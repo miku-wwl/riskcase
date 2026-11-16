@@ -5,7 +5,7 @@ test("analyst investigates a cross-account alert and an independent supervisor r
   const analyst = await analystContext.newPage();
   await analyst.goto("/");
   await analyst.getByLabel("工作邮箱").fill("analyst@riskcase.local");
-  await analyst.getByLabel("密码").fill("RiskAnalyst!2026");
+  await analyst.getByLabel("密码", { exact: true }).fill("RiskAnalyst!2026");
   await analyst.getByRole("button", { name: "安全登录" }).click();
   await expect(analyst.getByRole("heading", { name: "风险告警队列" })).toBeVisible();
   await analyst.screenshot({ path: "../../manual/figures/risk-alert-queue.png", fullPage: true });
@@ -45,7 +45,7 @@ test("analyst investigates a cross-account alert and an independent supervisor r
   const supervisor = await supervisorContext.newPage();
   await supervisor.goto("/");
   await supervisor.getByLabel("工作邮箱").fill("supervisor@riskcase.local");
-  await supervisor.getByLabel("密码").fill("RiskSupervisor!2026");
+  await supervisor.getByLabel("密码", { exact: true }).fill("RiskSupervisor!2026");
   await supervisor.getByRole("button", { name: "安全登录" }).click();
   await expect(supervisor.getByRole("heading", { name: "风险告警队列" })).toBeVisible();
   await supervisor.getByRole("link", { name: "等待复核" }).click();

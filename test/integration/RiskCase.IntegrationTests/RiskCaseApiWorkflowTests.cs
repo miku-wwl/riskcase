@@ -79,11 +79,13 @@ public sealed class RiskCaseApiWorkflowTests
         Assert.That(startResponse.StatusCode, Is.EqualTo(HttpStatusCode.OK), await startResponse.Content.ReadAsStringAsync());
         var started = await startResponse.Content.ReadFromJsonAsync<RiskCaseView>();
         Assert.That(started!.Status, Is.EqualTo("investigating"));
+        var persistedStart = await _analyst.GetFromJsonAsync<RiskCaseView>($"/api/cases/{customerCase.Id}");
+        Assert.That(persistedStart!.Version, Is.EqualTo(started.Version));
 
         var noteKey = Guid.NewGuid().ToString();
         var noteBody = new { text = "核对历史交易后，决定把新交易对手与另一客户账户的关联交由第二位分析员复核。" };
         using var noteResponse = await MutateAsync(_analyst, $"/api/cases/{customerCase.Id}/notes", HttpMethod.Post, started.Version, noteKey, noteBody);
-        Assert.That(noteResponse.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+        Assert.That(noteResponse.StatusCode, Is.EqualTo(HttpStatusCode.OK), $"Started version {started.Version}, reloaded version {persistedStart.Version}; response: {await noteResponse.Content.ReadAsStringAsync()}");
         var noted = await noteResponse.Content.ReadFromJsonAsync<RiskCaseView>();
         using var noteReplay = await MutateAsync(_analyst, $"/api/cases/{customerCase.Id}/notes", HttpMethod.Post, started.Version, noteKey, noteBody);
         Assert.That(noteReplay.StatusCode, Is.EqualTo(HttpStatusCode.OK));

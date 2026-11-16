@@ -29,6 +29,29 @@ if (!loginMethod.includes("HttpValidationProblemDetails.fromJS(resultData400)"))
   loginMethod = loginMethod.replace(rawResponseBranch, structuredResponseBranch);
 }
 
-const stableSource = `${source.slice(0, loginStart)}${loginMethod}${source.slice(refreshStart)}`;
+const resendStart = source.indexOf("    protected processResendConfirmationEmail(response: Response): Promise<void> {");
+const forgotStart = source.indexOf("    protected processForgotPassword(response: Response): Promise<void> {", resendStart);
+if (resendStart < 0 || forgotStart < 0) throw new Error("Could not locate the generated confirmation-email client method.");
+
+let resendMethod = source.slice(resendStart, forgotStart);
+if (!resendMethod.includes("HttpValidationProblemDetails.fromJS(resultData400)")) {
+  const rawResponseBranch = `        } else if (status === 400) {
+            return response.text().then((_responseText) => {
+            return throwException("Bad Request", status, _responseText, _headers);
+            });
+        }`;
+  const structuredResponseBranch = `        } else if (status === 400) {
+            return response.text().then((_responseText) => {
+            let result400: any = null;
+            let resultData400 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result400 = HttpValidationProblemDetails.fromJS(resultData400);
+            return throwException("Bad Request", status, _responseText, _headers, result400);
+            });
+        }`;
+  if (!resendMethod.includes(rawResponseBranch)) throw new Error("Could not normalize the generated confirmation-email validation response.");
+  resendMethod = resendMethod.replace(rawResponseBranch, structuredResponseBranch);
+}
+
+const stableSource = `${source.slice(0, loginStart)}${loginMethod}${source.slice(refreshStart, resendStart)}${resendMethod}${source.slice(forgotStart)}`;
 const normalized = `${stableSource.replace(/\r\n/g, "\n").replace(/[\t ]+$/gm, "").replace(/\n*$/, "\n")}`;
 await writeFile(path, normalized, "utf8");
