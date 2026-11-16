@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="460" viewBox="0 0 900 460">
+<rect width="100%" height="100%" rx="18" fill="#ffffff"/>
+<path d="M 30 77 H 870" stroke="#e6edf2" stroke-width="1"/>
+<text x="38" y="39" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="21px" font-weight="700" fill="#22364f">从 API 到类型安全的前端调用</text>
+<text x="38" y="63" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12px" font-weight="400" fill="#64748b">接口合同有单一机器可读来源，适配器承载通用请求策略</text>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#718096"/></marker></defs>
+<path d="M 212 236.0 C 254 236.0, 208 236.0, 250 236.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 432 236.0 C 474 236.0, 428 236.0, 470 236.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 652 236.0 C 694 236.0, 648 236.0, 690 236.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="30" y="180" width="182" height="112" rx="13" fill="#eef3f9" stroke="#22364f" stroke-width="1.4"/>
+<path d="M 44 194 V 278" stroke="#22364f" stroke-width="3" stroke-linecap="round"/>
+<text x="57" y="214" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">ASP.NET Core</text>
+<text x="57" y="246" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#4d6074">端点 · DTO · OpenAPI</text>
+<rect x="250" y="180" width="182" height="112" rx="13" fill="#e8f5f3" stroke="#117c78" stroke-width="1.4"/>
+<path d="M 264 194 V 278" stroke="#117c78" stroke-width="3" stroke-linecap="round"/>
+<text x="277" y="214" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">OpenAPI JSON</text>
+<text x="277" y="246" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#466b68">请求与响应契约</text>
+<rect x="470" y="180" width="182" height="112" rx="13" fill="#fff4df" stroke="#b87414" stroke-width="1.4"/>
+<path d="M 484 194 V 278" stroke="#b87414" stroke-width="3" stroke-linecap="round"/>
+<text x="497" y="214" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">NSwag SDK</text>
+<text x="497" y="246" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#765e39">TypeScript 客户端</text>
+<rect x="690" y="180" width="182" height="112" rx="13" fill="#f1edfb" stroke="#7255a5" stroke-width="1.4"/>
+<path d="M 704 194 V 278" stroke="#7255a5" stroke-width="3" stroke-linecap="round"/>
+<text x="717" y="214" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">API adapter</text>
+<text x="717" y="246" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#625576">CSRF · Cookie · 错误</text>
+<path d="M 30 414 H 870" stroke="#e6edf2" stroke-width="1"/>
+<text x="38" y="439" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#64748b">CI 重新生成客户端并检查提交差异</text>
+</svg>

@@ -1,0 +1,21 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".gitignore" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="global.json" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/backend/">
+    <Project Path="backend/RiskCase.Domain/RiskCase.Domain.csproj" />
+    <Project Path="backend/RiskCase.Application/RiskCase.Application.csproj" />
+    <Project Path="backend/RiskCase.Infrastructure/RiskCase.Infrastructure.csproj" />
+    <Project Path="backend/RiskCase.Api/RiskCase.Api.csproj" DefaultStartup="true" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/unit/RiskCase.Domain.UnitTests/Domain.UnitTests.csproj" />
+    <Project Path="test/unit/RiskCase.Application.UnitTests/Application.UnitTests.csproj" />
+    <Project Path="test/integration/RiskCase.IntegrationTests/IntegrationTests.csproj" />
+  </Folder>
+</Solution>
