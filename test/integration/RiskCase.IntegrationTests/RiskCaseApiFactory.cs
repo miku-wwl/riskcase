@@ -3,11 +3,15 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using RiskCase.Infrastructure.Data;
 
 namespace RiskCase.IntegrationTests;
 
 public sealed class RiskCaseApiFactory : WebApplicationFactory<Program>
 {
+    public CaseReadBarrier Barrier { get; } = new();
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         var connectionString = Environment.GetEnvironmentVariable("ConnectionStrings__RiskCaseDb");
@@ -15,6 +19,7 @@ public sealed class RiskCaseApiFactory : WebApplicationFactory<Program>
             throw new InvalidOperationException("Set ConnectionStrings__RiskCaseDb to a disposable PostgreSQL test database.");
 
         builder.UseEnvironment("Testing");
+        builder.ConfigureServices(services => services.AddDbContext<ApplicationDbContext>(options => options.AddInterceptors(Barrier)));
         builder.ConfigureLogging(logging =>
         {
             logging.AddConsole();

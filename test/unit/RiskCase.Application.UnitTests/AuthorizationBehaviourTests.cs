@@ -23,6 +23,7 @@ public sealed class AuthorizationBehaviourTests
         user.SetupGet(x => x.Roles).Returns([Roles.Analyst]);
         var identity = new Mock<IIdentityService>();
         var behavior = new AuthorizationBehaviour<ProtectedCommand, string>(user.Object, identity.Object);
+        identity.Setup(x => x.IsInRoleAsync("analyst-1", Roles.Analyst)).ReturnsAsync(true);
         var executed = false;
 
         var response = await behavior.Handle(new ProtectedCommand(), _ =>

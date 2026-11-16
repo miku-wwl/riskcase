@@ -1,4 +1,4 @@
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import { QueryClient, QueryClientProvider, useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { AlertCircle, LoaderCircle, RefreshCw } from "lucide-react";
@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { LoginPage } from "@/pages/login-page";
 import { QueuePage } from "@/pages/queue-page";
 import { errorMessage } from "@/lib/api-error";
-import { apiCall, clients, refreshAntiForgeryToken, signOut, unauthorized } from "@/lib/api";
+import { apiCall, clients, refreshAntiForgeryToken, signOut, unauthorized, setActiveUser } from "@/lib/api";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -20,6 +20,11 @@ const CaseDetailPage = lazy(() => import("@/pages/case-detail-page").then((modul
 
 function SignedInApp() {
   const client = useQueryClient();
+  useEffect(() => {
+    const listener = (event: StorageEvent) => { if (event.key === "riskcase:session-change") { setActiveUser(null); client.clear(); window.location.reload(); } };
+    window.addEventListener("storage", listener);
+    return () => window.removeEventListener("storage", listener);
+  }, [client]);
   const csrf = useQuery({ queryKey: ["csrf"], queryFn: refreshAntiForgeryToken, retry: false, staleTime: Infinity });
   const session = useQuery({
     queryKey: ["session"],
@@ -34,12 +39,14 @@ function SignedInApp() {
     retry: false,
   });
   const logout = useMutation({
-    mutationFn: signOut,
+    mutationFn: async () => { await client.cancelQueries(); await signOut(); },
     onSuccess: () => {
       client.clear();
       client.setQueryData(["session"], null);
     },
   });
+
+  setActiveUser(session.data?.id ?? null);
 
   if (session.isPending) return <LoadingScreen label="正在连接风控服务" />;
   if (session.isError) {

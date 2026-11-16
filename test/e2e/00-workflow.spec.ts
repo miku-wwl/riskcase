@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url";
 import { expect, test } from "@playwright/test";
 
 test("analyst investigates a cross-account alert and an independent supervisor records the disposition", async ({ browser }) => {
@@ -9,11 +10,28 @@ test("analyst investigates a cross-account alert and an independent supervisor r
   await analyst.getByRole("button", { name: "安全登录" }).click();
   await expect(analyst.getByRole("heading", { name: "风险告警队列" })).toBeVisible();
   await expect(analyst.getByText("正在准备安全会话…")).not.toBeVisible();
-  await expect(analyst.getByRole("link", { name: "UP-TR-00841", exact: true })).toBeVisible();
+  const queue = await (await analyst.request.get("/api/cases?search=UP-TR-00841")).json();
+  const seed = await (await analyst.request.get(`/api/cases/${queue.items[0].id}`)).json();
+  const scenarioAlertId = `BOOK-${crypto.randomUUID().slice(0, 8)}`;
+  const intake = await analyst.request.post("/api/ingestion/alerts", {
+    headers: { "X-Alert-Ingestion-Key": "e2e-test-key", "Idempotency-Key": crypto.randomUUID() },
+    data: { externalAlertId: scenarioAlertId, sourceSystem: "Textbook Synthetic Monitor", category: seed.alert.category,
+      detectedAt: seed.alert.detectedAt, severity: seed.alert.severity, riskScore: seed.alert.riskScore,
+      customerId: seed.customer.id, accountId: seed.account.id, signals: seed.signals,
+      transactions: seed.transactions.map((t: any) => ({ ...t, accountId: t.accountMaskedNumber === seed.account.maskedNumber ? seed.account.id : seed.graphNodes.find((n: any) => n.type === "account" && n.label === t.accountMaskedNumber).id.slice(8) })) },
+  });
+  expect(intake.status(), await intake.text()).toBe(201);
+  const created = await intake.json();
+  const session = await (await analyst.request.get("/api/session")).json();
+  const csrf = await (await analyst.request.get("/api/security/antiforgery")).json();
+  const assignment = await analyst.request.post(`/api/cases/${created.id}/assignment`, { headers: { "X-CSRF-TOKEN": csrf.requestToken, "If-Match": `"${created.version}"`, "Idempotency-Key": crypto.randomUUID() }, data: { analystId: session.id } });
+  expect(assignment.status(), await assignment.text()).toBe(200);
+  await analyst.reload();
+  await expect(analyst.getByRole("link", { name: scenarioAlertId, exact: true })).toBeVisible();
   await expect(analyst.getByText("正在读取档案…")).not.toBeVisible();
-  await analyst.screenshot({ path: "../../manual/figures/risk-alert-queue.png", fullPage: true });
+  await analyst.screenshot({ path: fileURLToPath(new URL("../../manual/figures/risk-alert-queue.png", import.meta.url)), fullPage: true });
 
-  await analyst.getByRole("link", { name: "UP-TR-00841", exact: true }).click();
+  await analyst.getByRole("link", { name: scenarioAlertId, exact: true }).click();
   await expect(analyst.getByRole("heading", { name: /Aroha Thompson/ })).toBeVisible();
   await analyst.getByRole("tab", { name: /风险信号/ }).click();
   await expect(analyst.getByText("出现新交易对手")).toBeVisible();
@@ -22,7 +40,7 @@ test("analyst investigates a cross-account alert and an independent supervisor r
   await expect(analyst.getByText("调查中").first()).toBeVisible();
   await expect(analyst.getByText("调查已开始")).not.toBeVisible();
   await analyst.evaluate(() => window.scrollTo(0, 0));
-  await analyst.screenshot({ path: "../../manual/figures/riskcase-investigation-workspace.png", fullPage: true });
+  await analyst.screenshot({ path: fileURLToPath(new URL("../../manual/figures/riskcase-investigation-workspace.png", import.meta.url)), fullPage: true });
 
   const originalNote = "核对三笔转账后，发现另一个客户账户也与相同交易对手发生交易；该关系仍需解释。";
   await analyst.getByLabel("调查笔记").fill(originalNote);
@@ -56,15 +74,15 @@ test("analyst investigates a cross-account alert and an independent supervisor r
   await supervisor.getByRole("button", { name: "安全登录" }).click();
   await expect(supervisor.getByRole("heading", { name: "风险告警队列" })).toBeVisible();
   await supervisor.getByRole("link", { name: "等待复核" }).click();
-  await supervisor.getByRole("link", { name: "UP-TR-00841", exact: true }).click();
+  await supervisor.getByRole("link", { name: scenarioAlertId, exact: true }).click();
 
   await supervisor.getByRole("tab", { name: "关系图谱" }).click();
   await expect(supervisor.getByText("Mateo Chen")).toBeVisible();
   await expect(supervisor.getByText("South Ridge Services").first()).toBeVisible();
   await supervisor.evaluate(() => window.scrollTo(0, 0));
-  await supervisor.screenshot({ path: "../../manual/figures/risk-relationship-graph.png", fullPage: true });
+  await supervisor.screenshot({ path: fileURLToPath(new URL("../../manual/figures/risk-relationship-graph.png", import.meta.url)), fullPage: true });
   await supervisor.getByRole("tab", { name: "审计记录" }).click();
-  await expect(supervisor.getByText("案件已提交复核")).toBeVisible();
+  await expect(supervisor.getByText("案件已提交复核", { exact: true })).toBeVisible();
   await expect(supervisor.getByText(/版本/).first()).toBeVisible();
 
   await supervisor.getByLabel("处置建议").selectOption("escalate");
@@ -78,6 +96,6 @@ test("analyst investigates a cross-account alert and an independent supervisor r
   await expect(supervisor.getByText("升级调查").last()).toBeVisible();
   await expect(supervisor.getByText("处置决定已记录")).not.toBeVisible();
   await supervisor.evaluate(() => window.scrollTo(0, 0));
-  await supervisor.screenshot({ path: "../../manual/figures/riskcase-audit-history.png", fullPage: true });
+  await supervisor.screenshot({ path: fileURLToPath(new URL("../../manual/figures/riskcase-audit-history.png", import.meta.url)), fullPage: true });
   await supervisorContext.close();
 });

@@ -47,7 +47,7 @@ public sealed class RiskCaseApiWorkflowTests
         Assert.That(page!.TotalItems, Is.GreaterThanOrEqualTo(4));
         Assert.That(page.Items, Has.Some.Matches<RiskCaseQueueItem>(x => x.Status == "resolved"));
 
-        var customerCase = page.Items.First(x => x.Status == "new" && x.AssignedAnalystId is not null);
+        var customerCase = page.Items.First();
         var customer = await _analyst.GetFromJsonAsync<RiskCaseView>($"/api/cases/{customerCase.Id}");
         Assert.That(customer, Is.Not.Null);
 
@@ -74,6 +74,13 @@ public sealed class RiskCaseApiWorkflowTests
         Assert.That(replayIntake.StatusCode, Is.EqualTo(HttpStatusCode.Created));
         var replay = await replayIntake.Content.ReadFromJsonAsync<RiskCaseView>();
         Assert.That(replay!.Id, Is.EqualTo(created!.Id));
+
+        var session = await _analyst.GetFromJsonAsync<System.Text.Json.Nodes.JsonObject>("/api/session");
+        var analystId = session!["id"]!.ToString();
+        using var assignment = await MutateAsync(_analyst, $"/api/cases/{created!.Id}/assignment", HttpMethod.Post, created.Version, Guid.NewGuid().ToString(), new { analystId });
+        Assert.That(assignment.StatusCode, Is.EqualTo(HttpStatusCode.OK), await assignment.Content.ReadAsStringAsync());
+        var assigned = await assignment.Content.ReadFromJsonAsync<RiskCaseView>();
+        customerCase = customerCase with { Id = created.Id, Version = assigned!.Version, AssignedAnalystId = analystId };
 
         var startResponse = await MutateAsync(_analyst, $"/api/cases/{customerCase.Id}/start", HttpMethod.Post, customerCase.Version, Guid.NewGuid().ToString(), null);
         Assert.That(startResponse.StatusCode, Is.EqualTo(HttpStatusCode.OK), await startResponse.Content.ReadAsStringAsync());

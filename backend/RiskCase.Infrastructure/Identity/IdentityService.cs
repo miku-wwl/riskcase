@@ -46,7 +46,7 @@ public class IdentityService : IIdentityService
     {
         var user = await _userManager.FindByIdAsync(userId);
 
-        return user != null && await _userManager.IsInRoleAsync(user, role);
+        return user != null && !await _userManager.IsLockedOutAsync(user) && await _userManager.IsInRoleAsync(user, role);
     }
 
     public async Task<bool> AuthorizeAsync(string userId, string policyName)

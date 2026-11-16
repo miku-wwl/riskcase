@@ -1,6 +1,8 @@
 using RiskCase.Domain.Constants;
 using RiskCase.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
+using RiskCase.Application.Common.Interfaces;
+using RiskCase.Application.Common.Exceptions;
 
 namespace RiskCase.Api.Endpoints;
 
@@ -14,12 +16,17 @@ public sealed class Analysts : IEndpointGroup
         group.MapGet("/", ListAnalysts).WithName("ListAnalysts").Produces<IReadOnlyList<AnalystView>>();
     }
 
-    public static async Task<IReadOnlyList<AnalystView>> ListAnalysts(UserManager<ApplicationUser> users)
+    public static async Task<IReadOnlyList<AnalystView>> ListAnalysts(UserManager<ApplicationUser> users, IUser user, IIdentityService identity)
     {
+        if (user.Id is null || !await identity.IsInRoleAsync(user.Id, Roles.Supervisor)) throw new ForbiddenAccessException();
         var analysts = (await users.GetUsersInRoleAsync(Roles.Analyst))
             .Concat(await users.GetUsersInRoleAsync(Roles.SeniorAnalyst))
+            .Concat(await users.GetUsersInRoleAsync(Roles.Supervisor))
             .DistinctBy(x => x.Id);
-        return analysts.OrderBy(x => x.Email).Select(x => new AnalystView(x.Id, x.Email ?? x.UserName ?? "")).ToArray();
+        var eligible = new List<AnalystView>();
+        foreach (var analyst in analysts.OrderBy(x => x.Email))
+            if (!await users.IsLockedOutAsync(analyst)) eligible.Add(new(analyst.Id, analyst.Email ?? analyst.UserName ?? ""));
+        return eligible;
     }
 }
 

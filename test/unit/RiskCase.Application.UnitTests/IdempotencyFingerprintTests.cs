@@ -9,6 +9,15 @@ namespace RiskCase.Application.UnitTests;
 public sealed class IdempotencyFingerprintTests
 {
     private sealed record SampleCommand(string IdempotencyKey, Guid CaseId, int ExpectedVersion, string Rationale) : IIdempotentRequest;
+    private sealed record OtherCommand(string IdempotencyKey, Guid CaseId, int ExpectedVersion, string Rationale) : IIdempotentRequest;
+
+    [Test]
+    public void Different_command_types_never_share_a_fingerprint_for_identical_fields()
+    {
+        var first = new SampleCommand(Guid.NewGuid().ToString(), Guid.NewGuid(), 4, "same");
+        var other = new OtherCommand(first.IdempotencyKey, first.CaseId, first.ExpectedVersion, first.Rationale);
+        Assert.That(IdempotencyBehaviour<SampleCommand, string>.Fingerprint(first), Is.Not.EqualTo(IdempotencyBehaviour<OtherCommand, string>.Fingerprint(other)));
+    }
 
     [Test]
     public void Fingerprint_ignores_retry_key_but_includes_business_payload()

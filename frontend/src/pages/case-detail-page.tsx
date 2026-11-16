@@ -27,7 +27,8 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import { useDraft, draftKey } from "@/lib/drafts";
-import { apiCall, clients, runIdempotentCaseMutation } from "@/lib/api";
+import { apiCall, clients, runIdempotentCaseMutation, pendingCaseMutation, recoverCaseMutation } from "@/lib/api";
+import { caseKey, newestCase } from "@/lib/case-state";
 import { ApiError } from "@/lib/api-error";
 import { formatDate, formatMoney } from "@/lib/utils";
 
@@ -42,11 +43,20 @@ type MutationIntent = {
 
 export function CaseDetailPage() {
   const { caseId } = useParams();
-  const id = caseId ?? "";
   const queryClient = useQueryClient();
   const session = queryClient.getQueryData<SessionView>(["session"]);
+  if (!session || !caseId) return null;
+  return <CaseWorkspace key={`${session.id}:${caseId}`} id={caseId} session={session} />;
+}
+
+function CaseWorkspace({ id, session }: { id: string; session: SessionView }) {
+  const queryClient = useQueryClient();
+  const userId = session.id;
+  const queryKey = caseKey(userId, id);
+  const [pending, setPending] = useState(() => pendingCaseMutation(userId, id));
   const caseQuery = useQuery({
-    queryKey: ["case", id],
+    queryKey,
+    structuralSharing: newestCase,
     queryFn: () => apiCall(() => clients.cases.getRiskCase(id)),
     enabled: Boolean(id),
     retry: false,
@@ -60,7 +70,6 @@ export function CaseDetailPage() {
     staleTime: 60_000,
   });
   const current = caseQuery.data;
-  const userId = session?.id ?? "unknown";
   const noteDraft = useDraft(draftKey(id, userId, "note"));
   const assessmentDraft = useDraft(draftKey(id, userId, "assessment"));
   const decisionDraft = useDraft(draftKey(id, userId, "decision"));
@@ -75,6 +84,7 @@ export function CaseDetailPage() {
 
   const action = useMutation<RiskCaseView, unknown, MutationIntent>({
     mutationFn: (intent) => runIdempotentCaseMutation(
+      userId,
       id,
       intent.operation,
       intent.expectedVersion,
@@ -82,12 +92,16 @@ export function CaseDetailPage() {
       intent.perform,
     ),
     onSuccess: (result, intent) => {
-      queryClient.setQueryData(["case", id], result);
+      if (queryClient.getQueryData<SessionView>(["session"])?.id !== userId) return;
+      queryClient.setQueryData(queryKey, (old: RiskCaseView | undefined) => newestCase(old, result));
+      void queryClient.invalidateQueries({ queryKey });
+      setPending(pendingCaseMutation(userId, id));
       void queryClient.invalidateQueries({ queryKey: ["cases"] });
       intent.clearDraft?.();
       toast.success(intent.successMessage);
     },
     onError: (error) => {
+      setPending(pendingCaseMutation(userId, id));
       if (error instanceof ApiError && error.status === 412) void caseQuery.refetch();
     },
   });
@@ -106,7 +120,7 @@ export function CaseDetailPage() {
   const isResolved = current.status === RiskCaseStatus.Resolved;
   const canInvestigate = investigator && assignedToMe && !isResolved;
   const canClaim = investigator && !current.assignedAnalystId && current.status === RiskCaseStatus.New;
-  const canReview = isSupervisor && current.status === RiskCaseStatus.Reviewing && !assignedToMe;
+  const canReview = isSupervisor && current.status === RiskCaseStatus.Reviewing && !assignedToMe && current.assessedById !== userId && current.reviewSubmittedById !== userId && !current.assessments.some(item => item.assessorId === userId) && Boolean(current.reviewedAssessmentId);
   const request = (operation: string, payload: unknown, perform: MutationIntent["perform"], successMessage: string, clearDraft?: () => void) =>
     runAction({ operation, payload, perform, successMessage, clearDraft });
 
@@ -114,7 +128,7 @@ export function CaseDetailPage() {
     <div className="space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <Link className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground" to="/"><ArrowLeft className="size-4" />返回风险队列</Link>
-        <div className="flex items-center gap-2 text-xs text-muted-foreground"><Clock3 className="size-3.5" />最后更新 {formatDate(current.lastModified)}<span className="rounded bg-muted px-2 py-1 font-mono">v{current.version}</span></div>
+        <div className="flex items-center gap-2 text-xs text-muted-foreground"><Clock3 className="size-3.5" />最后更新 {formatDate(current.lastModified)}<span data-testid="case-version" className="rounded bg-muted px-2 py-1 font-mono">v{current.version}</span><Button size="sm" variant="ghost" onClick={() => void caseQuery.refetch()} aria-label="刷新案件"><RefreshCw className="size-3.5" /></Button></div>
       </div>
 
       <section className="rounded-xl border bg-card p-5 shadow-sm md:p-6">
@@ -132,7 +146,18 @@ export function CaseDetailPage() {
         <div className="mt-4 flex items-start gap-2 rounded-md border border-sky-200 bg-sky-50 px-3 py-2.5 text-xs leading-5 text-sky-950"><CircleHelp className="mt-0.5 size-3.5 shrink-0" /><p>告警评分和信号用于安排核查优先级。它们不能单独证明欺诈或洗钱，也不触发冻结资金或支付操作。</p></div>
       </section>
 
-      {action.isError && <ApiFailure error={action.error} onRetry={action.variables ? () => action.mutate(action.variables!) : undefined} />}
+      {action.isError && <ApiFailure error={action.error} onRetry={action.error instanceof ApiError && action.error.status === 412 ? () => { void caseQuery.refetch(); action.reset(); } : action.variables ? () => action.mutate(action.variables!) : undefined} />}
+      {pending && <div role="status" className="rounded-md border border-amber-300 bg-amber-50 p-4 text-sm">上次写入结果尚未确认。请恢复原操作，服务端将核对原幂等键。<Button className="ml-3" variant="outline" disabled={action.isPending} onClick={async () => {
+        try {
+          const result = await recoverCaseMutation(pending);
+          if (queryClient.getQueryData<SessionView>(["session"])?.id !== userId) return;
+          queryClient.setQueryData(queryKey, (old: RiskCaseView | undefined) => newestCase(old, result));
+          await queryClient.invalidateQueries({ queryKey });
+          void queryClient.invalidateQueries({ queryKey: ["cases"] });
+          action.reset();
+        } catch { toast.error("原操作尚未恢复，请检查连接和当前权限后重试。"); }
+        finally { setPending(pendingCaseMutation(userId, id)); }
+      }}>恢复上次操作</Button></div>}
 
       <div className="grid items-start gap-5 xl:grid-cols-[minmax(0,1fr)_360px]">
         <section className="min-w-0">
@@ -141,6 +166,7 @@ export function CaseDetailPage() {
               <TabsTrigger value="facts">调查事实</TabsTrigger>
               <TabsTrigger value="signals">风险信号 <span className="ml-1 text-[10px]">{current.signals.length}</span></TabsTrigger>
               <TabsTrigger value="graph">关系图谱</TabsTrigger>
+              <TabsTrigger value="assessments">评估历史</TabsTrigger>
               <TabsTrigger value="audit">审计记录</TabsTrigger>
             </TabsList>
             <TabsContent value="facts" className="space-y-4">
@@ -160,7 +186,12 @@ export function CaseDetailPage() {
 
             <TabsContent value="graph" className="space-y-4">
               <Card className="overflow-hidden"><CardHeader className="pb-3"><div className="flex items-center justify-between"><div><CardTitle className="text-sm">实体关系调查图</CardTitle><p className="mt-1 text-xs text-muted-foreground">实线表示记录中的账户持有、交易活动和交易对手关系；紫色边表示人工调查关联。</p></div><Waypoints className="size-4 text-teal-700" /></div></CardHeader><CardContent className="p-0"><RiskGraph caseView={current} /></CardContent></Card>
-              {canInvestigate && !isResolved && current.graphNodes.length > 1 && <Card><CardHeader className="pb-3"><CardTitle className="flex items-center gap-2 text-sm"><Link2 className="size-4" />记录调查关系</CardTitle><p className="text-xs text-muted-foreground">新关系会写入案件并出现在审计记录中。解释需说明它支持、反驳或关联哪项事实。</p></CardHeader><CardContent><div className="grid gap-3 md:grid-cols-2"><div className="space-y-1.5"><Label>起点实体</Label><select className="h-10 w-full rounded-md border bg-background px-3 text-sm" value={linkSource || current.graphNodes[0]?.id} onChange={(event) => setLinkSource(event.target.value)}>{current.graphNodes.map((node) => <option key={node.id} value={node.id}>{node.label} · {node.type}</option>)}</select></div><div className="space-y-1.5"><Label>终点实体</Label><select className="h-10 w-full rounded-md border bg-background px-3 text-sm" value={linkTarget || current.graphNodes[1]?.id} onChange={(event) => setLinkTarget(event.target.value)}>{current.graphNodes.map((node) => <option key={node.id} value={node.id}>{node.label} · {node.type}</option>)}</select></div><div className="space-y-1.5 md:col-span-2"><Label>关系判断</Label><select className="h-10 w-full rounded-md border bg-background px-3 text-sm" defaultValue={CaseLinkKind.Related} id="link-kind"><option value={CaseLinkKind.Related}>相关线索</option><option value={CaseLinkKind.Supports}>支持当前判断</option><option value={CaseLinkKind.Contradicts}>反驳当前判断</option></select></div><div className="space-y-1.5 md:col-span-2"><Label htmlFor="link-rationale">事实说明</Label><Textarea id="link-rationale" value={linkDraft.value} onChange={(event) => linkDraft.setValue(event.target.value)} placeholder="描述这两个实体之间可观察到的关系，以及目前无法据此得出的结论。" maxLength={500} /></div><div className="flex items-center justify-between md:col-span-2"><span className="text-xs text-muted-foreground">至少 20 个字符 · 草稿保存在当前浏览器</span><Button disabled={action.isPending || linkDraft.value.trim().length < 20} onClick={() => { const kind = (document.getElementById("link-kind") as HTMLSelectElement).value as CaseLinkKind; const source = linkSource || current.graphNodes[0]?.id; const target = linkTarget || current.graphNodes[1]?.id; const rationale = linkDraft.value; request("relationship", { source, target, kind, rationale }, (key, tag) => clients.cases.links(id, key, tag, new LinkRequest({ sourceNodeId: source, targetNodeId: target, kind, rationale })), "关系线索已记录", () => linkDraft.clearIfUnchanged(rationale)); }}><Plus className="size-4" />记录关系</Button></div></div></CardContent></Card>}
+              {canInvestigate && current.status === RiskCaseStatus.Investigating && current.graphNodes.length > 1 && <Card><CardHeader className="pb-3"><CardTitle className="flex items-center gap-2 text-sm"><Link2 className="size-4" />记录调查关系</CardTitle><p className="text-xs text-muted-foreground">新关系会写入案件并出现在审计记录中。解释需说明它支持、反驳或关联哪项事实。</p></CardHeader><CardContent><div className="grid gap-3 md:grid-cols-2"><div className="space-y-1.5"><Label>起点实体</Label><select className="h-10 w-full rounded-md border bg-background px-3 text-sm" value={linkSource || current.graphNodes[0]?.id} onChange={(event) => setLinkSource(event.target.value)}>{current.graphNodes.map((node) => <option key={node.id} value={node.id}>{node.label} · {node.type}</option>)}</select></div><div className="space-y-1.5"><Label>终点实体</Label><select className="h-10 w-full rounded-md border bg-background px-3 text-sm" value={linkTarget || current.graphNodes[1]?.id} onChange={(event) => setLinkTarget(event.target.value)}>{current.graphNodes.map((node) => <option key={node.id} value={node.id}>{node.label} · {node.type}</option>)}</select></div><div className="space-y-1.5 md:col-span-2"><Label>关系判断</Label><select className="h-10 w-full rounded-md border bg-background px-3 text-sm" defaultValue={CaseLinkKind.Related} id="link-kind"><option value={CaseLinkKind.Related}>相关线索</option><option value={CaseLinkKind.Supports}>支持当前判断</option><option value={CaseLinkKind.Contradicts}>反驳当前判断</option></select></div><div className="space-y-1.5 md:col-span-2"><Label htmlFor="link-rationale">事实说明</Label><Textarea id="link-rationale" value={linkDraft.value} onChange={(event) => linkDraft.setValue(event.target.value)} placeholder="描述这两个实体之间可观察到的关系，以及目前无法据此得出的结论。" maxLength={500} /></div><div className="flex items-center justify-between md:col-span-2"><span className="text-xs text-muted-foreground">至少 20 个字符 · 草稿保存在当前浏览器</span><Button disabled={action.isPending || linkDraft.value.trim().length < 20} onClick={() => { const kind = (document.getElementById("link-kind") as HTMLSelectElement).value as CaseLinkKind; const source = linkSource || current.graphNodes[0]?.id; const target = linkTarget || current.graphNodes[1]?.id; const submitted = linkDraft.capture(); const rationale = submitted.value; request("relationship", { sourceNodeId: source, targetNodeId: target, kind, rationale }, (key, tag) => clients.cases.links(id, key, tag, new LinkRequest({ sourceNodeId: source, targetNodeId: target, kind, rationale })), "关系线索已记录", () => linkDraft.clearIfUnchanged(submitted)); }}><Plus className="size-4" />记录关系</Button></div></div></CardContent></Card>}
+            </TabsContent>
+
+            <TabsContent value="assessments" className="space-y-3">
+              {current.assessments.map((item) => <Card key={item.id}><CardContent className="p-5"><div className="flex justify-between text-sm font-semibold"><span>{assessmentLabel(item.level)} · v{item.caseVersion}</span><span>{current.reviewedAssessmentId === item.id ? "本次复核依据" : "历史评估"}</span></div><p className="mt-3 text-sm leading-6">{item.rationale}</p><p className="mt-2 text-xs text-muted-foreground">评估人 {item.assessorId ?? "未知（旧版保留快照）"} · {formatDate(item.assessedAt)} · 调查基础 v{item.basisVersion}</p>{item.isLegacy && <p className="mt-2 text-xs text-amber-800">旧版仅保留最后一次依据，更早的评估内容不可重建。</p>}</CardContent></Card>)}
+              {!current.assessments.length && <p className="p-4 text-sm text-muted-foreground">尚无风险评估记录。</p>}
             </TabsContent>
 
             <TabsContent value="audit" className="space-y-3">
@@ -173,7 +204,7 @@ export function CaseDetailPage() {
         <aside className="space-y-4">
           <Card><CardHeader className="pb-3"><CardTitle className="flex items-center gap-2 text-sm"><UserRoundCheck className="size-4 text-teal-700" />案件负责人</CardTitle></CardHeader><CardContent className="space-y-3">
             <div className="rounded-md bg-slate-50 p-3"><div className="text-xs text-muted-foreground">当前分配</div><div className="mt-1 truncate text-sm font-medium">{current.assignedAnalystId ? (assignedToMe ? `${session.email}（你）` : "已分配给其他分析员") : "未分配"}</div></div>
-            {isSupervisor && !isResolved && <div className="space-y-2"><Label htmlFor="assignee">分配 / 转交给分析员</Label><select id="assignee" className="h-10 w-full rounded-md border bg-background px-3 text-sm" value={assigneeId} onChange={(event) => setAssigneeId(event.target.value)}><option value="">选择分析员</option>{(analystsQuery.data ?? []).map((analyst) => <option key={analyst.id} value={analyst.id}>{analyst.email}</option>)}</select><Button variant="outline" className="w-full" disabled={!assigneeId || assigneeId === current.assignedAnalystId || action.isPending} onClick={() => request("assignment", { analystId: assigneeId }, (key, tag) => clients.cases.assignment(id, key, tag, new AssignRequest({ analystId: assigneeId })), "案件负责人已更新")}><UserRoundCheck className="size-4" />更新负责人</Button></div>}
+            {isSupervisor && !isResolved && current.status !== RiskCaseStatus.Reviewing && <div className="space-y-2"><Label htmlFor="assignee">分配 / 转交给分析员</Label><select id="assignee" className="h-10 w-full rounded-md border bg-background px-3 text-sm" value={assigneeId} onChange={(event) => setAssigneeId(event.target.value)}><option value="">选择分析员</option>{(analystsQuery.data ?? []).map((analyst) => <option key={analyst.id} value={analyst.id}>{analyst.email}</option>)}</select><Button variant="outline" className="w-full" disabled={!assigneeId || assigneeId === current.assignedAnalystId || action.isPending} onClick={() => request("assignment", { analystId: assigneeId }, (key, tag) => clients.cases.assignment(id, key, tag, new AssignRequest({ analystId: assigneeId })), "案件负责人已更新")}><UserRoundCheck className="size-4" />更新负责人</Button></div>}
             {canClaim && <Button className="w-full" disabled={action.isPending} onClick={() => request("assignment", { analystId: session.id }, (key, tag) => clients.cases.assignment(id, key, tag, new AssignRequest({ analystId: session.id })), "案件已分配给你")}><UserRoundCheck className="size-4" />领取案件</Button>}
             {canInvestigate && current.status === RiskCaseStatus.New && <Button className="w-full" disabled={action.isPending} onClick={() => request("start", null, (key, tag) => clients.cases.start(id, key, tag), "调查已开始")}><Activity className="size-4" />开始调查</Button>}
             {!isResolved && current.assignedAnalystId && !assignedToMe && !isSupervisor && <p className="text-xs leading-5 text-muted-foreground">此案件由其他分析员负责。你可以查看调查事实与审计历史。</p>}
@@ -183,16 +214,16 @@ export function CaseDetailPage() {
             {current.assessmentLevel && <div className="rounded-md border bg-slate-50 p-3"><div className="flex items-center justify-between text-xs"><span className="text-muted-foreground">当前风险评估</span><span className="font-semibold text-foreground">{assessmentLabel(current.assessmentLevel)}</span></div><p className="mt-2 text-xs leading-5 text-slate-600">{current.assessmentRationale}</p><p className="mt-2 text-[10px] text-muted-foreground">保存时间 {formatDate(current.assessedAt)}</p></div>}
             {canInvestigate && current.status === RiskCaseStatus.Investigating && <div className="space-y-3">
               <div className="space-y-1.5"><Label htmlFor="note">调查笔记</Label><Textarea id="note" value={noteDraft.value} onChange={(event) => noteDraft.setValue(event.target.value)} placeholder="写下已核对的事实、未解决的问题或下一步调查计划。" maxLength={2000} /></div>
-              <div className="flex items-center justify-between"><span className="text-[11px] text-muted-foreground">{noteDraft.value.length}/2000 · 自动保存在浏览器</span><Button size="sm" variant="outline" disabled={action.isPending || !noteDraft.value.trim()} onClick={() => { const text = noteDraft.value; request("note", { text }, (key, tag) => clients.cases.notes(id, key, tag, new NoteRequest({ text })), "调查笔记已保存", () => noteDraft.clearIfUnchanged(text)); }}><MessageSquareText className="size-3.5" />保存笔记</Button></div>
+              <div className="flex items-center justify-between"><span className="text-[11px] text-muted-foreground">{noteDraft.value.length}/2000 · 自动保存在浏览器</span><Button size="sm" variant="outline" disabled={action.isPending || !noteDraft.value.trim()} onClick={() => { const submitted = noteDraft.capture(); const text = submitted.value; request("note", { text }, (key, tag) => clients.cases.notes(id, key, tag, new NoteRequest({ text })), "调查笔记已保存", () => noteDraft.clearIfUnchanged(submitted)); }}><MessageSquareText className="size-3.5" />保存笔记</Button></div>
               <div className="border-t pt-3" />
               <div className="space-y-1.5"><Label htmlFor="assessment-level">评估风险等级</Label><select id="assessment-level" value={assessmentLevel} onChange={(event) => setAssessmentLevel(event.target.value as RiskAssessmentLevel)} className="h-10 w-full rounded-md border bg-background px-3 text-sm"><option value={RiskAssessmentLevel.Low}>低</option><option value={RiskAssessmentLevel.Medium}>中</option><option value={RiskAssessmentLevel.High}>高</option><option value={RiskAssessmentLevel.Critical}>紧急</option></select></div>
               <div className="space-y-1.5"><Label htmlFor="assessment-rationale">评估依据</Label><Textarea id="assessment-rationale" value={assessmentDraft.value} onChange={(event) => assessmentDraft.setValue(event.target.value)} placeholder="结合信号和已核实事实解释等级；说明还存在哪些不确定性。" maxLength={1500} /></div>
-              <Button className="w-full" disabled={action.isPending || assessmentDraft.value.trim().length < 20} onClick={() => { const rationale = assessmentDraft.value; request("assessment", { level: assessmentLevel, rationale }, (key, tag) => clients.cases.assessment(id, key, tag, new AssessmentRequest({ level: assessmentLevel, rationale })), "风险评估已保存", () => assessmentDraft.clearIfUnchanged(rationale)); }}><FileCheck2 className="size-4" />保存风险评估</Button>
+              <Button className="w-full" disabled={action.isPending || assessmentDraft.value.trim().length < 20} onClick={() => { const submitted = assessmentDraft.capture(); const rationale = submitted.value; request("assessment", { level: assessmentLevel, rationale }, (key, tag) => clients.cases.assessment(id, key, tag, new AssessmentRequest({ level: assessmentLevel, rationale })), "风险评估已保存", () => assessmentDraft.clearIfUnchanged(submitted)); }}><FileCheck2 className="size-4" />保存风险评估</Button>
               <p className="text-[11px] leading-4 text-muted-foreground">评估依据至少 20 个字符。提交复核前必须保存评估。</p>
               {current.assessmentLevel && <Button variant="outline" className="w-full" disabled={action.isPending} onClick={() => request("review", null, (key, tag) => clients.cases.review(id, key, tag), "案件已提交独立复核")}><ArrowRight className="size-4" />提交独立复核</Button>}
             </div>}
-            {canInvestigate && current.status === RiskCaseStatus.Reviewing && <div className="space-y-3"><div className="rounded-md border border-violet-200 bg-violet-50 p-3 text-xs leading-5 text-violet-900">案件已提交复核。主管可独立作出处置；如需补充调查，可退回调查阶段。</div><Button variant="outline" className="w-full" disabled={action.isPending} onClick={() => request("resume", null, (key, tag) => clients.cases.resume(id, key, tag), "案件已退回调查")}><RefreshCw className="size-4" />退回调查</Button></div>}
-            {canReview && <div className="space-y-3"><div className="rounded-md border border-violet-200 bg-violet-50 p-3 text-xs leading-5 text-violet-900">你不是当前经办人。复核结论将与调查人员分离记录。</div><div className="space-y-1.5"><Label htmlFor="disposition">处置建议</Label><select id="disposition" value={disposition} onChange={(event) => setDisposition(event.target.value as RiskDisposition)} className="h-10 w-full rounded-md border bg-background px-3 text-sm"><option value={RiskDisposition.Escalate}>升级调查</option><option value={RiskDisposition.Monitor}>继续监测</option><option value={RiskDisposition.CloseFalsePositive}>误报结案</option><option value={RiskDisposition.ReferForAmlReview}>转交 AML 复核</option></select></div><div className="space-y-1.5"><Label htmlFor="decision-rationale">处置依据</Label><Textarea id="decision-rationale" value={decisionDraft.value} onChange={(event) => decisionDraft.setValue(event.target.value)} placeholder="引用调查结论、支持与反驳的事实，以及后续处理理由。" maxLength={2000} /></div><Button className="w-full" disabled={action.isPending || decisionDraft.value.trim().length < 20} onClick={() => setConfirmOpen(true)}><BadgeCheck className="size-4" />提交处置决定</Button><p className="text-[11px] leading-4 text-muted-foreground">处置不会执行资金冻结、支付或账户余额修改。</p></div>}
+            {(canInvestigate || isSupervisor) && current.status === RiskCaseStatus.Reviewing && <div className="space-y-3"><div className="rounded-md border border-violet-200 bg-violet-50 p-3 text-xs leading-5 text-violet-900">案件已提交复核，调查事实、评估和分配均已冻结。退回后须重新评估并提交。</div><Button variant="outline" className="w-full" disabled={action.isPending} onClick={() => request("resume", null, (key, tag) => clients.cases.resume(id, key, tag), "案件已退回调查")}><RefreshCw className="size-4" />退回调查</Button></div>}
+            {canReview && <div className="space-y-3"><div className="rounded-md border border-violet-200 bg-violet-50 p-3 text-xs leading-5 text-violet-900">本次复核对应下方已冻结的评估记录；评估作者与复核人员独立。</div><div className="space-y-1.5"><Label htmlFor="disposition">处置建议</Label><select id="disposition" value={disposition} onChange={(event) => setDisposition(event.target.value as RiskDisposition)} className="h-10 w-full rounded-md border bg-background px-3 text-sm"><option value={RiskDisposition.Escalate}>升级调查</option><option value={RiskDisposition.Monitor}>继续监测</option><option value={RiskDisposition.CloseFalsePositive}>误报结案</option><option value={RiskDisposition.ReferForAmlReview}>转交 AML 复核</option></select></div><div className="space-y-1.5"><Label htmlFor="decision-rationale">处置依据</Label><Textarea id="decision-rationale" value={decisionDraft.value} onChange={(event) => decisionDraft.setValue(event.target.value)} placeholder="引用调查结论、支持与反驳的事实，以及后续处理理由。" maxLength={2000} /></div><Button className="w-full" disabled={action.isPending || decisionDraft.value.trim().length < 20} onClick={() => setConfirmOpen(true)}><BadgeCheck className="size-4" />提交处置决定</Button><p className="text-[11px] leading-4 text-muted-foreground">本系统完成处置记录即结案；监测、升级或 AML 转交由下游团队另行执行。</p></div>}
             {current.status === RiskCaseStatus.Resolved && <div className="rounded-md border border-emerald-200 bg-emerald-50 p-3 text-xs leading-5 text-emerald-900"><LockKeyhole className="mr-1 inline size-3.5" />案件已结案并锁定。调查与复核历史只读保存。</div>}
             {!canInvestigate && !canReview && !canClaim && !isResolved && <p className="text-xs leading-5 text-muted-foreground">当前角色或案件分配状态不允许写入。可查看资料与事件历史。</p>}
           </CardContent></Card>
@@ -205,7 +236,7 @@ export function CaseDetailPage() {
         <DialogContent>
           <DialogHeader><DialogTitle>确认提交独立处置</DialogTitle><DialogDescription>此操作会关闭案件并写入不可静默修改的审计事件。请检查处置内容。</DialogDescription></DialogHeader>
           <div className="rounded-md border bg-slate-50 p-4"><div className="text-sm font-semibold">{dispositionLabel(disposition)}</div><p className="mt-2 text-sm leading-6 text-slate-600">{decisionDraft.value}</p></div>
-          <DialogFooter><Button variant="outline" onClick={() => setConfirmOpen(false)}>返回检查</Button><Button disabled={action.isPending} onClick={() => { const rationale = decisionDraft.value; request("decision", { disposition, rationale }, (key, tag) => clients.cases.decision(id, key, tag, new DecisionRequest({ disposition, rationale })), "处置决定已记录", () => decisionDraft.clearIfUnchanged(rationale)); setConfirmOpen(false); }}>确认并记录处置</Button></DialogFooter>
+          <DialogFooter><Button variant="outline" onClick={() => setConfirmOpen(false)}>返回检查</Button><Button disabled={action.isPending} onClick={() => { const submitted = decisionDraft.capture(); const rationale = submitted.value; request("decision", { disposition, rationale }, (key, tag) => clients.cases.decision(id, key, tag, new DecisionRequest({ disposition, rationale })), "处置决定已记录", () => decisionDraft.clearIfUnchanged(submitted)); setConfirmOpen(false); }}>确认并记录处置</Button></DialogFooter>
         </DialogContent>
       </Dialog>
     </div>

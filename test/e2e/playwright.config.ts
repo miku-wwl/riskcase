@@ -1,7 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
 const apiUrl = process.env.RISKCASE_API_URL ?? "http://127.0.0.1:5250";
-const frontendUrl = "http://127.0.0.1:5173";
+const frontendUrl = process.env.RISKCASE_WEB_URL ?? "http://127.0.0.1:5173";
 const connectionString = process.env["ConnectionStrings__RiskCaseDb"] ?? "Host=localhost;Port=5432;Database=riskcase_e2e;Username=postgres;Password=postgres";
 
 export default defineConfig({
@@ -20,21 +20,22 @@ export default defineConfig({
   },
   webServer: [
     {
-      command: "dotnet run --configuration Release --no-build --no-launch-profile --project backend/RiskCase.Api/RiskCase.Api.csproj --urls http://127.0.0.1:5250",
+      command: `dotnet run --configuration Release --no-build --no-launch-profile --project backend/RiskCase.Api/RiskCase.Api.csproj --urls ${apiUrl}`,
       cwd: "../..",
       url: `${apiUrl}/health`,
-      reuseExistingServer: !process.env.CI,
+      reuseExistingServer: false,
       timeout: 120_000,
       env: {
         ASPNETCORE_ENVIRONMENT: "Testing",
+        RiskCase__IngestionApiKey: "e2e-test-key",
         ConnectionStrings__RiskCaseDb: connectionString,
       },
     },
     {
-      command: "npm --prefix frontend run dev -- --host 127.0.0.1",
+      command: `npm --prefix frontend run dev -- --host 127.0.0.1 --port ${new URL(frontendUrl).port}`,
       cwd: "../..",
       url: frontendUrl,
-      reuseExistingServer: !process.env.CI,
+      reuseExistingServer: false,
       timeout: 120_000,
       env: { RISKCASE_API_URL: apiUrl },
     },

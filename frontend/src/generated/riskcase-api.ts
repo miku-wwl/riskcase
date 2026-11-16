@@ -58,6 +58,18 @@ export class AlertIngestionClient {
             return response.text().then((_responseText) => {
             return throwException("Bad Request", status, _responseText, _headers);
             });
+        } else if (status === 401) {
+            return response.text().then((_responseText) => {
+            return throwException("Ingestion credential required", status, _responseText, _headers);
+            });
+        } else if (status === 409) {
+            return response.text().then((_responseText) => {
+            return throwException("External alert or idempotency conflict", status, _responseText, _headers);
+            });
+        } else if (status === 503) {
+            return response.text().then((_responseText) => {
+            return throwException("Ingestion unavailable or transaction retry required", status, _responseText, _headers);
+            });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
@@ -220,6 +232,10 @@ export class RiskCasesClient {
             return response.text().then((_responseText) => {
             return throwException("Forbidden", status, _responseText, _headers);
             });
+        } else if (status === 404) {
+            return response.text().then((_responseText) => {
+            return throwException("Resource not found", status, _responseText, _headers);
+            });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
@@ -271,6 +287,10 @@ export class RiskCasesClient {
         } else if (status === 403) {
             return response.text().then((_responseText) => {
             return throwException("Forbidden", status, _responseText, _headers);
+            });
+        } else if (status === 404) {
+            return response.text().then((_responseText) => {
+            return throwException("Resource not found", status, _responseText, _headers);
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
@@ -332,6 +352,26 @@ export class RiskCasesClient {
             return response.text().then((_responseText) => {
             return throwException("Forbidden", status, _responseText, _headers);
             });
+        } else if (status === 404) {
+            return response.text().then((_responseText) => {
+            return throwException("Resource not found", status, _responseText, _headers);
+            });
+        } else if (status === 409) {
+            return response.text().then((_responseText) => {
+            return throwException("Business or idempotency conflict", status, _responseText, _headers);
+            });
+        } else if (status === 412) {
+            return response.text().then((_responseText) => {
+            return throwException("Stale case version", status, _responseText, _headers);
+            });
+        } else if (status === 428) {
+            return response.text().then((_responseText) => {
+            return throwException("If-Match required", status, _responseText, _headers);
+            });
+        } else if (status === 503) {
+            return response.text().then((_responseText) => {
+            return throwException("Transaction rolled back; retry original intent", status, _responseText, _headers);
+            });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
@@ -387,6 +427,26 @@ export class RiskCasesClient {
         } else if (status === 403) {
             return response.text().then((_responseText) => {
             return throwException("Forbidden", status, _responseText, _headers);
+            });
+        } else if (status === 404) {
+            return response.text().then((_responseText) => {
+            return throwException("Resource not found", status, _responseText, _headers);
+            });
+        } else if (status === 409) {
+            return response.text().then((_responseText) => {
+            return throwException("Business or idempotency conflict", status, _responseText, _headers);
+            });
+        } else if (status === 412) {
+            return response.text().then((_responseText) => {
+            return throwException("Stale case version", status, _responseText, _headers);
+            });
+        } else if (status === 428) {
+            return response.text().then((_responseText) => {
+            return throwException("If-Match required", status, _responseText, _headers);
+            });
+        } else if (status === 503) {
+            return response.text().then((_responseText) => {
+            return throwException("Transaction rolled back; retry original intent", status, _responseText, _headers);
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
@@ -448,6 +508,26 @@ export class RiskCasesClient {
             return response.text().then((_responseText) => {
             return throwException("Forbidden", status, _responseText, _headers);
             });
+        } else if (status === 404) {
+            return response.text().then((_responseText) => {
+            return throwException("Resource not found", status, _responseText, _headers);
+            });
+        } else if (status === 409) {
+            return response.text().then((_responseText) => {
+            return throwException("Business or idempotency conflict", status, _responseText, _headers);
+            });
+        } else if (status === 412) {
+            return response.text().then((_responseText) => {
+            return throwException("Stale case version", status, _responseText, _headers);
+            });
+        } else if (status === 428) {
+            return response.text().then((_responseText) => {
+            return throwException("If-Match required", status, _responseText, _headers);
+            });
+        } else if (status === 503) {
+            return response.text().then((_responseText) => {
+            return throwException("Transaction rolled back; retry original intent", status, _responseText, _headers);
+            });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
@@ -507,6 +587,26 @@ export class RiskCasesClient {
         } else if (status === 403) {
             return response.text().then((_responseText) => {
             return throwException("Forbidden", status, _responseText, _headers);
+            });
+        } else if (status === 404) {
+            return response.text().then((_responseText) => {
+            return throwException("Resource not found", status, _responseText, _headers);
+            });
+        } else if (status === 409) {
+            return response.text().then((_responseText) => {
+            return throwException("Business or idempotency conflict", status, _responseText, _headers);
+            });
+        } else if (status === 412) {
+            return response.text().then((_responseText) => {
+            return throwException("Stale case version", status, _responseText, _headers);
+            });
+        } else if (status === 428) {
+            return response.text().then((_responseText) => {
+            return throwException("If-Match required", status, _responseText, _headers);
+            });
+        } else if (status === 503) {
+            return response.text().then((_responseText) => {
+            return throwException("Transaction rolled back; retry original intent", status, _responseText, _headers);
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
@@ -568,6 +668,26 @@ export class RiskCasesClient {
             return response.text().then((_responseText) => {
             return throwException("Forbidden", status, _responseText, _headers);
             });
+        } else if (status === 404) {
+            return response.text().then((_responseText) => {
+            return throwException("Resource not found", status, _responseText, _headers);
+            });
+        } else if (status === 409) {
+            return response.text().then((_responseText) => {
+            return throwException("Business or idempotency conflict", status, _responseText, _headers);
+            });
+        } else if (status === 412) {
+            return response.text().then((_responseText) => {
+            return throwException("Stale case version", status, _responseText, _headers);
+            });
+        } else if (status === 428) {
+            return response.text().then((_responseText) => {
+            return throwException("If-Match required", status, _responseText, _headers);
+            });
+        } else if (status === 503) {
+            return response.text().then((_responseText) => {
+            return throwException("Transaction rolled back; retry original intent", status, _responseText, _headers);
+            });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
@@ -624,6 +744,26 @@ export class RiskCasesClient {
             return response.text().then((_responseText) => {
             return throwException("Forbidden", status, _responseText, _headers);
             });
+        } else if (status === 404) {
+            return response.text().then((_responseText) => {
+            return throwException("Resource not found", status, _responseText, _headers);
+            });
+        } else if (status === 409) {
+            return response.text().then((_responseText) => {
+            return throwException("Business or idempotency conflict", status, _responseText, _headers);
+            });
+        } else if (status === 412) {
+            return response.text().then((_responseText) => {
+            return throwException("Stale case version", status, _responseText, _headers);
+            });
+        } else if (status === 428) {
+            return response.text().then((_responseText) => {
+            return throwException("If-Match required", status, _responseText, _headers);
+            });
+        } else if (status === 503) {
+            return response.text().then((_responseText) => {
+            return throwException("Transaction rolled back; retry original intent", status, _responseText, _headers);
+            });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
             return throwException("An unexpected server error occurred.", status, _responseText, _headers);
@@ -679,6 +819,26 @@ export class RiskCasesClient {
         } else if (status === 403) {
             return response.text().then((_responseText) => {
             return throwException("Forbidden", status, _responseText, _headers);
+            });
+        } else if (status === 404) {
+            return response.text().then((_responseText) => {
+            return throwException("Resource not found", status, _responseText, _headers);
+            });
+        } else if (status === 409) {
+            return response.text().then((_responseText) => {
+            return throwException("Business or idempotency conflict", status, _responseText, _headers);
+            });
+        } else if (status === 412) {
+            return response.text().then((_responseText) => {
+            return throwException("Stale case version", status, _responseText, _headers);
+            });
+        } else if (status === 428) {
+            return response.text().then((_responseText) => {
+            return throwException("If-Match required", status, _responseText, _headers);
+            });
+        } else if (status === 503) {
+            return response.text().then((_responseText) => {
+            return throwException("Transaction rolled back; retry original intent", status, _responseText, _headers);
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
@@ -739,6 +899,26 @@ export class RiskCasesClient {
         } else if (status === 403) {
             return response.text().then((_responseText) => {
             return throwException("Forbidden", status, _responseText, _headers);
+            });
+        } else if (status === 404) {
+            return response.text().then((_responseText) => {
+            return throwException("Resource not found", status, _responseText, _headers);
+            });
+        } else if (status === 409) {
+            return response.text().then((_responseText) => {
+            return throwException("Business or idempotency conflict", status, _responseText, _headers);
+            });
+        } else if (status === 412) {
+            return response.text().then((_responseText) => {
+            return throwException("Stale case version", status, _responseText, _headers);
+            });
+        } else if (status === 428) {
+            return response.text().then((_responseText) => {
+            return throwException("If-Match required", status, _responseText, _headers);
+            });
+        } else if (status === 503) {
+            return response.text().then((_responseText) => {
+            return throwException("Transaction rolled back; retry original intent", status, _responseText, _headers);
             });
         } else if (status !== 200 && status !== 204) {
             return response.text().then((_responseText) => {
@@ -1789,6 +1969,82 @@ export interface IAssessmentRequest {
     [key: string]: any;
 }
 
+export class AssessmentView implements IAssessmentView {
+    id!: string;
+    level!: RiskAssessmentLevel;
+    rationale!: string;
+    assessorId!: string | undefined;
+    assessedAt!: Date;
+    caseVersion!: number;
+    basisVersion!: number;
+    isLegacy!: boolean;
+
+    [key: string]: any;
+
+    constructor(data?: IAssessmentView) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (this as any)[property] = (data as any)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            this.id = _data["id"];
+            this.level = _data["level"];
+            this.rationale = _data["rationale"];
+            this.assessorId = _data["assessorId"];
+            this.assessedAt = _data["assessedAt"] ? new Date(_data["assessedAt"].toString()) : undefined as any;
+            this.caseVersion = _data["caseVersion"];
+            this.basisVersion = _data["basisVersion"];
+            this.isLegacy = _data["isLegacy"];
+        }
+    }
+
+    static fromJS(data: any): AssessmentView {
+        data = typeof data === 'object' ? data : {};
+        let result = new AssessmentView();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        data["id"] = this.id;
+        data["level"] = this.level;
+        data["rationale"] = this.rationale;
+        data["assessorId"] = this.assessorId;
+        data["assessedAt"] = this.assessedAt ? this.assessedAt.toISOString() : undefined as any;
+        data["caseVersion"] = this.caseVersion;
+        data["basisVersion"] = this.basisVersion;
+        data["isLegacy"] = this.isLegacy;
+        return data;
+    }
+}
+
+export interface IAssessmentView {
+    id: string;
+    level: RiskAssessmentLevel;
+    rationale: string;
+    assessorId: string | undefined;
+    assessedAt: Date;
+    caseVersion: number;
+    basisVersion: number;
+    isLegacy: boolean;
+
+    [key: string]: any;
+}
+
 export class AssignRequest implements IAssignRequest {
     analystId!: string;
 
@@ -2034,6 +2290,7 @@ export class DecisionView implements IDecisionView {
     reviewerId!: string;
     decidedAt!: Date;
     caseVersion!: number;
+    assessmentId!: string | undefined;
 
     [key: string]: any;
 
@@ -2058,6 +2315,7 @@ export class DecisionView implements IDecisionView {
             this.reviewerId = _data["reviewerId"];
             this.decidedAt = _data["decidedAt"] ? new Date(_data["decidedAt"].toString()) : undefined as any;
             this.caseVersion = _data["caseVersion"];
+            this.assessmentId = _data["assessmentId"];
         }
     }
 
@@ -2080,6 +2338,7 @@ export class DecisionView implements IDecisionView {
         data["reviewerId"] = this.reviewerId;
         data["decidedAt"] = this.decidedAt ? this.decidedAt.toISOString() : undefined as any;
         data["caseVersion"] = this.caseVersion;
+        data["assessmentId"] = this.assessmentId;
         return data;
     }
 }
@@ -2091,6 +2350,7 @@ export interface IDecisionView {
     reviewerId: string;
     decidedAt: Date;
     caseVersion: number;
+    assessmentId: string | undefined;
 
     [key: string]: any;
 }
@@ -3275,6 +3535,12 @@ export class RiskCaseView implements IRiskCaseView {
     assessmentLevel!: string | undefined;
     assessmentRationale!: string | undefined;
     assessedAt!: Date | undefined;
+    assessedById!: string | undefined;
+    currentAssessmentId!: string | undefined;
+    reviewedAssessmentId!: string | undefined;
+    reviewSubmittedById!: string | undefined;
+    reviewSubmittedAt!: Date | undefined;
+    assessments!: AssessmentView[];
     alert!: AlertView;
     customer!: CustomerView;
     account!: AccountView;
@@ -3297,6 +3563,7 @@ export class RiskCaseView implements IRiskCaseView {
             }
         }
         if (!data) {
+            this.assessments = [];
             this.alert = new AlertView();
             this.customer = new CustomerView();
             this.account = new AccountView();
@@ -3326,6 +3593,16 @@ export class RiskCaseView implements IRiskCaseView {
             this.assessmentLevel = _data["assessmentLevel"];
             this.assessmentRationale = _data["assessmentRationale"];
             this.assessedAt = _data["assessedAt"] ? new Date(_data["assessedAt"].toString()) : undefined as any;
+            this.assessedById = _data["assessedById"];
+            this.currentAssessmentId = _data["currentAssessmentId"];
+            this.reviewedAssessmentId = _data["reviewedAssessmentId"];
+            this.reviewSubmittedById = _data["reviewSubmittedById"];
+            this.reviewSubmittedAt = _data["reviewSubmittedAt"] ? new Date(_data["reviewSubmittedAt"].toString()) : undefined as any;
+            if (Array.isArray(_data["assessments"])) {
+                this.assessments = [] as any;
+                for (let item of _data["assessments"])
+                    this.assessments!.push(AssessmentView.fromJS(item));
+            }
             this.alert = _data["alert"] ? AlertView.fromJS(_data["alert"]) : new AlertView();
             this.customer = _data["customer"] ? CustomerView.fromJS(_data["customer"]) : new CustomerView();
             this.account = _data["account"] ? AccountView.fromJS(_data["account"]) : new AccountView();
@@ -3394,6 +3671,16 @@ export class RiskCaseView implements IRiskCaseView {
         data["assessmentLevel"] = this.assessmentLevel;
         data["assessmentRationale"] = this.assessmentRationale;
         data["assessedAt"] = this.assessedAt ? this.assessedAt.toISOString() : undefined as any;
+        data["assessedById"] = this.assessedById;
+        data["currentAssessmentId"] = this.currentAssessmentId;
+        data["reviewedAssessmentId"] = this.reviewedAssessmentId;
+        data["reviewSubmittedById"] = this.reviewSubmittedById;
+        data["reviewSubmittedAt"] = this.reviewSubmittedAt ? this.reviewSubmittedAt.toISOString() : undefined as any;
+        if (Array.isArray(this.assessments)) {
+            data["assessments"] = [];
+            for (let item of this.assessments)
+                data["assessments"].push(item ? item.toJSON() : undefined as any);
+        }
         data["alert"] = this.alert ? this.alert.toJSON() : undefined as any;
         data["customer"] = this.customer ? this.customer.toJSON() : undefined as any;
         data["account"] = this.account ? this.account.toJSON() : undefined as any;
@@ -3451,6 +3738,12 @@ export interface IRiskCaseView {
     assessmentLevel: string | undefined;
     assessmentRationale: string | undefined;
     assessedAt: Date | undefined;
+    assessedById: string | undefined;
+    currentAssessmentId: string | undefined;
+    reviewedAssessmentId: string | undefined;
+    reviewSubmittedById: string | undefined;
+    reviewSubmittedAt: Date | undefined;
+    assessments: AssessmentView[];
     alert: AlertView;
     customer: CustomerView;
     account: AccountView;

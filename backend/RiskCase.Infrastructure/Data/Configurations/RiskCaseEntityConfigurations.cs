@@ -102,6 +102,10 @@ public sealed class RiskCaseConfiguration : IEntityTypeConfiguration<RiskCaseEnt
         b.Property(x => x.Version).IsConcurrencyToken();
         b.Property(x => x.AssessmentLevel).HasConversion<string>().HasMaxLength(16);
         b.Property(x => x.AssessmentRationale).HasMaxLength(1500);
+        b.Property(x => x.AssessedById).HasMaxLength(450);
+        b.Property(x => x.ReviewSubmittedById).HasMaxLength(450);
+        b.HasMany(x => x.Assessments).WithOne(x => x.Case).HasForeignKey(x => x.CaseId).OnDelete(DeleteBehavior.Restrict);
+        b.Navigation(x => x.Assessments).HasField("_assessments").UsePropertyAccessMode(PropertyAccessMode.Field);
         b.HasOne(x => x.Alert).WithMany().HasForeignKey(x => x.AlertId).OnDelete(DeleteBehavior.Restrict);
         b.HasIndex(x => x.AlertId).IsUnique();
         b.HasIndex(x => new { x.Status, x.AssignedAnalystId, x.LastModified });
@@ -150,6 +154,22 @@ public sealed class RiskDecisionConfiguration : IEntityTypeConfiguration<RiskDec
         b.Property(x => x.Disposition).HasConversion<string>().HasMaxLength(32);
         b.Property(x => x.Rationale).HasMaxLength(2000).IsRequired();
         b.Property(x => x.AnalystId).HasMaxLength(450).IsRequired();
+        b.HasIndex(x => new { x.CaseId, x.CaseVersion }).IsUnique();
+        b.HasOne<RiskAssessment>().WithMany().HasForeignKey(x => new { x.CaseId, x.AssessmentId })
+            .HasPrincipalKey(x => new { x.CaseId, x.Id }).OnDelete(DeleteBehavior.Restrict);
+    }
+}
+
+public sealed class RiskAssessmentConfiguration : IEntityTypeConfiguration<RiskAssessment>
+{
+    public void Configure(EntityTypeBuilder<RiskAssessment> b)
+    {
+        b.ToTable("risk_assessments", t => t.HasCheckConstraint("ck_assessment_author", "\"IsLegacy\" OR \"AssessorId\" IS NOT NULL"));
+        b.HasKey(x => x.Id);
+        b.HasAlternateKey(x => new { x.CaseId, x.Id });
+        b.Property(x => x.Level).HasConversion<string>().HasMaxLength(16);
+        b.Property(x => x.Rationale).HasMaxLength(1500).IsRequired();
+        b.Property(x => x.AssessorId).HasMaxLength(450);
         b.HasIndex(x => new { x.CaseId, x.CaseVersion }).IsUnique();
     }
 }

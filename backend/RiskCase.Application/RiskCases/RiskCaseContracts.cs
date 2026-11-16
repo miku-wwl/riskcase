@@ -9,7 +9,8 @@ public sealed record SignalView(string Code, string Title, string Explanation, R
 public sealed record TransactionView(Guid Id, string ExternalReference, TransactionDirection Direction, decimal Amount, string Currency, DateTimeOffset OccurredAt, string Channel, string CounterpartyReference, string CounterpartyLabel, string AccountMaskedNumber);
 public sealed record NoteView(Guid Id, string AnalystId, string Text, DateTimeOffset OccurredAt, int CaseVersion);
 public sealed record LinkView(Guid Id, string SourceNodeId, string TargetNodeId, CaseLinkKind Kind, string Rationale, string AnalystId, DateTimeOffset OccurredAt, int CaseVersion);
-public sealed record DecisionView(Guid Id, RiskDisposition Disposition, string Rationale, string ReviewerId, DateTimeOffset DecidedAt, int CaseVersion);
+public sealed record DecisionView(Guid Id, RiskDisposition Disposition, string Rationale, string ReviewerId, DateTimeOffset DecidedAt, int CaseVersion, Guid? AssessmentId);
+public sealed record AssessmentView(Guid Id, RiskAssessmentLevel Level, string Rationale, string? AssessorId, DateTimeOffset AssessedAt, int CaseVersion, int BasisVersion, bool IsLegacy);
 public sealed record AuditView(int Version, string Operation, string ActorId, DateTimeOffset OccurredAt, string DetailsJson);
 public sealed record GraphNodeView(string Id, string Type, string Label, string Detail, bool IsAlertSubject);
 public sealed record GraphEdgeView(string Id, string Source, string Target, string Label, string? Rationale);
@@ -46,6 +47,12 @@ public sealed record RiskCaseView(
     string? AssessmentLevel,
     string? AssessmentRationale,
     DateTimeOffset? AssessedAt,
+    string? AssessedById,
+    Guid? CurrentAssessmentId,
+    Guid? ReviewedAssessmentId,
+    string? ReviewSubmittedById,
+    DateTimeOffset? ReviewSubmittedAt,
+    IReadOnlyList<AssessmentView> Assessments,
     AlertView Alert,
     CustomerView Customer,
     AccountView Account,

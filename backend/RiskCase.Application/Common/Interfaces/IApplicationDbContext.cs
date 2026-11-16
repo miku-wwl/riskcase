@@ -14,6 +14,7 @@ public interface IApplicationDbContext
     DbSet<RiskCaseNote> RiskCaseNotes { get; }
     DbSet<RiskCaseLink> RiskCaseLinks { get; }
     DbSet<RiskDecision> RiskDecisions { get; }
+    DbSet<RiskAssessment> RiskAssessments { get; }
     DbSet<AuditEvent> AuditEvents { get; }
     DbSet<IdempotencyReceipt> IdempotencyReceipts { get; }
 

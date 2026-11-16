@@ -21,6 +21,7 @@ public static class RiskCasePresenter
             .Include(x => x.Notes)
             .Include(x => x.Links)
             .Include(x => x.Decisions)
+            .Include(x => x.Assessments)
             .SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
 
         if (entity is null)
@@ -76,7 +77,9 @@ public static class RiskCasePresenter
         return new RiskCaseView(
             entity.Id, entity.Version, entity.Status, entity.AssignedAnalystId, entity.Created, entity.LastModified,
             entity.AssessmentLevel is { } level ? JsonNamingPolicy.CamelCase.ConvertName(level.ToString()) : null,
-            entity.AssessmentRationale, entity.AssessedAt,
+            entity.AssessmentRationale, entity.AssessedAt, entity.AssessedById,
+            entity.CurrentAssessmentId, entity.ReviewedAssessmentId, entity.ReviewSubmittedById, entity.ReviewSubmittedAt,
+            entity.Assessments.OrderBy(x => x.CaseVersion).Select(x => new AssessmentView(x.Id, x.Level, x.Rationale, x.AssessorId, x.AssessedAt, x.CaseVersion, x.BasisVersion, x.IsLegacy)).ToArray(),
             new(alert.Id, alert.ExternalAlertId, alert.SourceSystem, alert.Category, alert.DetectedAt, alert.Severity, alert.RiskScore),
             new(customer.Id, customer.CustomerNumber, customer.DisplayName, customer.Segment, customer.CountryCode, customer.RiskTier),
             new(account.Id, account.MaskedNumber, account.AccountType, account.Currency, account.Status, account.OpenedOn),
@@ -84,7 +87,7 @@ public static class RiskCasePresenter
             transactions.Select(x => new TransactionView(x.Id, x.ExternalReference, x.Direction, x.Amount, x.Currency, x.OccurredAt, x.Channel, x.CounterpartyReference, x.CounterpartyLabel, x.Account.MaskedNumber)).ToArray(),
             entity.Notes.OrderBy(x => x.OccurredAt).Select(x => new NoteView(x.Id, x.AnalystId, x.Text, x.OccurredAt, x.CaseVersion)).ToArray(),
             entity.Links.OrderBy(x => x.OccurredAt).Select(x => new LinkView(x.Id, x.SourceNodeId, x.TargetNodeId, x.Kind, x.Rationale, x.AnalystId, x.OccurredAt, x.CaseVersion)).ToArray(),
-            entity.Decisions.OrderBy(x => x.DecidedAt).Select(x => new DecisionView(x.Id, x.Disposition, x.Rationale, x.AnalystId, x.DecidedAt, x.CaseVersion)).ToArray(),
+            entity.Decisions.OrderBy(x => x.DecidedAt).Select(x => new DecisionView(x.Id, x.Disposition, x.Rationale, x.AnalystId, x.DecidedAt, x.CaseVersion, x.AssessmentId)).ToArray(),
             audit ?? [], nodes.Values.ToArray(), edges.ToArray());
     }
 }

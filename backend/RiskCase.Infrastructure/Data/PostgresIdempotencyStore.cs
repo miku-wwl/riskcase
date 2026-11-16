@@ -52,13 +52,23 @@ public sealed class PostgresIdempotencyStore(
             logger.LogWarning(exception, "A competing write occupied the same case audit or decision version.");
             throw new ApplicationFault(412, "version_conflict", "保存期间检测到并发写入，当前操作没有生效。请刷新档案后重新确认。");
         }
+        catch (DbUpdateException exception) when (exception.InnerException is PostgresException
+            { SqlState: PostgresErrorCodes.UniqueViolation, ConstraintName: "IX_risk_case_links_CaseId_SourceNodeId_TargetNodeId" })
+        {
+            throw new ApplicationFault(409, "duplicate_case_link", "该实体对已有关联记录。");
+        }
+        catch (Exception exception) when ((exception as PostgresException ?? exception.InnerException as PostgresException)
+            is { SqlState: PostgresErrorCodes.DeadlockDetected or PostgresErrorCodes.SerializationFailure })
+        {
+            throw new ApplicationFault(503, "transaction_retry_required", "数据库已回滚竞争事务，请沿用原幂等键重试。");
+        }
     }
 
     private static bool IsVersionConstraintConflict(DbUpdateException exception) =>
         exception.InnerException is PostgresException
         {
             SqlState: PostgresErrorCodes.UniqueViolation,
-            ConstraintName: "IX_audit_events_CaseId_CaseVersion" or "IX_risk_decisions_CaseId_CaseVersion"
+            ConstraintName: "IX_audit_events_CaseId_CaseVersion" or "IX_risk_decisions_CaseId_CaseVersion" or "IX_risk_assessments_CaseId_CaseVersion"
         };
 }
 

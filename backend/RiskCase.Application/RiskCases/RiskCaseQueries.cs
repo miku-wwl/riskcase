@@ -26,19 +26,19 @@ public sealed class GetRiskCasesQueryHandler(IApplicationDbContext db, IUser use
 
         if (!string.IsNullOrWhiteSpace(request.Status))
         {
-            if (!Enum.TryParse<RiskCaseStatus>(request.Status, true, out var status))
+            if (!Enum.TryParse<RiskCaseStatus>(request.Status, true, out var status) || !Enum.IsDefined(status))
                 throw new ApplicationFault(400, "status_filter_invalid", "档案状态筛选值无效。");
             query = query.Where(x => x.Status == status);
         }
         if (!string.IsNullOrWhiteSpace(request.Category))
         {
-            if (!Enum.TryParse<RiskAlertCategory>(request.Category, true, out var category))
+            if (!Enum.TryParse<RiskAlertCategory>(request.Category, true, out var category) || !Enum.IsDefined(category))
                 throw new ApplicationFault(400, "category_filter_invalid", "告警类别筛选值无效。");
             query = query.Where(x => x.Alert.Category == category);
         }
         if (!string.IsNullOrWhiteSpace(request.Severity))
         {
-            if (!Enum.TryParse<RiskSeverity>(request.Severity, true, out var severity))
+            if (!Enum.TryParse<RiskSeverity>(request.Severity, true, out var severity) || !Enum.IsDefined(severity))
                 throw new ApplicationFault(400, "severity_filter_invalid", "告警严重度筛选值无效。");
             query = query.Where(x => x.Alert.Severity == severity);
         }
@@ -63,6 +63,7 @@ public sealed class GetRiskCasesQueryHandler(IApplicationDbContext db, IUser use
                 : x.Alert.Severity == RiskSeverity.High ? 3
                 : x.Alert.Severity == RiskSeverity.Medium ? 2 : 1)
             .ThenBy(x => x.Alert.DetectedAt)
+            .ThenBy(x => x.Id)
             .Skip((request.Page - 1) * request.PageSize)
             .Take(request.PageSize)
             .ToListAsync(cancellationToken);

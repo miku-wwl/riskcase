@@ -141,3 +141,11 @@ GitHub Actions runs backend/unit/integration checks, frontend/API-client generat
 ## Textbook
 
 The editable Chinese-language textbook, original vector figures, source map and reproducible publication scripts live under [`manual/`](manual/). The final illustrated edition is published at `manual/dist/RiskCase-Financial-Risk-Management-Engineering-Textbook.pdf`.
+
+## Round 2 engineering hardening
+
+The review basis is frozen during supervisor review. Assessments are immutable, attributed records; submissions and final dispositions reference a particular assessment. Any historical assessor on a case is ineligible for its final review. New notes, links, reassignment and return invalidate the current assessment and require reassessment.
+
+The API validates assignee eligibility, loads persisted relationships, checks current Identity roles before idempotency replay, and rejects conflicting command-key reuse. The client preserves editing generations, rejects cache version regression, and can recover an uncertain committed write after reload using its original request and key.
+
+See [the remediation matrix, migration semantics and verification report](docs/round-2/ENGINEERING-HANDOFF.md). The schema upgrade preserves known legacy snapshots with unknown authors and returns unverifiable in-flight reviews for reassessment; it does not invent lost historical information. Escalation/monitoring/AML dispositions complete this application's record, while downstream actions remain outside its scope.

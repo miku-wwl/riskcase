@@ -32,6 +32,6 @@ public sealed class IdempotencyBehaviour<TRequest, TResponse>(IIdempotencyStore 
         var sorted = new SortedDictionary<string, JsonElement>(StringComparer.Ordinal);
         foreach (var property in json.EnumerateObject().Where(p => !StringComparer.OrdinalIgnoreCase.Equals(p.Name, nameof(IIdempotentRequest.IdempotencyKey))))
             sorted.Add(property.Name, property.Value.Clone());
-        return Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(JsonSerializer.Serialize(sorted))));
+        return Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(request.GetType().FullName + ":" + JsonSerializer.Serialize(sorted))));
     }
 }

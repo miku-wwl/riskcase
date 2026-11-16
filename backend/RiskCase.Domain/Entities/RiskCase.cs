@@ -9,6 +9,7 @@ public sealed class RiskCase : BaseAuditableEntity
     private readonly List<RiskCaseNote> _notes = [];
     private readonly List<RiskCaseLink> _links = [];
     private readonly List<RiskDecision> _decisions = [];
+    private readonly List<RiskAssessment> _assessments = [];
 
     public Guid AlertId { get; private set; }
     public RiskCaseStatus Status { get; private set; }
@@ -17,10 +18,17 @@ public sealed class RiskCase : BaseAuditableEntity
     public RiskAssessmentLevel? AssessmentLevel { get; private set; }
     public string? AssessmentRationale { get; private set; }
     public DateTimeOffset? AssessedAt { get; private set; }
+    public string? AssessedById { get; private set; }
+    public Guid? CurrentAssessmentId { get; private set; }
+    public Guid? ReviewedAssessmentId { get; private set; }
+    public string? ReviewSubmittedById { get; private set; }
+    public DateTimeOffset? ReviewSubmittedAt { get; private set; }
+    public int BasisVersion { get; private set; }
     public RiskAlert Alert { get; private set; } = null!;
     public IReadOnlyCollection<RiskCaseNote> Notes => _notes.AsReadOnly();
     public IReadOnlyCollection<RiskCaseLink> Links => _links.AsReadOnly();
     public IReadOnlyCollection<RiskDecision> Decisions => _decisions.AsReadOnly();
+    public IReadOnlyCollection<RiskAssessment> Assessments => _assessments.AsReadOnly();
 
     private RiskCase() { }
 
@@ -40,12 +48,14 @@ public sealed class RiskCase : BaseAuditableEntity
     public void Assign(string analystId, DateTimeOffset now)
     {
         EnsureNotResolved();
+        Require(Status != RiskCaseStatus.Reviewing, "review_basis_frozen", "复核期间不能重新分配；请先明确退回调查。");
         if (string.IsNullOrWhiteSpace(analystId))
             throw new DomainRuleException("analyst_required", "必须指定负责分析员。");
         if (StringComparer.Ordinal.Equals(AssignedAnalystId, analystId))
             throw new DomainRuleException("assignment_unchanged", "当前档案已分配给该分析员。");
         AssignedAnalystId = analystId;
         Advance(now);
+        InvalidateAssessment();
     }
 
     public void StartInvestigation(string analystId, DateTimeOffset now)
@@ -65,6 +75,7 @@ public sealed class RiskCase : BaseAuditableEntity
         Advance(now);
         var note = RiskCaseNote.Create(Id, analystId, normalized, now, Version);
         _notes.Add(note);
+        InvalidateAssessment();
         return note;
     }
 
@@ -85,10 +96,11 @@ public sealed class RiskCase : BaseAuditableEntity
         Advance(now);
         var link = RiskCaseLink.Create(Id, sourceNodeId, targetNodeId, kind, explanation, analystId, now, Version);
         _links.Add(link);
+        InvalidateAssessment();
         return link;
     }
 
-    public void RecordAssessment(string analystId, RiskAssessmentLevel level, string rationale, DateTimeOffset now)
+    public RiskAssessment RecordAssessment(string analystId, RiskAssessmentLevel level, string rationale, DateTimeOffset now)
     {
         EnsureAssignedAnalyst(analystId);
         Require(Status == RiskCaseStatus.Investigating, "assessment_requires_investigation", "只能在调查中记录风险评估。");
@@ -99,13 +111,21 @@ public sealed class RiskCase : BaseAuditableEntity
         AssessmentRationale = explanation;
         AssessedAt = now;
         Advance(now);
+        AssessedById = analystId;
+        var assessment = RiskAssessment.Record(Id, level, explanation, analystId, now, Version, BasisVersion);
+        CurrentAssessmentId = assessment.Id;
+        _assessments.Add(assessment);
+        return assessment;
     }
 
     public void RequestReview(string analystId, DateTimeOffset now)
     {
         EnsureAssignedAnalyst(analystId);
         Require(Status == RiskCaseStatus.Investigating, "invalid_case_transition", "只有调查中的档案可以提交复核。");
-        Require(AssessmentLevel is not null && !string.IsNullOrWhiteSpace(AssessmentRationale), "assessment_required", "提交复核前必须完成风险评估。");
+        Require(CurrentAssessmentId is not null && AssessedById == analystId, "assessment_required", "当前经办人须对最新调查事实重新评估后提交复核。");
+        ReviewedAssessmentId = CurrentAssessmentId;
+        ReviewSubmittedById = analystId;
+        ReviewSubmittedAt = now;
         Status = RiskCaseStatus.Reviewing;
         Advance(now);
     }
@@ -116,20 +136,23 @@ public sealed class RiskCase : BaseAuditableEntity
         Require(Status == RiskCaseStatus.Reviewing, "invalid_case_transition", "只有复核中的档案可以退回调查。");
         Status = RiskCaseStatus.Investigating;
         Advance(now);
+        InvalidateAssessment();
     }
 
     public RiskDecision Decide(string analystId, RiskDisposition disposition, string rationale, DateTimeOffset now)
     {
         EnsureNotResolved();
         Require(Status == RiskCaseStatus.Reviewing, "decision_requires_review", "风险处置必须在复核阶段完成。");
-        Require(!StringComparer.Ordinal.Equals(AssignedAnalystId, analystId), "independent_reviewer_required", "最终处置必须由非当前负责分析员的复核人员作出。");
-        Require(AssessmentLevel is not null, "assessment_required", "必须先完成风险评估。");
+        Require(AssessedById is not null && analystId != AssessedById && analystId != ReviewSubmittedById && analystId != AssignedAnalystId
+            && !_assessments.Any(x => x.AssessorId == analystId),
+            "independent_reviewer_required", "最终处置人员不能是本案任何一次评估的作者、当前提交人或经办人。");
+        Require(CurrentAssessmentId is not null && ReviewedAssessmentId == CurrentAssessmentId, "assessment_required", "复核必须对应已提交的确定评估记录。");
         Require(Enum.IsDefined(disposition), "disposition_invalid", "处置结果无效。");
         var explanation = rationale.Trim();
         Require(CountRunes(explanation) is >= 20 and <= 2000, "decision_rationale_length_invalid", "处置理由须为 20 至 2000 个字符。");
         Status = RiskCaseStatus.Resolved;
         Advance(now);
-        var decision = RiskDecision.Record(Id, disposition, explanation, analystId, now, Version);
+        var decision = RiskDecision.Record(Id, ReviewedAssessmentId!.Value, disposition, explanation, analystId, now, Version);
         _decisions.Add(decision);
         return decision;
     }
@@ -140,7 +163,20 @@ public sealed class RiskCase : BaseAuditableEntity
         EnsureNotResolved();
     }
 
-    private void EnsureEditable() => Require(Status is RiskCaseStatus.Investigating or RiskCaseStatus.Reviewing, "case_not_editable", "当前档案状态不允许此项调查操作。");
+    private void InvalidateAssessment()
+    {
+        BasisVersion = Version;
+        CurrentAssessmentId = null;
+        ReviewedAssessmentId = null;
+        AssessedById = null;
+        AssessmentLevel = null;
+        AssessmentRationale = null;
+        AssessedAt = null;
+        ReviewSubmittedById = null;
+        ReviewSubmittedAt = null;
+    }
+
+    private void EnsureEditable() => Require(Status == RiskCaseStatus.Investigating, "case_not_editable", "只有调查阶段允许修改调查事实；复核期间必须先退回调查。");
     private void EnsureNotResolved() => Require(Status != RiskCaseStatus.Resolved, "case_resolved", "已完成处置的档案为只读状态。");
     private void Advance(DateTimeOffset now)
     {

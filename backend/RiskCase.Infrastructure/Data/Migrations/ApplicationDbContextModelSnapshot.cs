@@ -409,6 +409,52 @@ namespace RiskCase.Infrastructure.Data.Migrations
                     b.ToTable("risk_alerts", "riskcase");
                 });
 
+            modelBuilder.Entity("RiskCase.Domain.Entities.RiskAssessment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTimeOffset>("AssessedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("AssessorId")
+                        .HasMaxLength(450)
+                        .HasColumnType("character varying(450)");
+
+                    b.Property<int>("BasisVersion")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("CaseId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("CaseVersion")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("IsLegacy")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Level")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("character varying(16)");
+
+                    b.Property<string>("Rationale")
+                        .IsRequired()
+                        .HasMaxLength(1500)
+                        .HasColumnType("character varying(1500)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CaseId", "CaseVersion")
+                        .IsUnique();
+
+                    b.ToTable("risk_assessments", "riskcase", t =>
+                        {
+                            t.HasCheckConstraint("ck_assessment_author", "\"IsLegacy\" OR \"AssessorId\" IS NOT NULL");
+                        });
+                });
+
             modelBuilder.Entity("RiskCase.Domain.Entities.RiskCase", b =>
                 {
                     b.Property<Guid>("Id")
@@ -420,6 +466,10 @@ namespace RiskCase.Infrastructure.Data.Migrations
 
                     b.Property<DateTimeOffset?>("AssessedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("AssessedById")
+                        .HasMaxLength(450)
+                        .HasColumnType("character varying(450)");
 
                     b.Property<string>("AssessmentLevel")
                         .HasMaxLength(16)
@@ -433,17 +483,33 @@ namespace RiskCase.Infrastructure.Data.Migrations
                         .HasMaxLength(450)
                         .HasColumnType("character varying(450)");
 
+                    b.Property<int>("BasisVersion")
+                        .HasColumnType("integer");
+
                     b.Property<DateTimeOffset>("Created")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
 
+                    b.Property<Guid?>("CurrentAssessmentId")
+                        .HasColumnType("uuid");
+
                     b.Property<DateTimeOffset>("LastModified")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("text");
+
+                    b.Property<DateTimeOffset?>("ReviewSubmittedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("ReviewSubmittedById")
+                        .HasMaxLength(450)
+                        .HasColumnType("character varying(450)");
+
+                    b.Property<Guid?>("ReviewedAssessmentId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -558,6 +624,9 @@ namespace RiskCase.Infrastructure.Data.Migrations
                         .HasMaxLength(450)
                         .HasColumnType("character varying(450)");
 
+                    b.Property<Guid?>("AssessmentId")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid>("CaseId")
                         .HasColumnType("uuid");
 
@@ -578,6 +647,8 @@ namespace RiskCase.Infrastructure.Data.Migrations
                         .HasColumnType("character varying(2000)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CaseId", "AssessmentId");
 
                     b.HasIndex("CaseId", "CaseVersion")
                         .IsUnique();
@@ -854,6 +925,17 @@ namespace RiskCase.Infrastructure.Data.Migrations
                     b.Navigation("Customer");
                 });
 
+            modelBuilder.Entity("RiskCase.Domain.Entities.RiskAssessment", b =>
+                {
+                    b.HasOne("RiskCase.Domain.Entities.RiskCase", "Case")
+                        .WithMany("Assessments")
+                        .HasForeignKey("CaseId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Case");
+                });
+
             modelBuilder.Entity("RiskCase.Domain.Entities.RiskCase", b =>
                 {
                     b.HasOne("RiskCase.Domain.Entities.RiskAlert", "Alert")
@@ -894,6 +976,12 @@ namespace RiskCase.Infrastructure.Data.Migrations
                         .HasForeignKey("CaseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("RiskCase.Domain.Entities.RiskAssessment", null)
+                        .WithMany()
+                        .HasForeignKey("CaseId", "AssessmentId")
+                        .HasPrincipalKey("CaseId", "Id")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Case");
                 });
@@ -937,6 +1025,8 @@ namespace RiskCase.Infrastructure.Data.Migrations
 
             modelBuilder.Entity("RiskCase.Domain.Entities.RiskCase", b =>
                 {
+                    b.Navigation("Assessments");
+
                     b.Navigation("Decisions");
 
                     b.Navigation("Links");
