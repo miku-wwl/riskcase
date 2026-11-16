@@ -3,6 +3,8 @@ using RiskCase.Application.Common.Exceptions;
 using RiskCase.Application.Common.Interfaces;
 using RiskCase.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace RiskCase.Infrastructure.Data;
@@ -11,6 +13,7 @@ public sealed class PostgresIdempotencyStore(
     ApplicationDbContext db,
     IUser user,
     TimeProvider clock,
+    IHostEnvironment environment,
     ILogger<PostgresIdempotencyStore> logger) : IIdempotencyStore
 {
     public async Task<TResponse> ExecuteAsync<TResponse>(string key, string fingerprint, Func<Task<TResponse>> action, CancellationToken cancellationToken)
@@ -42,10 +45,23 @@ public sealed class PostgresIdempotencyStore(
         }
         catch (DbUpdateConcurrencyException exception)
         {
-            var entries = string.Join(", ", exception.Entries.Select(entry => entry.Metadata.ClrType.Name));
-            logger.LogWarning(exception, "Optimistic concurrency failed while committing entities: {EntityTypes}.", entries);
-            throw new ApplicationFault(412, "version_conflict", "保存期间检测到并发写入，当前操作没有生效。请刷新档案后重新确认。");
+            var entries = string.Join(", ", exception.Entries.Select(DescribeConcurrencyEntry));
+            logger.LogWarning(exception, "Optimistic concurrency failed while committing entities: {EntityDiagnostics}.", entries);
+            var detail = environment.IsEnvironment("Testing")
+                ? $"Integration concurrency diagnostics: {entries}."
+                : "保存期间检测到并发写入，当前操作没有生效。请刷新档案后重新确认。";
+            throw new ApplicationFault(412, "version_conflict", detail);
         }
+    }
+
+    private static string DescribeConcurrencyEntry(EntityEntry entry)
+    {
+        var version = entry.Metadata.FindProperty("Version");
+        if (version is null)
+            return entry.Metadata.ClrType.Name;
+
+        var property = entry.Property(version.Name);
+        return $"{entry.Metadata.ClrType.Name}(originalVersion={property.OriginalValue}, currentVersion={property.CurrentValue})";
     }
 }
 
