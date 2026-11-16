@@ -41,9 +41,10 @@ export const clients = {
   ingestion: new AlertIngestionClient(baseUrl, transport),
 };
 
-export async function refreshAntiForgeryToken(): Promise<void> {
+export async function refreshAntiForgeryToken(): Promise<string> {
   const token = await apiCall(() => clients.security.issueAntiforgeryToken());
   requestToken = token.requestToken;
+  return token.requestToken;
 }
 
 export async function signIn(email: string, password: string): Promise<void> {
