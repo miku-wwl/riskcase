@@ -225,7 +225,7 @@ class CoverPage(Flowable):
         canvas.drawString(56, PAGE_H - 335, "从告警调查到独立复核：真实实现、真实源码与可复核工作流")
         canvas.setFont(CN_FONT, 10)
         canvas.setFillColor(colors.HexColor("#667788"))
-        canvas.drawString(56, 68, "RiskCase Engineering  ·  2026")
+        canvas.drawString(56, 68, "RiskCase Engineering  ·  2026  ·  Round 2")
 
 
 class ChapterAnchor(Flowable):
@@ -260,7 +260,7 @@ class CodePanel(Flowable):
             pieces = self._wrap_line(line, text_width)
             for offset, piece in enumerate(pieces):
                 self.rows.append((self.excerpt.start + index if offset == 0 else None, piece))
-        self.height = max(42, len(self.rows) * self.leading + 18)
+        self.height = max(42, len(self.rows) * self.leading + 30)
         return self.width, self.height
 
     def _wrap_line(self, line: str, width: float) -> list[str]:
@@ -492,6 +492,8 @@ def front_matter(chapters: list[dict], styles: dict):
     story.extend([
         Paragraph("版权、数据与使用边界", styles["frontTitle"]),
         Paragraph("本教材讲解 RiskCase 当前仓库中的真实实现。业务名称、账号、交易和告警均为合成演示数据；示例不构成法律、金融或监管建议。RiskCase 不执行付款、冻结账户、改变余额，也没有取得金融合规认证。", styles["body"]),
+        Spacer(1, 10),
+        Paragraph("本版依据 Round 2 工程提交 df126c7 修订。评估、复核冻结与幂等恢复的说明对应该实现；完整修复与验证记录保存在 docs/round-2。", styles["body"]),
         Spacer(1, 10),
         Paragraph("代码许可与模板来源", styles["frontSub"]),
         Paragraph("RiskCase 源码采用仓库根目录声明的 Apache-2.0 许可。后端从 Jason Taylor CleanArchitecture v10.8.0 实际生成解决方案改造；上游 MIT 许可证原文及准确提交 SHA 保存在 manual/reference。依赖许可应以各锁定版本的包元数据为准。", styles["body"]),

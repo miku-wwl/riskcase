@@ -14,15 +14,15 @@
 
 ### 第 3 页｜领域方法表达意图
 
-[source: backend/RiskCase.Domain/Entities/RiskCase.cs#public RiskCaseNote AddNote|28]
+[source: backend/RiskCase.Domain/Entities/RiskCase.cs#public RiskAssessment RecordAssessment|18]
 
-`AddNote` 表达“在案件中新增调查笔记”，而不是外部直接设置 `Notes` 列表。`Decide` 会验证状态与复核者，失败时拒绝修改。工厂方法建立有效初始对象；EF Core 的私有 setter 和集合用于物化，不应成为 API 更新模型。
+`RecordAssessment` 表达“对当前调查基础形成一次有作者的判断”，返回新增的不可变记录。更新投影与追加历史是同一个领域动作。`Decide` 会验证状态与复核者，失败时拒绝修改。工厂方法建立有效初始对象；EF Core 的私有 setter 和集合用于物化，不应成为 API 更新模型。
 
 ### 第 4 页｜把状态规则写成可观察结果
 
 单元测试验证从 New 开始调查、添加笔记使版本递增、请求复核需要评估、复核者独立、结案后写入被拒绝。每条测试说明一个业务结果，而不是仅证明方法被调用。
 
-当业务修改规则时，例如允许低风险分析员自行处置，就应该先更新规则和测试，再调整 UI 与授权策略，确保变化横跨层仍一致。
+本项目所有风险等级均需独立主管复核。若未来修改这一政策，应先明确职责分离与历史引用仍如何成立，再同时修改领域、应用授权、API、界面和失败场景测试。
 
 ### 第 5 页｜练习与本章小结
 

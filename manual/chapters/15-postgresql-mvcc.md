@@ -14,15 +14,15 @@ MVCC 解决并发读写可见性，不知道 RiskCase 的“谁能结案”规�
 
 ### 第 3 页｜数据库事务承担原子性
 
-[source: backend/RiskCase.Infrastructure/Data/PostgresIdempotencyStore.cs#public async Task<TResponse> ExecuteAsync|44]
+[source: backend/RiskCase.Infrastructure/Data/PostgresIdempotencyStore.cs#var response = await action();|15]
 
-存储先开启事务，再通过 PostgreSQL advisory transaction lock 串行化相同用户和幂等键。它读取已有回执；不存在时才执行命令，将响应序列化为回执并保存，然后提交。异常会沿调用链返回，未提交事务在释放时回滚。
+幂等存储先开启事务，再通过 PostgreSQL advisory transaction lock 串行化相同用户和幂等键。它读取已有回执；不存在时才执行命令，将响应序列化为回执并保存，然后提交。异常会沿调用链返回，未提交事务在释放时回滚。
 
 ### 第 4 页｜不要混淆隔离级别与业务锁
 
 MVCC 不等于无锁；数据库仍会对写入和唯一约束进行协调。advisory lock 是应用选择的事务级互斥信号，用于同一幂等范围。它不是案件版本锁，也不会自动防止用不同幂等键并发编辑同一案件。
 
-唯一索引处理外部告警编号竞争；EF 的版本条件处理过期案件更新；幂等键锁住重复业务请求。三者针对不同冲突来源。
+外部告警另用规范化来源与编号的 advisory lock 协调不同传输键的竞争，唯一索引作最终保护；EF 版本条件处理过期案件写入。Read Committed 的快照以语句为边界，不能把多条查询误解为天然固定的整段业务快照。事务失败会回滚子记录、父版本、审计与回执。
 
 ### 第 5 页｜练习与本章小结
 

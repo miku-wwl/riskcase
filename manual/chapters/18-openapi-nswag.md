@@ -20,7 +20,7 @@ ASP.NET Core 从端点与模型输出 OpenAPI JSON；NSwag 读取 JSON 并生成
 
 ### 第 4 页｜一次类型变化如何传播
 
-后端把 assessment 输出从 nullable enum 改为 nullable string，以免 TypeScript 生成器错误地生成包装类。重新生成 NSwag 客户端后，类型检查暴露所有受影响的 UI 引用。开发者通过编译错误调整页面，而不是等到浏览器收到未知 JSON。
+后端新增 AssessmentView、评估作者与被复核评估 ID 后，NSwag 同步生成 TypeScript 模型。OpenAPI 也声明 400、401、403、404、409、412、428 与事务重试 503 等相关错误语义。真实 API 测试仍需确认路由、Cookie、CSRF、枚举和请求头在运行时确实按契约工作。
 
 契约生成并不自动证明业务语义正确：同一字段即使类型相同，也可能改了单位或含义。重要的业务字段要通过 API 测试与文档说明。
 

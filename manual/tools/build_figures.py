@@ -99,6 +99,8 @@ def main() -> None:
     for figure in config["figures"]:
         path = FIGURES / figure["file"]
         path.write_text(render(figure), encoding="utf-8", newline="\n")
+    from build_round2_figures import build
+    build()
     print(f"Generated {len(config['figures'])} editable SVG diagrams.")
 
 
