@@ -38,7 +38,9 @@ public sealed class RiskCaseApiWorkflowTests
         using var anonymousResponse = await anonymous.GetAsync("/api/cases");
         Assert.That(anonymousResponse.StatusCode, Is.EqualTo(HttpStatusCode.Unauthorized));
 
-        var page = await _analyst.GetFromJsonAsync<RiskCaseQueuePage>("/api/cases?page=1&pageSize=25");
+        using var queueResponse = await _analyst.GetAsync("/api/cases?page=1&pageSize=25");
+        Assert.That(queueResponse.StatusCode, Is.EqualTo(HttpStatusCode.OK), await queueResponse.Content.ReadAsStringAsync());
+        var page = await queueResponse.Content.ReadFromJsonAsync<RiskCaseQueuePage>();
         Assert.That(page, Is.Not.Null);
         Assert.That(page!.TotalItems, Is.GreaterThanOrEqualTo(4));
         Assert.That(page.Items, Has.Some.Matches<RiskCaseQueueItem>(x => x.Status == "resolved"));

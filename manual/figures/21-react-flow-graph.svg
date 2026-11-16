@@ -4,38 +4,38 @@
 <text x="38" y="39" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="21px" font-weight="700" fill="#22364f">调查图谱中的实体路径</text>
 <text x="38" y="63" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12px" font-weight="400" fill="#64748b">节点和边保留类型；每一条关系都可以回查来源</text>
 <defs><marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#718096"/></marker></defs>
-<path d="M 220 236.0 C 262 236.0, 178 236.0, 220 236.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="183.0" y="214.0" width="74" height="19" rx="8" fill="#ffffff" stroke="#e2e8f0"/>
-<text x="220.0" y="228.0" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="10px" fill="#526273">拥有</text>
-<path d="M 402 236.0 C 444 236.0, 360 236.0, 402 236.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="365.0" y="214.0" width="74" height="19" rx="8" fill="#ffffff" stroke="#e2e8f0"/>
-<text x="402.0" y="228.0" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="10px" fill="#526273">记录</text>
-<path d="M 584 236.0 C 626 236.0, 542 236.0, 584 236.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="547.0" y="214.0" width="74" height="19" rx="8" fill="#ffffff" stroke="#e2e8f0"/>
-<text x="584.0" y="228.0" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="10px" fill="#526273">对手方</text>
-<path d="M 766 236.0 C 808 236.0, 724 236.0, 766 236.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="729.0" y="214.0" width="74" height="19" rx="8" fill="#ffffff" stroke="#e2e8f0"/>
-<text x="766.0" y="228.0" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="10px" fill="#526273">另一条交易</text>
-<rect x="38" y="180" width="182" height="112" rx="13" fill="#eef3f9" stroke="#22364f" stroke-width="1.4"/>
-<path d="M 52 194 V 278" stroke="#22364f" stroke-width="3" stroke-linecap="round"/>
-<text x="65" y="214" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">客户</text>
-<text x="65" y="246" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#4d6074">高亮告警主体</text>
-<rect x="220" y="180" width="182" height="112" rx="13" fill="#e8f5f3" stroke="#117c78" stroke-width="1.4"/>
-<path d="M 234 194 V 278" stroke="#117c78" stroke-width="3" stroke-linecap="round"/>
-<text x="247" y="214" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">账户</text>
-<text x="247" y="246" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#466b68">掩码编号</text>
-<rect x="402" y="180" width="182" height="112" rx="13" fill="#fff4df" stroke="#b87414" stroke-width="1.4"/>
-<path d="M 416 194 V 278" stroke="#b87414" stroke-width="3" stroke-linecap="round"/>
-<text x="429" y="214" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">交易</text>
-<text x="429" y="246" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#765e39">金额 · 时间 · 渠道</text>
-<rect x="584" y="180" width="182" height="112" rx="13" fill="#f1edfb" stroke="#7255a5" stroke-width="1.4"/>
-<path d="M 598 194 V 278" stroke="#7255a5" stroke-width="3" stroke-linecap="round"/>
-<text x="611" y="214" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">交易对手</text>
-<text x="611" y="246" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#625576">共享关系线索</text>
-<rect x="766" y="180" width="182" height="112" rx="13" fill="#fff0ed" stroke="#bd5448" stroke-width="1.4"/>
-<path d="M 780 194 V 278" stroke="#bd5448" stroke-width="3" stroke-linecap="round"/>
-<text x="793" y="214" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">关联客户</text>
-<text x="793" y="246" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#77524e">并非共同控制证明</text>
+<path d="M 175 236.0 C 217 236.0, 158 236.0, 200 236.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="150.5" y="214.0" width="74" height="19" rx="8" fill="#ffffff" stroke="#e2e8f0"/>
+<text x="187.5" y="228.0" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="10px" fill="#526273">拥有</text>
+<path d="M 350 236.0 C 392 236.0, 333 236.0, 375 236.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="325.5" y="214.0" width="74" height="19" rx="8" fill="#ffffff" stroke="#e2e8f0"/>
+<text x="362.5" y="228.0" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="10px" fill="#526273">记录</text>
+<path d="M 525 236.0 C 567 236.0, 508 236.0, 550 236.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="500.5" y="214.0" width="74" height="19" rx="8" fill="#ffffff" stroke="#e2e8f0"/>
+<text x="537.5" y="228.0" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="10px" fill="#526273">对手方</text>
+<path d="M 700 236.0 C 742 236.0, 683 236.0, 725 236.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="675.5" y="214.0" width="74" height="19" rx="8" fill="#ffffff" stroke="#e2e8f0"/>
+<text x="712.5" y="228.0" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="10px" fill="#526273">另一条交易</text>
+<rect x="25" y="180" width="150" height="112" rx="13" fill="#eef3f9" stroke="#22364f" stroke-width="1.4"/>
+<path d="M 39 194 V 278" stroke="#22364f" stroke-width="3" stroke-linecap="round"/>
+<text x="52" y="214" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">客户</text>
+<text x="52" y="246" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#4d6074">高亮告警主体</text>
+<rect x="200" y="180" width="150" height="112" rx="13" fill="#e8f5f3" stroke="#117c78" stroke-width="1.4"/>
+<path d="M 214 194 V 278" stroke="#117c78" stroke-width="3" stroke-linecap="round"/>
+<text x="227" y="214" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">账户</text>
+<text x="227" y="246" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#466b68">掩码编号</text>
+<rect x="375" y="180" width="150" height="112" rx="13" fill="#fff4df" stroke="#b87414" stroke-width="1.4"/>
+<path d="M 389 194 V 278" stroke="#b87414" stroke-width="3" stroke-linecap="round"/>
+<text x="402" y="214" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">交易</text>
+<text x="402" y="246" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#765e39">金额 · 时间 · 渠道</text>
+<rect x="550" y="180" width="150" height="112" rx="13" fill="#f1edfb" stroke="#7255a5" stroke-width="1.4"/>
+<path d="M 564 194 V 278" stroke="#7255a5" stroke-width="3" stroke-linecap="round"/>
+<text x="577" y="214" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">交易对手</text>
+<text x="577" y="246" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#625576">共享关系线索</text>
+<rect x="725" y="180" width="150" height="112" rx="13" fill="#fff0ed" stroke="#bd5448" stroke-width="1.4"/>
+<path d="M 739 194 V 278" stroke="#bd5448" stroke-width="3" stroke-linecap="round"/>
+<text x="752" y="214" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">关联客户</text>
+<text x="752" y="246" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#77524e">并非共同控制证明</text>
 <path d="M 30 414 H 870" stroke="#e6edf2" stroke-width="1"/>
 <text x="38" y="439" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#64748b">拖拽和缩放仅影响视图；不会更改案件风险事实</text>
 </svg>

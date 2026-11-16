@@ -26,9 +26,9 @@ public sealed class RiskCases : IEndpointGroup
     }
 
     public static Task<RiskCaseQueuePage> ListCases(
-        string? status, string? category, string? severity, string? search, bool assignedToMe,
+        string? status, string? category, string? severity, string? search, bool? assignedToMe,
         ISender sender, CancellationToken cancellationToken, int page = 1, int pageSize = 25) =>
-        sender.Send(new GetRiskCasesQuery(status, category, severity, search, assignedToMe, page, pageSize), cancellationToken);
+        sender.Send(new GetRiskCasesQuery(status, category, severity, search, assignedToMe ?? false, page, pageSize), cancellationToken);
 
     public static Task<RiskCaseView> GetCase(Guid id, ISender sender, CancellationToken cancellationToken) =>
         sender.Send(new GetRiskCaseQuery(id), cancellationToken);

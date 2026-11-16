@@ -149,11 +149,12 @@ export class RiskCasesClient {
      * @param category (optional)
      * @param severity (optional)
      * @param search (optional)
+     * @param assignedToMe (optional)
      * @param page (optional)
      * @param pageSize (optional)
      * @return OK
      */
-    listRiskCases(status: string | undefined, category: string | undefined, severity: string | undefined, search: string | undefined, assignedToMe: boolean, page: number | undefined, pageSize: number | undefined): Promise<RiskCaseQueuePage> {
+    listRiskCases(status: string | undefined, category: string | undefined, severity: string | undefined, search: string | undefined, assignedToMe: boolean | undefined, page: number | undefined, pageSize: number | undefined): Promise<RiskCaseQueuePage> {
         let url_ = this.baseUrl + "/api/cases?";
         if (status === null)
             throw new globalThis.Error("The parameter 'status' cannot be null.");
@@ -171,9 +172,9 @@ export class RiskCasesClient {
             throw new globalThis.Error("The parameter 'search' cannot be null.");
         else if (search !== undefined)
             url_ += "search=" + encodeURIComponent("" + search) + "&";
-        if (assignedToMe === undefined || assignedToMe === null)
-            throw new globalThis.Error("The parameter 'assignedToMe' must be defined and cannot be null.");
-        else
+        if (assignedToMe === null)
+            throw new globalThis.Error("The parameter 'assignedToMe' cannot be null.");
+        else if (assignedToMe !== undefined)
             url_ += "assignedToMe=" + encodeURIComponent("" + assignedToMe) + "&";
         if (page === null)
             throw new globalThis.Error("The parameter 'page' cannot be null.");

@@ -4,35 +4,35 @@
 <text x="38" y="39" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="21px" font-weight="700" fill="#22364f">MediatR 命令管线</text>
 <text x="38" y="63" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12px" font-weight="400" fill="#64748b">横切行为包住 handler；领域规则仍留在领域层</text>
 <defs><marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#718096"/></marker></defs>
-<path d="M 202 236.0 C 244 236.0, 123 236.0, 165 236.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
-<path d="M 347 236.0 C 389 236.0, 268 236.0, 310 236.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
-<path d="M 492 236.0 C 534 236.0, 413 236.0, 455 236.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
-<path d="M 637 236.0 C 679 236.0, 558 236.0, 600 236.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
-<path d="M 782 236.0 C 824 236.0, 703 236.0, 745 236.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="20" y="180" width="182" height="112" rx="13" fill="#eef3f9" stroke="#22364f" stroke-width="1.4"/>
-<path d="M 34 194 V 278" stroke="#22364f" stroke-width="3" stroke-linecap="round"/>
-<text x="47" y="214" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">HTTP</text>
-<text x="47" y="246" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#4d6074">命令合同</text>
-<rect x="165" y="180" width="182" height="112" rx="13" fill="#f1edfb" stroke="#7255a5" stroke-width="1.4"/>
-<path d="M 179 194 V 278" stroke="#7255a5" stroke-width="3" stroke-linecap="round"/>
-<text x="192" y="214" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">授权</text>
-<text x="192" y="246" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#625576">角色与身份</text>
-<rect x="310" y="180" width="182" height="112" rx="13" fill="#e8f5f3" stroke="#117c78" stroke-width="1.4"/>
-<path d="M 324 194 V 278" stroke="#117c78" stroke-width="3" stroke-linecap="round"/>
-<text x="337" y="214" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">验证</text>
-<text x="337" y="246" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#466b68">范围与格式</text>
-<rect x="455" y="180" width="182" height="112" rx="13" fill="#fff4df" stroke="#b87414" stroke-width="1.4"/>
-<path d="M 469 194 V 278" stroke="#b87414" stroke-width="3" stroke-linecap="round"/>
-<text x="482" y="214" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">幂等</text>
-<text x="482" y="246" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#765e39">锁 · 回执 · 事务</text>
-<rect x="600" y="180" width="182" height="112" rx="13" fill="#eef3f9" stroke="#22364f" stroke-width="1.4"/>
-<path d="M 614 194 V 278" stroke="#22364f" stroke-width="3" stroke-linecap="round"/>
-<text x="627" y="214" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">Handler</text>
-<text x="627" y="246" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#4d6074">协调领域用例</text>
-<rect x="745" y="180" width="182" height="112" rx="13" fill="#fff0ed" stroke="#bd5448" stroke-width="1.4"/>
-<path d="M 759 194 V 278" stroke="#bd5448" stroke-width="3" stroke-linecap="round"/>
-<text x="772" y="214" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">Domain</text>
-<text x="772" y="246" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#77524e">检查不变量</text>
+<path d="M 150 236.0 C 192 236.0, 121 236.0, 163 236.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 295 236.0 C 337 236.0, 266 236.0, 308 236.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 440 236.0 C 482 236.0, 411 236.0, 453 236.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 585 236.0 C 627 236.0, 556 236.0, 598 236.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M 730 236.0 C 772 236.0, 701 236.0, 743 236.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="18" y="180" width="132" height="112" rx="13" fill="#eef3f9" stroke="#22364f" stroke-width="1.4"/>
+<path d="M 32 194 V 278" stroke="#22364f" stroke-width="3" stroke-linecap="round"/>
+<text x="45" y="214" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">HTTP</text>
+<text x="45" y="246" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#4d6074">命令合同</text>
+<rect x="163" y="180" width="132" height="112" rx="13" fill="#f1edfb" stroke="#7255a5" stroke-width="1.4"/>
+<path d="M 177 194 V 278" stroke="#7255a5" stroke-width="3" stroke-linecap="round"/>
+<text x="190" y="214" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">授权</text>
+<text x="190" y="246" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#625576">角色与身份</text>
+<rect x="308" y="180" width="132" height="112" rx="13" fill="#e8f5f3" stroke="#117c78" stroke-width="1.4"/>
+<path d="M 322 194 V 278" stroke="#117c78" stroke-width="3" stroke-linecap="round"/>
+<text x="335" y="214" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">验证</text>
+<text x="335" y="246" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#466b68">范围与格式</text>
+<rect x="453" y="180" width="132" height="112" rx="13" fill="#fff4df" stroke="#b87414" stroke-width="1.4"/>
+<path d="M 467 194 V 278" stroke="#b87414" stroke-width="3" stroke-linecap="round"/>
+<text x="480" y="214" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">幂等</text>
+<text x="480" y="246" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#765e39">锁 · 回执 · 事务</text>
+<rect x="598" y="180" width="132" height="112" rx="13" fill="#eef3f9" stroke="#22364f" stroke-width="1.4"/>
+<path d="M 612 194 V 278" stroke="#22364f" stroke-width="3" stroke-linecap="round"/>
+<text x="625" y="214" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">Handler</text>
+<text x="625" y="246" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#4d6074">协调领域用例</text>
+<rect x="743" y="180" width="132" height="112" rx="13" fill="#fff0ed" stroke="#bd5448" stroke-width="1.4"/>
+<path d="M 757 194 V 278" stroke="#bd5448" stroke-width="3" stroke-linecap="round"/>
+<text x="770" y="214" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">Domain</text>
+<text x="770" y="246" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#77524e">检查不变量</text>
 <path d="M 30 414 H 870" stroke="#e6edf2" stroke-width="1"/>
 <text x="38" y="439" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#64748b">实际行为顺序以 DependencyInjection 中的注册为准</text>
 </svg>
