@@ -242,7 +242,7 @@ function RiskGraph({ caseView }: { caseView: RiskCaseView }) {
   const maxRows = Math.max(1, ...Object.values(nodes.reduce<Record<string, number>>((counts, node) => { const kind = node.data.type; counts[kind] = (counts[kind] ?? 0) + 1; return counts; }, {})));
   return <div className="h-[560px] w-full bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:18px_18px]">
     {nodes.length === 0 ? <div className="grid h-full place-items-center text-sm text-muted-foreground">当前告警没有可展示的关系数据。</div> : <ReactFlow nodes={nodes} edges={edges} nodeTypes={nodeTypes} nodesDraggable={false} nodesConnectable={false} elementsSelectable fitView fitViewOptions={{ padding: 0.18, maxZoom: 1.2 }} minZoom={0.3} maxZoom={1.5} proOptions={{ hideAttribution: true }}>
-      <Background color="#cbd5e1" gap={18} size={1} /><Controls position="bottom-left" showInteractive={false} /><MiniMap position="bottom-right" pannable zoomable nodeStrokeWidth={3} />
+      <Background color="#cbd5e1" gap={18} size={1} /><Controls position="bottom-left" showInteractive={false} /><MiniMap position="bottom-right" pannable zoomable nodeStrokeWidth={3} bgColor="#f8fafc" maskColor="rgba(15, 23, 42, 0.06)" nodeColor={(node) => (node.data as GraphNodeView).isAlertSubject ? "#5eead4" : (node.data as GraphNodeView).type === "counterparty" ? "#fed7aa" : "#bfdbfe"} nodeStrokeColor={(node) => (node.data as GraphNodeView).isAlertSubject ? "#0f766e" : "#64748b"} />
     </ReactFlow>}
     <div className="pointer-events-none sr-only">图谱共 {nodes.length} 个实体节点和 {edges.length} 条关系，最多 {maxRows} 个同类实体。</div>
   </div>;

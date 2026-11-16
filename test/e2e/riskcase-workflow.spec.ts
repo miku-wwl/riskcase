@@ -9,6 +9,8 @@ test("analyst investigates a cross-account alert and an independent supervisor r
   await analyst.getByRole("button", { name: "安全登录" }).click();
   await expect(analyst.getByRole("heading", { name: "风险告警队列" })).toBeVisible();
   await expect(analyst.getByText("正在准备安全会话…")).not.toBeVisible();
+  await expect(analyst.getByRole("link", { name: "UP-TR-00841", exact: true })).toBeVisible();
+  await expect(analyst.getByText("正在读取档案…")).not.toBeVisible();
   await analyst.screenshot({ path: "../../manual/figures/risk-alert-queue.png", fullPage: true });
 
   await analyst.getByRole("link", { name: "UP-TR-00841", exact: true }).click();
@@ -18,6 +20,8 @@ test("analyst investigates a cross-account alert and an independent supervisor r
   await analyst.getByRole("tab", { name: "调查事实" }).click();
   await analyst.getByRole("button", { name: "开始调查" }).click();
   await expect(analyst.getByText("调查中").first()).toBeVisible();
+  await expect(analyst.getByText("调查已开始")).not.toBeVisible();
+  await analyst.evaluate(() => window.scrollTo(0, 0));
   await analyst.screenshot({ path: "../../manual/figures/riskcase-investigation-workspace.png", fullPage: true });
 
   const originalNote = "核对三笔转账后，发现另一个客户账户也与相同交易对手发生交易；该关系仍需解释。";
@@ -57,6 +61,8 @@ test("analyst investigates a cross-account alert and an independent supervisor r
   await supervisor.getByRole("tab", { name: "关系图谱" }).click();
   await expect(supervisor.getByText("Mateo Chen")).toBeVisible();
   await expect(supervisor.getByText("South Ridge Services").first()).toBeVisible();
+  await expect(supervisor.locator(".react-flow__minimap-node").first()).toBeVisible();
+  await supervisor.evaluate(() => window.scrollTo(0, 0));
   await supervisor.screenshot({ path: "../../manual/figures/risk-relationship-graph.png", fullPage: true });
   await supervisor.getByRole("tab", { name: "审计记录" }).click();
   await expect(supervisor.getByText("案件已提交复核")).toBeVisible();
@@ -71,6 +77,8 @@ test("analyst investigates a cross-account alert and an independent supervisor r
   await supervisor.getByRole("tab", { name: "审计记录" }).click();
   await expect(supervisor.getByText("独立处置已记录")).toBeVisible();
   await expect(supervisor.getByText("升级调查").last()).toBeVisible();
+  await expect(supervisor.getByText("处置决定已记录")).not.toBeVisible();
+  await supervisor.evaluate(() => window.scrollTo(0, 0));
   await supervisor.screenshot({ path: "../../manual/figures/riskcase-audit-history.png", fullPage: true });
   await supervisorContext.close();
 });
