@@ -8,11 +8,14 @@ test("analyst investigates a cross-account alert and an independent supervisor r
   await analyst.getByLabel("密码", { exact: true }).fill("RiskAnalyst!2026");
   await analyst.getByRole("button", { name: "安全登录" }).click();
   await expect(analyst.getByRole("heading", { name: "风险告警队列" })).toBeVisible();
+  await expect(analyst.getByText("正在准备安全会话…")).not.toBeVisible();
   await analyst.screenshot({ path: "../../manual/figures/risk-alert-queue.png", fullPage: true });
 
   await analyst.getByRole("link", { name: "UP-TR-00841", exact: true }).click();
   await expect(analyst.getByRole("heading", { name: /Aroha Thompson/ })).toBeVisible();
+  await analyst.getByRole("tab", { name: /风险信号/ }).click();
   await expect(analyst.getByText("出现新交易对手")).toBeVisible();
+  await analyst.getByRole("tab", { name: "调查事实" }).click();
   await analyst.getByRole("button", { name: "开始调查" }).click();
   await expect(analyst.getByText("调查中").first()).toBeVisible();
   await analyst.screenshot({ path: "../../manual/figures/riskcase-investigation-workspace.png", fullPage: true });

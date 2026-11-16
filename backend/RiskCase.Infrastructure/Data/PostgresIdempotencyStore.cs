@@ -44,7 +44,7 @@ public sealed class PostgresIdempotencyStore(
         {
             var entries = string.Join(", ", exception.Entries.Select(entry => entry.Metadata.ClrType.Name));
             logger.LogWarning(exception, "Optimistic concurrency failed while committing entities: {EntityTypes}.", entries);
-            throw new ApplicationFault(412, "version_conflict", "档案已在其他窗口更新。请刷新后重新确认操作。");
+            throw new ApplicationFault(412, "version_conflict", "保存期间检测到并发写入，当前操作没有生效。请刷新档案后重新确认。");
         }
     }
 }

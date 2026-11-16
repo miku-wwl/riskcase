@@ -216,7 +216,7 @@ public abstract class RiskCaseCommandHandlerBase(IApplicationDbContext db, IUser
         var entity = await Db.RiskCases.SingleOrDefaultAsync(x => x.Id == request.CaseId, cancellationToken)
             ?? throw new ApplicationFault(404, "risk_case_not_found", "风控档案不存在。");
         if (entity.Version != request.ExpectedVersion)
-            throw new ApplicationFault(412, "version_conflict", "档案已在其他窗口更新。请刷新后重新确认操作。");
+            throw new ApplicationFault(412, "version_conflict", $"档案版本已从 {request.ExpectedVersion} 更新为 {entity.Version}。请刷新后重新确认操作。");
         return entity;
     }
 

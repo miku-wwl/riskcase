@@ -1,7 +1,7 @@
 import { useDeferredValue, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ArrowRight, ChevronRight, CircleAlert, Clock3, Filter, Search, SlidersHorizontal } from "lucide-react";
+import { ArrowLeft, ArrowRight, CircleAlert, Clock3, Filter, Search, SlidersHorizontal } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -95,7 +95,7 @@ export function QueuePage({ mode }: { mode: QueueMode }) {
           <>
             <div className="hidden overflow-x-auto md:block">
               <table className="w-full text-left text-sm">
-                <thead className="bg-slate-50 text-xs text-muted-foreground"><tr><th className="px-5 py-3 font-medium">风险告警</th><th className="px-4 py-3 font-medium">客户 / 账户</th><th className="px-4 py-3 font-medium">类别</th><th className="px-4 py-3 font-medium">严重度</th><th className="px-4 py-3 font-medium">状态 / 经办</th><th className="px-4 py-3 font-medium">检测时间</th><th className="px-5 py-3" /></tr></thead>
+                <thead className="bg-slate-50 text-xs text-muted-foreground"><tr><th className="px-5 py-3 font-medium">风险告警</th><th className="px-4 py-3 font-medium">客户 / 账户</th><th className="px-4 py-3 font-medium">类别</th><th className="px-4 py-3 font-medium">严重度</th><th className="px-4 py-3 font-medium">状态 / 经办</th><th className="px-4 py-3 font-medium">检测时间</th></tr></thead>
                 <tbody className="divide-y">
                   {items.map((item) => <QueueRow key={item.id} item={item} />)}
                 </tbody>
@@ -119,11 +119,10 @@ function QueueRow({ item }: { item: import("@/generated/riskcase-api").RiskCaseQ
   return <tr className="group transition-colors hover:bg-slate-50/80">
     <td className="min-w-64 px-5 py-4"><Link className="font-semibold text-slate-900 hover:text-teal-800" to={`/cases/${item.id}`}>{item.alert.externalAlertId}</Link><div className="mt-1 max-w-80 truncate text-xs text-muted-foreground">{item.signalSummary}</div><div className="mt-1 text-[11px] text-slate-400">{item.alert.sourceSystem}</div></td>
     <td className="min-w-48 px-4 py-4"><div className="font-medium">{item.customerName}</div><div className="mt-1 text-xs text-muted-foreground">{item.customerNumber} · {item.accountMaskedNumber}</div></td>
-    <td className="px-4 py-4 text-xs text-slate-600">{categoryLabel(item.alert.category)}</td>
+    <td className="min-w-24 whitespace-nowrap px-4 py-4 text-xs text-slate-600">{categoryLabel(item.alert.category)}</td>
     <td className="px-4 py-4"><SeverityBadge severity={item.alert.severity} /></td>
     <td className="min-w-40 px-4 py-4"><StatusBadge status={item.status} /><div className="mt-1.5 max-w-36 truncate text-[11px] text-muted-foreground">{item.assignedAnalystId ? "已分配经办人" : "等待领取"}</div></td>
     <td className="min-w-36 px-4 py-4 text-xs text-slate-600">{formatDate(item.alert.detectedAt)}</td>
-    <td className="px-5 py-4"><Link to={`/cases/${item.id}`} aria-label={`打开 ${item.alert.externalAlertId}`} className="grid size-8 place-items-center rounded-md text-muted-foreground hover:bg-teal-50 hover:text-teal-800"><ChevronRight className="size-4" /></Link></td>
   </tr>;
 }
 
