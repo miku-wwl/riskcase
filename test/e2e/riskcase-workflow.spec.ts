@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 test("analyst investigates a cross-account alert and an independent supervisor records the disposition", async ({ browser }) => {
-  const analystContext = await browser.newContext();
+  const analystContext = await browser.newContext({ viewport: { width: 1600, height: 1000 } });
   const analyst = await analystContext.newPage();
   await analyst.goto("/");
   await analyst.getByLabel("工作邮箱").fill("analyst@riskcase.local");
@@ -48,7 +48,7 @@ test("analyst investigates a cross-account alert and an independent supervisor r
   await expect(analyst.getByText("待复核").first()).toBeVisible();
   await analystContext.close();
 
-  const supervisorContext = await browser.newContext();
+  const supervisorContext = await browser.newContext({ viewport: { width: 1600, height: 1000 } });
   const supervisor = await supervisorContext.newPage();
   await supervisor.goto("/");
   await supervisor.getByLabel("工作邮箱").fill("supervisor@riskcase.local");
