@@ -14,7 +14,7 @@
 
 ### 第 3 页｜领域方法表达意图
 
-[source: backend/RiskCase.Domain/Entities/RiskCase.cs#public void AddNote|28]
+[source: backend/RiskCase.Domain/Entities/RiskCase.cs#public RiskCaseNote AddNote|28]
 
 `AddNote` 表达“在案件中新增调查笔记”，而不是外部直接设置 `Notes` 列表。`Decide` 会验证状态与复核者，失败时拒绝修改。工厂方法建立有效初始对象；EF Core 的私有 setter 和集合用于物化，不应成为 API 更新模型。
 

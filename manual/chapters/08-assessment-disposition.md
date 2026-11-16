@@ -14,7 +14,7 @@
 
 ### 第 3 页｜处置规则由领域执行
 
-[source: backend/RiskCase.Domain/Entities/RiskCase.cs#public void Decide|34]
+[source: backend/RiskCase.Domain/Entities/RiskCase.cs#public RiskDecision Decide|34]
 
 处置方法接收用户、处置枚举、说明和时间。它核验状态、已有评估和独立复核条件后追加 `RiskDecision`，将案件设为 Resolved 并记录事件。API 角色策略再限制只有主管可以访问这个命令。
 
