@@ -60,7 +60,8 @@ public sealed class IdempotencyFingerprintTests
     {
         public int CallCount { get; private set; }
 
-        public Task<TResponse> ExecuteAsync<TResponse>(string key, string fingerprint, Func<Task<TResponse>> action, CancellationToken cancellationToken)
+        public Task<TResponse> ExecuteAsync<TResponse>(string key, string fingerprint, Func<Task<TResponse>> action, CancellationToken cancellationToken,
+            Func<string, string, bool>? legacyReplayProof = null)
         {
             CallCount++;
             return action();

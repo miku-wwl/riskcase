@@ -352,6 +352,27 @@ public sealed class HardeningTests
         using var people = await user.GetAsync("/api/analysts"); Assert.That(people.StatusCode, Is.EqualTo(HttpStatusCode.Forbidden));
     }
 
+    [Test]
+    public async Task Legacy_retry_requires_audit_proof_of_the_original_command_and_preserves_recovery()
+    {
+        var c = await Intake(); c = await Change(_analyst, c, "assignment", new { analystId = _analystId });
+        var key = Guid.NewGuid().ToString();
+        var started = await Change(_analyst, c, "start", key: key);
+        var command = new RiskCase.Application.RiskCases.StartRiskCaseCommand(key, Guid.Parse(c["id"]!.ToString()), c["version"]!.GetValue<int>());
+        var legacyFingerprint = RiskCase.Application.Common.Behaviours.IdempotencyBehaviour<RiskCase.Application.RiskCases.StartRiskCaseCommand, RiskCase.Application.RiskCases.RiskCaseView>.Fingerprint(command, includeCommandType: false);
+        await using var db = new NpgsqlConnection(Environment.GetEnvironmentVariable("ConnectionStrings__RiskCaseDb")); await db.OpenAsync();
+        await using var makeLegacy = new NpgsqlCommand("UPDATE riskcase.idempotency_receipts SET \"Fingerprint\"=@fingerprint, \"ResponseJson\"=\"ResponseJson\" - 'Assessments' - 'AssessedById' - 'CurrentAssessmentId' - 'ReviewedAssessmentId' - 'ReviewSubmittedById' - 'ReviewSubmittedAt' WHERE \"Key\"=@key AND \"Scope\"=@actor", db);
+        makeLegacy.Parameters.AddWithValue("fingerprint", legacyFingerprint); makeLegacy.Parameters.AddWithValue("key", key); makeLegacy.Parameters.AddWithValue("actor", _analystId);
+        Assert.That(await makeLegacy.ExecuteNonQueryAsync(), Is.EqualTo(1));
+        using var replay = await Send(_analyst, c, "start", key: key);
+        Assert.That(replay.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+        var restored = await Body(replay); Assert.That(restored["version"]!.ToString(), Is.EqualTo(started["version"]!.ToString()));
+        Assert.That(restored["assessments"]!.AsArray(), Is.Empty);
+        using var wrongCommand = await Send(_analyst, c, "review", key: key);
+        Assert.That(wrongCommand.StatusCode, Is.EqualTo(HttpStatusCode.Conflict));
+        Assert.That((await Body(wrongCommand))["code"]!.ToString(), Is.EqualTo("idempotency_key_reused"));
+    }
+
     private async Task<HttpClient> Login(string name, string password)
     {
         var client = _factory.CreateClient(new WebApplicationFactoryClientOptions { HandleCookies = true, AllowAutoRedirect = false });

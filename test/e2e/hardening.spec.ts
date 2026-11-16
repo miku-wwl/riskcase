@@ -139,3 +139,26 @@ test("account switching keeps drafts owned by their original identity", async ({
   await page.getByLabel("调查笔记").fill("主管独立保存的工作草稿"); await page.reload();
   await expect(page.getByLabel("调查笔记")).toHaveValue("主管独立保存的工作草稿");
 });
+
+test("clearing a successful generation does not overwrite a cross-tab edit interleaved after the storage check", async ({ page }) => {
+  await login(page); const c = await createCase(page); await open(page, c);
+  const received = gate(), release = gate();
+  await page.route(`**/api/cases/${c.id}/notes`, async route => { const response = await route.fetch(); received.release(); await release.promise; await route.fulfill({ response }); });
+  await page.getByLabel("调查笔记").fill(reason); await page.getByRole("button", { name: "保存笔记" }).click(); await received.promise;
+  await page.evaluate((id) => {
+    const key = Object.keys(localStorage).find(item => item.includes(`:${id}:note`) && !item.includes(":cleared:"))!;
+    const originalGet = Storage.prototype.getItem, originalSet = Storage.prototype.setItem;
+    let injected = false;
+    Storage.prototype.getItem = function(name) {
+      const value = originalGet.call(this, name);
+      if (this === localStorage && name === key && !injected) {
+        injected = true;
+        originalSet.call(this, key, JSON.stringify({ key, value: "并发标签页在检查之后保存的新意图", revision: crypto.randomUUID() }));
+      }
+      return value;
+    };
+  }, c.id);
+  release.release(); await expect(page.getByText("调查笔记已保存", { exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: "保存笔记" })).toBeDisabled();
+  await page.reload(); await expect(page.getByLabel("调查笔记")).toHaveValue("并发标签页在检查之后保存的新意图");
+});

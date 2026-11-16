@@ -6,8 +6,12 @@ function read(key: string, fallback: string): DraftSnapshot {
   try {
     const stored = localStorage.getItem(key);
     if (stored) {
-      try { const parsed = JSON.parse(stored); if (typeof parsed.value === "string" && typeof parsed.revision === "string") return { ...parsed, key }; } catch { /* Round 1 plain text. */ }
-      return { key, value: stored, revision: crypto.randomUUID() };
+      try {
+        const parsed = JSON.parse(stored);
+        if (typeof parsed.value === "string" && typeof parsed.revision === "string")
+          return { ...parsed, key, value: localStorage.getItem(`${key}:cleared:${parsed.revision}`) ? "" : parsed.value };
+      } catch { /* Round 1 plain text. */ }
+      return { key, value: localStorage.getItem(`${key}:cleared:legacy`) ? "" : stored, revision: "legacy" };
     }
   } catch { /* Storage may be unavailable. */ }
   return { key, value: fallback, revision: crypto.randomUUID() };
@@ -31,7 +35,12 @@ export function useDraft(key: string, initialValue = "") {
       const persisted = JSON.parse(localStorage.getItem(key) ?? "null");
       if (persisted && persisted.revision !== submitted.revision) return;
     } catch { /* In-memory generation still protects this tab. */ }
-    setValue("");
+    // A shared storage record cannot be cleared with a read-then-write CAS.
+    // A per-generation acknowledgement never overwrites a concurrent tab's new revision.
+    try { localStorage.setItem(`${key}:cleared:${submitted.revision}`, "true"); } catch { /* Keep local editing available. */ }
+    const empty = { key, value: "", revision: crypto.randomUUID() };
+    current.current = empty;
+    setDraft(empty);
   };
   return { value: current.current.value, setValue, capture, clearIfUnchanged };
 }

@@ -5,5 +5,5 @@ export const caseKey = (userId: string, caseId: string) => ["case", userId, case
 export function newestCase(previous: unknown, incoming: unknown): RiskCaseView {
   const old = previous as RiskCaseView | undefined;
   const next = incoming as RiskCaseView;
-  return old && old.id === next.id && old.version > next.version ? old : next;
+  return old && old.id === next.id && old.version >= next.version ? old : next;
 }

@@ -2,6 +2,7 @@ using System.Text.Json;
 using RiskCase.Application.Common.Exceptions;
 using RiskCase.Application.Common.Interfaces;
 using RiskCase.Domain.Entities;
+using RiskCase.Application.RiskCases;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Npgsql;
@@ -14,7 +15,8 @@ public sealed class PostgresIdempotencyStore(
     TimeProvider clock,
     ILogger<PostgresIdempotencyStore> logger) : IIdempotencyStore
 {
-    public async Task<TResponse> ExecuteAsync<TResponse>(string key, string fingerprint, Func<Task<TResponse>> action, CancellationToken cancellationToken)
+    public async Task<TResponse> ExecuteAsync<TResponse>(string key, string fingerprint, Func<Task<TResponse>> action, CancellationToken cancellationToken,
+        Func<string, string, bool>? legacyReplayProof = null)
     {
         var scope = user.Id ?? "upstream-ingestion";
         await using var transaction = await db.Database.BeginTransactionAsync(cancellationToken);
@@ -24,11 +26,14 @@ public sealed class PostgresIdempotencyStore(
         var responseType = typeof(TResponse).FullName ?? typeof(TResponse).Name;
         if (prior is not null)
         {
-            if (!StringComparer.Ordinal.Equals(prior.Fingerprint, fingerprint) || !StringComparer.Ordinal.Equals(prior.ResponseType, responseType))
+            if (!StringComparer.Ordinal.Equals(prior.ResponseType, responseType)
+                || !StringComparer.Ordinal.Equals(prior.Fingerprint, fingerprint) && !(legacyReplayProof?.Invoke(prior.Fingerprint, prior.ResponseJson) ?? false))
                 throw new ApplicationFault(409, "idempotency_key_reused", "此幂等键已用于不同的写操作。");
             var replay = JsonSerializer.Deserialize<TResponse>(prior.ResponseJson);
             if (replay is null)
                 throw new InvalidOperationException("The stored idempotency response could not be deserialized.");
+            if (replay is RiskCaseView { Assessments: null } legacy)
+                replay = (TResponse)(object)(legacy with { Assessments = [] });
             await transaction.CommitAsync(cancellationToken);
             return replay;
         }
