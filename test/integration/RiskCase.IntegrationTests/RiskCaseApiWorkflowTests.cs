@@ -99,7 +99,8 @@ public sealed class RiskCaseApiWorkflowTests
         using var concurrentOne = concurrentWrites[0];
         using var concurrentTwo = concurrentWrites[1];
         Assert.That(concurrentWrites.Count(x => x.StatusCode == HttpStatusCode.OK), Is.EqualTo(1));
-        Assert.That(concurrentWrites.Count(x => x.StatusCode == HttpStatusCode.PreconditionFailed), Is.EqualTo(1));
+        var concurrentStatuses = string.Join(", ", concurrentWrites.Select(x => $"{(int)x.StatusCode} {x.StatusCode}"));
+        Assert.That(concurrentWrites.Count(x => x.StatusCode == HttpStatusCode.PreconditionFailed), Is.EqualTo(1), $"Concurrent response statuses: {concurrentStatuses}");
 
         using var staleWrite = await MutateAsync(_analyst, $"/api/cases/{customerCase.Id}/assessment", HttpMethod.Put, started.Version, Guid.NewGuid().ToString(), new { level = "high", rationale = "新收款人、交易频率上升和跨账户共享对手方同时出现，需要独立人员复核。" });
         Assert.That(staleWrite.StatusCode, Is.EqualTo(HttpStatusCode.PreconditionFailed));

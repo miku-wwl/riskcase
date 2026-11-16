@@ -4,6 +4,7 @@ using RiskCase.Application.Common.Interfaces;
 using RiskCase.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Npgsql;
 
 namespace RiskCase.Infrastructure.Data;
 
@@ -46,7 +47,19 @@ public sealed class PostgresIdempotencyStore(
             logger.LogWarning(exception, "Optimistic concurrency failed while committing entities: {EntityTypes}.", entities);
             throw new ApplicationFault(412, "version_conflict", "保存期间检测到并发写入，当前操作没有生效。请刷新档案后重新确认。");
         }
+        catch (DbUpdateException exception) when (IsVersionConstraintConflict(exception))
+        {
+            logger.LogWarning(exception, "A competing write occupied the same case audit or decision version.");
+            throw new ApplicationFault(412, "version_conflict", "保存期间检测到并发写入，当前操作没有生效。请刷新档案后重新确认。");
+        }
     }
+
+    private static bool IsVersionConstraintConflict(DbUpdateException exception) =>
+        exception.InnerException is PostgresException
+        {
+            SqlState: PostgresErrorCodes.UniqueViolation,
+            ConstraintName: "IX_audit_events_CaseId_CaseVersion" or "IX_risk_decisions_CaseId_CaseVersion"
+        };
 }
 
 public sealed class PostgresAdvisoryLockProvider(ApplicationDbContext db) : IAdvisoryLockProvider
