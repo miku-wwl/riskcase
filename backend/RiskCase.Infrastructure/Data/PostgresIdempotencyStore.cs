@@ -3,10 +3,15 @@ using RiskCase.Application.Common.Exceptions;
 using RiskCase.Application.Common.Interfaces;
 using RiskCase.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace RiskCase.Infrastructure.Data;
 
-public sealed class PostgresIdempotencyStore(ApplicationDbContext db, IUser user, TimeProvider clock) : IIdempotencyStore
+public sealed class PostgresIdempotencyStore(
+    ApplicationDbContext db,
+    IUser user,
+    TimeProvider clock,
+    ILogger<PostgresIdempotencyStore> logger) : IIdempotencyStore
 {
     public async Task<TResponse> ExecuteAsync<TResponse>(string key, string fingerprint, Func<Task<TResponse>> action, CancellationToken cancellationToken)
     {
@@ -35,8 +40,10 @@ public sealed class PostgresIdempotencyStore(ApplicationDbContext db, IUser user
             await transaction.CommitAsync(cancellationToken);
             return response;
         }
-        catch (DbUpdateConcurrencyException)
+        catch (DbUpdateConcurrencyException exception)
         {
+            var entries = string.Join(", ", exception.Entries.Select(entry => entry.Metadata.ClrType.Name));
+            logger.LogWarning(exception, "Optimistic concurrency failed while committing entities: {EntityTypes}.", entries);
             throw new ApplicationFault(412, "version_conflict", "档案已在其他窗口更新。请刷新后重新确认操作。");
         }
     }

@@ -10,7 +10,7 @@ test("analyst investigates a cross-account alert and an independent supervisor r
   await expect(analyst.getByRole("heading", { name: "风险告警队列" })).toBeVisible();
   await analyst.screenshot({ path: "../../manual/figures/risk-alert-queue.png", fullPage: true });
 
-  await analyst.getByRole("link", { name: "UP-TR-00841" }).click();
+  await analyst.getByRole("link", { name: "UP-TR-00841", exact: true }).click();
   await expect(analyst.getByRole("heading", { name: /Aroha Thompson/ })).toBeVisible();
   await expect(analyst.getByText("出现新交易对手")).toBeVisible();
   await analyst.getByRole("button", { name: "开始调查" }).click();
@@ -49,7 +49,7 @@ test("analyst investigates a cross-account alert and an independent supervisor r
   await supervisor.getByRole("button", { name: "安全登录" }).click();
   await expect(supervisor.getByRole("heading", { name: "风险告警队列" })).toBeVisible();
   await supervisor.getByRole("link", { name: "等待复核" }).click();
-  await supervisor.getByRole("link", { name: "UP-TR-00841" }).click();
+  await supervisor.getByRole("link", { name: "UP-TR-00841", exact: true }).click();
 
   await supervisor.getByRole("tab", { name: "关系图谱" }).click();
   await expect(supervisor.getByText("Mateo Chen")).toBeVisible();
