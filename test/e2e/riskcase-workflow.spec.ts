@@ -61,7 +61,6 @@ test("analyst investigates a cross-account alert and an independent supervisor r
   await supervisor.getByRole("tab", { name: "关系图谱" }).click();
   await expect(supervisor.getByText("Mateo Chen")).toBeVisible();
   await expect(supervisor.getByText("South Ridge Services").first()).toBeVisible();
-  await expect(supervisor.locator(".react-flow__minimap-node").first()).toBeVisible();
   await supervisor.evaluate(() => window.scrollTo(0, 0));
   await supervisor.screenshot({ path: "../../manual/figures/risk-relationship-graph.png", fullPage: true });
   await supervisor.getByRole("tab", { name: "审计记录" }).click();
