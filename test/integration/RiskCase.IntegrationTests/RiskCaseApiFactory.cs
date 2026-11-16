@@ -19,6 +19,7 @@ public sealed class RiskCaseApiFactory : WebApplicationFactory<Program>
         {
             logging.AddConsole();
             logging.SetMinimumLevel(LogLevel.Warning);
+            logging.AddFilter("Microsoft.EntityFrameworkCore.Database.Command", LogLevel.Information);
         });
         builder.ConfigureAppConfiguration((_, configuration) => configuration.AddInMemoryCollection(
             new Dictionary<string, string?>
