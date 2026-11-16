@@ -2,6 +2,8 @@ using RiskCase.Application.Common.Interfaces;
 using RiskCase.Infrastructure.Data;
 using RiskCase.Infrastructure.Data.Interceptors;
 using RiskCase.Infrastructure.Identity;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -49,6 +51,20 @@ public static class DependencyInjection
             .AddSignInManager()
             .AddDefaultTokenProviders()
             .AddApiEndpoints();
+
+        builder.Services.AddOptions<CookieAuthenticationOptions>(IdentityConstants.ApplicationScheme).Configure(options =>
+        {
+            options.Events.OnRedirectToLogin = context =>
+            {
+                context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                return Task.CompletedTask;
+            };
+            options.Events.OnRedirectToAccessDenied = context =>
+            {
+                context.Response.StatusCode = StatusCodes.Status403Forbidden;
+                return Task.CompletedTask;
+            };
+        });
 
         builder.Services.AddSingleton(TimeProvider.System);
         builder.Services.AddTransient<IIdentityService, IdentityService>();

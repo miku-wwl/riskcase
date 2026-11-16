@@ -49,6 +49,7 @@ export async function refreshAntiForgeryToken(): Promise<void> {
 export async function signIn(email: string, password: string): Promise<void> {
   await refreshAntiForgeryToken();
   await apiCall(() => clients.users.login(true, false, new LoginRequest({ email, password })));
+  await refreshAntiForgeryToken();
 }
 
 export async function signOut(): Promise<void> {

@@ -37,6 +37,8 @@ public sealed class RiskCaseApiWorkflowTests
         using var anonymous = _factory.CreateClient();
         using var anonymousResponse = await anonymous.GetAsync("/api/cases");
         Assert.That(anonymousResponse.StatusCode, Is.EqualTo(HttpStatusCode.Unauthorized));
+        using var anonymousSessionResponse = await anonymous.GetAsync("/api/session");
+        Assert.That(anonymousSessionResponse.StatusCode, Is.EqualTo(HttpStatusCode.Unauthorized));
 
         using var queueResponse = await _analyst.GetAsync("/api/cases?page=1&pageSize=25");
         Assert.That(queueResponse.StatusCode, Is.EqualTo(HttpStatusCode.OK), await queueResponse.Content.ReadAsStringAsync());
@@ -74,7 +76,7 @@ public sealed class RiskCaseApiWorkflowTests
         Assert.That(replay!.Id, Is.EqualTo(created!.Id));
 
         var startResponse = await MutateAsync(_analyst, $"/api/cases/{customerCase.Id}/start", HttpMethod.Post, customerCase.Version, Guid.NewGuid().ToString(), null);
-        Assert.That(startResponse.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+        Assert.That(startResponse.StatusCode, Is.EqualTo(HttpStatusCode.OK), await startResponse.Content.ReadAsStringAsync());
         var started = await startResponse.Content.ReadFromJsonAsync<RiskCaseView>();
         Assert.That(started!.Status, Is.EqualTo("investigating"));
 
@@ -151,12 +153,14 @@ public sealed class RiskCaseApiWorkflowTests
     {
         var response = await client.PostAsJsonAsync("/api/users/login?useCookies=true", new { email, password });
         Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK), await response.Content.ReadAsStringAsync());
+        await AddAntiforgeryTokenAsync(client);
     }
 
     private static async Task AddAntiforgeryTokenAsync(HttpClient client)
     {
         var issued = await client.GetFromJsonAsync<AntiforgeryTokenView>("/api/security/antiforgery");
         Assert.That(issued?.RequestToken, Is.Not.Null.And.Not.Empty);
+        client.DefaultRequestHeaders.Remove("X-CSRF-TOKEN");
         client.DefaultRequestHeaders.Add("X-CSRF-TOKEN", issued!.RequestToken);
     }
 

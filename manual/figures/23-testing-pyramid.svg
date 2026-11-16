@@ -10,12 +10,12 @@
 <path d="M 492 252.0 C 534 252.0, 488 342.0, 530 342.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
 <rect x="474.0" y="275.0" width="74" height="19" rx="8" fill="#ffffff" stroke="#e2e8f0"/>
 <text x="511.0" y="289.0" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="10px" fill="#526273">真实交互</text>
-<path d="M 710 252.0 C 675 204.0, 527 204.0, 492 252.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="564.0" y="194.0" width="74" height="19" rx="8" fill="#ffffff" stroke="#e2e8f0"/>
-<text x="601.0" y="208.0" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="10px" fill="#526273">执行</text>
-<path d="M 710 252.0 C 675 204.0, 747 294.0, 712 342.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="674.0" y="239.0" width="74" height="19" rx="8" fill="#ffffff" stroke="#e2e8f0"/>
-<text x="711.0" y="253.0" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="10px" fill="#526273">执行</text>
+<path d="M 715 252.0 C 680 204.0, 527 204.0, 492 252.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="566.5" y="194.0" width="74" height="19" rx="8" fill="#ffffff" stroke="#e2e8f0"/>
+<text x="603.5" y="208.0" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="10px" fill="#526273">执行</text>
+<path d="M 715 252.0 C 680 204.0, 747 294.0, 712 342.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="676.5" y="239.0" width="74" height="19" rx="8" fill="#ffffff" stroke="#e2e8f0"/>
+<text x="713.5" y="253.0" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="10px" fill="#526273">执行</text>
 <rect x="90" y="96" width="182" height="112" rx="13" fill="#e8f5f3" stroke="#117c78" stroke-width="1.4"/>
 <path d="M 104 110 V 194" stroke="#117c78" stroke-width="3" stroke-linecap="round"/>
 <text x="117" y="130" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">NUnit 单元测试</text>
@@ -28,10 +28,10 @@
 <path d="M 544 300 V 384" stroke="#22364f" stroke-width="3" stroke-linecap="round"/>
 <text x="557" y="320" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">Playwright E2E</text>
 <text x="557" y="352" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#4d6074">登录 · 调查 · 草稿 · 主管复核</text>
-<rect x="710" y="196" width="182" height="112" rx="13" fill="#f1edfb" stroke="#7255a5" stroke-width="1.4"/>
-<path d="M 724 210 V 294" stroke="#7255a5" stroke-width="3" stroke-linecap="round"/>
-<text x="737" y="230" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">GitHub Actions</text>
-<text x="737" y="262" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#625576">真实 PG 服务与 Chromium</text>
+<rect x="715" y="196" width="155" height="112" rx="13" fill="#f1edfb" stroke="#7255a5" stroke-width="1.4"/>
+<path d="M 729 210 V 294" stroke="#7255a5" stroke-width="3" stroke-linecap="round"/>
+<text x="742" y="230" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">GitHub Actions</text>
+<text x="742" y="262" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#625576">真实 PG 服务与 Chromium</text>
 <path d="M 30 414 H 870" stroke="#e6edf2" stroke-width="1"/>
 <text x="38" y="439" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#64748b">没有 PostgreSQL 的本地跳过结果不等同于集成验证通过</text>
 </svg>

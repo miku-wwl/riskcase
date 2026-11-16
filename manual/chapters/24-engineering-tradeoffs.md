@@ -14,7 +14,7 @@ RiskCase 没有微服务、消息队列、机器学习平台或资金账本。�
 
 ### 第 3 页｜把冲突转换为用户可采取的动作
 
-[source: backend/RiskCase.Infrastructure/Data/PostgresIdempotencyStore.cs#public async Task<TResponse> ExecuteAsync|40]
+[source: backend/RiskCase.Api/Infrastructure/ProblemDetailsExceptionHandler.cs#var problem = exception switch|24]
 
 相同键的结果回放；指纹不同则返回 409；EF 并发冲突则转换成 412。前端 adapter 将生成客户端异常统一包装成简明错误，用户能刷新、修订或请求主管，而不是看到堆栈文本。
 

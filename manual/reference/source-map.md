@@ -21,10 +21,10 @@
 | 15《PostgreSQL MVCC 与事务》 | `backend/RiskCase.Infrastructure/Data/PostgresIdempotencyStore.cs:11-32`（`public async Task<TResponse> ExecuteAsync`） |
 | 16《乐观并发与幂等重试》 | `backend/RiskCase.Application/Common/Behaviours/IdempotencyBehaviour.cs:18-37`（`public Task<TResponse> Handle`） |
 | 17《审计历史与决定完整性》 | `backend/RiskCase.Domain/Entities/AuditEvent.cs:17-27`（`public static AuditEvent`） |
-| 18《OpenAPI 与 NSwag 客户端生成》 | `frontend/src/lib/api.ts:69-87`（`export async function runIdempotentCaseMutation`） |
+| 18《OpenAPI 与 NSwag 客户端生成》 | `frontend/src/lib/api.ts:70-88`（`export async function runIdempotentCaseMutation`） |
 | 19《React 19 与 shadcn/ui 应用结构》 | `frontend/src/app.tsx:19-40`（`const CaseDetailPage = lazy`） |
 | 20《TanStack Query 与本地草稿同步》 | `frontend/src/lib/drafts.ts:3-24`（`export function useDraft`） |
 | 21《用 React Flow 表达风险关系》 | `frontend/src/pages/case-detail-page.tsx:219-240`（`function RiskGraph({ caseView }`） |
 | 22《分析员完整工作流》 | `frontend/src/pages/case-detail-page.tsx:76-97`（`const action = useMutation`） |
 | 23《单元、集成与端到端测试》 | `test/integration/RiskCase.IntegrationTests/RiskCaseApiWorkflowTests.cs:35-56`（`public async Task PostgreSql_workflow`） |
-| 24《跨层故障恢复与工程取舍》 | `backend/RiskCase.Infrastructure/Data/PostgresIdempotencyStore.cs:11-32`（`public async Task<TResponse> ExecuteAsync`） |
+| 24《跨层故障恢复与工程取舍》 | `backend/RiskCase.Api/Infrastructure/ProblemDetailsExceptionHandler.cs:13-34`（`var problem = exception switch`） |
