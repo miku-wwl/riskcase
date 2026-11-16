@@ -3,8 +3,6 @@ using RiskCase.Application.Common.Exceptions;
 using RiskCase.Application.Common.Interfaces;
 using RiskCase.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace RiskCase.Infrastructure.Data;
@@ -13,7 +11,6 @@ public sealed class PostgresIdempotencyStore(
     ApplicationDbContext db,
     IUser user,
     TimeProvider clock,
-    IHostEnvironment environment,
     ILogger<PostgresIdempotencyStore> logger) : IIdempotencyStore
 {
     public async Task<TResponse> ExecuteAsync<TResponse>(string key, string fingerprint, Func<Task<TResponse>> action, CancellationToken cancellationToken)
@@ -45,32 +42,10 @@ public sealed class PostgresIdempotencyStore(
         }
         catch (DbUpdateConcurrencyException exception)
         {
-            var entries = string.Join(", ", exception.Entries.Select(DescribeConcurrencyEntry));
-            logger.LogWarning(exception, "Optimistic concurrency failed while committing entities: {EntityDiagnostics}.", entries);
-            var detail = environment.IsEnvironment("Testing")
-                ? $"Integration concurrency diagnostics: {entries}."
-                : "保存期间检测到并发写入，当前操作没有生效。请刷新档案后重新确认。";
-            throw new ApplicationFault(412, "version_conflict", detail);
+            var entities = string.Join(", ", exception.Entries.Select(entry => entry.Metadata.ClrType.Name));
+            logger.LogWarning(exception, "Optimistic concurrency failed while committing entities: {EntityTypes}.", entities);
+            throw new ApplicationFault(412, "version_conflict", "保存期间检测到并发写入，当前操作没有生效。请刷新档案后重新确认。");
         }
-    }
-
-    private static string DescribeConcurrencyEntry(EntityEntry entry)
-    {
-        var fields = new[] { "Id", "CaseId", "CaseVersion" }
-            .Where(name => entry.Metadata.FindProperty(name) is not null)
-            .Select(name => $"{name}={entry.Property(name).CurrentValue}")
-            .ToList();
-        fields.Insert(0, $"state={entry.State}");
-
-        var version = entry.Metadata.FindProperty("Version");
-        if (version is not null)
-        {
-            var property = entry.Property(version.Name);
-            fields.Add($"originalVersion={property.OriginalValue}");
-            fields.Add($"currentVersion={property.CurrentValue}");
-        }
-
-        return $"{entry.Metadata.ClrType.Name}({string.Join("; ", fields)})";
     }
 }
 

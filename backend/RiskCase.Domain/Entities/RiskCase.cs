@@ -56,17 +56,19 @@ public sealed class RiskCase : BaseAuditableEntity
         Advance(now);
     }
 
-    public void AddNote(string analystId, string text, DateTimeOffset now)
+    public RiskCaseNote AddNote(string analystId, string text, DateTimeOffset now)
     {
         EnsureAssignedAnalyst(analystId);
         EnsureEditable();
         var normalized = text.Trim();
         Require(CountRunes(normalized) is >= 1 and <= 2000, "note_length_invalid", "调查笔记须为 1 至 2000 个字符。");
         Advance(now);
-        _notes.Add(RiskCaseNote.Create(Id, analystId, normalized, now, Version));
+        var note = RiskCaseNote.Create(Id, analystId, normalized, now, Version);
+        _notes.Add(note);
+        return note;
     }
 
-    public void AddLink(string analystId, string sourceNodeId, string targetNodeId, CaseLinkKind kind, string rationale, DateTimeOffset now)
+    public RiskCaseLink AddLink(string analystId, string sourceNodeId, string targetNodeId, CaseLinkKind kind, string rationale, DateTimeOffset now)
     {
         EnsureAssignedAnalyst(analystId);
         EnsureEditable();
@@ -81,7 +83,9 @@ public sealed class RiskCase : BaseAuditableEntity
         Require(!_links.Any(x => x.SourceNodeId == sourceNodeId && x.TargetNodeId == targetNodeId), "duplicate_case_link", "该实体对已有关联记录。");
 
         Advance(now);
-        _links.Add(RiskCaseLink.Create(Id, sourceNodeId, targetNodeId, kind, explanation, analystId, now, Version));
+        var link = RiskCaseLink.Create(Id, sourceNodeId, targetNodeId, kind, explanation, analystId, now, Version);
+        _links.Add(link);
+        return link;
     }
 
     public void RecordAssessment(string analystId, RiskAssessmentLevel level, string rationale, DateTimeOffset now)
@@ -114,7 +118,7 @@ public sealed class RiskCase : BaseAuditableEntity
         Advance(now);
     }
 
-    public void Decide(string analystId, RiskDisposition disposition, string rationale, DateTimeOffset now)
+    public RiskDecision Decide(string analystId, RiskDisposition disposition, string rationale, DateTimeOffset now)
     {
         EnsureNotResolved();
         Require(Status == RiskCaseStatus.Reviewing, "decision_requires_review", "风险处置必须在复核阶段完成。");
@@ -125,7 +129,9 @@ public sealed class RiskCase : BaseAuditableEntity
         Require(CountRunes(explanation) is >= 20 and <= 2000, "decision_rationale_length_invalid", "处置理由须为 20 至 2000 个字符。");
         Status = RiskCaseStatus.Resolved;
         Advance(now);
-        _decisions.Add(RiskDecision.Record(Id, disposition, explanation, analystId, now, Version));
+        var decision = RiskDecision.Record(Id, disposition, explanation, analystId, now, Version);
+        _decisions.Add(decision);
+        return decision;
     }
 
     public void EnsureAssignedAnalyst(string analystId)

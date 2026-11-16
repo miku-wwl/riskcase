@@ -264,7 +264,8 @@ public sealed class AddCaseNoteCommandHandler(IApplicationDbContext db, IUser us
     public async Task<RiskCaseView> Handle(AddCaseNoteCommand request, CancellationToken cancellationToken)
     {
         var entity = await LoadForWriteAsync(request, cancellationToken);
-        entity.AddNote(AnalystId, request.Text, Clock.GetUtcNow());
+        var note = entity.AddNote(AnalystId, request.Text, Clock.GetUtcNow());
+        Db.RiskCaseNotes.Add(note);
         return await SaveAsync(entity, "NoteAdded", new { textLength = request.Text.Trim().Length }, cancellationToken);
     }
 }
@@ -280,7 +281,8 @@ public sealed class AddCaseLinkCommandHandler(IApplicationDbContext db, IUser us
         var nodeIds = view.GraphNodes.Select(x => x.Id).ToHashSet(StringComparer.Ordinal);
         if (!nodeIds.Contains(request.SourceNodeId) || !nodeIds.Contains(request.TargetNodeId))
             throw new ApplicationFault(400, "case_link_endpoint_not_found", "关系端点必须来自当前档案的调查图谱。");
-        entity.AddLink(AnalystId, request.SourceNodeId, request.TargetNodeId, request.Kind, request.Rationale, Clock.GetUtcNow());
+        var link = entity.AddLink(AnalystId, request.SourceNodeId, request.TargetNodeId, request.Kind, request.Rationale, Clock.GetUtcNow());
+        Db.RiskCaseLinks.Add(link);
         return await SaveAsync(entity, "RelationshipRecorded", new { request.SourceNodeId, request.TargetNodeId, request.Kind }, cancellationToken);
     }
 }
@@ -328,7 +330,8 @@ public sealed class DecideRiskCaseCommandHandler(IApplicationDbContext db, IUser
     public async Task<RiskCaseView> Handle(DecideRiskCaseCommand request, CancellationToken cancellationToken)
     {
         var entity = await LoadForWriteAsync(request, cancellationToken);
-        entity.Decide(AnalystId, request.Disposition, request.Rationale, Clock.GetUtcNow());
+        var decision = entity.Decide(AnalystId, request.Disposition, request.Rationale, Clock.GetUtcNow());
+        Db.RiskDecisions.Add(decision);
         return await SaveAsync(entity, "DispositionRecorded", new { request.Disposition }, cancellationToken);
     }
 }
