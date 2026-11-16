@@ -56,12 +56,21 @@ public sealed class PostgresIdempotencyStore(
 
     private static string DescribeConcurrencyEntry(EntityEntry entry)
     {
-        var version = entry.Metadata.FindProperty("Version");
-        if (version is null)
-            return entry.Metadata.ClrType.Name;
+        var fields = new[] { "Id", "CaseId", "CaseVersion" }
+            .Where(name => entry.Metadata.FindProperty(name) is not null)
+            .Select(name => $"{name}={entry.Property(name).CurrentValue}")
+            .ToList();
+        fields.Insert(0, $"state={entry.State}");
 
-        var property = entry.Property(version.Name);
-        return $"{entry.Metadata.ClrType.Name}(originalVersion={property.OriginalValue}, currentVersion={property.CurrentValue})";
+        var version = entry.Metadata.FindProperty("Version");
+        if (version is not null)
+        {
+            var property = entry.Property(version.Name);
+            fields.Add($"originalVersion={property.OriginalValue}");
+            fields.Add($"currentVersion={property.CurrentValue}");
+        }
+
+        return $"{entry.Metadata.ClrType.Name}({string.Join("; ", fields)})";
     }
 }
 
