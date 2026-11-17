@@ -106,6 +106,8 @@ public sealed class RiskCaseConfiguration : IEntityTypeConfiguration<RiskCaseEnt
         b.Property(x => x.ReviewSubmittedById).HasMaxLength(450);
         b.HasMany(x => x.Assessments).WithOne(x => x.Case).HasForeignKey(x => x.CaseId).OnDelete(DeleteBehavior.Restrict);
         b.Navigation(x => x.Assessments).HasField("_assessments").UsePropertyAccessMode(PropertyAccessMode.Field);
+        b.HasMany(x => x.LegacyAssessorParticipation).WithOne(x => x.Case).HasForeignKey(x => x.CaseId).OnDelete(DeleteBehavior.Restrict);
+        b.Navigation(x => x.LegacyAssessorParticipation).HasField("_legacyAssessorParticipation").UsePropertyAccessMode(PropertyAccessMode.Field);
         b.HasOne(x => x.Alert).WithMany().HasForeignKey(x => x.AlertId).OnDelete(DeleteBehavior.Restrict);
         b.HasIndex(x => x.AlertId).IsUnique();
         b.HasIndex(x => new { x.Status, x.AssignedAnalystId, x.LastModified });
@@ -171,6 +173,26 @@ public sealed class RiskAssessmentConfiguration : IEntityTypeConfiguration<RiskA
         b.Property(x => x.Rationale).HasMaxLength(1500).IsRequired();
         b.Property(x => x.AssessorId).HasMaxLength(450);
         b.HasIndex(x => new { x.CaseId, x.CaseVersion }).IsUnique();
+    }
+}
+
+public sealed class LegacyAssessorParticipationConfiguration : IEntityTypeConfiguration<LegacyAssessorParticipation>
+{
+    public void Configure(EntityTypeBuilder<LegacyAssessorParticipation> b)
+    {
+        b.ToTable("legacy_assessor_participation", t => {
+            t.HasCheckConstraint("ck_legacy_author_provenance", "(\"SourceAuditId\" IS NULL) <> (\"SourceAssessmentId\" IS NULL)");
+            t.HasCheckConstraint("ck_legacy_author_identity", "\"AssessorId\" IS NULL OR length(btrim(\"AssessorId\")) > 0");
+        });
+        b.HasKey(x => x.Id);
+        b.Property(x => x.AssessorId).HasMaxLength(450);
+        b.HasIndex(x => x.SourceAuditId).IsUnique();
+        b.HasIndex(x => x.SourceAssessmentId).IsUnique();
+        b.HasIndex(x => new { x.CaseId, x.AssessorId });
+        b.HasOne<AuditEvent>().WithMany().HasForeignKey(x => new { x.CaseId, x.SourceAuditId })
+            .HasPrincipalKey(x => new { x.CaseId, x.Id }).OnDelete(DeleteBehavior.Restrict);
+        b.HasOne<RiskAssessment>().WithMany().HasForeignKey(x => new { x.CaseId, x.SourceAssessmentId })
+            .HasPrincipalKey(x => new { x.CaseId, x.Id }).OnDelete(DeleteBehavior.Restrict);
     }
 }
 

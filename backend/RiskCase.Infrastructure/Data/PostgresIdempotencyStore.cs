@@ -32,8 +32,13 @@ public sealed class PostgresIdempotencyStore(
             var replay = JsonSerializer.Deserialize<TResponse>(prior.ResponseJson);
             if (replay is null)
                 throw new InvalidOperationException("The stored idempotency response could not be deserialized.");
-            if (replay is RiskCaseView { Assessments: null } legacy)
-                replay = (TResponse)(object)(legacy with { Assessments = [] });
+            if (replay is RiskCaseView legacy)
+                replay = (TResponse)(object)(legacy with {
+                    Assessments = legacy.Assessments ?? [], LegacyAssessors = legacy.LegacyAssessors ?? [],
+                    // R2 receipts may predate the consistent presenter. Future audit events
+                    // cannot be part of this historical outcome's defined case version.
+                    AuditHistory = legacy.AuditHistory.Where(x => x.Version <= legacy.Version).ToArray()
+                });
             await transaction.CommitAsync(cancellationToken);
             return replay;
         }

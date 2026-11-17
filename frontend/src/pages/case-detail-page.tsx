@@ -11,6 +11,7 @@ import {
   DecisionRequest,
   LinkRequest,
   NoteRequest,
+  ResumeRequest,
   RiskAssessmentLevel,
   RiskCaseStatus,
   RiskDisposition,
@@ -28,7 +29,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import { useDraft, draftKey } from "@/lib/drafts";
 import { apiCall, clients, runIdempotentCaseMutation, pendingCaseMutation, recoverCaseMutation } from "@/lib/api";
-import { caseKey, newestCase } from "@/lib/case-state";
+import { caseKey, newestCase, confirmedCase } from "@/lib/case-state";
 import { ApiError } from "@/lib/api-error";
 import { formatDate, formatMoney } from "@/lib/utils";
 
@@ -56,7 +57,7 @@ function CaseWorkspace({ id, session }: { id: string; session: SessionView }) {
   const [pending, setPending] = useState(() => pendingCaseMutation(userId, id));
   const caseQuery = useQuery({
     queryKey,
-    structuralSharing: newestCase,
+    structuralSharing: confirmedCase,
     queryFn: () => apiCall(() => clients.cases.getRiskCase(id)),
     enabled: Boolean(id),
     retry: false,
@@ -73,6 +74,9 @@ function CaseWorkspace({ id, session }: { id: string; session: SessionView }) {
   const noteDraft = useDraft(draftKey(id, userId, "note"));
   const assessmentDraft = useDraft(draftKey(id, userId, "assessment"));
   const decisionDraft = useDraft(draftKey(id, userId, "decision"));
+  const returnDraft = useDraft(draftKey(id, userId, "return-reason"));
+  const returnLength = Array.from(returnDraft.value.trim()).length;
+  const [returnOpen, setReturnOpen] = useState(false);
   const linkDraft = useDraft(draftKey(id, userId, "link"));
   const [assessmentLevel, setAssessmentLevel] = useState<RiskAssessmentLevel>(RiskAssessmentLevel.Medium);
   const [disposition, setDisposition] = useState<RiskDisposition>(RiskDisposition.Monitor);
@@ -120,7 +124,7 @@ function CaseWorkspace({ id, session }: { id: string; session: SessionView }) {
   const isResolved = current.status === RiskCaseStatus.Resolved;
   const canInvestigate = investigator && assignedToMe && !isResolved;
   const canClaim = investigator && !current.assignedAnalystId && current.status === RiskCaseStatus.New;
-  const canReview = isSupervisor && current.status === RiskCaseStatus.Reviewing && !assignedToMe && current.assessedById !== userId && current.reviewSubmittedById !== userId && !current.assessments.some(item => item.assessorId === userId) && Boolean(current.reviewedAssessmentId);
+  const canReview = isSupervisor && current.status === RiskCaseStatus.Reviewing && !assignedToMe && current.assessedById !== userId && current.reviewSubmittedById !== userId && !current.assessments.some(item => item.assessorId === userId) && !current.legacyAssessors.some(item => !item.assessorId || item.assessorId === userId) && Boolean(current.reviewedAssessmentId);
   const request = (operation: string, payload: unknown, perform: MutationIntent["perform"], successMessage: string, clearDraft?: () => void) =>
     runAction({ operation, payload, perform, successMessage, clearDraft });
 
@@ -195,7 +199,7 @@ function CaseWorkspace({ id, session }: { id: string; session: SessionView }) {
             </TabsContent>
 
             <TabsContent value="audit" className="space-y-3">
-              <Card><CardHeader className="pb-3"><CardTitle className="text-sm">案件审计时间线</CardTitle><p className="text-xs text-muted-foreground">每个版本对应一次持久化业务变化；事件与案件更新在同一事务内写入。</p></CardHeader><CardContent className="pt-0"><ol className="space-y-0">{[...current.auditHistory].reverse().map((event, index) => <li key={`${event.version}-${event.operation}`} className="relative flex gap-4 pb-5 last:pb-0"><div className="relative flex w-5 shrink-0 justify-center"><span className="z-10 mt-1 size-2.5 rounded-full border-2 border-teal-600 bg-white" />{index < current.auditHistory.length - 1 && <span className="absolute top-4 h-full w-px bg-border" />}</div><div className="min-w-0 flex-1"><div className="flex flex-wrap items-center justify-between gap-2"><div className="font-medium">{auditLabel(event.operation)}</div><span className="font-mono text-[10px] text-muted-foreground">版本 {event.version}</span></div><div className="mt-1 text-xs text-muted-foreground">{formatDate(event.occurredAt)} · {event.actorId.startsWith("upstream:") ? event.actorId : `操作人 ${event.actorId.slice(0, 8)}`}</div></div></li>)}</ol></CardContent></Card>
+              <Card><CardHeader className="pb-3"><CardTitle className="text-sm">案件审计时间线</CardTitle><p className="text-xs text-muted-foreground">每个版本对应一次持久化业务变化；事件与案件更新在同一事务内写入。</p></CardHeader><CardContent className="pt-0"><ol className="space-y-0">{[...current.auditHistory].reverse().map((event, index) => <li key={`${event.version}-${event.operation}`} className="relative flex gap-4 pb-5 last:pb-0"><div className="relative flex w-5 shrink-0 justify-center"><span className="z-10 mt-1 size-2.5 rounded-full border-2 border-teal-600 bg-white" />{index < current.auditHistory.length - 1 && <span className="absolute top-4 h-full w-px bg-border" />}</div><div className="min-w-0 flex-1"><div className="flex flex-wrap items-center justify-between gap-2"><div className="font-medium">{auditLabel(event.operation)}</div><span className="font-mono text-[10px] text-muted-foreground">版本 {event.version}</span></div><div className="mt-1 text-xs text-muted-foreground">{formatDate(event.occurredAt)} · {event.actorId.startsWith("upstream:") ? event.actorId : `操作人 ${event.actorId.slice(0, 8)}`}</div>{event.operation === "InvestigationResumed" && <p className="mt-2 whitespace-pre-wrap rounded-md border bg-slate-50 p-3 text-sm leading-6" data-testid="return-audit-reason">{returnReason(event.detailsJson)}</p>}</div></li>)}</ol></CardContent></Card>
               {current.decisions.length > 0 && <Card><CardHeader className="pb-3"><CardTitle className="text-sm">最终处置</CardTitle></CardHeader><CardContent className="space-y-3">{current.decisions.map((decision) => <div key={decision.id} className="rounded-md border border-emerald-200 bg-emerald-50/60 p-4"><div className="flex flex-wrap items-center justify-between gap-2"><span className="font-semibold text-emerald-900">{dispositionLabel(decision.disposition)}</span><span className="text-xs text-muted-foreground">{formatDate(decision.decidedAt)}</span></div><p className="mt-2 text-sm leading-6 text-slate-700">{decision.rationale}</p><p className="mt-2 text-[11px] text-muted-foreground">独立复核 · 版本 {decision.caseVersion}</p></div>)}</CardContent></Card>}
             </TabsContent>
           </Tabs>
@@ -222,7 +226,7 @@ function CaseWorkspace({ id, session }: { id: string; session: SessionView }) {
               <p className="text-[11px] leading-4 text-muted-foreground">评估依据至少 20 个字符。提交复核前必须保存评估。</p>
               {current.assessmentLevel && <Button variant="outline" className="w-full" disabled={action.isPending} onClick={() => request("review", null, (key, tag) => clients.cases.review(id, key, tag), "案件已提交独立复核")}><ArrowRight className="size-4" />提交独立复核</Button>}
             </div>}
-            {(canInvestigate || isSupervisor) && current.status === RiskCaseStatus.Reviewing && <div className="space-y-3"><div className="rounded-md border border-violet-200 bg-violet-50 p-3 text-xs leading-5 text-violet-900">案件已提交复核，调查事实、评估和分配均已冻结。退回后须重新评估并提交。</div><Button variant="outline" className="w-full" disabled={action.isPending} onClick={() => request("resume", null, (key, tag) => clients.cases.resume(id, key, tag), "案件已退回调查")}><RefreshCw className="size-4" />退回调查</Button></div>}
+            {(canInvestigate || isSupervisor) && current.status === RiskCaseStatus.Reviewing && <div className="space-y-3"><div className="rounded-md border border-violet-200 bg-violet-50 p-3 text-xs leading-5 text-violet-900">案件已提交复核，调查事实、评估和分配均已冻结。退回后须重新评估并提交。</div><Button variant="outline" className="w-full" disabled={action.isPending} onClick={() => setReturnOpen(true)}><RefreshCw className="size-4" />退回调查</Button></div>}
             {canReview && <div className="space-y-3"><div className="rounded-md border border-violet-200 bg-violet-50 p-3 text-xs leading-5 text-violet-900">本次复核对应下方已冻结的评估记录；评估作者与复核人员独立。</div><div className="space-y-1.5"><Label htmlFor="disposition">处置建议</Label><select id="disposition" value={disposition} onChange={(event) => setDisposition(event.target.value as RiskDisposition)} className="h-10 w-full rounded-md border bg-background px-3 text-sm"><option value={RiskDisposition.Escalate}>升级调查</option><option value={RiskDisposition.Monitor}>继续监测</option><option value={RiskDisposition.CloseFalsePositive}>误报结案</option><option value={RiskDisposition.ReferForAmlReview}>转交 AML 复核</option></select></div><div className="space-y-1.5"><Label htmlFor="decision-rationale">处置依据</Label><Textarea id="decision-rationale" value={decisionDraft.value} onChange={(event) => decisionDraft.setValue(event.target.value)} placeholder="引用调查结论、支持与反驳的事实，以及后续处理理由。" maxLength={2000} /></div><Button className="w-full" disabled={action.isPending || decisionDraft.value.trim().length < 20} onClick={() => setConfirmOpen(true)}><BadgeCheck className="size-4" />提交处置决定</Button><p className="text-[11px] leading-4 text-muted-foreground">本系统完成处置记录即结案；监测、升级或 AML 转交由下游团队另行执行。</p></div>}
             {current.status === RiskCaseStatus.Resolved && <div className="rounded-md border border-emerald-200 bg-emerald-50 p-3 text-xs leading-5 text-emerald-900"><LockKeyhole className="mr-1 inline size-3.5" />案件已结案并锁定。调查与复核历史只读保存。</div>}
             {!canInvestigate && !canReview && !canClaim && !isResolved && <p className="text-xs leading-5 text-muted-foreground">当前角色或案件分配状态不允许写入。可查看资料与事件历史。</p>}
@@ -231,6 +235,21 @@ function CaseWorkspace({ id, session }: { id: string; session: SessionView }) {
           <Card><CardHeader className="pb-3"><CardTitle className="text-sm">近期笔记</CardTitle></CardHeader><CardContent>{current.notes.length === 0 ? <p className="text-xs text-muted-foreground">尚无调查笔记。</p> : <div className="space-y-3">{[...current.notes].reverse().slice(0, 3).map((note) => <div key={note.id} className="border-l-2 border-teal-300 pl-3"><p className="text-xs leading-5 text-slate-700">{note.text}</p><p className="mt-1 text-[10px] text-muted-foreground">{formatDate(note.occurredAt)} · v{note.caseVersion}</p></div>)}</div>}</CardContent></Card>
         </aside>
       </div>
+
+      <Dialog open={returnOpen} onOpenChange={(open) => { if (!action.isPending) setReturnOpen(open); }}>
+        <DialogContent>
+          <DialogHeader><DialogTitle>退回调查并记录原因</DialogTitle><DialogDescription>案件将恢复调查，当前评估失效。请说明需要补充或纠正的具体事实，经办人须重新评估后提交复核。</DialogDescription></DialogHeader>
+          <div className="space-y-2"><Label htmlFor="return-reason">退回原因</Label><Textarea id="return-reason" rows={6} value={returnDraft.value} onChange={(event) => returnDraft.setValue(event.target.value)} aria-describedby="return-validation" aria-invalid={returnLength < 20 || returnLength > 1500} placeholder="说明评估缺少哪些依据，以及需要进一步核实的事项。" /><p id="return-validation" className="text-xs text-muted-foreground">请输入 20 至 1500 个字符的具体原因，当前 {returnLength} 个字符。</p></div>
+          {action.isError && <ApiFailure error={action.error} />}
+          <DialogFooter><Button variant="outline" disabled={action.isPending} onClick={() => setReturnOpen(false)}>取消</Button><Button disabled={action.isPending || Boolean(pending) || current.status !== RiskCaseStatus.Reviewing || returnLength < 20 || returnLength > 1500} onClick={() => {
+            const submitted = returnDraft.capture(); const reason = submitted.value.trim();
+            request("resume", { reason }, (key, tag) => clients.cases.resume(id, key, tag, new ResumeRequest({ reason })), "案件已退回调查，原因已记录", () => {
+              const unchanged = returnDraft.capture().revision === submitted.revision;
+              returnDraft.clearIfUnchanged(submitted); if (unchanged) setReturnOpen(false);
+            });
+          }}>{action.isPending ? "正在记录…" : "确认退回并记录"}</Button></DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       <Dialog open={confirmOpen} onOpenChange={setConfirmOpen}>
         <DialogContent>
@@ -307,4 +326,10 @@ function auditLabel(operation: string) {
     InvestigationResumed: "案件已退回调查",
     DispositionRecorded: "独立处置已记录",
   } as Record<string, string>)[operation] ?? operation;
+}
+
+function returnReason(details: string) {
+  try { const value = JSON.parse(details); if (typeof value.Reason === "string" && value.Reason.trim()) return value.Reason; }
+  catch { /* Older audit details may not carry a reason. */ }
+  return "历史退回记录未保存原因。";
 }

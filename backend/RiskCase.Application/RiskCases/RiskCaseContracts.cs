@@ -12,6 +12,7 @@ public sealed record LinkView(Guid Id, string SourceNodeId, string TargetNodeId,
 public sealed record DecisionView(Guid Id, RiskDisposition Disposition, string Rationale, string ReviewerId, DateTimeOffset DecidedAt, int CaseVersion, Guid? AssessmentId);
 public sealed record AssessmentView(Guid Id, RiskAssessmentLevel Level, string Rationale, string? AssessorId, DateTimeOffset AssessedAt, int CaseVersion, int BasisVersion, bool IsLegacy);
 public sealed record AuditView(int Version, string Operation, string ActorId, DateTimeOffset OccurredAt, string DetailsJson);
+public sealed record LegacyAssessorView(int CaseVersion, string? AssessorId, Guid? SourceAuditId, Guid? SourceAssessmentId);
 public sealed record GraphNodeView(string Id, string Type, string Label, string Detail, bool IsAlertSubject);
 public sealed record GraphEdgeView(string Id, string Source, string Target, string Label, string? Rationale);
 public sealed record AlertView(Guid Id, string ExternalAlertId, string SourceSystem, RiskAlertCategory Category, DateTimeOffset DetectedAt, RiskSeverity Severity, int? RiskScore);
@@ -63,7 +64,8 @@ public sealed record RiskCaseView(
     IReadOnlyList<DecisionView> Decisions,
     IReadOnlyList<AuditView> AuditHistory,
     IReadOnlyList<GraphNodeView> GraphNodes,
-    IReadOnlyList<GraphEdgeView> GraphEdges);
+    IReadOnlyList<GraphEdgeView> GraphEdges,
+    IReadOnlyList<LegacyAssessorView> LegacyAssessors);
 
 public sealed record RiskSignalInput(string Code, string Title, string Explanation, RiskSeverity Severity, string[] TransactionReferences);
 public sealed record RiskTransactionInput(string ExternalReference, Guid AccountId, TransactionDirection Direction, decimal Amount, string Currency, DateTimeOffset OccurredAt, string Channel, string CounterpartyReference, string CounterpartyLabel);

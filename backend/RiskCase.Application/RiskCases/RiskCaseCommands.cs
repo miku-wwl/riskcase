@@ -190,7 +190,7 @@ public sealed record AssessRiskCaseCommand(string IdempotencyKey, Guid CaseId, i
 public sealed record RequestCaseReviewCommand(string IdempotencyKey, Guid CaseId, int ExpectedVersion)
     : IRequest<RiskCaseView>, IVersionedRiskCaseCommand;
 [Authorize(Roles = Roles.CaseInvestigators)]
-public sealed record ResumeRiskCaseCommand(string IdempotencyKey, Guid CaseId, int ExpectedVersion)
+public sealed record ResumeRiskCaseCommand(string IdempotencyKey, Guid CaseId, int ExpectedVersion, string? Reason = null)
     : IRequest<RiskCaseView>, IVersionedRiskCaseCommand;
 [Authorize(Roles = Roles.Supervisor)]
 public sealed record DecideRiskCaseCommand(string IdempotencyKey, Guid CaseId, int ExpectedVersion, RiskDisposition Disposition, string Rationale)
@@ -235,7 +235,13 @@ public sealed class RequestCaseReviewCommandValidator : AbstractValidator<Reques
 [Authorize(Roles = Roles.CaseInvestigators)]
 public sealed class ResumeRiskCaseCommandValidator : AbstractValidator<ResumeRiskCaseCommand>
 {
-    public ResumeRiskCaseCommandValidator() => RuleFor(x => x.ExpectedVersion).GreaterThan(0);
+    public ResumeRiskCaseCommandValidator()
+    {
+        RuleFor(x => x.ExpectedVersion).GreaterThan(0);
+        // Missing reason may identify a stored legacy success; only its handler may reject a new write.
+        RuleFor(x => x.Reason).Must(x => x is null || x.Trim().EnumerateRunes().Count() is >= 20 and <= 1500)
+            .WithMessage("退回原因须为 20 至 1500 个字符。");
+    }
 }
 
 [Authorize(Roles = Roles.Supervisor)]
@@ -253,7 +259,7 @@ public abstract class RiskCaseCommandHandlerBase(IApplicationDbContext db, IUser
 
     protected async Task<RiskCase.Domain.Entities.RiskCase> LoadForWriteAsync(IVersionedRiskCaseCommand request, CancellationToken cancellationToken)
     {
-        var entity = await Db.RiskCases.Include(x => x.Links).Include(x => x.Assessments).SingleOrDefaultAsync(x => x.Id == request.CaseId, cancellationToken)
+        var entity = await Db.RiskCases.Include(x => x.Links).Include(x => x.Assessments).Include(x => x.LegacyAssessorParticipation).SingleOrDefaultAsync(x => x.Id == request.CaseId, cancellationToken)
             ?? throw new ApplicationFault(404, "risk_case_not_found", "风控档案不存在。");
         if (entity.Version != request.ExpectedVersion)
             throw new ApplicationFault(412, "version_conflict", $"档案版本已从 {request.ExpectedVersion} 更新为 {entity.Version}。请刷新后重新确认操作。");
@@ -367,8 +373,12 @@ public sealed class ResumeRiskCaseCommandHandler(IApplicationDbContext db, IUser
     {
         var entity = await LoadForWriteAsync(request, cancellationToken);
         if (!await IsSupervisorAsync() && entity.AssignedAnalystId != AnalystId) throw new ForbiddenAccessException();
-        entity.ResumeInvestigation(entity.AssignedAnalystId!, Clock.GetUtcNow());
-        return await SaveAsync(entity, "InvestigationResumed", new { }, cancellationToken);
+        // Null is retained only so already-committed bodyless requests can reach the replay store.
+        // A new operation must always supply a validated reason, before any business mutation.
+        if (request.Reason is null)
+            throw new ApplicationFault(400, "return_reason_required", "退回调查必须提供 20 至 1500 个字符的具体原因。");
+        var reason = entity.ResumeInvestigation(entity.AssignedAnalystId!, request.Reason, Clock.GetUtcNow());
+        return await SaveAsync(entity, "InvestigationResumed", new { Reason = reason }, cancellationToken);
     }
 }
 

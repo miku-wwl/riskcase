@@ -28,19 +28,26 @@ public sealed class IdempotencyBehaviour<TRequest, TResponse>(IIdempotencyStore 
             (fingerprint, json) => CanReplayLegacy(request, fingerprint, json));
     }
 
-    public static string Fingerprint(object request, bool includeCommandType = true)
+    public static string Fingerprint(object request, bool includeCommandType = true, bool omitReturnReason = false)
     {
         var json = JsonSerializer.SerializeToElement(request, request.GetType());
         var sorted = new SortedDictionary<string, JsonElement>(StringComparer.Ordinal);
         foreach (var property in json.EnumerateObject().Where(p => !StringComparer.OrdinalIgnoreCase.Equals(p.Name, nameof(IIdempotentRequest.IdempotencyKey))))
+        {
+            if (omitReturnReason && property.Name == nameof(ResumeRiskCaseCommand.Reason)) continue;
             sorted.Add(property.Name, property.Value.Clone());
+        }
         var identity = includeCommandType ? request.GetType().FullName + ":" : "";
         return Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(identity + JsonSerializer.Serialize(sorted))));
     }
 
     private static bool CanReplayLegacy(TRequest request, string fingerprint, string responseJson)
     {
-        if (fingerprint != Fingerprint(request, includeCommandType: false)) return false;
+        var compatible = fingerprint == Fingerprint(request, includeCommandType: false);
+        if (request is ResumeRiskCaseCommand { Reason: null })
+            compatible |= fingerprint == Fingerprint(request, omitReturnReason: true)
+                || fingerprint == Fingerprint(request, includeCommandType: false, omitReturnReason: true);
+        if (!compatible) return false;
         using var document = JsonDocument.Parse(responseJson);
         var response = document.RootElement;
         if (request is IngestAlertCommand intake)

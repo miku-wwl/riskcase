@@ -1,0 +1,470 @@
+[[
+  {
+    "Plan": {
+      "Node Type": "Sort",
+      "Parallel Aware": false,
+      "Async Capable": false,
+      "Startup Cost": 943620456.98,
+      "Total Cost": 943765396.49,
+      "Plan Rows": 57975804,
+      "Plan Width": 7527,
+      "Sort Key": ["r.\"Id\"", "r0.\"Id\"", "c.\"Id\"", "a.\"Id\"", "r1.\"Id\"", "r2.\"Id\"", "a0.\"Id\"", "c0.\"Id\"", "r3.\"Id\"", "r4.\"Id\"", "r5.\"Id\""],
+      "Plans": [
+        {
+          "Node Type": "Hash Join",
+          "Parent Relationship": "Outer",
+          "Parallel Aware": false,
+          "Async Capable": false,
+          "Join Type": "Left",
+          "Startup Cost": 40.79,
+          "Total Cost": 831994.62,
+          "Plan Rows": 57975804,
+          "Plan Width": 7527,
+          "Inner Unique": false,
+          "Hash Cond": "(r.\"Id\" = r6.\"CaseId\")",
+          "Plans": [
+            {
+              "Node Type": "Nested Loop",
+              "Parent Relationship": "Outer",
+              "Parallel Aware": false,
+              "Async Capable": false,
+              "Join Type": "Left",
+              "Startup Cost": 36.88,
+              "Total Cost": 61253.55,
+              "Plan Rows": 4774478,
+              "Plan Width": 7426,
+              "Inner Unique": false,
+              "Plans": [
+                {
+                  "Node Type": "Nested Loop",
+                  "Parent Relationship": "Outer",
+                  "Parallel Aware": false,
+                  "Async Capable": false,
+                  "Join Type": "Left",
+                  "Startup Cost": 32.06,
+                  "Total Cost": 843.28,
+                  "Plan Rows": 56170,
+                  "Plan Width": 7336,
+                  "Inner Unique": false,
+                  "Plans": [
+                    {
+                      "Node Type": "Hash Join",
+                      "Parent Relationship": "Outer",
+                      "Parallel Aware": false,
+                      "Async Capable": false,
+                      "Join Type": "Left",
+                      "Startup Cost": 27.44,
+                      "Total Cost": 106.38,
+                      "Plan Rows": 1267,
+                      "Plan Width": 7182,
+                      "Inner Unique": false,
+                      "Hash Cond": "(r0.\"Id\" = r1.\"AlertId\")",
+                      "Plans": [
+                        {
+                          "Node Type": "Nested Loop",
+                          "Parent Relationship": "Outer",
+                          "Parallel Aware": false,
+                          "Async Capable": false,
+                          "Join Type": "Left",
+                          "Startup Cost": 22.12,
+                          "Total Cost": 83.48,
+                          "Plan Rows": 123,
+                          "Plan Width": 7025,
+                          "Inner Unique": false,
+                          "Plans": [
+                            {
+                              "Node Type": "Nested Loop",
+                              "Parent Relationship": "Outer",
+                              "Parallel Aware": false,
+                              "Async Capable": false,
+                              "Join Type": "Left",
+                              "Startup Cost": 0.71,
+                              "Total Cost": 26.07,
+                              "Plan Rows": 1,
+                              "Plan Width": 5606,
+                              "Inner Unique": false,
+                              "Plans": [
+                                {
+                                  "Node Type": "Limit",
+                                  "Parent Relationship": "Outer",
+                                  "Parallel Aware": false,
+                                  "Async Capable": false,
+                                  "Startup Cost": 0.57,
+                                  "Total Cost": 17.90,
+                                  "Plan Rows": 1,
+                                  "Plan Width": 4432,
+                                  "Plans": [
+                                    {
+                                      "Node Type": "Nested Loop",
+                                      "Parent Relationship": "Outer",
+                                      "Parallel Aware": false,
+                                      "Async Capable": false,
+                                      "Join Type": "Inner",
+                                      "Startup Cost": 0.57,
+                                      "Total Cost": 17.90,
+                                      "Plan Rows": 1,
+                                      "Plan Width": 4432,
+                                      "Inner Unique": true,
+                                      "Plans": [
+                                        {
+                                          "Node Type": "Nested Loop",
+                                          "Parent Relationship": "Outer",
+                                          "Parallel Aware": false,
+                                          "Async Capable": false,
+                                          "Join Type": "Inner",
+                                          "Startup Cost": 0.42,
+                                          "Total Cost": 17.20,
+                                          "Plan Rows": 1,
+                                          "Plan Width": 4038,
+                                          "Inner Unique": true,
+                                          "Plans": [
+                                            {
+                                              "Node Type": "Nested Loop",
+                                              "Parent Relationship": "Outer",
+                                              "Parallel Aware": false,
+                                              "Async Capable": false,
+                                              "Join Type": "Inner",
+                                              "Startup Cost": 0.28,
+                                              "Total Cost": 16.49,
+                                              "Plan Rows": 1,
+                                              "Plan Width": 3218,
+                                              "Inner Unique": true,
+                                              "Plans": [
+                                                {
+                                                  "Node Type": "Index Scan",
+                                                  "Parent Relationship": "Outer",
+                                                  "Parallel Aware": false,
+                                                  "Async Capable": false,
+                                                  "Scan Direction": "Forward",
+                                                  "Index Name": "PK_risk_cases",
+                                                  "Relation Name": "risk_cases",
+                                                  "Alias": "r",
+                                                  "Startup Cost": 0.14,
+                                                  "Total Cost": 8.15,
+                                                  "Plan Rows": 1,
+                                                  "Plan Width": 2348,
+                                                  "Index Cond": "(\"Id\" = 'a575c93d-7b75-4435-9db8-cc49952c304f'::uuid)"
+                                                },
+                                                {
+                                                  "Node Type": "Index Scan",
+                                                  "Parent Relationship": "Inner",
+                                                  "Parallel Aware": false,
+                                                  "Async Capable": false,
+                                                  "Scan Direction": "Forward",
+                                                  "Index Name": "PK_risk_alerts",
+                                                  "Relation Name": "risk_alerts",
+                                                  "Alias": "r0",
+                                                  "Startup Cost": 0.14,
+                                                  "Total Cost": 8.16,
+                                                  "Plan Rows": 1,
+                                                  "Plan Width": 870,
+                                                  "Index Cond": "(\"Id\" = r.\"AlertId\")"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "Node Type": "Index Scan",
+                                              "Parent Relationship": "Inner",
+                                              "Parallel Aware": false,
+                                              "Async Capable": false,
+                                              "Scan Direction": "Forward",
+                                              "Index Name": "PK_customers",
+                                              "Relation Name": "customers",
+                                              "Alias": "c",
+                                              "Startup Cost": 0.14,
+                                              "Total Cost": 0.69,
+                                              "Plan Rows": 1,
+                                              "Plan Width": 820,
+                                              "Index Cond": "(\"Id\" = r0.\"CustomerId\")"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "Node Type": "Index Scan",
+                                          "Parent Relationship": "Inner",
+                                          "Parallel Aware": false,
+                                          "Async Capable": false,
+                                          "Scan Direction": "Forward",
+                                          "Index Name": "PK_accounts",
+                                          "Relation Name": "accounts",
+                                          "Alias": "a",
+                                          "Startup Cost": 0.14,
+                                          "Total Cost": 0.70,
+                                          "Plan Rows": 1,
+                                          "Plan Width": 394,
+                                          "Index Cond": "(\"Id\" = r0.\"AccountId\")"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "Node Type": "Index Scan",
+                                  "Parent Relationship": "Inner",
+                                  "Parallel Aware": false,
+                                  "Async Capable": false,
+                                  "Scan Direction": "Forward",
+                                  "Index Name": "IX_risk_decisions_CaseId_AssessmentId",
+                                  "Relation Name": "risk_decisions",
+                                  "Alias": "r5",
+                                  "Startup Cost": 0.14,
+                                  "Total Cost": 8.16,
+                                  "Plan Rows": 1,
+                                  "Plan Width": 1174,
+                                  "Index Cond": "(\"CaseId\" = r.\"Id\")"
+                                }
+                              ]
+                            },
+                            {
+                              "Node Type": "Hash Join",
+                              "Parent Relationship": "Inner",
+                              "Parallel Aware": false,
+                              "Async Capable": false,
+                              "Join Type": "Inner",
+                              "Startup Cost": 21.41,
+                              "Total Cost": 56.18,
+                              "Plan Rows": 123,
+                              "Plan Width": 1419,
+                              "Inner Unique": true,
+                              "Hash Cond": "(a0.\"CustomerId\" = c0.\"Id\")",
+                              "Plans": [
+                                {
+                                  "Node Type": "Nested Loop",
+                                  "Parent Relationship": "Outer",
+                                  "Parallel Aware": false,
+                                  "Async Capable": false,
+                                  "Join Type": "Inner",
+                                  "Startup Cost": 9.39,
+                                  "Total Cost": 43.82,
+                                  "Plan Rows": 123,
+                                  "Plan Width": 599,
+                                  "Inner Unique": true,
+                                  "Plans": [
+                                    {
+                                      "Node Type": "Bitmap Heap Scan",
+                                      "Parent Relationship": "Outer",
+                                      "Parallel Aware": false,
+                                      "Async Capable": false,
+                                      "Relation Name": "risk_transactions",
+                                      "Alias": "r2",
+                                      "Startup Cost": 9.23,
+                                      "Total Cost": 39.77,
+                                      "Plan Rows": 123,
+                                      "Plan Width": 205,
+                                      "Recheck Cond": "(r0.\"Id\" = \"AlertId\")",
+                                      "Plans": [
+                                        {
+                                          "Node Type": "Bitmap Index Scan",
+                                          "Parent Relationship": "Outer",
+                                          "Parallel Aware": false,
+                                          "Async Capable": false,
+                                          "Index Name": "IX_risk_transactions_AlertId_ExternalReference",
+                                          "Startup Cost": 0.00,
+                                          "Total Cost": 9.20,
+                                          "Plan Rows": 123,
+                                          "Plan Width": 0,
+                                          "Index Cond": "(\"AlertId\" = r0.\"Id\")"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "Node Type": "Memoize",
+                                      "Parent Relationship": "Inner",
+                                      "Parallel Aware": false,
+                                      "Async Capable": false,
+                                      "Startup Cost": 0.15,
+                                      "Total Cost": 0.21,
+                                      "Plan Rows": 1,
+                                      "Plan Width": 394,
+                                      "Cache Key": "r2.\"AccountId\"",
+                                      "Cache Mode": "logical",
+                                      "Plans": [
+                                        {
+                                          "Node Type": "Index Scan",
+                                          "Parent Relationship": "Outer",
+                                          "Parallel Aware": false,
+                                          "Async Capable": false,
+                                          "Scan Direction": "Forward",
+                                          "Index Name": "PK_accounts",
+                                          "Relation Name": "accounts",
+                                          "Alias": "a0",
+                                          "Startup Cost": 0.14,
+                                          "Total Cost": 0.20,
+                                          "Plan Rows": 1,
+                                          "Plan Width": 394,
+                                          "Index Cond": "(\"Id\" = r2.\"AccountId\")"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "Node Type": "Hash",
+                                  "Parent Relationship": "Inner",
+                                  "Parallel Aware": false,
+                                  "Async Capable": false,
+                                  "Startup Cost": 10.90,
+                                  "Total Cost": 10.90,
+                                  "Plan Rows": 90,
+                                  "Plan Width": 820,
+                                  "Plans": [
+                                    {
+                                      "Node Type": "Seq Scan",
+                                      "Parent Relationship": "Outer",
+                                      "Parallel Aware": false,
+                                      "Async Capable": false,
+                                      "Relation Name": "customers",
+                                      "Alias": "c0",
+                                      "Startup Cost": 0.00,
+                                      "Total Cost": 10.90,
+                                      "Plan Rows": 90,
+                                      "Plan Width": 820
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "Node Type": "Hash",
+                          "Parent Relationship": "Inner",
+                          "Parallel Aware": false,
+                          "Async Capable": false,
+                          "Startup Cost": 4.03,
+                          "Total Cost": 4.03,
+                          "Plan Rows": 103,
+                          "Plan Width": 157,
+                          "Plans": [
+                            {
+                              "Node Type": "Seq Scan",
+                              "Parent Relationship": "Outer",
+                              "Parallel Aware": false,
+                              "Async Capable": false,
+                              "Relation Name": "risk_signals",
+                              "Alias": "r1",
+                              "Startup Cost": 0.00,
+                              "Total Cost": 4.03,
+                              "Plan Rows": 103,
+                              "Plan Width": 157
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "Node Type": "Memoize",
+                      "Parent Relationship": "Inner",
+                      "Parallel Aware": false,
+                      "Async Capable": false,
+                      "Startup Cost": 4.62,
+                      "Total Cost": 12.17,
+                      "Plan Rows": 44,
+                      "Plan Width": 154,
+                      "Cache Key": "r.\"Id\"",
+                      "Cache Mode": "logical",
+                      "Plans": [
+                        {
+                          "Node Type": "Bitmap Heap Scan",
+                          "Parent Relationship": "Outer",
+                          "Parallel Aware": false,
+                          "Async Capable": false,
+                          "Relation Name": "risk_case_links",
+                          "Alias": "r4",
+                          "Startup Cost": 4.61,
+                          "Total Cost": 12.16,
+                          "Plan Rows": 44,
+                          "Plan Width": 154,
+                          "Recheck Cond": "(r.\"Id\" = \"CaseId\")",
+                          "Plans": [
+                            {
+                              "Node Type": "Bitmap Index Scan",
+                              "Parent Relationship": "Outer",
+                              "Parallel Aware": false,
+                              "Async Capable": false,
+                              "Index Name": "IX_risk_case_links_CaseId_SourceNodeId_TargetNodeId",
+                              "Startup Cost": 0.00,
+                              "Total Cost": 4.60,
+                              "Plan Rows": 44,
+                              "Plan Width": 0,
+                              "Index Cond": "(\"CaseId\" = r.\"Id\")"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "Node Type": "Memoize",
+                  "Parent Relationship": "Inner",
+                  "Parallel Aware": false,
+                  "Async Capable": false,
+                  "Startup Cost": 4.82,
+                  "Total Cost": 13.88,
+                  "Plan Rows": 85,
+                  "Plan Width": 90,
+                  "Cache Key": "r.\"Id\"",
+                  "Cache Mode": "logical",
+                  "Plans": [
+                    {
+                      "Node Type": "Bitmap Heap Scan",
+                      "Parent Relationship": "Outer",
+                      "Parallel Aware": false,
+                      "Async Capable": false,
+                      "Relation Name": "risk_case_notes",
+                      "Alias": "r3",
+                      "Startup Cost": 4.81,
+                      "Total Cost": 13.87,
+                      "Plan Rows": 85,
+                      "Plan Width": 90,
+                      "Recheck Cond": "(r.\"Id\" = \"CaseId\")",
+                      "Plans": [
+                        {
+                          "Node Type": "Bitmap Index Scan",
+                          "Parent Relationship": "Outer",
+                          "Parallel Aware": false,
+                          "Async Capable": false,
+                          "Index Name": "IX_risk_case_notes_CaseId_OccurredAt",
+                          "Startup Cost": 0.00,
+                          "Total Cost": 4.79,
+                          "Plan Rows": 85,
+                          "Plan Width": 0,
+                          "Index Cond": "(\"CaseId\" = r.\"Id\")"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Node Type": "Hash",
+              "Parent Relationship": "Inner",
+              "Parallel Aware": false,
+              "Async Capable": false,
+              "Startup Cost": 2.85,
+              "Total Cost": 2.85,
+              "Plan Rows": 85,
+              "Plan Width": 101,
+              "Plans": [
+                {
+                  "Node Type": "Seq Scan",
+                  "Parent Relationship": "Outer",
+                  "Parallel Aware": false,
+                  "Async Capable": false,
+                  "Relation Name": "risk_assessments",
+                  "Alias": "r6",
+                  "Startup Cost": 0.00,
+                  "Total Cost": 2.85,
+                  "Plan Rows": 85,
+                  "Plan Width": 101
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+]]

@@ -75,7 +75,7 @@ public sealed class Round2RegressionTests
             "note" => () => c.AddNote("author", Rationale, now),
             "link" => () => c.AddLink("author", "a", "b", CaseLinkKind.Related, Rationale, now),
             "assess" => () => c.RecordAssessment("author", RiskAssessmentLevel.Low, Rationale, now),
-            "review" => () => c.RequestReview("author", now), "resume" => () => c.ResumeInvestigation("author", now),
+            "review" => () => c.RequestReview("author", now), "resume" => () => c.ResumeInvestigation("author", Rationale, now),
             "decide" => () => c.Decide("independent", RiskDisposition.Escalate, Rationale, now),
             _ => throw new ArgumentOutOfRangeException(nameof(operation))
         };
@@ -87,7 +87,7 @@ public sealed class Round2RegressionTests
     public void Assessment_history_and_decision_bind_to_the_submitted_basis_after_return_and_reassignment()
     {
         var c = Investigating("author"); var first = c.Assessments.Single(); var now = DateTimeOffset.UtcNow;
-        c.RequestReview("author", now); c.ResumeInvestigation("author", now); c.Assign("new-author", now);
+        c.RequestReview("author", now); c.ResumeInvestigation("author", Rationale, now); c.Assign("new-author", now);
         Assert.Throws<DomainRuleException>(() => c.RequestReview("new-author", now));
         var second = c.RecordAssessment("new-author", RiskAssessmentLevel.Low, Rationale + "重新评估。", now);
         c.RequestReview("new-author", now);

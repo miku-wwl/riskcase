@@ -775,20 +775,25 @@ export class RiskCasesClient {
     /**
      * @param idempotency_Key (optional)
      * @param if_Match (optional)
+     * @param body (optional)
      * @return OK
      */
-    resume(id: string, idempotency_Key: string | undefined, if_Match: string | undefined): Promise<RiskCaseView> {
+    resume(id: string, idempotency_Key: string | undefined, if_Match: string | undefined, body: ResumeRequest | null | undefined): Promise<RiskCaseView> {
         let url_ = this.baseUrl + "/api/cases/{id}/resume";
         if (id === undefined || id === null)
             throw new globalThis.Error("The parameter 'id' must be defined.");
         url_ = url_.replace("{id}", encodeURIComponent("" + id));
         url_ = url_.replace(/[?&]$/, "");
 
+        const content_ = JSON.stringify(body);
+
         let options_: RequestInit = {
+            body: content_,
             method: "POST",
             headers: {
                 "Idempotency-Key": idempotency_Key !== undefined && idempotency_Key !== null ? "" + idempotency_Key : "",
                 "If-Match": if_Match !== undefined && if_Match !== null ? "" + if_Match : "",
+                "Content-Type": "application/json",
                 "Accept": "application/json"
             }
         };
@@ -2823,6 +2828,66 @@ export interface IIngestAlertRequest {
     [key: string]: any;
 }
 
+export class LegacyAssessorView implements ILegacyAssessorView {
+    caseVersion!: number;
+    assessorId!: string | undefined;
+    sourceAuditId!: string | undefined;
+    sourceAssessmentId!: string | undefined;
+
+    [key: string]: any;
+
+    constructor(data?: ILegacyAssessorView) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (this as any)[property] = (data as any)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            this.caseVersion = _data["caseVersion"];
+            this.assessorId = _data["assessorId"];
+            this.sourceAuditId = _data["sourceAuditId"];
+            this.sourceAssessmentId = _data["sourceAssessmentId"];
+        }
+    }
+
+    static fromJS(data: any): LegacyAssessorView {
+        data = typeof data === 'object' ? data : {};
+        let result = new LegacyAssessorView();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        data["caseVersion"] = this.caseVersion;
+        data["assessorId"] = this.assessorId;
+        data["sourceAuditId"] = this.sourceAuditId;
+        data["sourceAssessmentId"] = this.sourceAssessmentId;
+        return data;
+    }
+}
+
+export interface ILegacyAssessorView {
+    caseVersion: number;
+    assessorId: string | undefined;
+    sourceAuditId: string | undefined;
+    sourceAssessmentId: string | undefined;
+
+    [key: string]: any;
+}
+
 export class LinkRequest implements ILinkRequest {
     sourceNodeId!: string;
     targetNodeId!: string;
@@ -3335,6 +3400,54 @@ export interface IResetPasswordRequest {
     [key: string]: any;
 }
 
+export class ResumeRequest implements IResumeRequest {
+    reason!: string | undefined;
+
+    [key: string]: any;
+
+    constructor(data?: IResumeRequest) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (this as any)[property] = (data as any)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            this.reason = _data["reason"];
+        }
+    }
+
+    static fromJS(data: any): ResumeRequest {
+        data = typeof data === 'object' ? data : {};
+        let result = new ResumeRequest();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        data["reason"] = this.reason;
+        return data;
+    }
+}
+
+export interface IResumeRequest {
+    reason: string | undefined;
+
+    [key: string]: any;
+}
+
 export enum RiskAlertCategory {
     TransactionRisk = "transactionRisk",
     Fraud = "fraud",
@@ -3552,6 +3665,7 @@ export class RiskCaseView implements IRiskCaseView {
     auditHistory!: AuditView[];
     graphNodes!: GraphNodeView[];
     graphEdges!: GraphEdgeView[];
+    legacyAssessors!: LegacyAssessorView[];
 
     [key: string]: any;
 
@@ -3575,6 +3689,7 @@ export class RiskCaseView implements IRiskCaseView {
             this.auditHistory = [];
             this.graphNodes = [];
             this.graphEdges = [];
+            this.legacyAssessors = [];
         }
     }
 
@@ -3645,6 +3760,11 @@ export class RiskCaseView implements IRiskCaseView {
                 this.graphEdges = [] as any;
                 for (let item of _data["graphEdges"])
                     this.graphEdges!.push(GraphEdgeView.fromJS(item));
+            }
+            if (Array.isArray(_data["legacyAssessors"])) {
+                this.legacyAssessors = [] as any;
+                for (let item of _data["legacyAssessors"])
+                    this.legacyAssessors!.push(LegacyAssessorView.fromJS(item));
             }
         }
     }
@@ -3724,6 +3844,11 @@ export class RiskCaseView implements IRiskCaseView {
             for (let item of this.graphEdges)
                 data["graphEdges"].push(item ? item.toJSON() : undefined as any);
         }
+        if (Array.isArray(this.legacyAssessors)) {
+            data["legacyAssessors"] = [];
+            for (let item of this.legacyAssessors)
+                data["legacyAssessors"].push(item ? item.toJSON() : undefined as any);
+        }
         return data;
     }
 }
@@ -3755,6 +3880,7 @@ export interface IRiskCaseView {
     auditHistory: AuditView[];
     graphNodes: GraphNodeView[];
     graphEdges: GraphEdgeView[];
+    legacyAssessors: LegacyAssessorView[];
 
     [key: string]: any;
 }

@@ -11,15 +11,18 @@ namespace RiskCase.IntegrationTests;
 
 public sealed class RiskCaseApiFactory : WebApplicationFactory<Program>
 {
+    public string? ConnectionString { get; init; }
     public CaseReadBarrier Barrier { get; } = new();
+    public PresenterReadProbe ReadProbe { get; } = new();
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        var connectionString = Environment.GetEnvironmentVariable("ConnectionStrings__RiskCaseDb");
+        var connectionString = ConnectionString ?? Environment.GetEnvironmentVariable("ConnectionStrings__RiskCaseDb");
         if (string.IsNullOrWhiteSpace(connectionString))
             throw new InvalidOperationException("Set ConnectionStrings__RiskCaseDb to a disposable PostgreSQL test database.");
 
         builder.UseEnvironment("Testing");
-        builder.ConfigureServices(services => services.AddDbContext<ApplicationDbContext>(options => options.AddInterceptors(Barrier)));
+        builder.ConfigureServices(services => services.AddDbContext<ApplicationDbContext>(options =>
+            options.UseNpgsql(connectionString).AddInterceptors(Barrier, ReadProbe)));
         builder.ConfigureLogging(logging =>
         {
             logging.AddConsole();

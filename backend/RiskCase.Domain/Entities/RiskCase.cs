@@ -10,6 +10,7 @@ public sealed class RiskCase : BaseAuditableEntity
     private readonly List<RiskCaseLink> _links = [];
     private readonly List<RiskDecision> _decisions = [];
     private readonly List<RiskAssessment> _assessments = [];
+    private readonly List<LegacyAssessorParticipation> _legacyAssessorParticipation = [];
 
     public Guid AlertId { get; private set; }
     public RiskCaseStatus Status { get; private set; }
@@ -29,6 +30,7 @@ public sealed class RiskCase : BaseAuditableEntity
     public IReadOnlyCollection<RiskCaseLink> Links => _links.AsReadOnly();
     public IReadOnlyCollection<RiskDecision> Decisions => _decisions.AsReadOnly();
     public IReadOnlyCollection<RiskAssessment> Assessments => _assessments.AsReadOnly();
+    public IReadOnlyCollection<LegacyAssessorParticipation> LegacyAssessorParticipation => _legacyAssessorParticipation.AsReadOnly();
 
     private RiskCase() { }
 
@@ -130,21 +132,26 @@ public sealed class RiskCase : BaseAuditableEntity
         Advance(now);
     }
 
-    public void ResumeInvestigation(string analystId, DateTimeOffset now)
+    public string ResumeInvestigation(string analystId, string reason, DateTimeOffset now)
     {
         EnsureAssignedAnalyst(analystId);
         Require(Status == RiskCaseStatus.Reviewing, "invalid_case_transition", "只有复核中的档案可以退回调查。");
+        var accepted = reason.Trim();
+        Require(CountRunes(accepted) is >= 20 and <= 1500, "return_reason_length_invalid", "退回原因须为 20 至 1500 个字符。");
         Status = RiskCaseStatus.Investigating;
         Advance(now);
         InvalidateAssessment();
+        return accepted;
     }
 
     public RiskDecision Decide(string analystId, RiskDisposition disposition, string rationale, DateTimeOffset now)
     {
         EnsureNotResolved();
         Require(Status == RiskCaseStatus.Reviewing, "decision_requires_review", "风险处置必须在复核阶段完成。");
+        Require(!_legacyAssessorParticipation.Any(x => x.AssessorId is null),
+            "legacy_assessor_identity_unavailable", "旧评估作者身份缺失，无法证明独立性，禁止最终处置。须由数据治理流程核实原始记录。");
         Require(AssessedById is not null && analystId != AssessedById && analystId != ReviewSubmittedById && analystId != AssignedAnalystId
-            && !_assessments.Any(x => x.AssessorId == analystId),
+            && !_assessments.Any(x => x.AssessorId == analystId) && !_legacyAssessorParticipation.Any(x => x.AssessorId == analystId),
             "independent_reviewer_required", "最终处置人员不能是本案任何一次评估的作者、当前提交人或经办人。");
         Require(CurrentAssessmentId is not null && ReviewedAssessmentId == CurrentAssessmentId, "assessment_required", "复核必须对应已提交的确定评估记录。");
         Require(Enum.IsDefined(disposition), "disposition_invalid", "处置结果无效。");

@@ -41,8 +41,11 @@ function SignedInApp() {
   const logout = useMutation({
     mutationFn: async () => { await client.cancelQueries(); await signOut(); },
     onSuccess: () => {
-      client.clear();
+      // Keep the observed session query attached during the login/logout handoff.
+      // Removing it with clear() can leave the mounted observer watching a discarded query.
       client.setQueryData(["session"], null);
+      client.removeQueries({ predicate: (query) => !["session", "csrf"].includes(String(query.queryKey[0])) });
+      client.getMutationCache().clear();
     },
   });
 

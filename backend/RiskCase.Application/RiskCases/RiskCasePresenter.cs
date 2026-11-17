@@ -10,9 +10,12 @@ namespace RiskCase.Application.RiskCases;
 
 public static class RiskCasePresenter
 {
-    public static async Task<RiskCaseView> LoadAsync(IApplicationDbContext db, Guid id, CancellationToken cancellationToken)
+    public static Task<RiskCaseView> LoadAsync(IApplicationDbContext db, Guid id, CancellationToken cancellationToken) =>
+        db.WithCaseSnapshotAsync(id, () => LoadSnapshotAsync(db, id, cancellationToken), cancellationToken);
+
+    private static async Task<RiskCaseView> LoadSnapshotAsync(IApplicationDbContext db, Guid id, CancellationToken cancellationToken)
     {
-        var entity = await db.RiskCases
+        var entity = await db.CaseDetails
             .AsNoTracking()
             .Include(x => x.Alert).ThenInclude(x => x.Customer)
             .Include(x => x.Alert).ThenInclude(x => x.Account)
@@ -22,6 +25,7 @@ public static class RiskCasePresenter
             .Include(x => x.Links)
             .Include(x => x.Decisions)
             .Include(x => x.Assessments)
+            .Include(x => x.LegacyAssessorParticipation)
             .SingleOrDefaultAsync(x => x.Id == id, cancellationToken);
 
         if (entity is null)
@@ -88,6 +92,7 @@ public static class RiskCasePresenter
             entity.Notes.OrderBy(x => x.OccurredAt).Select(x => new NoteView(x.Id, x.AnalystId, x.Text, x.OccurredAt, x.CaseVersion)).ToArray(),
             entity.Links.OrderBy(x => x.OccurredAt).Select(x => new LinkView(x.Id, x.SourceNodeId, x.TargetNodeId, x.Kind, x.Rationale, x.AnalystId, x.OccurredAt, x.CaseVersion)).ToArray(),
             entity.Decisions.OrderBy(x => x.DecidedAt).Select(x => new DecisionView(x.Id, x.Disposition, x.Rationale, x.AnalystId, x.DecidedAt, x.CaseVersion, x.AssessmentId)).ToArray(),
-            audit ?? [], nodes.Values.ToArray(), edges.ToArray());
+            audit ?? [], nodes.Values.ToArray(), edges.ToArray(),
+            entity.LegacyAssessorParticipation.OrderBy(x => x.CaseVersion).Select(x => new LegacyAssessorView(x.CaseVersion, x.AssessorId, x.SourceAuditId, x.SourceAssessmentId)).ToArray());
     }
 }

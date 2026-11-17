@@ -1,0 +1,582 @@
+{
+  "baseline": "4667f194e4847e06a0764d40f0bc78be7420541c",
+  "database": "PostgreSQL 17.12 real loopback server",
+  "functional": [
+    {
+      "suite": "net10.0",
+      "counters": {
+        "total": "47",
+        "executed": "47",
+        "passed": "47",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "tests": [
+        {
+          "name": "State_matrix_preserves_versions_on_rejected_transitions(Investigating,\"link\",True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "State_matrix_preserves_versions_on_rejected_transitions(Reviewing,\"review\",False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Investigation_requires_assignment_and_advances_version_for_each_change",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Invalid_return_reason_cannot_change_frozen_case(\"short\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "State_matrix_preserves_versions_on_rejected_transitions(New,\"decide\",False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Legacy_participation_is_independent_of_current_assignment(null)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "State_matrix_preserves_versions_on_rejected_transitions(Reviewing,\"decide\",True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Review_assignment_cannot_be_used_to_bypass_independence",
+          "outcome": "Passed"
+        },
+        {
+          "name": "State_matrix_preserves_versions_on_rejected_transitions(Investigating,\"note\",True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "High_risk_case_requires_an_independent_reviewer_and_rationale",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Review_freezes_notes_and_links",
+          "outcome": "Passed"
+        },
+        {
+          "name": "State_matrix_preserves_versions_on_rejected_transitions(New,\"assess\",False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "State_matrix_preserves_versions_on_rejected_transitions(Investigating,\"resume\",False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "State_matrix_preserves_versions_on_rejected_transitions(Resolved,\"decide\",False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "State_matrix_preserves_versions_on_rejected_transitions(Investigating,\"assign\",True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Invalid_return_reason_cannot_change_frozen_case(\"oversized\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "State_matrix_preserves_versions_on_rejected_transitions(Resolved,\"resume\",False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "State_matrix_preserves_versions_on_rejected_transitions(Reviewing,\"assess\",False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Legacy_participation_is_independent_of_current_assignment(\"old-one\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Resolved_case_is_immutable_and_notes_count_unicode_runes",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Assessment_history_and_decision_bind_to_the_submitted_basis_after_return_and_reassignment",
+          "outcome": "Passed"
+        },
+        {
+          "name": "State_matrix_preserves_versions_on_rejected_transitions(New,\"note\",False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "State_matrix_preserves_versions_on_rejected_transitions(Investigating,\"start\",False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Evidence_added_after_assessment_requires_reassessment",
+          "outcome": "Passed"
+        },
+        {
+          "name": "State_matrix_preserves_versions_on_rejected_transitions(Reviewing,\"assign\",False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "State_matrix_preserves_versions_on_rejected_transitions(Investigating,\"decide\",False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Invalid_return_reason_cannot_change_frozen_case(\"   \")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "State_matrix_preserves_versions_on_rejected_transitions(Resolved,\"link\",False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "State_matrix_preserves_versions_on_rejected_transitions(Reviewing,\"link\",False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "State_matrix_preserves_versions_on_rejected_transitions(New,\"link\",False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "State_matrix_preserves_versions_on_rejected_transitions(Resolved,\"assess\",False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Return_accepts_trimmed_reason_and_retains_assessment_history_but_invalidates_review",
+          "outcome": "Passed"
+        },
+        {
+          "name": "State_matrix_preserves_versions_on_rejected_transitions(New,\"start\",True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "State_matrix_preserves_versions_on_rejected_transitions(Reviewing,\"note\",False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "State_matrix_preserves_versions_on_rejected_transitions(Investigating,\"review\",True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "State_matrix_preserves_versions_on_rejected_transitions(Resolved,\"start\",False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "State_matrix_preserves_versions_on_rejected_transitions(Reviewing,\"resume\",True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "State_matrix_preserves_versions_on_rejected_transitions(Resolved,\"note\",False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "State_matrix_preserves_versions_on_rejected_transitions(Reviewing,\"start\",False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "State_matrix_preserves_versions_on_rejected_transitions(New,\"review\",False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "State_matrix_preserves_versions_on_rejected_transitions(New,\"assign\",True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "State_matrix_preserves_versions_on_rejected_transitions(Resolved,\"review\",False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "State_matrix_preserves_versions_on_rejected_transitions(Investigating,\"assess\",True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "State_matrix_preserves_versions_on_rejected_transitions(Resolved,\"assign\",False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "State_matrix_preserves_versions_on_rejected_transitions(New,\"resume\",False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Invalid_return_reason_cannot_change_frozen_case(\"\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Legacy_participation_is_independent_of_current_assignment(\"old-two\")",
+          "outcome": "Passed"
+        }
+      ]
+    },
+    {
+      "suite": "net10.0",
+      "counters": {
+        "total": "13",
+        "executed": "13",
+        "passed": "13",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "tests": [
+        {
+          "name": "Present_but_invalid_reasons_are_rejected_before_execution(\"oversized\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Present_but_invalid_reasons_are_rejected_before_execution(\"short\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Trimmed_unicode_scalar_boundaries_match_domain_and_browser(20)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Present_but_invalid_reasons_are_rejected_before_execution(\"   \")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Analyst_role_reaches_a_case_command",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Fingerprint_ignores_retry_key_but_includes_business_payload",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Bodyless_command_can_reach_historical_replay_but_new_write_handler_requires_reason",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Different_command_types_never_share_a_fingerprint_for_identical_fields",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Behaviour_rejects_a_non_uuid_write_key",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Read_only_auditor_is_rejected_by_the_command_pipeline",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Trimmed_unicode_scalar_boundaries_match_domain_and_browser(1500)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Present_but_invalid_reasons_are_rejected_before_execution(\"\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Behaviour_runs_a_valid_command_through_the_idempotency_store",
+          "outcome": "Passed"
+        }
+      ]
+    },
+    {
+      "suite": "net10.0",
+      "counters": {
+        "total": "56",
+        "executed": "55",
+        "passed": "55",
+        "failed": "0",
+        "error": "0",
+        "timeout": "0",
+        "aborted": "0",
+        "inconclusive": "0",
+        "passedButRunAborted": "0",
+        "notRunnable": "0",
+        "notExecuted": "0",
+        "disconnected": "0",
+        "warning": "0",
+        "completed": "0",
+        "inProgress": "0",
+        "pending": "0"
+      },
+      "tests": [
+        {
+          "name": "Malformed_ingestion_rejects_without_partial_business_state(\"invalid_signal\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "New_return_without_a_reason_is_rejected_without_audit_or_receipt",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Malformed_ingestion_rejects_without_partial_business_state(\"wrong_owner\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Command_identity_is_part_of_idempotency_fingerprint_and_stale_preconditions_do_not_commit",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Upgrade_preserves_unknowns_decisions_and_immutable_provenance(\"incomplete-details\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Concurrent_external_duplicates_different_keys_and_changed_payload_are_distinguished",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Invalid_return_reason_is_a_400_with_no_committed_changes(\"Too short\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Detail_query_count_is_constant_and_returns_all_collections(500,30,200,100,30)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Invalid_return_reason_is_a_400_with_no_committed_changes(\"\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Registered_identity_has_no_case_privileges_or_role_provisioning_route",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Revoked_role_cookie_cannot_replay_a_protected_snapshot",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Api_preconditions_not_found_and_numeric_enum_filters_have_stable_statuses",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Committed_bodyless_return_receipt_recovers_but_cannot_authorize_a_new_return(True)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Return_enforces_authority_version_and_atomic_concurrent_outcome",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Assessment_history_preserves_both_rationales_and_reviewed_identity",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Upgrade_recovers_all_old_authors_and_rejects_finalization(\"Round2\",2)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Upgrade_preserves_unknowns_decisions_and_immutable_provenance(\"missing-audit\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Malformed_ingestion_rejects_without_partial_business_state(\"bad_currency\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Invalid_return_reason_is_a_400_with_no_committed_changes(\"     \")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Ineligible_assignment_is_rejected_without_business_or_audit_changes(\"missing\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Detail_is_one_snapshot_across_collections_and_audit(\"notes\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Round2_bodyless_return_receipt_and_reasonless_audit_survive_the_actual_schema_upgrade",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Lost_response_replay_remains_recoverable_after_reassignment_without_reexecution",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Legacy_retry_requires_audit_proof_of_the_original_command_and_preserves_recovery",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Malformed_ingestion_rejects_without_partial_business_state(\"missing_account\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Concurrent_retries_same_key_commit_exactly_one_note_and_one_audit",
+          "outcome": "Passed"
+        },
+        {
+          "name": "PostgreSql_workflow_persists_idempotent_intake_audit_and_independent_review",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Invalid_return_reason_is_a_400_with_no_committed_changes(\"oversized\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Duplicate_and_reversed_links_are_conflicts_without_partial_audit_or_receipts",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Malformed_ingestion_rejects_without_partial_business_state(\"invalid_enum\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Snapshot_in_existing_ingestion_transaction_uses_parent_lock_without_nested_transaction",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Historical_Round2_receipt_cannot_attach_future_audit_to_older_case_state",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Upgrade_preserves_known_legacy_rationale_marks_unknown_author_and_requires_new_review",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Csrf_headers_role_matrix_and_append_only_database_boundaries_hold",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Concurrent_review_and_new_facts_cannot_both_commit",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Ineligible_assignment_is_rejected_without_business_or_audit_changes(\"auditor\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Upgrade_preserves_unknowns_decisions_and_immutable_provenance(\"legacy-decision\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Upgrade_preserves_unknowns_decisions_and_immutable_provenance(\"empty-actor\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Upgrade_recovers_all_old_authors_and_rejects_finalization(\"Round1\",2)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Review_freezes_facts_assignment_and_assessment_and_keeps_database_unchanged",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Concurrent_writers_share_snapshot_but_only_one_commits_case_note_audit_and_receipt",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Committed_bodyless_return_receipt_recovers_but_cannot_authorize_a_new_return(False)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Fresh_database_initializes_all_three_migrations_without_legacy_facts",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Malformed_ingestion_rejects_without_partial_business_state(\"bad_amount\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Upgrade_recovers_all_old_authors_and_rejects_finalization(\"Round2\",1)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Malformed_ingestion_rejects_without_partial_business_state(\"duplicate_transaction\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Detail_query_count_is_constant_and_returns_all_collections(10,3,5,3,2)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Detail_is_one_snapshot_across_collections_and_audit(\"assessment\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Upgrade_recovers_all_old_authors_and_rejects_finalization(\"Round1\",1)",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Measure_case_detail",
+          "outcome": "NotExecuted"
+        },
+        {
+          "name": "Malformed_ingestion_rejects_without_partial_business_state(\"duplicate_signal\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Return_reason_is_trimmed_persisted_attributed_replayable_and_requires_reassessment",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Assessor_cannot_self_review_after_reassignment_or_role_combination",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Failure_after_business_save_rolls_back_case_children_audit_and_receipt_then_allows_retry",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Detail_is_one_snapshot_across_collections_and_audit(\"decision\")",
+          "outcome": "Passed"
+        },
+        {
+          "name": "Semantically_equal_legacy_alert_retries_do_not_create_duplicates",
+          "outcome": "Passed"
+        }
+      ]
+    }
+  ],
+  "browser": {
+    "summary": "15 passed (1.8m); retries=0",
+    "passed": 15,
+    "failed": 0,
+    "skipped": 0,
+    "tests": [
+      "ok  1 00-workflow.spec.ts:4:1 › analyst investigates a cross-account alert and an independent supervisor records the disposition (24.2s)",
+      "ok  2 hardening.spec.ts:53:1 › review return requires a reason, records the audit feedback, and requires reassessment before resubmission (8.8s)",
+      "ok  3 hardening.spec.ts:83:1 › return completion preserves an A to B to A reason generation typed while the response was delayed (5.5s)",
+      "ok  4 hardening.spec.ts:95:1 › lost return response recovers the original reason and key after reload without duplicate audit (6.3s)",
+      "ok  5 hardening.spec.ts:105:1 › stale review return refreshes the case and preserves the unsaved feedback (4.9s)",
+      "ok  6 hardening.spec.ts:113:1 › a current GET can reconcile historical metadata at the same business version (6.0s)",
+      "ok  7 hardening.spec.ts:131:1 › A → B → A edits survive an earlier successful response, and the same text can be submitted again intentionally (4.5s)",
+      "ok  8 hardening.spec.ts:146:1 › an older delayed mutation result cannot replace a newer confirmed snapshot (3.0s)",
+      "ok  9 hardening.spec.ts:160:1 › a lost committed HTTP response is recoverable after reload with the original key and without duplicate notes (4.1s)",
+      "ok 10 hardening.spec.ts:175:1 › switching cases while a write is pending isolates both cache and draft (4.5s)",
+      "ok 11 hardening.spec.ts:187:1 › review screens freeze investigation forms and expose the exact historical assessment (6.3s)",
+      "ok 12 hardening.spec.ts:203:1 › a completion in one tab never removes a newer persisted draft from another tab (4.9s)",
+      "ok 13 hardening.spec.ts:214:1 › account switching keeps drafts owned by their original identity (4.3s)",
+      "ok 14 hardening.spec.ts:230:1 › repeated account handoffs keep the observed session query connected without a page reload (3.6s)",
+      "ok 15 hardening.spec.ts:241:1 › clearing a successful generation does not overwrite a cross-tab edit interleaved after the storage check (4.3s)"
+    ]
+  },
+  "benchmark": {
+    "baseline": "1 explicit test passed; medium/large requests cancelled at 2 seconds",
+    "optimized": "1 explicit test passed; 20 complete samples at every scale",
+    "hardwareTimingGate": false
+  },
+  "functionalSummary": {
+    "domainPassed": 47,
+    "applicationPassed": 13,
+    "postgresqlPassed": 55,
+    "browserPassed": 15,
+    "totalPassed": 130,
+    "failed": 0,
+    "correctnessSkipped": 0,
+    "normalDiscoveryExplicitBenchmarkNotExecuted": 1,
+    "benchmarkExecutedSeparately": true
+  },
+  "additionalObservations": {
+    "sameVersionMetadata": "Failed deterministically with simulated historical metadata; fixed and full browser suite passed.",
+    "accountSwitch": "One failure observed with HTTP login/session 200 and Login still mounted. Original case passed 3 immediate repeats. Preserved observed session query rather than removing it; 6 targeted repeats and final full suite passed."
+  }
+}

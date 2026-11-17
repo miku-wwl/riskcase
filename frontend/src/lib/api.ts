@@ -1,6 +1,6 @@
 import {
   AlertIngestionClient,
-  AssessmentRequest, AssignRequest, DecisionRequest, LinkRequest, NoteRequest,
+  AssessmentRequest, AssignRequest, DecisionRequest, LinkRequest, NoteRequest, ResumeRequest,
   AnalystsClient,
   LoginRequest,
   RiskCasesClient,
@@ -118,7 +118,7 @@ export async function recoverCaseMutation(intent: PendingCaseMutation): Promise<
       case "relationship": return clients.cases.links(id, key, tag, new LinkRequest(payload as LinkRequest));
       case "assessment": return clients.cases.assessment(id, key, tag, new AssessmentRequest(payload as AssessmentRequest));
       case "review": return clients.cases.review(id, key, tag);
-      case "resume": return clients.cases.resume(id, key, tag);
+      case "resume": return clients.cases.resume(id, key, tag, payload == null ? undefined : new ResumeRequest(payload as ResumeRequest));
       case "decision": return clients.cases.decision(id, key, tag, new DecisionRequest(payload as DecisionRequest));
       default: throw new ApiError("无法识别待恢复操作。", 400, "unknown_operation", false);
     }

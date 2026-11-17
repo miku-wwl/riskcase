@@ -1,0 +1,27 @@
+SELECT s."Id", s."AlertId", s."AssessedAt", s."AssessedById", s."AssessmentLevel", s."AssessmentRationale", s."AssignedAnalystId", s."BasisVersion", s."Created", s."CreatedBy", s."CurrentAssessmentId", s."LastModified", s."LastModifiedBy", s."ReviewSubmittedAt", s."ReviewSubmittedById", s."ReviewedAssessmentId", s."Status", s."Version", s."Id0", s."AccountId", s."Category", s."Created0", s."CreatedBy0", s."CustomerId", s."DetectedAt", s."ExternalAlertId", s."IngestionFingerprint", s."LastModified0", s."LastModifiedBy0", s."RiskScore", s."Severity", s."SourceSystem", s."Id1", s."CountryCode", s."Created1", s."CreatedBy1", s."CustomerNumber", s."DisplayName", s."LastModified1", s."LastModifiedBy1", s."RiskTier", s."Segment", s."Id2", s."AccountType", s."Created2", s."CreatedBy2", s."Currency", s."CustomerId0", s."LastModified2", s."LastModifiedBy2", s."MaskedNumber", s."OpenedOn", s."Status0", r1."Id", r1."AlertId", r1."Code", r1."Explanation", r1."Severity", r1."Title", r1."TransactionReferences", s0."Id", s0."AccountId", s0."AlertId", s0."Amount", s0."Channel", s0."CounterpartyLabel", s0."CounterpartyReference", s0."Created", s0."CreatedBy", s0."Currency", s0."Direction", s0."ExternalReference", s0."LastModified", s0."LastModifiedBy", s0."OccurredAt", s0."Id0", s0."AccountType", s0."Created0", s0."CreatedBy0", s0."Currency0", s0."CustomerId", s0."LastModified0", s0."LastModifiedBy0", s0."MaskedNumber", s0."OpenedOn", s0."Status", s0."Id1", s0."CountryCode", s0."Created1", s0."CreatedBy1", s0."CustomerNumber", s0."DisplayName", s0."LastModified1", s0."LastModifiedBy1", s0."RiskTier", s0."Segment", r3."Id", r3."AnalystId", r3."CaseId", r3."CaseVersion", r3."OccurredAt", r3."Text", r4."Id", r4."AnalystId", r4."CaseId", r4."CaseVersion", r4."Kind", r4."OccurredAt", r4."Rationale", r4."SourceNodeId", r4."TargetNodeId", r5."Id", r5."AnalystId", r5."AssessmentId", r5."CaseId", r5."CaseVersion", r5."DecidedAt", r5."Disposition", r5."Rationale", r6."Id", r6."AssessedAt", r6."AssessorId", r6."BasisVersion", r6."CaseId", r6."CaseVersion", r6."IsLegacy", r6."Level", r6."Rationale"
+FROM (
+    SELECT r."Id", r."AlertId", r."AssessedAt", r."AssessedById", r."AssessmentLevel", r."AssessmentRationale", r."AssignedAnalystId", r."BasisVersion", r."Created", r."CreatedBy", r."CurrentAssessmentId", r."LastModified", r."LastModifiedBy", r."ReviewSubmittedAt", r."ReviewSubmittedById", r."ReviewedAssessmentId", r."Status", r."Version", r0."Id" AS "Id0", r0."AccountId", r0."Category", r0."Created" AS "Created0", r0."CreatedBy" AS "CreatedBy0", r0."CustomerId", r0."DetectedAt", r0."ExternalAlertId", r0."IngestionFingerprint", r0."LastModified" AS "LastModified0", r0."LastModifiedBy" AS "LastModifiedBy0", r0."RiskScore", r0."Severity", r0."SourceSystem", c."Id" AS "Id1", c."CountryCode", c."Created" AS "Created1", c."CreatedBy" AS "CreatedBy1", c."CustomerNumber", c."DisplayName", c."LastModified" AS "LastModified1", c."LastModifiedBy" AS "LastModifiedBy1", c."RiskTier", c."Segment", a."Id" AS "Id2", a."AccountType", a."Created" AS "Created2", a."CreatedBy" AS "CreatedBy2", a."Currency", a."CustomerId" AS "CustomerId0", a."LastModified" AS "LastModified2", a."LastModifiedBy" AS "LastModifiedBy2", a."MaskedNumber", a."OpenedOn", a."Status" AS "Status0"
+    FROM riskcase.risk_cases AS r
+    INNER JOIN riskcase.risk_alerts AS r0 ON r."AlertId" = r0."Id"
+    INNER JOIN riskcase.customers AS c ON r0."CustomerId" = c."Id"
+    INNER JOIN riskcase.accounts AS a ON r0."AccountId" = a."Id"
+    WHERE r."Id" = @id
+    LIMIT 2
+) AS s
+LEFT JOIN riskcase.risk_signals AS r1 ON s."Id0" = r1."AlertId"
+LEFT JOIN (
+    SELECT r2."Id", r2."AccountId", r2."AlertId", r2."Amount", r2."Channel", r2."CounterpartyLabel", r2."CounterpartyReference", r2."Created", r2."CreatedBy", r2."Currency", r2."Direction", r2."ExternalReference", r2."LastModified", r2."LastModifiedBy", r2."OccurredAt", a0."Id" AS "Id0", a0."AccountType", a0."Created" AS "Created0", a0."CreatedBy" AS "CreatedBy0", a0."Currency" AS "Currency0", a0."CustomerId", a0."LastModified" AS "LastModified0", a0."LastModifiedBy" AS "LastModifiedBy0", a0."MaskedNumber", a0."OpenedOn", a0."Status", c0."Id" AS "Id1", c0."CountryCode", c0."Created" AS "Created1", c0."CreatedBy" AS "CreatedBy1", c0."CustomerNumber", c0."DisplayName", c0."LastModified" AS "LastModified1", c0."LastModifiedBy" AS "LastModifiedBy1", c0."RiskTier", c0."Segment"
+    FROM riskcase.risk_transactions AS r2
+    INNER JOIN riskcase.accounts AS a0 ON r2."AccountId" = a0."Id"
+    INNER JOIN riskcase.customers AS c0 ON a0."CustomerId" = c0."Id"
+) AS s0 ON s."Id0" = s0."AlertId"
+LEFT JOIN riskcase.risk_case_notes AS r3 ON s."Id" = r3."CaseId"
+LEFT JOIN riskcase.risk_case_links AS r4 ON s."Id" = r4."CaseId"
+LEFT JOIN riskcase.risk_decisions AS r5 ON s."Id" = r5."CaseId"
+LEFT JOIN riskcase.risk_assessments AS r6 ON s."Id" = r6."CaseId"
+ORDER BY s."Id", s."Id0", s."Id1", s."Id2", r1."Id", s0."Id", s0."Id0", s0."Id1", r3."Id", r4."Id", r5."Id"
+
+SELECT a."CaseVersion", a."Operation", a."ActorId", a."OccurredAt", a."DetailsJson"
+FROM riskcase.audit_events AS a
+WHERE a."CaseId" = @id
+ORDER BY a."CaseVersion"

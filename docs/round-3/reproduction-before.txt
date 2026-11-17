@@ -1,0 +1,68 @@
+RiskCase Round 3: pre-fix observations at 4667f194e4847e06a0764d40f0bc78be7420541c
+PostgreSQL 17.12, loopback 55439, .NET 10.0.300
+Only test harness/probes were added; production source unchanged at reproduction.
+
+Detail_is_one_snapshot_across_collections_and_audit("decision")
+outcome=Failed
+Read mixed an earlier case with later audit.
+
+Assert.That(read["auditHistory"]!.AsArray().Max(a => a!["version"]!.GetValue<int>()), Is.LessThanOrEqualTo(version))
+
+  Expected: less than or equal to 6
+
+  But was:  7
+
+Detail_is_one_snapshot_across_collections_and_audit("notes")
+outcome=Failed
+Read mixed an earlier case with later audit.
+
+Assert.That(read["auditHistory"]!.AsArray().Max(a => a!["version"]!.GetValue<int>()), Is.LessThanOrEqualTo(version))
+
+  Expected: less than or equal to 5
+
+  But was:  6
+
+New_return_without_a_reason_is_rejected_without_audit_or_receipt
+outcome=Failed
+{"id":"29f198b8-858d-45c6-9e09-825beda98eb4","version":6,"status":"investigating","assignedAnalystId":"07758e70-1731-4271-8be1-50c267fda497","created":"2026-11-17T08:04:10.394081+00:00","lastModified":"2026-11-17T08:04:10.621763+00:00","assessmentLevel":null,"assessmentRationale":null,"assessedAt":null,"assessedById":null,"currentAssessmentId":null,"reviewedAssessmentId":null,"reviewSubmittedById":null,"reviewSubmittedAt":null,"assessments":[{"id":"e5cdf629-e83b-4406-bf28-09e98f8999f2","level":"high","rationale":"已核验合成交易、客户资料和相关账户关系，需要保留完整依据并由独立人员复核。","assessorId":"07758e70-1731-4271-8be1-50c267fda497","assessedAt":"2026-11-17T08:04:10.50572+00:00","caseVersion":4,"basisVersion":2,"isLegacy":false}],"alert":{"id":"71f50ebf-7c41-448a-9d5e-a15eef5c9dbe","externalAlertId":"R2-cb50d2d436e64702828d53068ed05632","sourceSystem":"Round2","category":"transactionRisk","detectedAt":"2026-11-17T08:04:10.384689+00:00","severity":"high","riskScore":80},"customer":{"id":"4c073557-6801-4a49-904e-8813139505e7","customerNumber":"RC-20931","displayName":"Mateo Chen","segment":"Small Business","countryCode":"NZ","riskTier":"Elevated"},"account":{"id":"2ea5e16a-ed63-4528-a733-c9ec25a63971","maskedNumber":"03-****-1269","accountType":"Business","currency":"NZD","status":"Open","openedOn":"2024-11-17"},"signals":[{"code":"R2_SIGNAL","title":"Synthetic","explanation":"已核验合成交易、客户资料和相关账户关系，需要保留完整依据并由独立人员复核。","severity":"high","transactionReferences":["R2-TX"]}],"transactions":[{"id":"070ec385-ee7c-43db-8a15-6f8614454616","externalReference":"R2-TX","direction":"outgoing","amount":120.00,"currency":"NZD","occurredAt":"2026-11-17T08:04:10.384703+00:00","channel":"online","counterpartyReference":"R2-CP","counterpartyLabel":"Synthetic Counterparty","accountMaskedNumber":"03-****-1269"}],"notes":[],"links":[],"decisions":[],"auditHistory":[{"version":1,"operation":"AlertIngested","actorId":"upstream:Round2","occurredAt":"2026-11-17T08:04:10.39378+00:00","detailsJson":"{\"SourceSystem\": \"Round2\", \"ExternalAlertId\": \"R2-cb50d2d436e64702828d53068ed05632\", \"transactionCount\": 1}"},{"version":2,"operation":"AnalystAssigned","actorId":"84c816a6-e83b-47bf-9b6a-ccf201eb8bfb","occurredAt":"2026-11-17T08:04:10.443627+00:00","detailsJson":"{\"AnalystId\": \"07758e70-1731-4271-8be1-50c267fda497\"}"},{"version":3,"operation":"InvestigationStarted","actorId":"07758e70-1731-4271-8be1-50c267fda497","occurredAt":"2026-11-17T08:04:10.479546+00:00","detailsJson":"{}"},{"version":4,"operation":"AssessmentRecorded","actorId":"07758e70-1731-4271-8be1-50c267fda497","occurredAt":"2026-11-17T08:04:10.506121+00:00","detailsJson":"{\"Id\": \"e5cdf629-e83b-4406-bf28-09e98f8999f2\", \"Level\": 2, \"BasisVersion\": 2}"},{"version":5,"operation":"ReviewRequested","actorId":"07758e70-1731-4271-8be1-50c267fda497","occurredAt":"2026-11-17T08:04:10.542166+00:00","detailsJson":"{\"ReviewSubmittedById\": \"07758e70-1731-4271-8be1-50c267fda497\", \"ReviewedAssessmentId\": \"e5cdf629-e83b-4406-bf28-09e98f8999f2\"}"},{"version":6,"operation":"InvestigationResumed","actorId":"84c816a6-e83b-47bf-9b6a-ccf201eb8bfb","occurredAt":"2026-11-17T08:04:10.6211+00:00","detailsJson":"{}"}],"graphNodes":[{"id":"customer:4c073557-6801-4a49-904e-8813139505e7","type":"customer","label":"Mateo Chen","detail":"客户号 RC-20931 · NZ · 风险层级 Elevated","isAlertSubject":true},{"id":"account:2ea5e16a-ed63-4528-a733-c9ec25a63971","type":"account","label":"03-****-1269","detail":"Business · NZD · Open","isAlertSubject":true},{"id":"transaction:070ec385-ee7c-43db-8a15-6f8614454616","type":"transaction","label":"Outgoing 120.00 NZD","detail":"2026-11-17 08:04 · online · R2-TX","isAlertSubject":false},{"id":"counterparty:R2-CP","type":"counterparty","label":"Synthetic Counterparty","detail":"R2-CP","isAlertSubject":false}],"graphEdges":[{"id":"owns:4c073557-6801-4a49-904e-8813139505e7:2ea5e16a-ed63-4528-a733-c9ec25a63971","source":"customer:4c073557-6801-4a49-904e-8813139505e7","target":"account:2ea5e16a-ed63-4528-a733-c9ec25a63971","label":"持有账户","rationale":null},{"id":"activity:070ec385-ee7c-43db-8a15-6f8614454616","source":"account:2ea5e16a-ed63-4528-a733-c9ec25a63971","target":"transaction:070ec385-ee7c-43db-8a15-6f8614454616","label":"转出","rationale":null},{"id":"counterparty:070ec385-ee7c-43db-8a15-6f8614454616","source":"transaction:070ec385-ee7c-43db-8a15-6f8614454616","target":"counterparty:R2-CP","label":"交易对手","rationale":null}]}
+
+Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest))
+
+  Expected: BadRequest
+
+  But was:  OK
+
+Detail_is_one_snapshot_across_collections_and_audit("assessment")
+outcome=Failed
+Read mixed an earlier case with later audit.
+
+Assert.That(read["auditHistory"]!.AsArray().Max(a => a!["version"]!.GetValue<int>()), Is.LessThanOrEqualTo(version))
+
+  Expected: less than or equal to 5
+
+  But was:  6
+
+Upgrade_recovers_all_old_authors_and_rejects_finalization("Round1")
+outcome=Failed
+Historical author finalization returned HTTP 200, status=resolved, caseVersion=12, reviewerId=old-author-1.
+  Expected: Conflict
+  But was: OK
+  The handler commits the transaction before returning the response. The failing assertion preceded the fixture's independent SQL assertion; no separate pre-fix SQL result is claimed here.
+
+Upgrade_recovers_all_old_authors_and_rejects_finalization("Round2")
+outcome=Failed
+Historical author finalization returned HTTP 200, status=resolved, caseVersion=12, reviewerId=old-author-1.
+  Expected: Conflict
+  But was: OK
+  The handler commits the transaction before returning the response. The failing assertion preceded the fixture's independent SQL assertion; no separate pre-fix SQL result is claimed here.
+
+Independent pre-fix repeat from an archive of the pinned production SHA:
+INDEPENDENT_SQL Round1: HTTP=200; Status/Version/Reviewer=Resolved/12/old-author-1
+INDEPENDENT_SQL Round2: HTTP=200; Status/Version/Reviewer=Resolved/12/old-author-1
+Both correct-independence assertions failed (expected 409, actual 200). Each isolated database was independently read after the HTTP response and then dropped.
+
+Additional cache defect (real browser with explicitly simulated R2 metadata):
+Expected: "已核验客户、合成交易与关联账户，记录当前已知事实并保留不确定性以供独立复核。"
+Received: "历史退回记录未保存原因。"
+1 failed
+A real current GET at the same case version could not replace cached historical metadata. Fixed with distinct confirmed-GET versus historical-mutation tie rules. No altered response was used in textbook screenshots.

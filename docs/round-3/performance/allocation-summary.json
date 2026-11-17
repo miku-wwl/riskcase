@@ -1,0 +1,20 @@
+{
+  "before-small": {
+    "medianApproxAllocationBytes": 4181732.0
+  },
+  "before-medium": {
+    "medianApproxAllocationBytes": null
+  },
+  "before-large": {
+    "medianApproxAllocationBytes": null
+  },
+  "after-small": {
+    "medianApproxAllocationBytes": 556708.0
+  },
+  "after-medium": {
+    "medianApproxAllocationBytes": 2131000.0
+  },
+  "after-large": {
+    "medianApproxAllocationBytes": 10015932.0
+  }
+}

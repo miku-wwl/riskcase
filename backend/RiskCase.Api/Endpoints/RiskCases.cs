@@ -87,12 +87,12 @@ public sealed class RiskCases : IEndpointGroup
         return WithEtag(context, response);
     }
 
-    public static async Task<IResult> Resume(Guid id,
+    public static async Task<IResult> Resume(Guid id, [FromBody] ResumeRequest? body,
         [FromHeader(Name = "Idempotency-Key")] string? idempotencyKey,
         [FromHeader(Name = "If-Match")] string? ifMatch,
         ISender sender, HttpContext context, CancellationToken cancellationToken)
     {
-        var response = await sender.Send(new ResumeRiskCaseCommand(idempotencyKey ?? "", id, ParseVersion(ifMatch)), cancellationToken);
+        var response = await sender.Send(new ResumeRiskCaseCommand(idempotencyKey ?? "", id, ParseVersion(ifMatch), body?.Reason), cancellationToken);
         return WithEtag(context, response);
     }
 
@@ -125,3 +125,4 @@ public sealed record NoteRequest(string Text);
 public sealed record LinkRequest(string SourceNodeId, string TargetNodeId, CaseLinkKind Kind, string Rationale);
 public sealed record AssessmentRequest(RiskAssessmentLevel Level, string Rationale);
 public sealed record DecisionRequest(RiskDisposition Disposition, string Rationale);
+public sealed record ResumeRequest(string? Reason);

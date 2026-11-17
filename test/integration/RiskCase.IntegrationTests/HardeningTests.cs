@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace RiskCase.IntegrationTests;
 
 [NonParallelizable]
-public sealed class HardeningTests
+public sealed partial class HardeningTests
 {
     private RiskCaseApiFactory _factory = null!;
     private HttpClient _analyst = null!, _supervisor = null!, _senior = null!, _auditor = null!;
@@ -421,6 +421,7 @@ public sealed class HardeningTests
     }
     private static async Task<JsonObject> Change(HttpClient client, JsonObject c, string operation, object? payload = null, string? key = null)
     {
+        if (operation == "resume" && payload is null) payload = new { reason = Reason };
         using var response = await Send(client, c, operation, payload, key);
         Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK), await response.Content.ReadAsStringAsync()); return await Body(response);
     }

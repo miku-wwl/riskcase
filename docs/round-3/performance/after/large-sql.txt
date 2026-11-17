@@ -1,0 +1,116 @@
+SELECT r."Id", r."AlertId", r."AssessedAt", r."AssessedById", r."AssessmentLevel", r."AssessmentRationale", r."AssignedAnalystId", r."BasisVersion", r."Created", r."CreatedBy", r."CurrentAssessmentId", r."LastModified", r."LastModifiedBy", r."ReviewSubmittedAt", r."ReviewSubmittedById", r."ReviewedAssessmentId", r."Status", r."Version", r0."Id", r0."AccountId", r0."Category", r0."Created", r0."CreatedBy", r0."CustomerId", r0."DetectedAt", r0."ExternalAlertId", r0."IngestionFingerprint", r0."LastModified", r0."LastModifiedBy", r0."RiskScore", r0."Severity", r0."SourceSystem", c."Id", c."CountryCode", c."Created", c."CreatedBy", c."CustomerNumber", c."DisplayName", c."LastModified", c."LastModifiedBy", c."RiskTier", c."Segment", a."Id", a."AccountType", a."Created", a."CreatedBy", a."Currency", a."CustomerId", a."LastModified", a."LastModifiedBy", a."MaskedNumber", a."OpenedOn", a."Status"
+FROM riskcase.risk_cases AS r
+INNER JOIN riskcase.risk_alerts AS r0 ON r."AlertId" = r0."Id"
+INNER JOIN riskcase.customers AS c ON r0."CustomerId" = c."Id"
+INNER JOIN riskcase.accounts AS a ON r0."AccountId" = a."Id"
+WHERE r."Id" = @id
+ORDER BY r."Id", r0."Id", c."Id", a."Id"
+LIMIT 2
+
+SELECT r1."Id", r1."AlertId", r1."Code", r1."Explanation", r1."Severity", r1."Title", r1."TransactionReferences", s."Id", s."Id0", s."Id1", s."Id2"
+FROM (
+    SELECT r."Id", r0."Id" AS "Id0", c."Id" AS "Id1", a."Id" AS "Id2"
+    FROM riskcase.risk_cases AS r
+    INNER JOIN riskcase.risk_alerts AS r0 ON r."AlertId" = r0."Id"
+    INNER JOIN riskcase.customers AS c ON r0."CustomerId" = c."Id"
+    INNER JOIN riskcase.accounts AS a ON r0."AccountId" = a."Id"
+    WHERE r."Id" = @id
+    ORDER BY r."Id", r0."Id", c."Id", a."Id"
+    LIMIT 1
+) AS s
+INNER JOIN riskcase.risk_signals AS r1 ON s."Id0" = r1."AlertId"
+ORDER BY s."Id", s."Id0", s."Id1", s."Id2"
+
+SELECT s1."Id", s1."AccountId", s1."AlertId", s1."Amount", s1."Channel", s1."CounterpartyLabel", s1."CounterpartyReference", s1."Created", s1."CreatedBy", s1."Currency", s1."Direction", s1."ExternalReference", s1."LastModified", s1."LastModifiedBy", s1."OccurredAt", s1."Id0", s1."AccountType", s1."Created0", s1."CreatedBy0", s1."Currency0", s1."CustomerId", s1."LastModified0", s1."LastModifiedBy0", s1."MaskedNumber", s1."OpenedOn", s1."Status", s1."Id1", s1."CountryCode", s1."Created1", s1."CreatedBy1", s1."CustomerNumber", s1."DisplayName", s1."LastModified1", s1."LastModifiedBy1", s1."RiskTier", s1."Segment", s0."Id", s0."Id0", s0."Id1", s0."Id2"
+FROM (
+    SELECT r."Id", r0."Id" AS "Id0", c."Id" AS "Id1", a."Id" AS "Id2"
+    FROM riskcase.risk_cases AS r
+    INNER JOIN riskcase.risk_alerts AS r0 ON r."AlertId" = r0."Id"
+    INNER JOIN riskcase.customers AS c ON r0."CustomerId" = c."Id"
+    INNER JOIN riskcase.accounts AS a ON r0."AccountId" = a."Id"
+    WHERE r."Id" = @id
+    ORDER BY r."Id", r0."Id", c."Id", a."Id"
+    LIMIT 1
+) AS s0
+INNER JOIN (
+    SELECT r2."Id", r2."AccountId", r2."AlertId", r2."Amount", r2."Channel", r2."CounterpartyLabel", r2."CounterpartyReference", r2."Created", r2."CreatedBy", r2."Currency", r2."Direction", r2."ExternalReference", r2."LastModified", r2."LastModifiedBy", r2."OccurredAt", a0."Id" AS "Id0", a0."AccountType", a0."Created" AS "Created0", a0."CreatedBy" AS "CreatedBy0", a0."Currency" AS "Currency0", a0."CustomerId", a0."LastModified" AS "LastModified0", a0."LastModifiedBy" AS "LastModifiedBy0", a0."MaskedNumber", a0."OpenedOn", a0."Status", c0."Id" AS "Id1", c0."CountryCode", c0."Created" AS "Created1", c0."CreatedBy" AS "CreatedBy1", c0."CustomerNumber", c0."DisplayName", c0."LastModified" AS "LastModified1", c0."LastModifiedBy" AS "LastModifiedBy1", c0."RiskTier", c0."Segment"
+    FROM riskcase.risk_transactions AS r2
+    INNER JOIN riskcase.accounts AS a0 ON r2."AccountId" = a0."Id"
+    INNER JOIN riskcase.customers AS c0 ON a0."CustomerId" = c0."Id"
+) AS s1 ON s0."Id0" = s1."AlertId"
+ORDER BY s0."Id", s0."Id0", s0."Id1", s0."Id2"
+
+SELECT r3."Id", r3."AnalystId", r3."CaseId", r3."CaseVersion", r3."OccurredAt", r3."Text", s2."Id", s2."Id0", s2."Id1", s2."Id2"
+FROM (
+    SELECT r."Id", r0."Id" AS "Id0", c."Id" AS "Id1", a."Id" AS "Id2"
+    FROM riskcase.risk_cases AS r
+    INNER JOIN riskcase.risk_alerts AS r0 ON r."AlertId" = r0."Id"
+    INNER JOIN riskcase.customers AS c ON r0."CustomerId" = c."Id"
+    INNER JOIN riskcase.accounts AS a ON r0."AccountId" = a."Id"
+    WHERE r."Id" = @id
+    ORDER BY r."Id", r0."Id", c."Id", a."Id"
+    LIMIT 1
+) AS s2
+INNER JOIN riskcase.risk_case_notes AS r3 ON s2."Id" = r3."CaseId"
+ORDER BY s2."Id", s2."Id0", s2."Id1", s2."Id2"
+
+SELECT r4."Id", r4."AnalystId", r4."CaseId", r4."CaseVersion", r4."Kind", r4."OccurredAt", r4."Rationale", r4."SourceNodeId", r4."TargetNodeId", s3."Id", s3."Id0", s3."Id1", s3."Id2"
+FROM (
+    SELECT r."Id", r0."Id" AS "Id0", c."Id" AS "Id1", a."Id" AS "Id2"
+    FROM riskcase.risk_cases AS r
+    INNER JOIN riskcase.risk_alerts AS r0 ON r."AlertId" = r0."Id"
+    INNER JOIN riskcase.customers AS c ON r0."CustomerId" = c."Id"
+    INNER JOIN riskcase.accounts AS a ON r0."AccountId" = a."Id"
+    WHERE r."Id" = @id
+    ORDER BY r."Id", r0."Id", c."Id", a."Id"
+    LIMIT 1
+) AS s3
+INNER JOIN riskcase.risk_case_links AS r4 ON s3."Id" = r4."CaseId"
+ORDER BY s3."Id", s3."Id0", s3."Id1", s3."Id2"
+
+SELECT r5."Id", r5."AnalystId", r5."AssessmentId", r5."CaseId", r5."CaseVersion", r5."DecidedAt", r5."Disposition", r5."Rationale", s4."Id", s4."Id0", s4."Id1", s4."Id2"
+FROM (
+    SELECT r."Id", r0."Id" AS "Id0", c."Id" AS "Id1", a."Id" AS "Id2"
+    FROM riskcase.risk_cases AS r
+    INNER JOIN riskcase.risk_alerts AS r0 ON r."AlertId" = r0."Id"
+    INNER JOIN riskcase.customers AS c ON r0."CustomerId" = c."Id"
+    INNER JOIN riskcase.accounts AS a ON r0."AccountId" = a."Id"
+    WHERE r."Id" = @id
+    ORDER BY r."Id", r0."Id", c."Id", a."Id"
+    LIMIT 1
+) AS s4
+INNER JOIN riskcase.risk_decisions AS r5 ON s4."Id" = r5."CaseId"
+ORDER BY s4."Id", s4."Id0", s4."Id1", s4."Id2"
+
+SELECT r6."Id", r6."AssessedAt", r6."AssessorId", r6."BasisVersion", r6."CaseId", r6."CaseVersion", r6."IsLegacy", r6."Level", r6."Rationale", s5."Id", s5."Id0", s5."Id1", s5."Id2"
+FROM (
+    SELECT r."Id", r0."Id" AS "Id0", c."Id" AS "Id1", a."Id" AS "Id2"
+    FROM riskcase.risk_cases AS r
+    INNER JOIN riskcase.risk_alerts AS r0 ON r."AlertId" = r0."Id"
+    INNER JOIN riskcase.customers AS c ON r0."CustomerId" = c."Id"
+    INNER JOIN riskcase.accounts AS a ON r0."AccountId" = a."Id"
+    WHERE r."Id" = @id
+    ORDER BY r."Id", r0."Id", c."Id", a."Id"
+    LIMIT 1
+) AS s5
+INNER JOIN riskcase.risk_assessments AS r6 ON s5."Id" = r6."CaseId"
+ORDER BY s5."Id", s5."Id0", s5."Id1", s5."Id2"
+
+SELECT l."Id", l."AssessorId", l."CaseId", l."CaseVersion", l."SourceAssessmentId", l."SourceAuditId", s6."Id", s6."Id0", s6."Id1", s6."Id2"
+FROM (
+    SELECT r."Id", r0."Id" AS "Id0", c."Id" AS "Id1", a."Id" AS "Id2"
+    FROM riskcase.risk_cases AS r
+    INNER JOIN riskcase.risk_alerts AS r0 ON r."AlertId" = r0."Id"
+    INNER JOIN riskcase.customers AS c ON r0."CustomerId" = c."Id"
+    INNER JOIN riskcase.accounts AS a ON r0."AccountId" = a."Id"
+    WHERE r."Id" = @id
+    ORDER BY r."Id", r0."Id", c."Id", a."Id"
+    LIMIT 1
+) AS s6
+INNER JOIN riskcase.legacy_assessor_participation AS l ON s6."Id" = l."CaseId"
+ORDER BY s6."Id", s6."Id0", s6."Id1", s6."Id2"
+
+SELECT a."CaseVersion", a."Operation", a."ActorId", a."OccurredAt", a."DetailsJson"
+FROM riskcase.audit_events AS a
+WHERE a."CaseId" = @id
+ORDER BY a."CaseVersion"

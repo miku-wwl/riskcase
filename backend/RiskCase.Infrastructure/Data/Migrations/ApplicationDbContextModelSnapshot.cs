@@ -340,6 +340,50 @@ namespace RiskCase.Infrastructure.Data.Migrations
                     b.ToTable("idempotency_receipts", "riskcase");
                 });
 
+            modelBuilder.Entity("RiskCase.Domain.Entities.LegacyAssessorParticipation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("AssessorId")
+                        .HasMaxLength(450)
+                        .HasColumnType("character varying(450)");
+
+                    b.Property<Guid>("CaseId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("CaseVersion")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid?>("SourceAssessmentId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("SourceAuditId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SourceAssessmentId")
+                        .IsUnique();
+
+                    b.HasIndex("SourceAuditId")
+                        .IsUnique();
+
+                    b.HasIndex("CaseId", "AssessorId");
+
+                    b.HasIndex("CaseId", "SourceAssessmentId");
+
+                    b.HasIndex("CaseId", "SourceAuditId");
+
+                    b.ToTable("legacy_assessor_participation", "riskcase", t =>
+                        {
+                            t.HasCheckConstraint("ck_legacy_author_identity", "\"AssessorId\" IS NULL OR length(btrim(\"AssessorId\")) > 0");
+
+                            t.HasCheckConstraint("ck_legacy_author_provenance", "(\"SourceAuditId\" IS NULL) <> (\"SourceAssessmentId\" IS NULL)");
+                        });
+                });
+
             modelBuilder.Entity("RiskCase.Domain.Entities.RiskAlert", b =>
                 {
                     b.Property<Guid>("Id")
@@ -906,6 +950,29 @@ namespace RiskCase.Infrastructure.Data.Migrations
                     b.Navigation("Case");
                 });
 
+            modelBuilder.Entity("RiskCase.Domain.Entities.LegacyAssessorParticipation", b =>
+                {
+                    b.HasOne("RiskCase.Domain.Entities.RiskCase", "Case")
+                        .WithMany("LegacyAssessorParticipation")
+                        .HasForeignKey("CaseId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("RiskCase.Domain.Entities.RiskAssessment", null)
+                        .WithMany()
+                        .HasForeignKey("CaseId", "SourceAssessmentId")
+                        .HasPrincipalKey("CaseId", "Id")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("RiskCase.Domain.Entities.AuditEvent", null)
+                        .WithMany()
+                        .HasForeignKey("CaseId", "SourceAuditId")
+                        .HasPrincipalKey("CaseId", "Id")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Case");
+                });
+
             modelBuilder.Entity("RiskCase.Domain.Entities.RiskAlert", b =>
                 {
                     b.HasOne("RiskCase.Domain.Entities.Account", "Account")
@@ -1028,6 +1095,8 @@ namespace RiskCase.Infrastructure.Data.Migrations
                     b.Navigation("Assessments");
 
                     b.Navigation("Decisions");
+
+                    b.Navigation("LegacyAssessorParticipation");
 
                     b.Navigation("Links");
 
