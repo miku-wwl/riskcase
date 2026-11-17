@@ -1,0 +1,113 @@
+{
+  "checked_at_utc": "2026-11-17T22:06:38.860315+00:00",
+  "source": "npm audit against https://registry.npmjs.org; published advisory independently opened",
+  "engineering_sha": "2177004a39a534ee1796b8391a590763cce62fc2",
+  "publication_content_commit": "230dcf1d41db41aaaa01f5f169f4b4640d37e432",
+  "package_lock_sha256": "dc73f5f23353285f513d23b2982de2ebbd4586a5971e99bbbafee116a2a7f13f",
+  "all_dependencies": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 5,
+    "critical": 0,
+    "total": 5
+  },
+  "omit_dev": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  },
+  "entries": [
+    {
+      "package": "@vitejs/plugin-react",
+      "severity": "high",
+      "direct": true,
+      "installed_nodes": [
+        {
+          "path": "node_modules/@vitejs/plugin-react",
+          "version": "6.3.0"
+        }
+      ],
+      "via": [
+        "vite"
+      ]
+    },
+    {
+      "package": "fdir",
+      "severity": "high",
+      "direct": false,
+      "installed_nodes": [
+        {
+          "path": "node_modules/fdir",
+          "version": "6.5.0"
+        }
+      ],
+      "via": [
+        "picomatch"
+      ]
+    },
+    {
+      "package": "picomatch",
+      "severity": "high",
+      "direct": false,
+      "installed_nodes": [
+        {
+          "path": "node_modules/picomatch",
+          "version": "4.0.7"
+        }
+      ],
+      "via": [
+        {
+          "source": 1247710,
+          "name": "picomatch",
+          "dependency": "picomatch",
+          "title": "picomatch vulnerable to ReDoS through single-branch repeated extglobs",
+          "url": "https://github.com/advisories/GHSA-fc5q-39xc-vjpf",
+          "severity": "high",
+          "cwe": [
+            "CWE-1333"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": "<=4.0.7"
+        }
+      ]
+    },
+    {
+      "package": "tinyglobby",
+      "severity": "high",
+      "direct": false,
+      "installed_nodes": [
+        {
+          "path": "node_modules/tinyglobby",
+          "version": "0.2.17"
+        }
+      ],
+      "via": [
+        "fdir",
+        "picomatch"
+      ]
+    },
+    {
+      "package": "vite",
+      "severity": "high",
+      "direct": true,
+      "installed_nodes": [
+        {
+          "path": "node_modules/vite",
+          "version": "8.3.8"
+        }
+      ],
+      "via": [
+        "picomatch",
+        "tinyglobby"
+      ]
+    }
+  ],
+  "scope": "Five affected package entries from one underlying picomatch advisory in the development/build dependency graph. No exploit against RiskCase was reproduced. No dependency or lockfile change was made."
+}
