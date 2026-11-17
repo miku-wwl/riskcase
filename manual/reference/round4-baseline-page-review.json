@@ -1,0 +1,898 @@
+{
+  "pdf_sha256": "3efeb42ad0bfde4423bfdcd5aaa365dad9e1d542bf8c5e992ed8182bc9557e76",
+  "pages": {
+    "1": {
+      "method": "individual rendered page",
+      "observation": "PASS：封面层级与留白合理；新版更新版次标识。",
+      "chapter": "front matter",
+      "severity": "None",
+      "revised_page": 1
+    },
+    "2": {
+      "method": "individual rendered page",
+      "observation": "Minor：来源需统一到固定工程2177004；字体清晰，无越界。",
+      "chapter": "front matter",
+      "severity": "Minor",
+      "revised_page": 2
+    },
+    "3": {
+      "method": "individual rendered page",
+      "observation": "Major L1：导读仅占上部四分之一；学习路线与页面组织不足。",
+      "chapter": "front matter",
+      "severity": "Major",
+      "revised_page": 3
+    },
+    "4": {
+      "method": "individual rendered page",
+      "observation": "Minor L2：目录页码紧接标题，无对齐列；改版应动态定位。",
+      "chapter": "front matter",
+      "severity": "Minor",
+      "revised_page": 4
+    },
+    "5": {
+      "method": "individual rendered page",
+      "observation": "Minor L2：目录延续相同问题；现有链接正确。",
+      "chapter": "front matter",
+      "severity": "Minor",
+      "revised_page": 5
+    },
+    "6": {
+      "method": "individual rendered page",
+      "observation": "Major L1：两段导入独占一页，空白过多，宜与边界图合排。",
+      "chapter": "RiskCase 要解决的是什么问题",
+      "severity": "Major",
+      "revised_page": 6
+    },
+    "7": {
+      "method": "individual rendered page",
+      "observation": "Major G1：业务边界图顶部与方框间空白过大；箭头缺少处置输出与人工作用边界。",
+      "chapter": "RiskCase 要解决的是什么问题",
+      "severity": "Major",
+      "revised_page": 6
+    },
+    "8": {
+      "method": "individual rendered page",
+      "observation": "Major C1：7.25pt比例代码字体，标识符被拆断，节选混入下一类型开头；聚焦入口调用与返回并提高字号。",
+      "chapter": "RiskCase 要解决的是什么问题",
+      "severity": "Major",
+      "revised_page": 7
+    },
+    "9": {
+      "method": "individual rendered page",
+      "observation": "Major L1/D1：短概述独页，三笔交易未给出具体引用与判读步骤；补为完整典型实例。",
+      "chapter": "RiskCase 要解决的是什么问题",
+      "severity": "Major",
+      "revised_page": 8
+    },
+    "10": {
+      "method": "individual rendered page",
+      "observation": "Major D2：练习无参考推理、总结重复导入，页面大幅留白；增加判断依据与自查答案。",
+      "chapter": "RiskCase 要解决的是什么问题",
+      "severity": "Major",
+      "revised_page": 8
+    },
+    "11": {
+      "method": "individual rendered page",
+      "observation": "Major L1：短导入与定义占一页，宜与来源身份示意结合。",
+      "chapter": "理解银行风险告警",
+      "severity": "Major",
+      "revised_page": 9
+    },
+    "12": {
+      "method": "individual rendered page",
+      "observation": "Major T1/G1：流程图把来源锁与幂等锁合为一格，隐藏事务开始及两级去重顺序；应按真实执行边界重画。",
+      "chapter": "理解银行风险告警",
+      "severity": "Major",
+      "revised_page": 9
+    },
+    "13": {
+      "method": "individual rendered page",
+      "observation": "Major C1/C2：字号偏小，22行截断在兼容分支注释；正文讲验证与入库，节选只展示锁及已有告警查询。",
+      "chapter": "理解银行风险告警",
+      "severity": "Major",
+      "revised_page": 10
+    },
+    "14": {
+      "method": "individual rendered page",
+      "observation": "Minor D1/L1：两级幂等解释正确但没有同键/异键/载荷变化的成对数值例题，留白明显。",
+      "chapter": "理解银行风险告警",
+      "severity": "Minor",
+      "revised_page": 11
+    },
+    "15": {
+      "method": "individual rendered page",
+      "observation": "Major D2：三题无答案或判读依据；可补对照结果和反例。",
+      "chapter": "理解银行风险告警",
+      "severity": "Major",
+      "revised_page": 12
+    },
+    "16": {
+      "method": "individual rendered page",
+      "observation": "Major L1：概念导入独页过短，宜与对象关系图合排。",
+      "chapter": "客户、账户与交易",
+      "severity": "Major",
+      "revised_page": 13
+    },
+    "17": {
+      "method": "individual rendered page",
+      "observation": "Minor G1：关系图可读，箭头含义需要区分持久化外键和概念归属；对手方不是独立实体表。",
+      "chapter": "客户、账户与交易",
+      "severity": "Minor",
+      "revised_page": 13
+    },
+    "18": {
+      "method": "individual rendered page",
+      "observation": "Minor C1：真实方法完整，但代码字体比例、长签名换行需改；可保留必要字段并解释只读账务边界。",
+      "chapter": "客户、账户与交易",
+      "severity": "Minor",
+      "revised_page": 14
+    },
+    "19": {
+      "method": "individual rendered page",
+      "observation": "Major D1/L1：共享对手方例子保留了不等于串谋的边界，但缺少交易引用、核查步骤与结论的完整推导。",
+      "chapter": "客户、账户与交易",
+      "severity": "Major",
+      "revised_page": 15
+    },
+    "20": {
+      "method": "individual rendered page",
+      "observation": "Major D2：对象边界练习无答案，短内容独页。",
+      "chapter": "客户、账户与交易",
+      "severity": "Major",
+      "revised_page": 15
+    },
+    "21": {
+      "method": "individual rendered page",
+      "observation": "Major L1：87分告警导入清楚，篇幅过短，宜与信号机制图合排。",
+      "chapter": "可解释的风险信号",
+      "severity": "Major",
+      "revised_page": 16
+    },
+    "22": {
+      "method": "individual rendered page",
+      "observation": "Minor G1：事实与解释的区分正确，但四框单线图将可选分数误画为必经阶段，框内文字偏小，内部空白多。",
+      "chapter": "可解释的风险信号",
+      "severity": "Minor",
+      "revised_page": 16
+    },
+    "23": {
+      "method": "individual rendered page",
+      "observation": "Major C1/C2：explanation被断词，方法在Explanation赋值后截断，未显示严重度及交易引用，和正文不一致。",
+      "chapter": "可解释的风险信号",
+      "severity": "Major",
+      "revised_page": 17
+    },
+    "24": {
+      "method": "individual rendered page",
+      "observation": "Minor D1/L1：五分钟四笔案例方向正确，但缺少已知数据、逐项核对结果和更新后的判断。",
+      "chapter": "可解释的风险信号",
+      "severity": "Minor",
+      "revised_page": 18
+    },
+    "25": {
+      "method": "individual rendered page",
+      "observation": "Major D2：信号练习没有解释参考路径，页面短。",
+      "chapter": "可解释的风险信号",
+      "severity": "Major",
+      "revised_page": 18
+    },
+    "26": {
+      "method": "individual rendered page",
+      "observation": "Minor L1：冻结调查基础的重要定义正确，但可和状态图同页以建立视觉因果。",
+      "chapter": "RiskCase 生命周期与不变量",
+      "severity": "Minor",
+      "revised_page": 19
+    },
+    "27": {
+      "method": "individual rendered page",
+      "observation": "PASS：状态、退回、评估失效和下游人工边界基本清楚；保留，图中文字可随正文版面稍放大。",
+      "chapter": "RiskCase 生命周期与不变量",
+      "severity": "None",
+      "revised_page": 19
+    },
+    "28": {
+      "method": "individual rendered page",
+      "observation": "Minor C1：RequestReview完整且因果清楚，但长Require行需合理断行，代码字号应增大。",
+      "chapter": "RiskCase 生命周期与不变量",
+      "severity": "Minor",
+      "revised_page": 20
+    },
+    "29": {
+      "method": "individual rendered page",
+      "observation": "PASS：退回原因、版本、审计与新评估形成闭环，图可保留；应明确Unicode字符指scalar而非字节。",
+      "chapter": "RiskCase 生命周期与不变量",
+      "severity": "None",
+      "revised_page": 21
+    },
+    "30": {
+      "method": "individual rendered page",
+      "observation": "Major D2：竞争题目有价值，但缺少两种获胜路径及失败结果的推导。",
+      "chapter": "RiskCase 生命周期与不变量",
+      "severity": "Major",
+      "revised_page": 22
+    },
+    "31": {
+      "method": "individual rendered page",
+      "observation": "Minor L1：分派资格说明准确，但孤立短页，适合与队列图融合。",
+      "chapter": "分析员队列与分派",
+      "severity": "Minor",
+      "revised_page": 23
+    },
+    "32": {
+      "method": "individual rendered page",
+      "observation": "Minor G1：队列与授权区分清楚，但图采用所有阶段串联易误解为数据管线，标签小；可改角色行动表。",
+      "chapter": "分析员队列与分派",
+      "severity": "Minor",
+      "revised_page": 23
+    },
+    "33": {
+      "method": "individual rendered page",
+      "observation": "Major C2：正文强调排序Skip/Take，源码只显示分页边界和部分过滤，未呈现排序和投影；需聚焦真正查询段。",
+      "chapter": "分析员队列与分派",
+      "severity": "Major",
+      "revised_page": 24
+    },
+    "34": {
+      "method": "individual rendered page",
+      "observation": "Major S1：真实队列全窗口缩至版心，表格和筛选文字过小；需真实局部截图并标注读法，图旁缺少一次查询结果解释。",
+      "chapter": "分析员队列与分派",
+      "severity": "Major",
+      "revised_page": 25
+    },
+    "35": {
+      "method": "individual rendered page",
+      "observation": "Major D2：分页与授权练习没有判断答案和反例。",
+      "chapter": "分析员队列与分派",
+      "severity": "Major",
+      "revised_page": 25
+    },
+    "36": {
+      "method": "individual rendered page",
+      "observation": "Minor L1：图谱目的和证据边界正确，短页可合并。",
+      "chapter": "关系调查与图谱",
+      "severity": "Minor",
+      "revised_page": 26
+    },
+    "37": {
+      "method": "individual rendered page",
+      "observation": "Major G2：窄节点间距导致边标签被框遮挡，持有账户/交易记录/关联对手方读不全；应重排边与标签。",
+      "chapter": "关系调查与图谱",
+      "severity": "Major",
+      "revised_page": 26
+    },
+    "38": {
+      "method": "individual rendered page",
+      "observation": "Major C1/C2：长字符串插值被断词，节选停止在if条件，未展示节点构造闭环；应选择完整映射循环关键段。",
+      "chapter": "关系调查与图谱",
+      "severity": "Major",
+      "revised_page": 27
+    },
+    "39": {
+      "method": "individual rendered page",
+      "observation": "Major S1：图谱全窗口缩小严重，节点、侧栏和版本几乎不可读；需真实图谱区域和关键侧栏分开展示，保留谨慎结论。",
+      "chapter": "关系调查与图谱",
+      "severity": "Major",
+      "revised_page": 28
+    },
+    "40": {
+      "method": "individual rendered page",
+      "observation": "Major D2：图谱练习应给出节点追溯表及共同邻居反例的答案。",
+      "chapter": "关系调查与图谱",
+      "severity": "Major",
+      "revised_page": 29
+    },
+    "41": {
+      "method": "individual rendered page",
+      "observation": "Minor L1：独立复核动机场景正确，宜和评估身份图合排。",
+      "chapter": "风险评估与处置",
+      "severity": "Minor",
+      "revised_page": 30
+    },
+    "42": {
+      "method": "individual rendered page",
+      "observation": "PASS：所有历史作者均禁止最终处置的策略及评估/提交/决定引用清楚；保留身份对照，增加具体验证例。",
+      "chapter": "风险评估与处置",
+      "severity": "None",
+      "revised_page": 30
+    },
+    "43": {
+      "method": "individual rendered page",
+      "observation": "Major C1：独立复核实现完整但单行多条件和7.25pt造成断词/难读；应分段展示真正条件并逐项解释。",
+      "chapter": "风险评估与处置",
+      "severity": "Major",
+      "revised_page": 31
+    },
+    "44": {
+      "method": "individual rendered page",
+      "observation": "Minor S1：真实确认框局部可读但放大模糊，需原生高分辨率重新截图；内容正确，缺少提交后真实审计结果对照。",
+      "chapter": "风险评估与处置",
+      "severity": "Minor",
+      "revised_page": 32
+    },
+    "45": {
+      "method": "individual rendered page",
+      "observation": "Major D2：职责分离题缺乏历史作者约束的参考答案。",
+      "chapter": "风险评估与处置",
+      "severity": "Major",
+      "revised_page": 33
+    },
+    "46": {
+      "method": "individual rendered page",
+      "observation": "Minor L1：上游模板来历说明准确，短页可合排。",
+      "chapter": "从官方 CleanArchitecture 到 RiskCase",
+      "severity": "Minor",
+      "revised_page": 34
+    },
+    "47": {
+      "method": "individual rendered page",
+      "observation": "Minor G1：依赖方向基本准确，但弯曲交叉箭头使编译依赖难跟踪；可用清晰邻接布局，另标运行时与编译不同。",
+      "chapter": "从官方 CleanArchitecture 到 RiskCase",
+      "severity": "Minor",
+      "revised_page": 34
+    },
+    "48": {
+      "method": "individual rendered page",
+      "observation": "PASS：完整DI注册代码，依赖归属正确；代码字体需统一升级。",
+      "chapter": "从官方 CleanArchitecture 到 RiskCase",
+      "severity": "None",
+      "revised_page": 35
+    },
+    "49": {
+      "method": "individual rendered page",
+      "observation": "Minor D1/L1：运行时接口解析说明正确，但缺少具体命令、实际实现和结果跟踪表。",
+      "chapter": "从官方 CleanArchitecture 到 RiskCase",
+      "severity": "Minor",
+      "revised_page": 36
+    },
+    "50": {
+      "method": "individual rendered page",
+      "observation": "Major D2：依赖方向练习应给真实项目引用对照及错误引用反例。",
+      "chapter": "从官方 CleanArchitecture 到 RiskCase",
+      "severity": "Major",
+      "revised_page": 36
+    },
+    "51": {
+      "method": "individual rendered page",
+      "observation": "Major T1：评估接口误写为POST，实际PUT；管线讲解需分清中间件/绑定/端点过滤器。",
+      "chapter": "ASP.NET Core 请求管线",
+      "severity": "Major",
+      "revised_page": 37
+    },
+    "52": {
+      "method": "individual rendered page",
+      "observation": "Minor G1：大类顺序正确，缺少绑定/过滤器/应用层责任边界，图内空白多。",
+      "chapter": "ASP.NET Core 请求管线",
+      "severity": "Minor",
+      "revised_page": 37
+    },
+    "53": {
+      "method": "individual rendered page",
+      "observation": "Major C2：源码节选只到HTTPS分支且缺闭括号，未展示标题所讲中间件和endpoint组合，需替换真实核心段。",
+      "chapter": "ASP.NET Core 请求管线",
+      "severity": "Major",
+      "revised_page": 38
+    },
+    "54": {
+      "method": "individual rendered page",
+      "observation": "Minor D1/L1：CSRF概念正确但缺少具体请求成对判读，短页留白大。",
+      "chapter": "ASP.NET Core 请求管线",
+      "severity": "Minor",
+      "revised_page": 39
+    },
+    "55": {
+      "method": "individual rendered page",
+      "observation": "Major D2：CSRF和Cookie身份题缺少区分认证、来源防护与资源资格的答案。",
+      "chapter": "ASP.NET Core 请求管线",
+      "severity": "Major",
+      "revised_page": 39
+    },
+    "56": {
+      "method": "individual rendered page",
+      "observation": "Minor L1：CQRS范围说明正确，短页可合排。",
+      "chapter": "MediatR、CQRS 与应用工作流",
+      "severity": "Minor",
+      "revised_page": 40
+    },
+    "57": {
+      "method": "individual rendered page",
+      "observation": "Major T1：正文列出的日志/性能/授权/验证顺序不符DI注册；Logging是预处理器，图未显示异常包裹与性能计时边界，必须重画。",
+      "chapter": "MediatR、CQRS 与应用工作流",
+      "severity": "Major",
+      "revised_page": 40
+    },
+    "58": {
+      "method": "individual rendered page",
+      "observation": "Major C1/C2：加入笔记方法完整却额外拼入下一handler的半截，干扰教学，长声明断词；应只摘核心方法。",
+      "chapter": "MediatR、CQRS 与应用工作流",
+      "severity": "Major",
+      "revised_page": 41
+    },
+    "59": {
+      "method": "individual rendered page",
+      "observation": "Major D1：标题实测但只有概括，没有请求已知条件、逐站处理和确切结果，需完整展开一个案例。",
+      "chapter": "MediatR、CQRS 与应用工作流",
+      "severity": "Major",
+      "revised_page": 42
+    },
+    "60": {
+      "method": "individual rendered page",
+      "observation": "Major D2：横切行为练习缺少参考分类及边界判断。",
+      "chapter": "MediatR、CQRS 与应用工作流",
+      "severity": "Major",
+      "revised_page": 42
+    },
+    "61": {
+      "method": "individual rendered page",
+      "observation": "Minor L1：聚合建模动机清楚，短页宜合并。",
+      "chapter": "领域建模与业务不变量",
+      "severity": "Minor",
+      "revised_page": 43
+    },
+    "62": {
+      "method": "individual rendered page",
+      "observation": "Minor G1：聚合图只标当前评估，未显示历史集合与BasisVersion；关系标签有交叉，改为数据所有权关系图更准确。",
+      "chapter": "领域建模与业务不变量",
+      "severity": "Minor",
+      "revised_page": 43
+    },
+    "63": {
+      "method": "individual rendered page",
+      "observation": "PASS：RecordAssessment完整呈现当前投影与历史同一动作；字号/长签名需统一改。",
+      "chapter": "领域建模与业务不变量",
+      "severity": "None",
+      "revised_page": 44
+    },
+    "64": {
+      "method": "individual rendered page",
+      "observation": "Major D1/L1：单元测试描述无一个真实断言和前后状态对照，无法教读者预测结果。",
+      "chapter": "领域建模与业务不变量",
+      "severity": "Major",
+      "revised_page": 45
+    },
+    "65": {
+      "method": "individual rendered page",
+      "observation": "Minor D2：聚合边界题可讨论但不能暗示唯一普适答案；需给本项目上下文下的参考推理。",
+      "chapter": "领域建模与业务不变量",
+      "severity": "Minor",
+      "revised_page": 45
+    },
+    "66": {
+      "method": "individual rendered page",
+      "observation": "Minor L1：验证/授权/领域规则分工正确，短页合排。",
+      "chapter": "输入验证与资源授权",
+      "severity": "Minor",
+      "revised_page": 46
+    },
+    "67": {
+      "method": "individual rendered page",
+      "observation": "Minor G1：分层防线说明正确，但图标签泛化，宜增加每层输入/失败码以支持预测。",
+      "chapter": "输入验证与资源授权",
+      "severity": "Minor",
+      "revised_page": 46
+    },
+    "68": {
+      "method": "individual rendered page",
+      "observation": "Major C2：节选停在foreach开头，没有真正Identity校验及拒绝路径；正文结论无法由图中源码验证。",
+      "chapter": "输入验证与资源授权",
+      "severity": "Major",
+      "revised_page": 47
+    },
+    "69": {
+      "method": "individual rendered page",
+      "observation": "PASS：区分Cookie旧声明与当前Identity查询，回放不绕过角色检查，表述清楚；可补行动矩阵。",
+      "chapter": "输入验证与资源授权",
+      "severity": "None",
+      "revised_page": 48
+    },
+    "70": {
+      "method": "individual rendered page",
+      "observation": "Major T1/D2：第二题问打开他人案件哪些层拒绝，与本项目全案读取策略冲突；应明确是写入他人案件，再给角色/资源答案。",
+      "chapter": "输入验证与资源授权",
+      "severity": "Major",
+      "revised_page": 48
+    },
+    "71": {
+      "method": "individual rendered page",
+      "observation": "PASS：规则事实与显示资料分离、AsNoTracking不消除集合相乘解释准确；可合图。",
+      "chapter": "EF Core Change Tracking",
+      "severity": "None",
+      "revised_page": 49
+    },
+    "72": {
+      "method": "individual rendered page",
+      "observation": "PASS：901到25行及实测条件、取消实验限制说明完整，保留数据并核对原始测量；字号可增大。",
+      "chapter": "EF Core Change Tracking",
+      "severity": "None",
+      "revised_page": 49
+    },
+    "73": {
+      "method": "individual rendered page",
+      "observation": "Minor C1：加载规则事实代码完整、说明准确，但长链调用和参数换行不易读，应改面板排版。",
+      "chapter": "EF Core Change Tracking",
+      "severity": "Minor",
+      "revised_page": 50
+    },
+    "74": {
+      "method": "individual rendered page",
+      "observation": "PASS：查询策略、事务与成本边界解释充分；保留，官方文档可加真正可点击链接。",
+      "chapter": "EF Core Change Tracking",
+      "severity": "None",
+      "revised_page": 51
+    },
+    "75": {
+      "method": "individual rendered page",
+      "observation": "Major D2：EF状态与回滚题缺少已提交零新增的明确答案及SQL顺序非保证的说明。",
+      "chapter": "EF Core Change Tracking",
+      "severity": "Major",
+      "revised_page": 52
+    },
+    "76": {
+      "method": "individual rendered page",
+      "observation": "PASS：RC逐语句快照与原子写入不同，解释准确；短页可合排。",
+      "chapter": "PostgreSQL MVCC 与事务",
+      "severity": "None",
+      "revised_page": 53
+    },
+    "77": {
+      "method": "individual rendered page",
+      "observation": "Minor G1：两个可见性时序正确，但单线框箭头易被看作GET调用写者，应加独立泳道和时间轴说明。",
+      "chapter": "PostgreSQL MVCC 与事务",
+      "severity": "Minor",
+      "revised_page": 53
+    },
+    "78": {
+      "method": "individual rendered page",
+      "observation": "PASS：RR仅独立GET分支、写事务保留RC以读取锁后回执解释准确；补完整分支定位即可。",
+      "chapter": "PostgreSQL MVCC 与事务",
+      "severity": "None",
+      "revised_page": 54
+    },
+    "79": {
+      "method": "individual rendered page",
+      "observation": "PASS：FOR SHARE实际实现与依赖所有写更新主行的限制解释准确，长SQL排版需改。",
+      "chapter": "PostgreSQL MVCC 与事务",
+      "severity": "None",
+      "revised_page": 55
+    },
+    "80": {
+      "method": "individual rendered page",
+      "observation": "Major D2：MVCC三题无参考时序及结论，官方参考链接应直接可点。",
+      "chapter": "PostgreSQL MVCC 与事务",
+      "severity": "Major",
+      "revised_page": 56
+    },
+    "81": {
+      "method": "individual rendered page",
+      "observation": "PASS：历史成功和当前许可界限正确；可作为完整丢失响应例题的开端。",
+      "chapter": "乐观并发与幂等重试",
+      "severity": "None",
+      "revised_page": 57
+    },
+    "82": {
+      "method": "individual rendered page",
+      "observation": "Minor G1：历史/当前分离正确，但泳道箭头时间顺序有跳跃，未画同键回放读取回执的关键边；应重绘。",
+      "chapter": "乐观并发与幂等重试",
+      "severity": "Minor",
+      "revised_page": 57
+    },
+    "83": {
+      "method": "individual rendered page",
+      "observation": "PASS：命令类型入指纹与旧版恢复限制解释真实，长标识符换行需改善。",
+      "chapter": "乐观并发与幂等重试",
+      "severity": "None",
+      "revised_page": 59
+    },
+    "84": {
+      "method": "individual rendered page",
+      "observation": "Minor D1：恢复机制细节充分，尚缺一个从v7提交到v8、v9再回放的完整可预测例题。",
+      "chapter": "乐观并发与幂等重试",
+      "severity": "Minor",
+      "revised_page": 60
+    },
+    "85": {
+      "method": "individual rendered page",
+      "observation": "Major D2：回放题缺少版本取大与同键重试的推理答案。",
+      "chapter": "乐观并发与幂等重试",
+      "severity": "Major",
+      "revised_page": 62
+    },
+    "86": {
+      "method": "individual rendered page",
+      "observation": "Minor L1：审计事件与完整业务记录分工正确，短页合图。",
+      "chapter": "审计历史与决定完整性",
+      "severity": "Minor",
+      "revised_page": 63
+    },
+    "87": {
+      "method": "individual rendered page",
+      "observation": "PASS（复核更正）：初次多页查看疑似标题裁切，重新独立查看本页并核对文字坐标 x48.19–352.19pt 后确认完整；撤销 L3。旧作者恢复图及未知身份边界准确。",
+      "chapter": "审计历史与决定完整性",
+      "severity": "None",
+      "revised_page": 63
+    },
+    "88": {
+      "method": "individual rendered page",
+      "observation": "Minor C1：独立性摘录准确，长条件断词；应展示与迁移来源对应关系。",
+      "chapter": "审计历史与决定完整性",
+      "severity": "Minor",
+      "revised_page": 64
+    },
+    "89": {
+      "method": "individual rendered page",
+      "observation": "Minor S1：审计真实局部可读但像素放大模糊，需重新原生截图；应连同提交前后版本解释。",
+      "chapter": "审计历史与决定完整性",
+      "severity": "Minor",
+      "revised_page": 65
+    },
+    "90": {
+      "method": "individual rendered page",
+      "observation": "Major D2：历史完整性题需给未知身份不得猜测、归档权限边界的答案。",
+      "chapter": "审计历史与决定完整性",
+      "severity": "Major",
+      "revised_page": 66
+    },
+    "91": {
+      "method": "individual rendered page",
+      "observation": "Minor L1：单源契约概念正确，短页合排。",
+      "chapter": "OpenAPI 与 NSwag 客户端生成",
+      "severity": "Minor",
+      "revised_page": 67
+    },
+    "92": {
+      "method": "individual rendered page",
+      "observation": "Minor G1：生成链正确但每框输入输出不明确，应加真实文件和运行时契约边界。",
+      "chapter": "OpenAPI 与 NSwag 客户端生成",
+      "severity": "Minor",
+      "revised_page": 67
+    },
+    "93": {
+      "method": "individual rendered page",
+      "observation": "PASS：可空正文与旧回放兼容语义清楚；长调用断词需修。",
+      "chapter": "OpenAPI 与 NSwag 客户端生成",
+      "severity": "None",
+      "revised_page": 68
+    },
+    "94": {
+      "method": "individual rendered page",
+      "observation": "PASS：指纹升级与旧回执安全恢复限制清楚，可增加输入/结果对照而非仅概括。",
+      "chapter": "OpenAPI 与 NSwag 客户端生成",
+      "severity": "None",
+      "revised_page": 69
+    },
+    "95": {
+      "method": "individual rendered page",
+      "observation": "Major D2：生成代码/adapter练习缺少文件归属答案和运行时反例。",
+      "chapter": "OpenAPI 与 NSwag 客户端生成",
+      "severity": "Major",
+      "revised_page": 69
+    },
+    "96": {
+      "method": "individual rendered page",
+      "observation": "Minor L1：工作区设计动机正确，短页合排。",
+      "chapter": "React 19 与 shadcn/ui 应用结构",
+      "severity": "Minor",
+      "revised_page": 70
+    },
+    "97": {
+      "method": "individual rendered page",
+      "observation": "Minor G1：组件边界不能画成Query调用UI的顺序流程，需树/所有权图，标注异步数据边。",
+      "chapter": "React 19 与 shadcn/ui 应用结构",
+      "severity": "Minor",
+      "revised_page": 70
+    },
+    "98": {
+      "method": "individual rendered page",
+      "observation": "Major C2：标题讲懒加载，22行节选只有首行相关，后续全为session逻辑，没有Suspense/Route；应改焦点。",
+      "chapter": "React 19 与 shadcn/ui 应用结构",
+      "severity": "Major",
+      "revised_page": 71
+    },
+    "99": {
+      "method": "individual rendered page",
+      "observation": "Major S1：工作区整体能辨结构但字段/表单文字太小；需概览加任务区域真实局部，解释从API到UI的对应。",
+      "chapter": "React 19 与 shadcn/ui 应用结构",
+      "severity": "Major",
+      "revised_page": 72
+    },
+    "100": {
+      "method": "individual rendered page",
+      "observation": "Major D2：组件练习应给拆包代价及工作区常显信息的参考答案。",
+      "chapter": "React 19 与 shadcn/ui 应用结构",
+      "severity": "Major",
+      "revised_page": 73
+    },
+    "101": {
+      "method": "individual rendered page",
+      "observation": "PASS：ABA问题与两类版本的区别清楚，短页宜与时序图合排。",
+      "chapter": "TanStack Query 与本地草稿同步",
+      "severity": "None",
+      "revised_page": 74
+    },
+    "102": {
+      "method": "individual rendered page",
+      "observation": "PASS：ABA时间线、mutation身份、草稿代次和案件版本不同职责准确；可增加取值表支持复算。",
+      "chapter": "TanStack Query 与本地草稿同步",
+      "severity": "None",
+      "revised_page": 74
+    },
+    "103": {
+      "method": "individual rendered page",
+      "observation": "Minor C1：关键清理代码完整且含跨标签页确认标志机制，保留源码，字号升级。",
+      "chapter": "TanStack Query 与本地草稿同步",
+      "severity": "Minor",
+      "revised_page": 75
+    },
+    "104": {
+      "method": "individual rendered page",
+      "observation": "PASS：同版GET与mutation投影不同策略、注销session保留说明准确；补具体输入结果表更易理解。",
+      "chapter": "TanStack Query 与本地草稿同步",
+      "severity": "None",
+      "revised_page": 76
+    },
+    "105": {
+      "method": "individual rendered page",
+      "observation": "Major D2：ABA练习需代次值、回调条件及保留文本的参考解。",
+      "chapter": "TanStack Query 与本地草稿同步",
+      "severity": "Major",
+      "revised_page": 76
+    },
+    "106": {
+      "method": "individual rendered page",
+      "observation": "Minor L1：图与事实边界正确，短页合图。",
+      "chapter": "用 React Flow 表达风险关系",
+      "severity": "Minor",
+      "revised_page": 77
+    },
+    "107": {
+      "method": "individual rendered page",
+      "observation": "Major G2/T1：箭头标签被节点遮挡；图将共同对手方画成直接指向关联客户，实际需经另一交易/账户。页脚说拖拽，当前节点draggable:false，应修正文义。",
+      "chapter": "用 React Flow 表达风险关系",
+      "severity": "Major",
+      "revised_page": 77
+    },
+    "108": {
+      "method": "individual rendered page",
+      "observation": "Minor C1：映射逻辑完整但长return行断词；图谱节点实际禁止拖动，需与前页说明一致。",
+      "chapter": "用 React Flow 表达风险关系",
+      "severity": "Minor",
+      "revised_page": 78
+    },
+    "109": {
+      "method": "individual rendered page",
+      "observation": "Major S1：重复第39页的全窗口小图，未能支持逐边追溯教学；需真正节点/详情局部截图。",
+      "chapter": "用 React Flow 表达风险关系",
+      "severity": "Major",
+      "revised_page": 79
+    },
+    "110": {
+      "method": "individual rendered page",
+      "observation": "Major D2：视觉语义题缺少节点/边/位置三种信息的参考答案。",
+      "chapter": "用 React Flow 表达风险关系",
+      "severity": "Major",
+      "revised_page": 80
+    },
+    "111": {
+      "method": "individual rendered page",
+      "observation": "Major D1/L1：完整工作流导入仅概述，需一案逐版本贯穿已知条件、动作、界面、数据和最终结论。",
+      "chapter": "分析员完整工作流",
+      "severity": "Major",
+      "revised_page": 81
+    },
+    "112": {
+      "method": "individual rendered page",
+      "observation": "Major G2：确认结果回边挤在ASP/PG间，标签重叠；图没有实际主管泳道和版本，应用版本推进流程图代替。",
+      "chapter": "分析员完整工作流",
+      "severity": "Major",
+      "revised_page": 81
+    },
+    "113": {
+      "method": "individual rendered page",
+      "observation": "Minor C1/T1：mutation片段完整但缺闭合useMutation；正文应明确相等版本保留旧缓存，与GET允许同版更新区分。",
+      "chapter": "分析员完整工作流",
+      "severity": "Minor",
+      "revised_page": 82
+    },
+    "114": {
+      "method": "individual rendered page",
+      "observation": "Minor S1/D1：历史评估局部文字清楚但模糊，需重拍并让两次理由差异对应明确调查变化，不仅口头说验证。",
+      "chapter": "分析员完整工作流",
+      "severity": "Minor",
+      "revised_page": 83
+    },
+    "115": {
+      "method": "individual rendered page",
+      "observation": "Major D2：端到端练习应给真实路由/权限/恢复步骤参考解。",
+      "chapter": "分析员完整工作流",
+      "severity": "Major",
+      "revised_page": 84
+    },
+    "116": {
+      "method": "individual rendered page",
+      "observation": "Minor L1：测试边界及依赖隔离说明正确，短页合排。",
+      "chapter": "单元、集成与端到端测试",
+      "severity": "Minor",
+      "revised_page": 85
+    },
+    "117": {
+      "method": "individual rendered page",
+      "observation": "Major G2：测试图多个执行箭头交叉、标签被框挡，且混合测试层与CI执行者；重排为问题/环境/证据矩阵。",
+      "chapter": "单元、集成与端到端测试",
+      "severity": "Major",
+      "revised_page": 85
+    },
+    "118": {
+      "method": "individual rendered page",
+      "observation": "Major C2：标题承诺真实并发，节选仅匿名请求/队列和告警构造开头，未显示任何竞争同步或断言，应换真实屏障案例。",
+      "chapter": "单元、集成与端到端测试",
+      "severity": "Major",
+      "revised_page": 86
+    },
+    "119": {
+      "method": "individual rendered page",
+      "observation": "PASS：确定性屏障和独立数据库读的重要性解释准确，适合配真实核心断言。",
+      "chapter": "单元、集成与端到端测试",
+      "severity": "None",
+      "revised_page": 87
+    },
+    "120": {
+      "method": "individual rendered page",
+      "observation": "Major D2：测试层练习无参考方案及可推翻设计承诺的明确断言。",
+      "chapter": "单元、集成与端到端测试",
+      "severity": "Major",
+      "revised_page": 87
+    },
+    "121": {
+      "method": "individual rendered page",
+      "observation": "Minor L1：工程边界正确，短页可与恢复决策融合。",
+      "chapter": "跨层故障恢复与工程取舍",
+      "severity": "Minor",
+      "revised_page": 88
+    },
+    "122": {
+      "method": "individual rendered page",
+      "observation": "Minor G1：恢复卡片未覆盖409多种code及401/428/503，需按失败语义给行动表；不要把所有409等同键冲突。",
+      "chapter": "跨层故障恢复与工程取舍",
+      "severity": "Minor",
+      "revised_page": 88
+    },
+    "123": {
+      "method": "individual rendered page",
+      "observation": "Minor C1：异常映射核心真实，长英文被断词；数据库预期冲突/503在store边界，应补引用说明来源。",
+      "chapter": "跨层故障恢复与工程取舍",
+      "severity": "Minor",
+      "revised_page": 89
+    },
+    "124": {
+      "method": "individual rendered page",
+      "observation": "PASS：保留治理、回执保留、未知身份和大集合边界，未夸大生产认证。",
+      "chapter": "跨层故障恢复与工程取舍",
+      "severity": "None",
+      "revised_page": 90
+    },
+    "125": {
+      "method": "individual rendered page",
+      "observation": "Major D2：全书回顾练习缺少恢复选择和取舍的参考推理。",
+      "chapter": "跨层故障恢复与工程取舍",
+      "severity": "Major",
+      "revised_page": 90
+    },
+    "126": {
+      "method": "individual rendered page",
+      "observation": "Minor C1/T1：术语表Optimistic concurrency被拆词；MVCC定义应区分隔离级别，不能笼统说事务始终一个快照。",
+      "chapter": "appendix",
+      "severity": "Minor",
+      "revised_page": 91
+    },
+    "127": {
+      "method": "individual rendered page",
+      "observation": "Minor C1/L2：索引完整但文件名在单词中断开、无可点击源码链接；可按章聚合同文件并更新动态行号。",
+      "chapter": "appendix",
+      "severity": "Minor",
+      "revised_page": 92
+    }
+  },
+  "page_count": 127,
+  "render_dpi": 150,
+  "review_period": "2026-11-17 to 2026-11-18 Pacific/Auckland",
+  "reference_sample_sha256": "7734044f418f235d86e5b14592bccf851f3e37c4bfb7817cee3068b7788a0c44"
+}

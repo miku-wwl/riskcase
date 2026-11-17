@@ -1,30 +1,28 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="460" viewBox="0 0 900 460">
-<rect width="100%" height="100%" rx="18" fill="#ffffff"/>
-<path d="M 30 77 H 870" stroke="#e6edf2" stroke-width="1"/>
-<text x="38" y="39" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="21px" font-weight="700" fill="#22364f">队列、负责人和复核队列</text>
-<text x="38" y="63" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12px" font-weight="400" fill="#64748b">过滤决定看什么；授权决定可以做什么</text>
-<defs><marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#718096"/></marker></defs>
-<path d="M 212 236.0 C 254 236.0, 208 236.0, 250 236.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
-<path d="M 432 236.0 C 474 236.0, 428 236.0, 470 236.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
-<path d="M 652 236.0 C 694 236.0, 648 236.0, 690 236.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="634.0" y="214.0" width="74" height="19" rx="8" fill="#ffffff" stroke="#e2e8f0"/>
-<text x="671.0" y="228.0" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="10px" fill="#526273">待复核</text>
-<rect x="30" y="180" width="182" height="112" rx="13" fill="#eef3f9" stroke="#22364f" stroke-width="1.4"/>
-<path d="M 44 194 V 278" stroke="#22364f" stroke-width="3" stroke-linecap="round"/>
-<text x="57" y="214" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">案件集合</text>
-<text x="57" y="246" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#4d6074">New · 调查中 · 已结案</text>
-<rect x="250" y="180" width="182" height="112" rx="13" fill="#e8f5f3" stroke="#117c78" stroke-width="1.4"/>
-<path d="M 264 194 V 278" stroke="#117c78" stroke-width="3" stroke-linecap="round"/>
-<text x="277" y="214" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">筛选与分页</text>
-<text x="277" y="246" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#466b68">类别 · 严重度 · 搜索</text>
-<rect x="470" y="180" width="182" height="112" rx="13" fill="#fff4df" stroke="#b87414" stroke-width="1.4"/>
-<path d="M 484 194 V 278" stroke="#b87414" stroke-width="3" stroke-linecap="round"/>
-<text x="497" y="214" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">分析员队列</text>
-<text x="497" y="246" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#765e39">认领 · 调查 · 提交复核</text>
-<rect x="690" y="180" width="182" height="112" rx="13" fill="#f1edfb" stroke="#7255a5" stroke-width="1.4"/>
-<path d="M 704 194 V 278" stroke="#7255a5" stroke-width="3" stroke-linecap="round"/>
-<text x="717" y="214" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">主管队列</text>
-<text x="717" y="246" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#625576">分派 · 独立复核 · 处置</text>
-<path d="M 30 414 H 870" stroke="#e6edf2" stroke-width="1"/>
-<text x="38" y="439" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#64748b">审核员只读；端点始终重新检查角色和资源规则</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="440" viewBox="0 0 900 440">
+<rect width="900" height="100%" fill="white"/>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="none" stroke="#64748b"/></marker></defs>
+<text x="24" y="32" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="24" fill="#22364f" font-weight="700">队列过滤改变视图，写入资格改变可做的事</text>
+<text x="24" y="61" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="16" fill="#526273" font-weight="400">所有 CaseReaders 读取全案；AssignedToMe 仅增加查询条件</text>
+<path d="M24 79H876" fill="none" stroke="#dbe5ea" stroke-width="1.7"/>
+<path d="M24 398H876" fill="none" stroke="#dbe5ea" stroke-width="1.7"/>
+<text x="24" y="425" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="15" fill="#526273" font-weight="400">稳定排序：严重度权重降序 → 检测时间升序 → ID；列表分页不等于详情集合分页</text>
+<rect x="25" y="115" width="250" height="145" rx="9" fill="#eef3f9" stroke="#22364f" stroke-width="1.5"/>
+<text x="39" y="143" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="19" fill="#22364f" font-weight="700">数据库查询</text>
+<text x="39" y="169" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#526273" font-weight="400">状态 / 类别 / 严重度</text>
+<text x="39" y="193" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#526273" font-weight="400">搜索 / AssignedToMe</text>
+<text x="39" y="217" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#526273" font-weight="400">Count 与当前页读取</text>
+<rect x="325" y="115" width="250" height="145" rx="9" fill="#e8f5f3" stroke="#117c78" stroke-width="1.5"/>
+<text x="339" y="143" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="19" fill="#117c78" font-weight="700">列表视图</text>
+<text x="339" y="169" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#526273" font-weight="400">Skip / Take ≤ 100</text>
+<text x="339" y="193" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#526273" font-weight="400">来源、客户、状态、经办</text>
+<text x="339" y="217" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#526273" font-weight="400">打开案件时再读详情</text>
+<rect x="625" y="115" width="250" height="145" rx="9" fill="#f1edfb" stroke="#7255a5" stroke-width="1.5"/>
+<text x="639" y="143" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="19" fill="#7255a5" font-weight="700">写入另行检查</text>
+<text x="639" y="169" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#526273" font-weight="400">当前角色与目标资格</text>
+<text x="639" y="193" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#526273" font-weight="400">当前经办人 + 版本</text>
+<text x="639" y="217" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#526273" font-weight="400">领域状态与独立性</text>
+<path d="M275 185L325 185" fill="none" stroke="#64748b" stroke-width="1.7" marker-end="url(#arrow)"/>
+<path d="M600 105V278" fill="none" stroke="#b87414" stroke-width="1.7" stroke-dasharray="5 5"/>
+<rect x="100" y="310" width="700" height="65" rx="9" fill="#fff4df" stroke="#a36c13" stroke-width="1.5"/>
+<text x="114" y="338" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="19" fill="#a36c13" font-weight="700">界面隐藏按钮可以提示规则；服务器必须拒绝直接越权请求</text>
 </svg>

@@ -1,41 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="460" viewBox="0 0 900 460">
-<rect width="100%" height="100%" rx="18" fill="#ffffff"/>
-<path d="M 30 77 H 870" stroke="#e6edf2" stroke-width="1"/>
-<text x="38" y="39" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="21px" font-weight="700" fill="#22364f">RiskCase 聚合与关联资料</text>
-<text x="38" y="63" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12px" font-weight="400" fill="#64748b">案件聚合保护调查操作的一致性</text>
-<defs><marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#718096"/></marker></defs>
-<path d="M 234 144.0 C 276 144.0, 318 244.0, 360 244.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="260.0" y="172.0" width="74" height="19" rx="8" fill="#ffffff" stroke="#e2e8f0"/>
-<text x="297.0" y="186.0" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="10px" fill="#526273">调查来源</text>
-<path d="M 360 244.0 C 325 196.0, 269 294.0, 234 342.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="260.0" y="235.0" width="74" height="19" rx="8" fill="#ffffff" stroke="#e2e8f0"/>
-<text x="297.0" y="249.0" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="10px" fill="#526273">管理写入</text>
-<path d="M 542 244.0 C 584 244.0, 628 144.0, 670 144.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="569.0" y="172.0" width="74" height="19" rx="8" fill="#ffffff" stroke="#e2e8f0"/>
-<text x="606.0" y="186.0" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="10px" fill="#526273">当前评估</text>
-<path d="M 542 244.0 C 584 244.0, 628 342.0, 670 342.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="569.0" y="271.0" width="74" height="19" rx="8" fill="#ffffff" stroke="#e2e8f0"/>
-<text x="606.0" y="285.0" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="10px" fill="#526273">终态记录</text>
-<rect x="52" y="88" width="182" height="112" rx="13" fill="#fff4df" stroke="#b87414" stroke-width="1.4"/>
-<path d="M 66 102 V 186" stroke="#b87414" stroke-width="3" stroke-linecap="round"/>
-<text x="79" y="122" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">RiskAlert</text>
-<text x="79" y="154" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#765e39">来源告警与风险信号</text>
-<rect x="52" y="286" width="182" height="112" rx="13" fill="#eef3f9" stroke="#22364f" stroke-width="1.4"/>
-<path d="M 66 300 V 384" stroke="#22364f" stroke-width="3" stroke-linecap="round"/>
-<text x="79" y="320" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">调查笔记</text>
-<text x="79" y="352" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#4d6074">分析员 · 时间 · 版本</text>
-<rect x="360" y="188" width="182" height="112" rx="13" fill="#e8f5f3" stroke="#117c78" stroke-width="1.4"/>
-<path d="M 374 202 V 286" stroke="#117c78" stroke-width="3" stroke-linecap="round"/>
-<text x="387" y="222" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">RiskCase 聚合</text>
-<text x="387" y="254" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#466b68">状态 · 负责人 · 版本</text>
-<rect x="670" y="88" width="182" height="112" rx="13" fill="#f1edfb" stroke="#7255a5" stroke-width="1.4"/>
-<path d="M 684 102 V 186" stroke="#7255a5" stroke-width="3" stroke-linecap="round"/>
-<text x="697" y="122" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">RiskAssessment</text>
-<text x="697" y="154" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#625576">等级 · 理由 · 时间</text>
-<rect x="670" y="286" width="182" height="112" rx="13" fill="#fff0ed" stroke="#bd5448" stroke-width="1.4"/>
-<path d="M 684 300 V 384" stroke="#bd5448" stroke-width="3" stroke-linecap="round"/>
-<text x="697" y="320" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">RiskDecision</text>
-<text x="697" y="352" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#77524e">独立复核 · 处置</text>
-<path d="M 30 414 H 870" stroke="#e6edf2" stroke-width="1"/>
-<text x="38" y="439" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#64748b">Customer、Account 和 Transaction 是关联的调查证据，不全部装入案件聚合</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="440" viewBox="0 0 900 440">
+<rect width="900" height="100%" fill="white"/>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="none" stroke="#64748b"/></marker></defs>
+<text x="24" y="32" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="24" fill="#22364f" font-weight="700">当前指针可以失效，业务历史不能覆盖</text>
+<text x="24" y="61" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="16" fill="#526273" font-weight="400">聚合边界保护同一案件的调查写入；来源资料通过告警引用</text>
+<path d="M24 79H876" fill="none" stroke="#dbe5ea" stroke-width="1.7"/>
+<path d="M24 398H876" fill="none" stroke="#dbe5ea" stroke-width="1.7"/>
+<text x="24" y="425" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="15" fill="#526273" font-weight="400">Version 标识业务动作；BasisVersion 标识被评估的调查事实基础</text>
+<rect x="80" y="105" width="740" height="105" rx="9" fill="#eef3f9" stroke="#22364f" stroke-width="1.5"/>
+<text x="94" y="133" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="19" fill="#22364f" font-weight="700">RiskCase：状态 / 经办人 / Version / BasisVersion</text>
+<text x="94" y="159" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#526273" font-weight="400">CurrentAssessmentId → 当前判断；ReviewedAssessmentId → 本次提交对象</text>
+<rect x="25" y="270" width="250" height="110" rx="9" fill="#e8f5f3" stroke="#117c78" stroke-width="1.5"/>
+<text x="39" y="298" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="19" fill="#117c78" font-weight="700">笔记与关系</text>
+<text x="39" y="324" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#526273" font-weight="400">Added：事实追加</text>
+<text x="39" y="348" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#526273" font-weight="400">使当前评估引用失效</text>
+<path d="M150 210L150 270" fill="none" stroke="#64748b" stroke-width="1.7" marker-end="url(#arrow)"/>
+<rect x="325" y="270" width="250" height="110" rx="9" fill="#fff4df" stroke="#a36c13" stroke-width="1.5"/>
+<text x="339" y="298" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="19" fill="#a36c13" font-weight="700">Assessments</text>
+<text x="339" y="324" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#526273" font-weight="400">作者 / 理由 / 两种版本</text>
+<text x="339" y="348" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#526273" font-weight="400">不可变历史集合</text>
+<path d="M450 210L450 270" fill="none" stroke="#64748b" stroke-width="1.7" marker-end="url(#arrow)"/>
+<rect x="625" y="270" width="250" height="110" rx="9" fill="#f1edfb" stroke="#7255a5" stroke-width="1.5"/>
+<text x="639" y="298" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="19" fill="#7255a5" font-weight="700">Decisions</text>
+<text x="639" y="324" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#526273" font-weight="400">独立复核人 / 理由</text>
+<text x="639" y="348" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#526273" font-weight="400">引用 AssessmentId</text>
+<path d="M750 210L750 270" fill="none" stroke="#64748b" stroke-width="1.7" marker-end="url(#arrow)"/>
 </svg>

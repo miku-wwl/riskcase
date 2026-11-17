@@ -1,0 +1,89 @@
+{
+  "engineering_sha": "2177004a39a534ee1796b8391a590763cce62fc2",
+  "verified_at": "2026-11-17T21:56:14.753035+00:00",
+  "method": "independent psql READ ONLY transaction",
+  "database": "riskcase_round4_publication",
+  "results": [
+    {
+      "scenario": "return/reassess/resubmit/independent-decision",
+      "facts": {
+        "caseId": "0a97f278-7df5-4a56-9112-69aad8b552a1",
+        "caseVersion": 11,
+        "status": "Resolved",
+        "currentAssessmentId": "f48792e7-4b84-4a0a-b90e-7bf350b980c7",
+        "reviewedAssessmentId": "f48792e7-4b84-4a0a-b90e-7bf350b980c7",
+        "assessments": 2,
+        "assessmentAudits": 2,
+        "assessmentVersions": [
+          5,
+          9
+        ],
+        "basisVersions": [
+          4,
+          8
+        ],
+        "auditVersions": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "decisions": 1,
+        "decisionAssessmentId": "f48792e7-4b84-4a0a-b90e-7bf350b980c7",
+        "receipts": 11,
+        "receiptVersions": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ]
+      }
+    },
+    {
+      "scenario": "assessment-commit/lost-response/reassignment/reload/replay",
+      "facts": {
+        "caseId": "0f9b7c10-5440-44ba-92e7-a32d81927668",
+        "caseVersion": 6,
+        "status": "Investigating",
+        "currentAssessmentId": null,
+        "reviewedAssessmentId": null,
+        "assessments": 1,
+        "assessmentAudits": 1,
+        "assessmentVersions": [
+          5
+        ],
+        "basisVersions": [
+          4
+        ],
+        "auditVersions": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "decisions": 0,
+        "decisionAssessmentId": null,
+        "receipts": 1,
+        "receiptVersions": [
+          5
+        ]
+      }
+    }
+  ]
+}

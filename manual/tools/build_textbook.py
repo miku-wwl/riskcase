@@ -2,9 +2,11 @@ from __future__ import annotations
 
 import argparse
 import html
+import io
 import json
 import re
 import tempfile
+import functools
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -17,6 +19,7 @@ from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.units import mm
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.pdfgen import canvas as pdfcanvas
 from reportlab.platypus import (
     BaseDocTemplate,
     Flowable,
@@ -36,6 +39,10 @@ CHAPTERS = ROOT / "manual" / "chapters"
 FIGURES = ROOT / "manual" / "figures"
 REFERENCES = ROOT / "manual" / "reference"
 OUTPUT = ROOT / "manual" / "dist" / "RiskCase-Financial-Risk-Management-Engineering-Textbook.pdf"
+ENGINEERING_SHA = "2177004a39a534ee1796b8391a590763cce62fc2"
+PAGE_MAP: dict[str, int] = {}
+FIGURE_NUMBERS: dict[str, str] = {}
+LAYOUT_DECISIONS: dict[int, dict] = {}
 SCREENSHOT_RE = re.compile(r"\[screenshot: ([^\]]+)\]")
 FIGURE_RE = re.compile(r"\[figure: ([^\]]+)\]")
 SOURCE_RE = re.compile(r"\[source: ([^#\]]+)#([^|\]]+)\|(\d+)\]")
@@ -75,6 +82,7 @@ def markdown_inline(value: str) -> str:
     escaped = html.escape(value, quote=False)
     escaped = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", escaped)
     escaped = re.sub(r"`([^`]+)`", rf'<font name="{CODE_FONT}" color="#117c78">\1</font>', escaped)
+    escaped = re.sub(r"\[([^\]]+)\]\((https://[^\s)]+)\)", r'<link href="\2" color="#117c78">\1</link>', escaped)
     return escaped
 
 
@@ -90,8 +98,8 @@ def read_chapters() -> list[dict]:
             end = re.search(r"^###\s+", text[match.end():], re.M)
             content_end = match.end() + end.start() if end else len(text)
             sections.append({"heading": match.group(1), "body": text[match.end():content_end].strip()})
-        if len(sections) != 5:
-            raise ValueError(f"{path.name} must contain five teaching pages; found {len(sections)}")
+        if not sections:
+            raise ValueError(f"{path.name} must contain teaching sections")
         result.append({"path": path, "number": int(title_match.group(1)), "title": title_match.group(2).strip(), "sections": sections})
     if len(result) != 24:
         raise ValueError(f"Expected 24 editable chapters; found {len(result)}")
@@ -104,10 +112,12 @@ def source_excerpt(path: str, anchor: str, requested_lines: int) -> SourceExcerp
         raise FileNotFoundError(f"Source reference does not exist: {path}")
     lines = source_path.read_text(encoding="utf-8").splitlines()
     matches = [index for index, line in enumerate(lines) if anchor in line]
-    if not matches:
-        raise ValueError(f"Source anchor '{anchor}' not found in {path}")
+    if len(matches) != 1:
+        raise ValueError(f"Source anchor '{anchor}' must be unique in {path}; found {len(matches)}")
     start_index = matches[0]
-    count = min(requested_lines, 22)
+    count = requested_lines
+    if count < 1 or start_index + count > len(lines):
+        raise ValueError(f"Source excerpt is out of bounds: {path} / {anchor} / {count}")
     selected = lines[start_index : start_index + count]
     return SourceExcerpt(path, start_index + 1, start_index + len(selected), selected)
 
@@ -162,7 +172,7 @@ def _font(name: str, size: float):
 
 class RiskCaseDocTemplate(BaseDocTemplate):
     def __init__(self, filename: str):
-        super().__init__(filename, pagesize=A4, title="企业级金融风控系统：.NET 全栈架构、业务源码与数据一致性实践", author="RiskCase Engineering", subject="RiskCase 实际实现的中文插图技术教材", leftMargin=MARGIN_X, rightMargin=MARGIN_X, topMargin=17 * mm, bottomMargin=15 * mm)
+        super().__init__(filename, pagesize=A4, invariant=1, title="企业级金融风控系统：.NET 全栈架构、业务源码与数据一致性实践", author="RiskCase Engineering", subject="Round 4 图解精修版 · 工程基准 " + ENGINEERING_SHA, leftMargin=MARGIN_X, rightMargin=MARGIN_X, topMargin=17 * mm, bottomMargin=15 * mm)
         cover = Frame(0, 0, PAGE_W, PAGE_H, leftPadding=0, rightPadding=0, topPadding=0, bottomPadding=0, id="cover")
         body = Frame(MARGIN_X, FRAME_Y, FRAME_W, FRAME_H, leftPadding=0, rightPadding=0, topPadding=0, bottomPadding=0, id="body")
         self.addPageTemplates([
@@ -225,7 +235,7 @@ class CoverPage(Flowable):
         canvas.drawString(56, PAGE_H - 335, "从告警调查到独立复核：真实实现、真实源码与可复核工作流")
         canvas.setFont(CN_FONT, 10)
         canvas.setFillColor(colors.HexColor("#667788"))
-        canvas.drawString(56, 68, "RiskCase Engineering  ·  2026  ·  Round 3")
+        canvas.drawString(56, 68, "RiskCase Engineering  ·  2026  ·  Round 4 图解精修版")
 
 
 class ChapterAnchor(Flowable):
@@ -236,6 +246,7 @@ class ChapterAnchor(Flowable):
         self.height = 0
 
     def draw(self):
+        PAGE_MAP[self.key] = self.canv.getPageNumber()
         self.canv.bookmarkPage(self.key)
         self.canv.addOutlineEntry(self.title, self.key, level=0, closed=False)
 
@@ -247,8 +258,8 @@ class CodePanel(Flowable):
         super().__init__()
         self.excerpt = excerpt
         self.width = width
-        self.font_size = 7.25
-        self.leading = 10.2
+        self.font_size = 8.7
+        self.leading = 12.2
         self.rows: list[tuple[int | None, str]] = []
         self.height = 0
 
@@ -260,22 +271,53 @@ class CodePanel(Flowable):
             pieces = self._wrap_line(line, text_width)
             for offset, piece in enumerate(pieces):
                 self.rows.append((self.excerpt.start + index if offset == 0 else None, piece))
-        self.height = max(42, len(self.rows) * self.leading + 30)
+        self.height = max(58, len(self.rows) * self.leading + 43)
         return self.width, self.height
+
+    @staticmethod
+    def _mixed_width(text: str, size: float) -> float:
+        return sum(pdfmetrics.stringWidth(char, CODE_FONT if ord(char) < 128 else CN_FONT, size) for char in text)
 
     def _wrap_line(self, line: str, width: float) -> list[str]:
         if not line:
             return [""]
         pieces, current = [], ""
-        for char in line:
-            candidate = current + char
-            if current and pdfmetrics.stringWidth(candidate, CN_FONT, self.font_size) > width:
+        # Keep Latin identifiers intact. Chinese and punctuation provide legal wrap points.
+        tokens = re.findall(r'''"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|[A-Za-z_][A-Za-z_0-9]*|[0-9]+|[^\x00-\x7f]|.''', line)
+        expanded = []
+        for token in tokens:
+            if self._mixed_width(token, self.font_size) > width and token.startswith(('"', "'")):
+                expanded.extend(re.findall(r"[A-Za-z_][A-Za-z_0-9]*|[0-9]+|[^\x00-\x7f]|.", token))
+            else:
+                expanded.append(token)
+        tokens = expanded
+        for token in tokens:
+            candidate = current + token
+            if current and self._mixed_width(candidate, self.font_size) > width:
                 pieces.append(current)
-                current = "   " + char
+                current = "    " + token
             else:
                 current = candidate
+            if self._mixed_width(current, self.font_size) > width:
+                raise ValueError(f"Unbreakable code token in {self.excerpt.path}: {token}")
         pieces.append(current)
         return pieces
+
+    def split(self, availWidth, availHeight):
+        self.wrap(availWidth, availHeight)
+        used = 43
+        count = 0
+        for line in self.excerpt.lines:
+            cost = len(self._wrap_line(line, self.width - 46)) * self.leading
+            if used + cost > availHeight:
+                break
+            used += cost
+            count += 1
+        if count < 2 or count >= len(self.excerpt.lines):
+            return []
+        first = SourceExcerpt(self.excerpt.path, self.excerpt.start, self.excerpt.start + count - 1, self.excerpt.lines[:count])
+        rest = SourceExcerpt(self.excerpt.path, self.excerpt.start + count, self.excerpt.end, self.excerpt.lines[count:])
+        return [CodePanel(first, self.width), CodePanel(rest, self.width)]
 
     def _colored_segments(self, value: str):
         position = 0
@@ -303,21 +345,31 @@ class CodePanel(Flowable):
         canvas.setFillColor(colors.HexColor("#f4f7f9"))
         canvas.setStrokeColor(colors.HexColor("#dbe5ea"))
         canvas.roundRect(0, 0, self.width, self.height, 7, stroke=1, fill=1)
-        canvas.setFont(CN_FONT, 7.0)
+        canvas.setFont(CN_FONT, 7.2)
         canvas.setFillColor(colors.HexColor("#526273"))
-        canvas.drawString(10, self.height - 13, f"{self.excerpt.path}  ·  L{self.excerpt.start}–{self.excerpt.end}")
-        y = self.height - 27
+        source_url = f"https://github.com/miku-wwl/riskcase/blob/{ENGINEERING_SHA}/{self.excerpt.path}#L{self.excerpt.start}"
+        canvas.drawString(10, self.height - 13, self.excerpt.path)
+        canvas.linkURL(source_url, (8, self.height - 18, self.width - 8, self.height - 2), relative=1)
+        canvas.setFont(CN_FONT, 6.7)
+        canvas.drawString(10, self.height - 25, f"L{self.excerpt.start}–{self.excerpt.end}　·　> 表示同一源码行的排版续行")
+        y = self.height - 39
         for number, line in self.rows:
             if number is not None:
                 canvas.setFillColor(colors.HexColor("#97a6b4"))
                 canvas.setFont(CODE_FONT, self.font_size)
                 canvas.drawRightString(35, y, str(number))
+            else:
+                canvas.setFillColor(colors.HexColor("#97a6b4"))
+                canvas.setFont(CODE_FONT, 7)
+                canvas.drawRightString(35, y, ">")
             x = 42
-            canvas.setFont(CN_FONT, self.font_size)
             for text, color in self._colored_segments(line):
                 canvas.setFillColor(colors.HexColor(color))
-                canvas.drawString(x, y, text)
-                x += pdfmetrics.stringWidth(text, CN_FONT, self.font_size)
+                for run in re.findall(r"[\x00-\x7f]+|[^\x00-\x7f]+", text):
+                    face = CODE_FONT if ord(run[0]) < 128 else CN_FONT
+                    canvas.setFont(face, self.font_size)
+                    canvas.drawString(x, y, run)
+                    x += pdfmetrics.stringWidth(run, face, self.font_size)
             y -= self.leading
         canvas.restoreState()
 
@@ -391,7 +443,7 @@ def _paragraphs_for_block(block: str, styles: dict, width: float, temp_dir: Path
     if figure_match:
         name = figure_match.group(1)
         path = FIGURES / name
-        yield _fit_image(path, width, 314, temp_dir)
+        yield _fit_image(path, width, 320, temp_dir)
         yield Spacer(1, 5)
         try:
             data = json.loads((FIGURES / "diagrams.json").read_text(encoding="utf-8"))
@@ -399,7 +451,9 @@ def _paragraphs_for_block(block: str, styles: dict, width: float, temp_dir: Path
         except (StopIteration, KeyError):
             extra_captions = json.loads((FIGURES / "round3-captions.json").read_text(encoding="utf-8"))
             caption = extra_captions.get(name, name)
-        yield Paragraph(f"图｜{markdown_inline(caption)}。原理图为 RiskCase 原创矢量图。", styles["caption"])
+        revised = json.loads((FIGURES / "publication-captions.json").read_text(encoding="utf-8")) if (FIGURES / "publication-captions.json").exists() else {}
+        caption = revised.get(name, caption)
+        yield Paragraph(f"图 {FIGURE_NUMBERS.get(name, '')}｜{markdown_inline(caption)}", styles["caption"])
         return
     screenshot_match = SCREENSHOT_RE.fullmatch(block.strip())
     if screenshot_match:
@@ -418,12 +472,31 @@ def _paragraphs_for_block(block: str, styles: dict, width: float, temp_dir: Path
         yield _fit_image(annotated, width, 355, temp_dir)
         yield Spacer(1, 4)
         legend = " · ".join(f"{i}. {item['label']}" for i, item in enumerate(labels, 1))
-        caption = "真实应用截图 · Playwright + PostgreSQL 合成数据"
+        revised = json.loads((FIGURES / "publication-captions.json").read_text(encoding="utf-8")) if (FIGURES / "publication-captions.json").exists() else {}
+        caption = f"图 {FIGURE_NUMBERS.get(name, '')}｜" + revised.get(name, "真实应用截图 · Playwright + PostgreSQL 合成数据")
         if legend:
             caption += f"\n{legend}"
         yield Paragraph(markdown_inline(caption).replace("\n", "<br/>"), styles["caption"])
         return
     rows = [line.strip() for line in block.strip().splitlines() if line.strip()]
+    if rows and rows[0].startswith("|"):
+        cells = [[cell.strip() for cell in row.strip("|").split("|")] for row in rows if not re.match(r"^\|[\s:|\-]+\|$", row)]
+        count = len(cells[0])
+        data = [[Paragraph(markdown_inline(cell), styles["tableHead"] if i == 0 else styles["tableCell"]) for cell in row] for i, row in enumerate(cells)]
+        widths = [width / count] * count
+        if count == 2:
+            widths = [width * .28, width * .72]
+        table = Table(data, colWidths=widths, repeatRows=1, hAlign="LEFT")
+        table.setStyle(TableStyle([
+            ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#22364f")),
+            ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.white, colors.HexColor("#f1f7f7")]),
+            ("GRID", (0, 0), (-1, -1), .4, colors.HexColor("#dbe5ea")),
+            ("VALIGN", (0, 0), (-1, -1), "TOP"),
+            ("LEFTPADDING", (0, 0), (-1, -1), 7), ("RIGHTPADDING", (0, 0), (-1, -1), 7),
+            ("TOPPADDING", (0, 0), (-1, -1), 6), ("BOTTOMPADDING", (0, 0), (-1, -1), 6),
+        ]))
+        yield table
+        return
     if rows and all(line.startswith("- ") or re.match(r"\d+\. ", line) for line in rows):
         items = []
         for row in rows:
@@ -432,39 +505,90 @@ def _paragraphs_for_block(block: str, styles: dict, width: float, temp_dir: Path
         from reportlab.platypus import ListFlowable, ListItem
 
         list_items = [ListItem(item, leftIndent=3, bulletColor=colors.HexColor("#117c78")) for item in items]
-        yield ListFlowable(list_items, bulletType="bullet", start="circle", leftIndent=16, bulletFontName=CN_FONT, bulletFontSize=7, spaceAfter=7)
+        ordered = bool(re.match(r"\d+\. ", rows[0]))
+        yield ListFlowable(list_items, bulletType="1" if ordered else "bullet", start=1 if ordered else "circle", leftIndent=18, bulletFontName=CN_FONT, bulletFontSize=9 if ordered else 7, spaceAfter=7)
         return
     text = markdown_inline(" ".join(rows))
-    if text.startswith("<b>练习</b>"):
+    if text in ("<b>练习</b>", "<b>参考解</b>"):
+        yield Paragraph(text, styles["subTitle"])
+    elif text.startswith("<b>练习</b>"):
         text = text.replace("<b>练习</b>", '<font color="#117c78"><b>练习</b></font>', 1)
         yield Callout(Paragraph(text, styles["body"]), width, background="#eef5f8", accent="#22364f")
     elif text.startswith("<b>小结</b>") or text.startswith("<b>全书回顾</b>"):
         text = re.sub(r"^<b>(.+?)</b>", r'<font color="#117c78"><b>\1</b></font>', text, count=1)
         yield Callout(Paragraph(text, styles["body"]), width)
+    elif any(text.startswith(f"<b>{label}</b>") for label in ("已知", "问题", "判读", "参考解", "常见误区", "适用边界")):
+        yield Callout(Paragraph(text, styles["body"]), width, background="#fff6e5" if text.startswith("<b>常见误区") else "#eef5f8", accent="#b87414" if text.startswith("<b>常见误区") else "#22364f")
     else:
         yield Paragraph(text, styles["body"])
 
 
 def chapter_flowables(chapters: list[dict], styles: dict, temp_dir: Path):
     story = []
+    measure_canvas = pdfcanvas.Canvas(io.BytesIO(), initialFontName=CN_FONT)
     for chapter in chapters:
         story.append(PageBreak())
         chapter_key = f"chapter-{chapter['number']:02d}"
         story.append(ChapterAnchor(chapter_key, f"第 {chapter['number']:02d} 章｜{chapter['title']}"))
+        section_bodies = []
+        for section in chapter["sections"]:
+            body = []
+            for block in [value.strip() for value in re.split(r"\n\s*\n", section["body"].replace("<!-- page -->", "")) if value.strip()]:
+                for item in _paragraphs_for_block(block, styles, FRAME_W, temp_dir):
+                    body.extend([item, Spacer(1, 7)])
+            section_bodies.append(body)
+        def occupied_height(items):
+            return sum(item.wrapOn(measure_canvas, FRAME_W, FRAME_H)[1] + item.getSpaceBefore() + item.getSpaceAfter() for item in items)
+        # Join worked example and consolidation only when actual content fits comfortably.
+        # This avoids imposing another fixed page quota on the 24 chapters.
+        combined_height = occupied_height(section_bodies[-2]) + occupied_height(section_bodies[-1]) + 100
+        join_exercises = combined_height <= FRAME_H - 40
+        LAYOUT_DECISIONS[chapter["number"]] = {"join_worked_example_and_exercises": join_exercises, "estimated_points": round(combined_height, 1), "limit_points": round(FRAME_H - 40, 1)}
         for page_index, section in enumerate(chapter["sections"]):
-            if page_index:
+            new_page = section["body"].startswith("<!-- page -->")
+            if page_index == len(chapter["sections"]) - 1 and join_exercises:
+                new_page = False
+            if page_index and new_page:
                 story.append(PageBreak())
-            story.append(Paragraph(f"第 {chapter['number']:02d} 章　·　第 {page_index + 1} 页 / 5", styles["kicker"]))
-            story.append(Paragraph(markdown_inline(chapter["title"]), styles["chapterName"]))
+            if page_index == 0 or new_page:
+                story.append(Paragraph(f"第 {chapter['number']:02d} 章　｜　{markdown_inline(chapter['title'])}", styles["kicker"]))
             heading = re.sub(r"^第\s*\d+\s*页[｜|]\s*", "", section["heading"])
-            story.append(Paragraph(markdown_inline(heading), styles["pageTitle"]))
-            story.append(Spacer(1, 8))
-            blocks = [value.strip() for value in re.split(r"\n\s*\n", section["body"]) if value.strip()]
-            for block in blocks:
-                for flowable in _paragraphs_for_block(block, styles, FRAME_W, temp_dir):
-                    story.append(flowable)
-                    story.append(Spacer(1, 7))
+            story.append(SectionAnchor(f"section-{chapter['number']:02d}-{page_index + 1}"))
+            story.append(Paragraph(markdown_inline(heading), styles["pageTitle"] if page_index == 0 or new_page else styles["subTitle"]))
+            story.append(Spacer(1, 5))
+            story.extend(section_bodies[page_index])
     return story
+
+
+class SectionAnchor(Flowable):
+    def __init__(self, key):
+        super().__init__()
+        self.key = key
+        self.width = self.height = 0
+
+    def draw(self):
+        PAGE_MAP[self.key] = self.canv.getPageNumber()
+
+
+class TocRow(Flowable):
+    def __init__(self, key, label):
+        super().__init__()
+        self.key, self.label = key, label
+        self.width, self.height = FRAME_W, 27
+
+    def draw(self):
+        canvas = self.canv
+        canvas.setFillColor(colors.HexColor("#293b4d"))
+        canvas.setFont(CN_FONT, 10.2)
+        canvas.drawString(0, 11, self.label)
+        canvas.linkRect("", self.key, (0, 0, self.width, self.height), relative=1, thickness=0)
+        label_width = pdfmetrics.stringWidth(self.label, CN_FONT, 10.2)
+        canvas.setDash(1, 3)
+        canvas.setStrokeColor(colors.HexColor("#beced8"))
+        canvas.line(label_width + 10, 11, self.width - 30, 11)
+        canvas.setDash()
+        canvas.setFont(CODE_FONT, 10.2)
+        canvas.drawRightString(self.width, 11, str(PAGE_MAP.get(self.key, "")))
 
 
 def build_styles() -> dict:
@@ -474,12 +598,13 @@ def build_styles() -> dict:
         "caption": ParagraphStyle("CaptionCN", fontName=CN_FONT, fontSize=8.2, leading=12, textColor=colors.HexColor("#687888"), alignment=TA_CENTER, wordWrap="CJK"),
         "kicker": ParagraphStyle("Kicker", fontName=CN_BOLD, fontSize=8.5, leading=12, textColor=colors.HexColor("#117c78"), spaceAfter=2),
         "chapterName": ParagraphStyle("ChapterName", fontName=CN_FONT, fontSize=9, leading=13, textColor=colors.HexColor("#748494"), spaceAfter=4),
-        "pageTitle": ParagraphStyle("PageTitle", fontName=CN_BOLD, fontSize=19, leading=26, textColor=colors.HexColor("#20334a"), spaceAfter=7, wordWrap="CJK"),
+        "pageTitle": ParagraphStyle("PageTitle", fontName=CN_BOLD, fontSize=18, leading=25, textColor=colors.HexColor("#20334a"), spaceAfter=7, wordWrap="CJK", splitLongWords=1, keepWithNext=True),
+        "subTitle": ParagraphStyle("SubTitle", fontName=CN_BOLD, fontSize=12.5, leading=19, textColor=colors.HexColor("#117c78"), spaceBefore=8, spaceAfter=5, wordWrap="CJK", keepWithNext=True),
         "frontTitle": ParagraphStyle("FrontTitle", fontName=CN_BOLD, fontSize=23, leading=30, textColor=colors.HexColor("#20334a"), spaceAfter=12, wordWrap="CJK"),
         "frontSub": ParagraphStyle("FrontSub", fontName=CN_BOLD, fontSize=14, leading=21, textColor=colors.HexColor("#117c78"), spaceAfter=12, wordWrap="CJK"),
         "toc": ParagraphStyle("TOC", fontName=CN_FONT, fontSize=10.1, leading=17, textColor=colors.HexColor("#293b4d"), leftIndent=0, spaceAfter=3, wordWrap="CJK"),
         "tableHead": ParagraphStyle("TableHead", fontName=CN_BOLD, fontSize=9, leading=13, textColor=colors.white, wordWrap="CJK"),
-        "tableCell": ParagraphStyle("TableCell", fontName=CN_FONT, fontSize=8.4, leading=12, textColor=colors.HexColor("#293b4d"), wordWrap="CJK"),
+        "tableCell": ParagraphStyle("TableCell", fontName=CN_FONT, fontSize=8.8, leading=13.2, textColor=colors.HexColor("#293b4d"), wordWrap="CJK"),
         "small": ParagraphStyle("SmallCN", fontName=CN_FONT, fontSize=8.8, leading=13.2, textColor=colors.HexColor("#526273"), wordWrap="CJK"),
     }
     return styles
@@ -494,7 +619,7 @@ def front_matter(chapters: list[dict], styles: dict):
         Paragraph("版权、数据与使用边界", styles["frontTitle"]),
         Paragraph("本教材讲解 RiskCase 当前仓库中的真实实现。业务名称、账号、交易和告警均为合成演示数据；示例不构成法律、金融或监管建议。RiskCase 不执行付款、冻结账户、改变余额，也没有取得金融合规认证。", styles["body"]),
         Spacer(1, 10),
-        Paragraph("本版依据 Round 3 工程提交 65b2895 修订。旧作者来源、一致快照、复核退回与查询性能的说明对应该实现；完整工程材料保存在 docs/round-3。", styles["body"]),
+        Paragraph(f"本版为 Round 4 图解精修版。全部应用机制以固定工程基准 {ENGINEERING_SHA} 为准；本轮只修改出版材料。旧作者来源、一致快照、复核退回与查询性能对应这一实现，原始工程材料保存在 docs/round-3。", styles["body"]),
         Spacer(1, 10),
         Paragraph("代码许可与模板来源", styles["frontSub"]),
         Paragraph("RiskCase 源码采用仓库根目录声明的 Apache-2.0 许可。后端从 Jason Taylor CleanArchitecture v10.8.0 实际生成解决方案改造；上游 MIT 许可证原文及准确提交 SHA 保存在 manual/reference。依赖许可应以各锁定版本的包元数据为准。", styles["body"]),
@@ -507,22 +632,27 @@ def front_matter(chapters: list[dict], styles: dict):
         Paragraph("导读｜如何读懂这套系统", styles["frontTitle"]),
         Paragraph("本书面向后端与前端工程师、测试人员、业务分析员，以及希望理解一条真实跨层工作流的读者。阅读时可以先看机制图，再沿着文件路径打开源码；如果某页提出问题，先按当前实现回答，再比较其他设计可能带来的代价。", styles["body"]),
         Spacer(1, 8),
-        Paragraph("全书分为四部分：风险业务模型；.NET 后端架构与数据一致性；React 调查工作区；测试、故障恢复和工程取舍。每章最后的练习留给读者完成，答案需要回到业务场景和源代码中论证。", styles["body"]),
+        Paragraph("全书分为四部分：风险业务模型；.NET 后端架构与数据一致性；React 调查工作区；测试、故障恢复和工程取舍。每章先独立作答，再阅读参考解；开放题的答案说明本项目选择的依据，不声称只有一种通用设计。", styles["body"]),
         Spacer(1, 12),
+        Paragraph("三条阅读路线", styles["frontSub"]),
+        Paragraph("业务路线：1–8 → 22 章。沿同一案件识别告警、调查事实、评估、复核和处置；能够回答谁为哪一份判断负责。", styles["body"]),
+        Paragraph("后端路线：9–18 → 23–24 章。按一次写请求追到数据库提交，再反向预测并发失败和未知结果。重点比较业务版本、MVCC 快照和幂等回执的职责。", styles["body"]),
+        Paragraph("前端路线：19–22 → 16、18 章。先识别服务器状态、草稿和待恢复意图，再解释 ABA、旧响应和账号切换时各自如何被隔离。", styles["body"]),
+        Spacer(1, 10),
+        Paragraph("贯穿案例与读图约定", styles["frontSub"]),
+        Paragraph("Aroha 与 Mateo 的合成交易都出现 South Ridge Services。这个共同邻居是一条核查线索；它不证明共同控制。图中版本数字用于机制推演，真实运行截图与其版本另有说明。深蓝表示已知事实，青色表示接受或当前状态，紫色表示复核/引用，琥珀色提示条件，红色提示拒绝或风险。", styles["body"]),
+        Spacer(1, 8),
         Callout(Paragraph("源码定位方法：打开节选标题中显示的仓库相对路径与行号。Markdown 章节和 SVG 原理图均可编辑，PDF 可从仓库工具重建。", styles["body"]), FRAME_W),
         PageBreak(),
         Paragraph("内容目录", styles["frontTitle"]),
     ])
     for index, chapter in enumerate(chapters[:12]):
-        page_number = 6 + index * 5
-        title = html.escape(chapter["title"])
-        story.append(Paragraph(f'<link href="#chapter-{chapter["number"]:02d}" color="#22364f">{chapter["number"]:02d}　{title}</link><font color="#718096">　{page_number}</font>', styles["toc"]))
+        story.append(TocRow(f"chapter-{chapter['number']:02d}", f"{chapter['number']:02d}　{chapter['title']}"))
     story.append(PageBreak())
     story.append(Paragraph("内容目录　·　续", styles["frontTitle"]))
     for index, chapter in enumerate(chapters[12:], start=12):
-        page_number = 6 + index * 5
-        title = html.escape(chapter["title"])
-        story.append(Paragraph(f'<link href="#chapter-{chapter["number"]:02d}" color="#22364f">{chapter["number"]:02d}　{title}</link><font color="#718096">　{page_number}</font>', styles["toc"]))
+        story.append(TocRow(f"chapter-{chapter['number']:02d}", f"{chapter['number']:02d}　{chapter['title']}"))
+    story.extend([Spacer(1, 12), TocRow("appendix-glossary", "附录 A　关键术语"), TocRow("appendix-source-map", "附录 B　源码与章节索引")])
     return story
 
 
@@ -535,7 +665,7 @@ GLOSSARY = [
     ("CSRF", "跨站请求伪造；利用浏览器自动附带身份 Cookie 的攻击方式。"),
     ("ETag / If-Match", "HTTP 条件写入机制；此处 If-Match 携带案件版本，避免过期页面覆盖新状态。"),
     ("Idempotency", "相同业务意图可安全重试并取得原结果；键复用到不同内容时应冲突。"),
-    ("MVCC", "PostgreSQL 多版本并发控制，为事务提供一致可见的数据版本。"),
+    ("MVCC", "PostgreSQL 多版本并发控制。RC 每条语句重新确定可见性；RR 在第一次数据语句固定事务快照，不能与业务 Version 混为一谈。"),
     ("MediatR pipeline", "围绕请求 handler 执行的行为链；可集中处理授权、验证、日志与幂等。"),
     ("NSwag", "根据 OpenAPI 文档生成 TypeScript 客户端与数据类型的工具。"),
     ("Optimistic concurrency", "假定写冲突较少，用版本条件检测并拒绝基于旧状态提交的写入。"),
@@ -551,7 +681,7 @@ def appendix_flowables(chapters: list[dict], excerpts: list[SourceExcerpt], styl
     story.append(Paragraph("术语释义依照本项目实际用法，不延伸为对所有技术栈的统一定义。", styles["small"]))
     data = [[Paragraph("术语", styles["tableHead"]), Paragraph("本书语境中的含义", styles["tableHead"])]]
     data.extend([[Paragraph(markdown_inline(term), styles["tableCell"]), Paragraph(markdown_inline(definition), styles["tableCell"])] for term, definition in GLOSSARY])
-    table = Table(data, colWidths=[105, FRAME_W - 105], repeatRows=1, hAlign="LEFT")
+    table = Table(data, colWidths=[140, FRAME_W - 140], repeatRows=1, hAlign="LEFT")
     table.setStyle(TableStyle([
         ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#22364f")),
         ("BACKGROUND", (0, 1), (-1, -1), colors.white),
@@ -570,9 +700,11 @@ def appendix_flowables(chapters: list[dict], excerpts: list[SourceExcerpt], styl
             for _ in SOURCE_RE.findall(section["body"]):
                 excerpt = excerpts[index]
                 index += 1
-                rows.append([Paragraph(f"{chapter['number']:02d}　{markdown_inline(chapter['title'])}", styles["tableCell"]), Paragraph(f"<font name=\"{CODE_FONT}\">{html.escape(excerpt.path)}:{excerpt.start}-{excerpt.end}</font>", styles["tableCell"])
+                directory, filename = excerpt.path.rsplit("/", 1)
+                url = f"https://github.com/miku-wwl/riskcase/blob/{ENGINEERING_SHA}/{excerpt.path}#L{excerpt.start}"
+                rows.append([Paragraph(f"{chapter['number']:02d}　{markdown_inline(chapter['title'])}", styles["tableCell"]), Paragraph(f'<link href="{url}" color="#117c78"><font name="{CODE_FONT}" size="7.8">{html.escape(directory)}/<br/>{html.escape(filename)} · L{excerpt.start}–{excerpt.end}</font></link>', styles["tableCell"])
                 ])
-    ref_table = Table(rows, colWidths=[175, FRAME_W - 175], repeatRows=1, hAlign="LEFT")
+    ref_table = Table(rows, colWidths=[140, FRAME_W - 140], repeatRows=1, hAlign="LEFT")
     ref_table.setStyle(TableStyle([
         ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#22364f")),
         ("GRID", (0, 0), (-1, -1), 0.4, colors.HexColor("#dbe5ea")),
@@ -595,6 +727,14 @@ def main() -> None:
     chapters = read_chapters()
     missing_screenshots = validate_assets(chapters, args.allow_missing_screenshots)
     excerpts = build_source_map(chapters)
+    for chapter in chapters:
+        sequence = 0
+        for section in chapter["sections"]:
+            for match in re.finditer(r"\[(?:figure|screenshot): ([^\]]+)\]", section["body"]):
+                name = match.group(1)
+                if name not in FIGURE_NUMBERS:
+                    sequence += 1
+                    FIGURE_NUMBERS[name] = f"{chapter['number']:02d}-{sequence}"
     if args.validate_only:
         figure_count = len({name for chapter in chapters for section in chapter["sections"] for name in FIGURE_RE.findall(section["body"])})
         print(f"Validated {len(chapters)} chapters, {figure_count} SVG references, {len(excerpts)} source excerpts.")
@@ -607,11 +747,15 @@ def main() -> None:
     with tempfile.TemporaryDirectory(prefix="riskcase-book-") as temp_name:
         temp_dir = Path(temp_name)
         styles = build_styles()
-        story = front_matter(chapters, styles)
-        story.extend(chapter_flowables(chapters, styles, temp_dir))
-        story.extend(appendix_flowables(chapters, excerpts, styles))
-        doc = RiskCaseDocTemplate(str(OUTPUT))
-        doc.build(story)
+        # First pass discovers actual chapter/section destinations; second prints them.
+        for _ in range(2):
+            story = front_matter(chapters, styles)
+            story.extend(chapter_flowables(chapters, styles, temp_dir))
+            story.extend(appendix_flowables(chapters, excerpts, styles))
+            doc = RiskCaseDocTemplate(str(OUTPUT))
+            doc.build(story, canvasmaker=functools.partial(pdfcanvas.Canvas, initialFontName=CN_FONT))
+    (REFERENCES / "publication-page-map.json").write_text(json.dumps({"engineering_sha": ENGINEERING_SHA, "destinations": PAGE_MAP, "figures": FIGURE_NUMBERS}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (REFERENCES / "publication-layout-decisions.json").write_text(json.dumps(LAYOUT_DECISIONS, indent=2) + "\n", encoding="utf-8")
     print(f"Published {OUTPUT}")
 
 

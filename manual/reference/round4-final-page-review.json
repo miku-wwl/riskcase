@@ -1,0 +1,1050 @@
+{
+  "pdf_sha256": "2cc6722ac61336ad9fe4f6ad509d4f497fae148f339fcf86b0be80e989001ef5",
+  "pages": {
+    "1": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：封面层级和留白合理，Round 4 版次清楚，无裁切。",
+      "final_render_rgb_sha256": "5f54ddbbdd9ad4e6528e4811fabc99bb479d5209dd085362e0fdaa4bb6e5a666"
+    },
+    "2": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：工程基准、合成数据与许可边界明确；完整 SHA 换行但字符完整，未影响正文。",
+      "final_render_rgb_sha256": "9c60c993b4afe2768e5e9e563804d45d1b4a28780755926e7da0a4cdce7ee114"
+    },
+    "3": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：三条阅读路线、贯穿案例与读图约定形成完整导读，无短段独占页问题。",
+      "final_render_rgb_sha256": "4427d377a159cb651a16a97015f2b2879b13ca279277fffeb40f00fd2d47437c"
+    },
+    "4": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：目录前半页码右对齐、引导线清楚，12 个章节入口完整。",
+      "final_render_rgb_sha256": "6f63d44fed2b025804cfd432a8ea52b8adbdd38d5e309b538e6d654f916f01df"
+    },
+    "5": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：目录续页含后 12 章及两项附录，页码与章节映射一致，未裁切。",
+      "final_render_rgb_sha256": "4a0733eb2bb13c571637a1d71bc609d2fb99fbe9b4483a8acb7aec21d5df6d7e"
+    },
+    "6": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：业务现场与三种职责图同页，箭头和处置边界标注清楚。",
+      "final_render_rgb_sha256": "102039c99075fc435543b3a8cc10bd0af6b11fba195a881f817f4c3ba22fa867"
+    },
+    "7": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：入口源码 17–33 行完整，长字符串及参数按续行标识排开，解释与实际 API 一致。",
+      "final_render_rgb_sha256": "55a42e5f627778d2622fb520641b029feca97d590cf5f8f5851045444416ef73"
+    },
+    "8": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：完整业务例题、三题参考解和小结同页，推理顺序清楚；参考解序号间距偏紧但可读。",
+      "final_render_rgb_sha256": "4b102098527d0e1d6e59b0a7ccf75528a156fb3185c2cd62dff611e41cde840c"
+    },
+    "9": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：幂等键锁与来源身份锁分层清楚，图内事务边界、冲突路径及说明未重叠。",
+      "final_render_rgb_sha256": "d4f2ce507bf6b2de0ad3e20e58943fbeb19b4204f1eecd4e73e1a61609c00ccd"
+    },
+    "10": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：引用校验的客户、账户、信号条件完整展示；中文异常信息清晰，行号真实。",
+      "final_render_rgb_sha256": "be7abd0eb918ba3a938f43b3158b14f404d70d3e21045293520cdc899514d176"
+    },
+    "11": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：四类重复请求对照表清楚区分传输键与业务身份，边界及合成时间设定明确。",
+      "final_render_rgb_sha256": "4b134fbeb7c815a42b9255fa79d4a7ea5bb8f941215574aed2e834aabaa29c52"
+    },
+    "12": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：三题均有原因与恢复策略参考解，冲突码未断裂；练习页留白适当。",
+      "final_render_rgb_sha256": "4a188dc50bc82254939bfab19e5ead146f69f3ee48d2bc608476a55fe83ba4fd"
+    },
+    "13": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：外键方向与值投影明确区分，对手方未误画成独立持久化表，图注完整。",
+      "final_render_rgb_sha256": "5464ac10f644c9e9f3103e4dc57317696b679dffa64faf97dcbb47ed781615dd"
+    },
+    "14": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：Account.Create 实际字段和校验完整，等宽字号及中文回退清楚，边界解释准确。",
+      "final_render_rgb_sha256": "3a68a0b498839a00339645913cc83f312e473bc22775d0640b1877dd461647bf"
+    },
+    "15": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：跨账户例题说明各自所有权、共享节点及推论限制，练习解和小结无溢出。",
+      "final_render_rgb_sha256": "6975c068ae1eb4e49cecba132143bc7d25e9282606167630d21b9284f178ac43"
+    },
+    "16": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：信号、反证、人工判断的因果图及可选分数旁路清楚，未把分数等同裁决。",
+      "final_render_rgb_sha256": "7feba3d1aecaf5edd332f0e5fe812bf4f89f22af79b2e958e82df5f21234319e"
+    },
+    "17": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：Explain 工厂方法上下文完整；解释、引用集合与本文教学目标一致，续行不截断。",
+      "final_render_rgb_sha256": "e1edbfed7f037d1fceb811b1268708d0c54751882edcac4045f5195324561565"
+    },
+    "18": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：三步信号核验案例、反例和参考解连贯，末尾小结保持在正文区内。",
+      "final_render_rgb_sha256": "489270d1995a6561d6b2f217003a5eeac95fe0db01bbfb7ba095fa07107a2d4b"
+    },
+    "19": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：四态图、返回路径与 BasisVersion 区分清楚，图例和正文一致，无标签遮挡。",
+      "final_render_rgb_sha256": "1806430499d75b22a7ab2bdde5b58c066de950b84070333990c1af7e030ea663"
+    },
+    "20": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：提交复核绑定具体评估 ID、提交人和时间；当前作者条件完整，解释与源码逐行对应。",
+      "final_render_rgb_sha256": "c1211e677c28e851625b27bd17b522a0d7002354c396f60059a585b73169d3cf"
+    },
+    "21": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：退回图的理由、审计与重新评估路径清楚；并发两分支例题完整，处置外部边界明确。",
+      "final_render_rgb_sha256": "cd5664481a5ea4f8099dba0200f6aa4251c97411d930c7c0ab9ac4ee285008ff"
+    },
+    "22": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：竞争写入、评估失效及保留历史的练习均有推理答案，无生硬截页。",
+      "final_render_rgb_sha256": "5a3be69dda4bb06c7b9da451cf6973cd2078c9a9ff81c46076221f99d03a8259"
+    },
+    "23": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：查询过滤与写入授权分栏，角色可见性及有效目标规则准确，排序说明完整。",
+      "final_render_rgb_sha256": "1c57f8877759d729168250ed90376d2e478144ae40a57eb349392be26c79f1bd"
+    },
+    "24": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：排序权重与 Skip/Take 源码清楚，行宽和语法着色正常；数据库分页边界明确。",
+      "final_render_rgb_sha256": "c02420ad91f0d3b160cb917c8158d6b73cf487529b3b6461def11573c687e071"
+    },
+    "25": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：真实紧凑队列截图字形清楚、未拉伸；图注区分来源严重度与人工评估，练习完整。",
+      "final_render_rgb_sha256": "7587a6791ebc658427271c65d05f262cb937fda855156481f7c070ae9294dda0"
+    },
+    "26": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：两客户各自路径汇入共同对手方，持有/活动标签可读，未凭空连接客户。",
+      "final_render_rgb_sha256": "9de669df93b4eb344ec4bf9eb3cdc9c70540601b190ab757f725b8dff4e57b8d"
+    },
+    "27": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：对手方合并和人工边采用两个实际聚焦片段，路径、行号与解释对应。",
+      "final_render_rgb_sha256": "f0d916d51bd4900d9162ff30801d450b5bc6bdddafe113aaada854c04088216a"
+    },
+    "28": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：真实交易/对手方局部可读，三条连向 CP-845；UTC 与本地相差 13 小时已解释，未伪造图形。",
+      "final_render_rgb_sha256": "14175eaba2d5f6507fba57ad0c615d016ffed3a78dd250b1fd5955cae6f014b4"
+    },
+    "29": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：节点溯源、共同邻居反例与人工边记录参考解完整，无乱码或遮挡。",
+      "final_render_rgb_sha256": "3a1adfeebf21c188cf5a7c0dd3df89e856667bd232e3d4fa00abb1cea502cb17"
+    },
+    "30": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：评估、当前投影、提交和决定身份分清；历史作者禁复核路径、版本示例及图注完整。",
+      "final_render_rgb_sha256": "de336de8dd5c12f80f2a86abb248981c0eb9d81409f8e3267906769b47776612"
+    },
+    "31": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：Decide 的遗失旧身份、所有历史作者、提交者与经办人检查均完整，代码清楚无截短。",
+      "final_render_rgb_sha256": "45911a9221af121bf6a68cf808eb26c503b8f80315694ce05b51d8739b486a77"
+    },
+    "32": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：真实退回对话框内容可读，确认动作与案例独立性推理分开，页面底部仍有安全间距。",
+      "final_render_rgb_sha256": "eea125a945cc1de6eb7d18da7b98cbca02280051bf8469aefe28bc6e9d7fe48e"
+    },
+    "33": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：职责分离练习以历史作者事实推理，外部升级边界清楚，内容没有被截短。",
+      "final_render_rgb_sha256": "668f47bb4ac833f4b96b9482f253d030c8e221e61dc9fae634f9d2d33370aa24"
+    },
+    "34": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：项目引用图仅画真实直接依赖，编译与运行时方向区别清楚，模板来源表述准确。",
+      "final_render_rgb_sha256": "fe457797c2d900f8f3c54dd774db0f09d1e8dd13a807fdc6e20f82f0dfa1f735"
+    },
+    "35": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：依赖注册源码清楚展示预处理器及五个 behaviour，模板机制与新增实现未混淆。",
+      "final_render_rgb_sha256": "e0b21a265c2debb0a7ceaa843a7db07e19e5d177276bfbf43aa3780a7ab0137b"
+    },
+    "36": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：POST notes 调用例题说明接口到 EF 实现的运行时解析，许可证边界与练习完整。",
+      "final_render_rgb_sha256": "6dcc45aade2794029a6fb40c707e036ffd92ae8aa4f8c523de896e0c5246fa50"
+    },
+    "37": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：PUT 评估路由已纠正；绑定、过滤器、授权、异常包裹次序与图注准确，未遮挡。",
+      "final_render_rgb_sha256": "01e33ddac1d4ba3baa9d52a4f47f03c6cac19c61976529e7a82776f54f411200"
+    },
+    "38": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：Program.cs 顺序可读，启动迁移策略有明确环境边界，未把摘录外代码虚构进面板。",
+      "final_render_rgb_sha256": "8758839918f962a98bce04aa516c4962d5669d3624312f2d3fbbadac9fc6ae14"
+    },
+    "39": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：Cookie、CSRF、角色与资源规则各自作用清楚；完整请求例题及三题答案排布正常。",
+      "final_render_rgb_sha256": "9eec0edf8da4fb7d8ee6e4dc0e4fd2f5ef78dba5edb8b3c38750ed498bd2131e"
+    },
+    "40": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：MediatR 注册/进入顺序已纠正，日志为预处理器，计时范围及事务归属标注准确。",
+      "final_render_rgb_sha256": "10ff183e7a745ebcac0f73caf9f9dd715efc9d98301c3e93cf51ca930510e71d"
+    },
+    "41": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS（轻微留白）：AddNote Handler 片段完整可读，领域/持久化分工清楚；短代码专页下半留白较多。",
+      "final_render_rgb_sha256": "2703a7222229da5c1df7f8e349a32b6c40bb7a941d98d5573746ff883689c53f"
+    },
+    "42": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：Handler、回执和提交顺序完整解释，链接可见；练习区虽较密但段落和小结未越界。",
+      "final_render_rgb_sha256": "2fd380932b91a450fa553293e1fb605fc7ed5271b7b10e14e2cb5d2c4c8961e1"
+    },
+    "43": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：聚合所有权与当前引用分开，版本语义和历史集合说明准确，字形无裁切。",
+      "final_render_rgb_sha256": "25268d3df15a9eea5c9d9f924b8373356fbf2ddf03c89eba421df1c5f1e7f9b0"
+    },
+    "44": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：RecordAssessment 完整呈现版本推进、当前投影和历史追加，中文理由限制及标识符完整。",
+      "final_render_rgb_sha256": "dd210ffd7f93ae781d9cc4a4e688ed67b3fabd3a1f4032c4e4245c241bb9b170"
+    },
+    "45": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：v5→v6→v7 例题区分两种版本，事实新增导致引用失效的推理与练习一致。",
+      "final_render_rgb_sha256": "e8a6be621b88f3939f707f6d03edc69b9161d5df4027b5fe6e66ffc9835c5701"
+    },
+    "46": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：四层失败语义图可读、状态码明确，回放仍检查当前角色的注释正确。",
+      "final_render_rgb_sha256": "96ae9ea5c6396eab978534d70324b8e56e4442aa46a49f88372793f5761f83cf"
+    },
+    "47": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS（轻微留白）：当前角色与锁定检查源码及注册边界准确，短片段页下半留白较多。",
+      "final_render_rgb_sha256": "a77e942b267ed53119c395dcf507b45de6ed8e7231c14c8e26690e83d424cac8"
+    },
+    "48": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：角色/动作矩阵明确全案读取与经办写入差别，修正旧授权练习，表格和小结未溢出。",
+      "final_render_rgb_sha256": "d554fd315b4ae7984129bea57854ce2bbea68131dc81ff3b0262ecc7a588fd75"
+    },
+    "49": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：集合乘积与分拆读取图可读，实测数据保留条件、超时与生产外推限制，无伪称本轮重测。",
+      "final_render_rgb_sha256": "9649d77107a453f681b3495653cf768d893dd4eae67fa7a1b64f522d4c741bdd"
+    },
+    "50": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：写入所需历史 Include、版本和所有权条件完整，代码中的长异常消息仍可读。",
+      "final_render_rgb_sha256": "4931d17d4bebcc72c4c65c7b917fbc0fba508e08f16166acc1ea650b57fc870e"
+    },
+    "51": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：写聚合与只读分拆图解释加载与一致性边界，单行实际源码及网络代价说明清楚。",
+      "final_render_rgb_sha256": "358ccfbd7b02f0f2b4c14409ef9cb048a5560b6da4d58480080b5512ef300940"
+    },
+    "52": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：从对象状态预测 SQL 和整体回滚的练习具有反证价值，参考解完整清楚。",
+      "final_render_rgb_sha256": "7371d74a6c6c68e1ecb0f0232c46431fc2c8cab86d00c27b774aff845a6e269a"
+    },
+    "53": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：RC/RR 独立泳道、首次数据读快照与并发提交清楚，未把 GET 画成调用写者。",
+      "final_render_rgb_sha256": "4feb81548f1f9c1e07753b8b5d955fa8ff01535508bb0eefabc503594b329ece"
+    },
+    "54": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：独立 RR 分支与已有 RC 幂等事务区别准确，快照起点和生命周期说明完整。",
+      "final_render_rgb_sha256": "75099f1ed4987435ca033dfc48ab3256489ee49f7c28de5b72e67c65fe4053ee"
+    },
+    "55": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：FOR SHARE 实际 SQL、允许的已有隔离级别和拒绝分支完整，约定依赖及外部 SQL 限制明确。",
+      "final_render_rgb_sha256": "7bdf667f44ba080c33a6512bb6f08c4de3e8bf9f3615641d4705ffc888caa2db"
+    },
+    "56": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：读写交错练习区分可见性、原子性和版本，主文档链接明确，内容可读。",
+      "final_render_rgb_sha256": "5a01776a4a2c50f24779717843f9605bb856728d5a53ebacde5b248ac8b477aa"
+    },
+    "57": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：首次提交、随后转派与历史恢复分两排，虚线回执含义清楚，版本新旧不会混淆。",
+      "final_render_rgb_sha256": "f4068c94f1651d17bf79d6874b0d8326a526453513634177ed8cd2a12270780b"
+    },
+    "58": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：两新意图竞争图、真实并发 token 配置和失败整体回滚案例同页，唯一约束先失败的替代路径有说明。",
+      "final_render_rgb_sha256": "6f2e8652f8e5698aeca0c077f9abe2f56df1051e37cbdcb33fc7e65a5dfd64f6"
+    },
+    "59": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：Fingerprint 与回执提交片段清楚、保留完整方法；命令身份和最终 COMMIT 时点明确。",
+      "final_render_rgb_sha256": "2b70a4cb7cdfe756f6cc634d010ae30dfa184e46fcd92063f9fffb7ec5da3e1f"
+    },
+    "60": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：丢响应完整九步例题逐层解释浏览器到 COMMIT 和原键恢复，故障证明边界明确，无脚本/日志堆积。",
+      "final_render_rgb_sha256": "1767e6db7c71396873b1083a7b54dae225306879ca73b388b28b070f294e3a14"
+    },
+    "61": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：待恢复提示与唯一历史评估两张真实截图清楚；历史 v5、当前 v6 及独立读取结果解释一致。",
+      "final_render_rgb_sha256": "c7ed4ebe7aef0f39e72e571e66227fbd5ef96b14be7861b243f6291617595611"
+    },
+    "62": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：恢复原意图、保留较新缓存与草稿代次的练习解准确，无布局问题。",
+      "final_render_rgb_sha256": "c73f280197bfc5aa4700c656ae8dc10c4ee59b3f6b5923c066ea41b98fde16c3"
+    },
+    "63": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：旧作者恢复、最后快照与未知身份缺口分开，图中未知不会被伪造身份替代，说明完整。",
+      "final_render_rgb_sha256": "bfac7c93038ba628bfa5cd6ae6e150f4262cb2d0ad609db99831e060fc82bbd1"
+    },
+    "64": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：独立性条件与前向迁移说明保留真实未知语义，源码路径和完整检查可定位。",
+      "final_render_rgb_sha256": "45928aee6b8d8c08f8feb1a68617bdb169ebc860dd9e99e1ca6208147bcf3166"
+    },
+    "65": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：真实审计局部包含七个版本与退回理由，主内容可读；未把空历史理由补造成事实。",
+      "final_render_rgb_sha256": "37295c8b2bc162342ecbf67962c6ba46a0ee1b3423c276fd0946c55974ef62f8"
+    },
+    "66": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：追溯性三题答案说明不可重构及管理员边界，未把应用追加性夸大为外部不可篡改归档。",
+      "final_render_rgb_sha256": "448c1fed4145327c129306d21645a394d5f3abddb7b5589c90386e452b31a9b5"
+    },
+    "67": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：OpenAPI→NSwag→adapter 分工和 nullable 旧回放通道准确，契约图无溢出。",
+      "final_render_rgb_sha256": "d59217cbfb24a2ff62e1e432a3108e2acec006481d3b1a322cbead49cd2f4a93"
+    },
+    "68": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：Resume nullable 正文的实际端点源码和兼容解释一致，行号与头字段完整。",
+      "final_render_rgb_sha256": "f7406f53c6a7d8aa831556aefd6ef91374295ab4d3a73909d84dca76dd91fa97"
+    },
+    "69": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：旧成功互证与新理由必需的三步案例清楚，契约生成不等于运行时正确的限制明确。",
+      "final_render_rgb_sha256": "c41d073d004eef4009afef134b34b3741fcdad78f7ad19d507b3800b2b831022"
+    },
+    "70": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：页面所有权图不再误示 Query 顺序调用 UI，登录/账号/案件边界清楚。",
+      "final_render_rgb_sha256": "c702095d486e51863d39e240a475df95ee7cc30669738810943ead690674b21f"
+    },
+    "71": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS（轻微留白）：lazy 与实际 Route 两段源码可定位，Suspense 解释准确；短源码专页仍较疏。",
+      "final_render_rgb_sha256": "b0b5c98e0f3b64585bc5d5027aef5f26b574077bd62c0111cfcc41d2be7bf9cf"
+    },
+    "72": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：客户、主账户及四笔交易真实截图清楚，第四笔账户差异可读，图注准确。",
+      "final_render_rgb_sha256": "09af9caeb7750c5ef2a36e6c28efbef3a55bc31dedbb1f3b2373507833139be2"
+    },
+    "73": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：懒加载、UI 语义与工作区信息层级的练习解具备理由和代价说明，无布局缺陷。",
+      "final_render_rgb_sha256": "ed4815411d49615ff23a4c8fe3fc7982a8e216a7e8282003943ce93e2a3ba6e6"
+    },
+    "74": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：ABA 编辑泳道与网络泳道清楚，r1/r3 不等、案件版本另行协调的解释准确。",
+      "final_render_rgb_sha256": "a9e508e34d4d8c4d8a4ddc84e3a62cc05e9876cd24d0648007fe872151b83d86"
+    },
+    "75": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：clearIfUnchanged 完整函数可读，跨标签确认标记与避免共享读后写竞争的说明对应源码。",
+      "final_render_rgb_sha256": "7cfe9abfb6f0e2f96756b2b7ef77c41f6ec69eef8c1de6d8b3d30c4d0f7c82d0"
+    },
+    "76": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：ABA 时序表、同版本 GET 元数据协调和练习区完整，密度较高但无重叠或跨页截断。",
+      "final_render_rgb_sha256": "4410ccfc9b054af6d70b3fc673e75a03a2be0607616345802b634151a7cc8ffe"
+    },
+    "77": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：React Flow 图按实际固定布局和可用交互解释，已删除不存在的拖动、详情面板和边 URL 承诺。",
+      "final_render_rgb_sha256": "24f0ea280db1aa7474b631dc8569def7744644318d0e9cb3422b1413c4d06da7"
+    },
+    "78": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：RiskGraph 节点与边两段完整计算源码未截断，draggable:false 与稳定 ID 保留规则清楚。",
+      "final_render_rgb_sha256": "5703717a1e7e17209b69380c8d057b5af1f9ec0b82071eaa3864ed58c1386879"
+    },
+    "79": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：真实客户/账户局部放大后标签可读，主体青框和各自所有权解释准确；截图略软但不妨碍读图。",
+      "final_render_rgb_sha256": "f23f5ed671d6bff5812ced8a4782ae45df642fb7ca103da7e19eea8e12baa402"
+    },
+    "80": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：交互和可追溯性的练习明确现有功能边界，未把一跳导航假设当作已实现。",
+      "final_render_rgb_sha256": "dcd46658dd8490012df68d43ea1d64ad924a6edd610f256ce1770cd75c2f9ee2"
+    },
+    "81": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：实际 v1–v11 工作流与退回/重评路径清楚，独立主管角色与版本图注准确。",
+      "final_render_rgb_sha256": "6e2526180bdc309342d6c58024edd1e8add5858095f138a541fd808a8ff4751e"
+    },
+    "82": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：useMutation 完整成功/错误边界清楚，账号检查与版本协调未被省略，长行续排正常。",
+      "final_render_rgb_sha256": "ae69141f4aed732a39ba3291edd863a80e104097bdb41b2e7dc45b936b14378c"
+    },
+    "83": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：真实两次评估截图可读、版本/基础/引用正确；退回延迟及恢复描述可定位既有浏览器场景。",
+      "final_render_rgb_sha256": "9695e6b8246aafbbf53ce03cc1b70579cca2332de850d755698eaefeeee661c2"
+    },
+    "84": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：工作流读写方法、角色和原键恢复答案明确，PUT 与 POST 区分正确。",
+      "final_render_rgb_sha256": "21cd023aa9622c9c18a1583527a56b944ec6a78d55ba68b90a3dba1c6b1275cd"
+    },
+    "85": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：测试边界三栏图说明各自能推翻的承诺，保留真实 PostgreSQL 与浏览器依赖，图文清楚。",
+      "final_render_rgb_sha256": "ee56861f8de6ad7d09182c1d6aac94e37afb8e480c28956442592ea497187579"
+    },
+    "86": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：并发测试完整片段、屏障释放及独立 Facts 断言可读，未省略关键竞态条件。",
+      "final_render_rgb_sha256": "185c718bc3838811b1aa87a7684e75d98303e6cebad508afa8d2586e5f57dc8a"
+    },
+    "87": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：竞争条件、允许任一写者获胜和失败后独立核对的推理完整，测试专用屏障边界清楚。",
+      "final_render_rgb_sha256": "98f2485c07f9ca99e058f3abd562588da0c25f5e3b1fe2cdcffeab4ca58b73c0"
+    },
+    "88": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：故障类型到恢复动作映射图清楚，403 不反推原写失败及 409 分类型规则准确。",
+      "final_render_rgb_sha256": "36c5d2f5bbc4bb821f5af1f50c8aac57ce87e725794f4d17869591ba07f8f215"
+    },
+    "89": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：ProblemDetails 异常映射源码清楚，已解释回放、冲突、并发及可重试竞争的不同语义。",
+      "final_render_rgb_sha256": "75c1e3f03fbe1786aa90ad86b3726b69f818bd67609527833d81362ffa198290"
+    },
+    "90": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：工程样例、生产部署及已知容量/历史缺口边界明确，全文回顾与练习无日志堆积。",
+      "final_render_rgb_sha256": "c749e67cfec166a57ebe54b3c53df2611e40fafac939bd957dd46703262b5717"
+    },
+    "91": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：术语表列宽已避免英文单词任意断开，16 项定义清楚，表格无裁切。",
+      "final_render_rgb_sha256": "512068dbd11a665c9bfda7e5dbae27fd8a734c20eb746588dbe5656ea7c73aa6"
+    },
+    "92": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：源码索引 1/2 表格路径、文件名与行号完整，章节列换行正常；检查字符边界未跨入相邻列。",
+      "final_render_rgb_sha256": "0f9fce0f9b89e1a17c2f5c9c7191e130ec093c63e238c6a48baf3274482baba3"
+    },
+    "93": {
+      "method": "individual rendered page at 180 DPI; identical final pixels verified after deterministic-metadata rebuild",
+      "observation": "PASS：源码索引续表含其余十二项节选，重复表头正常，末行及页脚不重叠，列边界检查正常。",
+      "final_render_rgb_sha256": "c71f5a53e04bb384cebcd8778f5b5adb7c69d4d1a89e189a2bd491a762d6f78b"
+    }
+  },
+  "individually_viewed_pdf_sha256": "5d6802ca6307d4405f64c5f709bca3a52f646160439145758f280ff8e5106100",
+  "page_count": 93,
+  "render_dpi": 180,
+  "review_period": "2026-11-17 to 2026-11-18 Pacific/Auckland",
+  "high_resolution_individually_viewed_pages": [
+    31,
+    53,
+    58,
+    59,
+    75,
+    78,
+    92,
+    93
+  ],
+  "high_resolution_dpi": 240,
+  "high_resolution_result": "PASS - complete identifiers, conditions, arrow labels and table cell boundaries readable",
+  "contact_sheets_reviewed": 6,
+  "rebuild_pixel_comparison": [
+    {
+      "page": 1,
+      "rgb_sha256": "5f54ddbbdd9ad4e6528e4811fabc99bb479d5209dd085362e0fdaa4bb6e5a666",
+      "png_sha256": "139e263ca8d3491e86d16a29302582a9c332d6a5e29684be71405ff2ae1a38db",
+      "identical": true
+    },
+    {
+      "page": 2,
+      "rgb_sha256": "9c60c993b4afe2768e5e9e563804d45d1b4a28780755926e7da0a4cdce7ee114",
+      "png_sha256": "d14b3a6d2e2a96801e34c355c5800e7333c934c64d252f4d70334003f67ae424",
+      "identical": true
+    },
+    {
+      "page": 3,
+      "rgb_sha256": "4427d377a159cb651a16a97015f2b2879b13ca279277fffeb40f00fd2d47437c",
+      "png_sha256": "aced6cc8923c563928c58f34367f8c1d2e9195ed1da85a0020816a24786c1b95",
+      "identical": true
+    },
+    {
+      "page": 4,
+      "rgb_sha256": "6f63d44fed2b025804cfd432a8ea52b8adbdd38d5e309b538e6d654f916f01df",
+      "png_sha256": "b083d216494b041dcd312fc40929dac57bd66f794a6f9c667993e9e4ee650c0a",
+      "identical": true
+    },
+    {
+      "page": 5,
+      "rgb_sha256": "4a0733eb2bb13c571637a1d71bc609d2fb99fbe9b4483a8acb7aec21d5df6d7e",
+      "png_sha256": "31be6e5938fbc188dac0aed61830150eab6dd4c5bbd83427067ee25ce364ff00",
+      "identical": true
+    },
+    {
+      "page": 6,
+      "rgb_sha256": "102039c99075fc435543b3a8cc10bd0af6b11fba195a881f817f4c3ba22fa867",
+      "png_sha256": "f04ddcd5784b8cae13c81f1cc90fdbf552de8c6cea9901d5ea7ee1ea60980250",
+      "identical": true
+    },
+    {
+      "page": 7,
+      "rgb_sha256": "55a42e5f627778d2622fb520641b029feca97d590cf5f8f5851045444416ef73",
+      "png_sha256": "44c67018b4f26c27d575b556066158d402672867478b87784764ddf230789362",
+      "identical": true
+    },
+    {
+      "page": 8,
+      "rgb_sha256": "4b102098527d0e1d6e59b0a7ccf75528a156fb3185c2cd62dff611e41cde840c",
+      "png_sha256": "0cc7f82d4808e185f7e08eeb9ac1b60800f34bcfd4e924a7c529a262d9d514a6",
+      "identical": true
+    },
+    {
+      "page": 9,
+      "rgb_sha256": "d4f2ce507bf6b2de0ad3e20e58943fbeb19b4204f1eecd4e73e1a61609c00ccd",
+      "png_sha256": "a7b740cf8a524ac80aea382b1d6223cde67924b566db0dde090a593319c1f4bd",
+      "identical": true
+    },
+    {
+      "page": 10,
+      "rgb_sha256": "be7abd0eb918ba3a938f43b3158b14f404d70d3e21045293520cdc899514d176",
+      "png_sha256": "5a0c92ecf2b19362596d1ffebd6ecfc8309a8cf852433e2ea097ba5155cd20c1",
+      "identical": true
+    },
+    {
+      "page": 11,
+      "rgb_sha256": "4b134fbeb7c815a42b9255fa79d4a7ea5bb8f941215574aed2e834aabaa29c52",
+      "png_sha256": "71f7e97e691711c4ed38421713e502d6fdec6fc095004631294311a75fb05dcd",
+      "identical": true
+    },
+    {
+      "page": 12,
+      "rgb_sha256": "4a188dc50bc82254939bfab19e5ead146f69f3ee48d2bc608476a55fe83ba4fd",
+      "png_sha256": "958200c3ce1dd3388836d451dc1b4700995b61e46d0fc827cce2d7621e3425bb",
+      "identical": true
+    },
+    {
+      "page": 13,
+      "rgb_sha256": "5464ac10f644c9e9f3103e4dc57317696b679dffa64faf97dcbb47ed781615dd",
+      "png_sha256": "72734d4b0f6857ad50c6053c81fd7cf5d07c65f518b20e222d3882814a600203",
+      "identical": true
+    },
+    {
+      "page": 14,
+      "rgb_sha256": "3a68a0b498839a00339645913cc83f312e473bc22775d0640b1877dd461647bf",
+      "png_sha256": "af8f9300e6f64fa0e7078873254efd1d0bc8417c5fcae95a2b6d03cd4a1373ae",
+      "identical": true
+    },
+    {
+      "page": 15,
+      "rgb_sha256": "6975c068ae1eb4e49cecba132143bc7d25e9282606167630d21b9284f178ac43",
+      "png_sha256": "4ca737b841434a2ce22201d2f258664fa4a0076431928c1e2b1ac64f034f75cb",
+      "identical": true
+    },
+    {
+      "page": 16,
+      "rgb_sha256": "7feba3d1aecaf5edd332f0e5fe812bf4f89f22af79b2e958e82df5f21234319e",
+      "png_sha256": "f90aed7dce7e115561b11ffb3a8ef8af68893c1803a3199783f02c8b85cd94ec",
+      "identical": true
+    },
+    {
+      "page": 17,
+      "rgb_sha256": "e1edbfed7f037d1fceb811b1268708d0c54751882edcac4045f5195324561565",
+      "png_sha256": "f62d553e353f2241e54e5250214b6b84e827b755f59106729d77810071e343de",
+      "identical": true
+    },
+    {
+      "page": 18,
+      "rgb_sha256": "489270d1995a6561d6b2f217003a5eeac95fe0db01bbfb7ba095fa07107a2d4b",
+      "png_sha256": "b1b914cd5fd435c89b7123dd1eaf8bebed6b4eb89aebf75b9ebbc32a3d9935f5",
+      "identical": true
+    },
+    {
+      "page": 19,
+      "rgb_sha256": "1806430499d75b22a7ab2bdde5b58c066de950b84070333990c1af7e030ea663",
+      "png_sha256": "36364287edd39bce5621f9cd0b65c468be3af01c4c1a79525f7b716ab79171ca",
+      "identical": true
+    },
+    {
+      "page": 20,
+      "rgb_sha256": "c1211e677c28e851625b27bd17b522a0d7002354c396f60059a585b73169d3cf",
+      "png_sha256": "99334e2ff81eb11d4746a1d5902e6ea1dc17015b24cbd5d18b1fdde5ab07d6b0",
+      "identical": true
+    },
+    {
+      "page": 21,
+      "rgb_sha256": "cd5664481a5ea4f8099dba0200f6aa4251c97411d930c7c0ab9ac4ee285008ff",
+      "png_sha256": "8bb33bf1ffa466344ff1367d92e221bed4fe25358cadf99f15fcc5aa01bcb4bc",
+      "identical": true
+    },
+    {
+      "page": 22,
+      "rgb_sha256": "5a3be69dda4bb06c7b9da451cf6973cd2078c9a9ff81c46076221f99d03a8259",
+      "png_sha256": "783960c07e21c5ac476dc2cbb2422787ee1b5dd10ac49b81be0be0dc808d63c7",
+      "identical": true
+    },
+    {
+      "page": 23,
+      "rgb_sha256": "1c57f8877759d729168250ed90376d2e478144ae40a57eb349392be26c79f1bd",
+      "png_sha256": "1ed0ef4678a2ad03a346295fd7cf3c2d7dd1b02f48b330f9491e565fa9045363",
+      "identical": true
+    },
+    {
+      "page": 24,
+      "rgb_sha256": "c02420ad91f0d3b160cb917c8158d6b73cf487529b3b6461def11573c687e071",
+      "png_sha256": "2e7ae5cb86e4bfe6df9e5b45be60d8baf844fd22c33d92b20c086b0c97be00c5",
+      "identical": true
+    },
+    {
+      "page": 25,
+      "rgb_sha256": "7587a6791ebc658427271c65d05f262cb937fda855156481f7c070ae9294dda0",
+      "png_sha256": "d87de4f6195085574e770aee749a26af8d5bd6a48874f6d7328b034b00c3e79a",
+      "identical": true
+    },
+    {
+      "page": 26,
+      "rgb_sha256": "9de669df93b4eb344ec4bf9eb3cdc9c70540601b190ab757f725b8dff4e57b8d",
+      "png_sha256": "1ae0ab37c0af6a658954f4ed8d2edcffa5cff2fa841804f27f9601f091355430",
+      "identical": true
+    },
+    {
+      "page": 27,
+      "rgb_sha256": "f0d916d51bd4900d9162ff30801d450b5bc6bdddafe113aaada854c04088216a",
+      "png_sha256": "ca69ae86e279442d1daf2a9b78167a818a9f9dc98f14b5d47e841c80c159b0f3",
+      "identical": true
+    },
+    {
+      "page": 28,
+      "rgb_sha256": "14175eaba2d5f6507fba57ad0c615d016ffed3a78dd250b1fd5955cae6f014b4",
+      "png_sha256": "440e1cf8e09edb8d3691f3f1e828aad3693f8859d20d5d25039897a816934d5a",
+      "identical": true
+    },
+    {
+      "page": 29,
+      "rgb_sha256": "3a1adfeebf21c188cf5a7c0dd3df89e856667bd232e3d4fa00abb1cea502cb17",
+      "png_sha256": "097702266618d63f70f64b5003ac21e758b0eed0a3b5601cd1863b0fca5e8911",
+      "identical": true
+    },
+    {
+      "page": 30,
+      "rgb_sha256": "de336de8dd5c12f80f2a86abb248981c0eb9d81409f8e3267906769b47776612",
+      "png_sha256": "e2379fa59b0c4ced7abb257843250dd7514d09b1fc4b1f1ae39c6556a30c7e2d",
+      "identical": true
+    },
+    {
+      "page": 31,
+      "rgb_sha256": "45911a9221af121bf6a68cf808eb26c503b8f80315694ce05b51d8739b486a77",
+      "png_sha256": "d09a2d382fdef21023ac08ede001a65057f85f63f0751903307032ba1971d27c",
+      "identical": true
+    },
+    {
+      "page": 32,
+      "rgb_sha256": "eea125a945cc1de6eb7d18da7b98cbca02280051bf8469aefe28bc6e9d7fe48e",
+      "png_sha256": "b32681451a1c9a221bb1df1ba23c76f593cbeb6d54e901933b4730d35291ceb5",
+      "identical": true
+    },
+    {
+      "page": 33,
+      "rgb_sha256": "668f47bb4ac833f4b96b9482f253d030c8e221e61dc9fae634f9d2d33370aa24",
+      "png_sha256": "34f2b2bdaf50bece1c26fdd4574126bdccb5765a01d89fc3df1975d66e1bd7c8",
+      "identical": true
+    },
+    {
+      "page": 34,
+      "rgb_sha256": "fe457797c2d900f8f3c54dd774db0f09d1e8dd13a807fdc6e20f82f0dfa1f735",
+      "png_sha256": "aea77cf84875b2061333c39cba46a3c55c23eed8c574b99ca5a194b48df4efed",
+      "identical": true
+    },
+    {
+      "page": 35,
+      "rgb_sha256": "e0b21a265c2debb0a7ceaa843a7db07e19e5d177276bfbf43aa3780a7ab0137b",
+      "png_sha256": "352037ddf383077135052638a94387240ffacbdd5d11629363eac19fa80b861b",
+      "identical": true
+    },
+    {
+      "page": 36,
+      "rgb_sha256": "6dcc45aade2794029a6fb40c707e036ffd92ae8aa4f8c523de896e0c5246fa50",
+      "png_sha256": "d0363f7dc66650847075cdbe383642b52bdb84f3f12fde0d8baada00ed26ed36",
+      "identical": true
+    },
+    {
+      "page": 37,
+      "rgb_sha256": "01e33ddac1d4ba3baa9d52a4f47f03c6cac19c61976529e7a82776f54f411200",
+      "png_sha256": "0b955852bec55ae2a6541a7e89cf02152dad910ebda98e1b4dc1a0d5fdd54945",
+      "identical": true
+    },
+    {
+      "page": 38,
+      "rgb_sha256": "8758839918f962a98bce04aa516c4962d5669d3624312f2d3fbbadac9fc6ae14",
+      "png_sha256": "33f40a1be823f636ef44de6a0fe5171f28fc45539832d38f3f96fe55556f14ab",
+      "identical": true
+    },
+    {
+      "page": 39,
+      "rgb_sha256": "9eec0edf8da4fb7d8ee6e4dc0e4fd2f5ef78dba5edb8b3c38750ed498bd2131e",
+      "png_sha256": "1dfea985621ba7fdbdf30b779e8ce0d77a2f583fadd28c58feeab8c52e9af6f2",
+      "identical": true
+    },
+    {
+      "page": 40,
+      "rgb_sha256": "10ff183e7a745ebcac0f73caf9f9dd715efc9d98301c3e93cf51ca930510e71d",
+      "png_sha256": "15490c11607b8cbb6ca4a227c21b1c52c5ee7ba320a732954e580431fece001e",
+      "identical": true
+    },
+    {
+      "page": 41,
+      "rgb_sha256": "2703a7222229da5c1df7f8e349a32b6c40bb7a941d98d5573746ff883689c53f",
+      "png_sha256": "e8664aa8c0d00a4e20af6909dc62120bac144e0bd04ab70e6fe1c60703aa621c",
+      "identical": true
+    },
+    {
+      "page": 42,
+      "rgb_sha256": "2fd380932b91a450fa553293e1fb605fc7ed5271b7b10e14e2cb5d2c4c8961e1",
+      "png_sha256": "8ca960483f515315906efe0bcd0f68c5625aa49856ee4d7569f8e701d9086ec9",
+      "identical": true
+    },
+    {
+      "page": 43,
+      "rgb_sha256": "25268d3df15a9eea5c9d9f924b8373356fbf2ddf03c89eba421df1c5f1e7f9b0",
+      "png_sha256": "eefc41e0c2c04c3009135a172ce00690b90431ae416f30a5f953d5a0699512fb",
+      "identical": true
+    },
+    {
+      "page": 44,
+      "rgb_sha256": "dd210ffd7f93ae781d9cc4a4e688ed67b3fabd3a1f4032c4e4245c241bb9b170",
+      "png_sha256": "cdbb9aa0a16cab797e6d0e7d069772ff9437735ffc906560821ce43b416a2ee2",
+      "identical": true
+    },
+    {
+      "page": 45,
+      "rgb_sha256": "e8a6be621b88f3939f707f6d03edc69b9161d5df4027b5fe6e66ffc9835c5701",
+      "png_sha256": "e72cb72d92f6f850538f9ff4993c795eacde037a5d2035c9ab1c1a2341d240d8",
+      "identical": true
+    },
+    {
+      "page": 46,
+      "rgb_sha256": "96ae9ea5c6396eab978534d70324b8e56e4442aa46a49f88372793f5761f83cf",
+      "png_sha256": "1f4f2494c869fb9271bd4594d63cf16f3f08f43562036c05f46d40fcced093d3",
+      "identical": true
+    },
+    {
+      "page": 47,
+      "rgb_sha256": "a77e942b267ed53119c395dcf507b45de6ed8e7231c14c8e26690e83d424cac8",
+      "png_sha256": "b17b3f768028f13d29c0ba4de41f5b9713300a6d3581754febc6341cbe2c7fc7",
+      "identical": true
+    },
+    {
+      "page": 48,
+      "rgb_sha256": "d554fd315b4ae7984129bea57854ce2bbea68131dc81ff3b0262ecc7a588fd75",
+      "png_sha256": "786ce5d159be3bc9eda5f953d9b0467356baac8afe582c2b46c30dd4058b2419",
+      "identical": true
+    },
+    {
+      "page": 49,
+      "rgb_sha256": "9649d77107a453f681b3495653cf768d893dd4eae67fa7a1b64f522d4c741bdd",
+      "png_sha256": "5a2bcf9d7606517810e4af0ce8d8dc5732b5fa2fc24d350ed659100c2cc95906",
+      "identical": true
+    },
+    {
+      "page": 50,
+      "rgb_sha256": "4931d17d4bebcc72c4c65c7b917fbc0fba508e08f16166acc1ea650b57fc870e",
+      "png_sha256": "ac7b81bae3cb079bd0989010d13743b4661a1acbce0a4130fe417c1ceea6710d",
+      "identical": true
+    },
+    {
+      "page": 51,
+      "rgb_sha256": "358ccfbd7b02f0f2b4c14409ef9cb048a5560b6da4d58480080b5512ef300940",
+      "png_sha256": "74bcc26477d11f18eebbc883f0dfab53ecdeb309e4986fe88b003f9a45dcfed1",
+      "identical": true
+    },
+    {
+      "page": 52,
+      "rgb_sha256": "7371d74a6c6c68e1ecb0f0232c46431fc2c8cab86d00c27b774aff845a6e269a",
+      "png_sha256": "a132e65b05b132d83b3a857b9496e44c1fcbcee28cca7bb3528254418feefaae",
+      "identical": true
+    },
+    {
+      "page": 53,
+      "rgb_sha256": "4feb81548f1f9c1e07753b8b5d955fa8ff01535508bb0eefabc503594b329ece",
+      "png_sha256": "4c3eb8c56b395607a0434e406c614789b68882c2c4814b2ba312d997bf44f7af",
+      "identical": true
+    },
+    {
+      "page": 54,
+      "rgb_sha256": "75099f1ed4987435ca033dfc48ab3256489ee49f7c28de5b72e67c65fe4053ee",
+      "png_sha256": "03664e8461adfe1441d5ce8d0502b7198ad02019261f772cb7d235832259b6d7",
+      "identical": true
+    },
+    {
+      "page": 55,
+      "rgb_sha256": "7bdf667f44ba080c33a6512bb6f08c4de3e8bf9f3615641d4705ffc888caa2db",
+      "png_sha256": "7d746e1ad9fb886c5ef7dea289aed624f44b4508e41f77ee150bbd378c8e872f",
+      "identical": true
+    },
+    {
+      "page": 56,
+      "rgb_sha256": "5a01776a4a2c50f24779717843f9605bb856728d5a53ebacde5b248ac8b477aa",
+      "png_sha256": "0c2cc2bede2ab9ee980c1dad72da70f4438bb49019bf91476b5b0d31faff12c8",
+      "identical": true
+    },
+    {
+      "page": 57,
+      "rgb_sha256": "f4068c94f1651d17bf79d6874b0d8326a526453513634177ed8cd2a12270780b",
+      "png_sha256": "6de451071b8e2cd7b538ed9cea0b1a3adcc901253e64a85eea53fa693af52112",
+      "identical": true
+    },
+    {
+      "page": 58,
+      "rgb_sha256": "6f2e8652f8e5698aeca0c077f9abe2f56df1051e37cbdcb33fc7e65a5dfd64f6",
+      "png_sha256": "e07961d36efc549e3528b3706c893c2c80f27a82d6c3d0c1a83b9d2ab691a070",
+      "identical": true
+    },
+    {
+      "page": 59,
+      "rgb_sha256": "2b70a4cb7cdfe756f6cc634d010ae30dfa184e46fcd92063f9fffb7ec5da3e1f",
+      "png_sha256": "3228669da658bdba06f31a06559bcd8a8b6d1d4d89fbce125bb10a22fd1c962a",
+      "identical": true
+    },
+    {
+      "page": 60,
+      "rgb_sha256": "1767e6db7c71396873b1083a7b54dae225306879ca73b388b28b070f294e3a14",
+      "png_sha256": "b7da4c4a868b2d705db5747e59b4ebc221d9bb64fe225cfe2d41ece136f466d5",
+      "identical": true
+    },
+    {
+      "page": 61,
+      "rgb_sha256": "c7ed4ebe7aef0f39e72e571e66227fbd5ef96b14be7861b243f6291617595611",
+      "png_sha256": "fa94060568a35c2c6d7e54d404c3a10fd4ff54893ce55527a2c5199d0eed030a",
+      "identical": true
+    },
+    {
+      "page": 62,
+      "rgb_sha256": "c73f280197bfc5aa4700c656ae8dc10c4ee59b3f6b5923c066ea41b98fde16c3",
+      "png_sha256": "2d2f46b09214a5d7e43df488be4a695b26622b28bf2160b29caec6b156ee99fd",
+      "identical": true
+    },
+    {
+      "page": 63,
+      "rgb_sha256": "bfac7c93038ba628bfa5cd6ae6e150f4262cb2d0ad609db99831e060fc82bbd1",
+      "png_sha256": "e9adb9f1ca542b55515b29ef250cd0a8dc05fdeb1107fe435679b8d0ceba845f",
+      "identical": true
+    },
+    {
+      "page": 64,
+      "rgb_sha256": "45928aee6b8d8c08f8feb1a68617bdb169ebc860dd9e99e1ca6208147bcf3166",
+      "png_sha256": "1603ac38e1726eb3459c238b588aea7ecc8a82fc8de9a97e2bb0ca5c29dbf49c",
+      "identical": true
+    },
+    {
+      "page": 65,
+      "rgb_sha256": "37295c8b2bc162342ecbf67962c6ba46a0ee1b3423c276fd0946c55974ef62f8",
+      "png_sha256": "62378c60e4b6c0c17f03e19e3a6c9493007a913795dc807eed16ff7b9ba988bf",
+      "identical": true
+    },
+    {
+      "page": 66,
+      "rgb_sha256": "448c1fed4145327c129306d21645a394d5f3abddb7b5589c90386e452b31a9b5",
+      "png_sha256": "7309da64812846fe2432e0ac0a65bc92d3054f6c4f605510cd86bbffef5ac7bf",
+      "identical": true
+    },
+    {
+      "page": 67,
+      "rgb_sha256": "d59217cbfb24a2ff62e1e432a3108e2acec006481d3b1a322cbead49cd2f4a93",
+      "png_sha256": "8d4e368fe67debf81a673b3e898524f800a8df890cead6d10e027e332914614a",
+      "identical": true
+    },
+    {
+      "page": 68,
+      "rgb_sha256": "f7406f53c6a7d8aa831556aefd6ef91374295ab4d3a73909d84dca76dd91fa97",
+      "png_sha256": "980d4bac1595f61f7529aeb00f720ea2a4ac0e12605ffa5b16e73ba1be85b73c",
+      "identical": true
+    },
+    {
+      "page": 69,
+      "rgb_sha256": "c41d073d004eef4009afef134b34b3741fcdad78f7ad19d507b3800b2b831022",
+      "png_sha256": "d912ee45e0046bda544ac83546fcb2108ab9c9c28c6be17133449cd5c46801bd",
+      "identical": true
+    },
+    {
+      "page": 70,
+      "rgb_sha256": "c702095d486e51863d39e240a475df95ee7cc30669738810943ead690674b21f",
+      "png_sha256": "3d3348cd4f7333cbfd32f9e520a55b3ff69b1cfa864acb179d30c9a67c225f34",
+      "identical": true
+    },
+    {
+      "page": 71,
+      "rgb_sha256": "b0b5c98e0f3b64585bc5d5027aef5f26b574077bd62c0111cfcc41d2be7bf9cf",
+      "png_sha256": "9b9a98575107c20afcd10cc969526868f84af9b019a6b5de6ce8dde423c87b70",
+      "identical": true
+    },
+    {
+      "page": 72,
+      "rgb_sha256": "09af9caeb7750c5ef2a36e6c28efbef3a55bc31dedbb1f3b2373507833139be2",
+      "png_sha256": "1a8ec50b2454144ec64a659b94a7406900fa1e81bd02bc49b77dac1ae7b86ce8",
+      "identical": true
+    },
+    {
+      "page": 73,
+      "rgb_sha256": "ed4815411d49615ff23a4c8fe3fc7982a8e216a7e8282003943ce93e2a3ba6e6",
+      "png_sha256": "743a553372f478b9cd3d65bf780ec0ed50a967e25a25e707f1979bd1da1ecef6",
+      "identical": true
+    },
+    {
+      "page": 74,
+      "rgb_sha256": "a9e508e34d4d8c4d8a4ddc84e3a62cc05e9876cd24d0648007fe872151b83d86",
+      "png_sha256": "58633dddac26c0e4cdb47312fe79e9ff77523b52f50a6089d681c8d404d70b5a",
+      "identical": true
+    },
+    {
+      "page": 75,
+      "rgb_sha256": "7cfe9abfb6f0e2f96756b2b7ef77c41f6ec69eef8c1de6d8b3d30c4d0f7c82d0",
+      "png_sha256": "512fd27eb781b7de756b6b9b4966bf2a3c0d96ea0436b9d6af60992da3b32e5f",
+      "identical": true
+    },
+    {
+      "page": 76,
+      "rgb_sha256": "4410ccfc9b054af6d70b3fc673e75a03a2be0607616345802b634151a7cc8ffe",
+      "png_sha256": "a9009de7d09ce93cca1ac8f2880a63b1cb2807e86f21a01e5b910d7ebbd4ad21",
+      "identical": true
+    },
+    {
+      "page": 77,
+      "rgb_sha256": "24f0ea280db1aa7474b631dc8569def7744644318d0e9cb3422b1413c4d06da7",
+      "png_sha256": "8688c21fcd51bd0fc93da7dfb6a5f5d74de27a51435650ffdfbe64caa2e0ac73",
+      "identical": true
+    },
+    {
+      "page": 78,
+      "rgb_sha256": "5703717a1e7e17209b69380c8d057b5af1f9ec0b82071eaa3864ed58c1386879",
+      "png_sha256": "6ec19b87de795f7cdc793d866bc491509045a234df20fa92876f54976a1fd9ac",
+      "identical": true
+    },
+    {
+      "page": 79,
+      "rgb_sha256": "f23f5ed671d6bff5812ced8a4782ae45df642fb7ca103da7e19eea8e12baa402",
+      "png_sha256": "ed392da2d3f9f44fc38ae40e5a735c248455a109d92e18e089f4605f71d48906",
+      "identical": true
+    },
+    {
+      "page": 80,
+      "rgb_sha256": "dcd46658dd8490012df68d43ea1d64ad924a6edd610f256ce1770cd75c2f9ee2",
+      "png_sha256": "469ad81a3b2e57e383921a3c08316a11aaacc08a904cf6f837ddf4e837d92a6b",
+      "identical": true
+    },
+    {
+      "page": 81,
+      "rgb_sha256": "6e2526180bdc309342d6c58024edd1e8add5858095f138a541fd808a8ff4751e",
+      "png_sha256": "9549522a6b7e15afa1e29928c9dc66a6c747c98bb0098d9264cc1f8bdd8aa8e9",
+      "identical": true
+    },
+    {
+      "page": 82,
+      "rgb_sha256": "ae69141f4aed732a39ba3291edd863a80e104097bdb41b2e7dc45b936b14378c",
+      "png_sha256": "402e397ca358be43cc83b0a9deb72ae137f6ae3974b6263e65ae9a880ddf2511",
+      "identical": true
+    },
+    {
+      "page": 83,
+      "rgb_sha256": "9695e6b8246aafbbf53ce03cc1b70579cca2332de850d755698eaefeeee661c2",
+      "png_sha256": "deec3bf92ab79da57ecebbd52afe5ac93156bc79048d3e1af556b3bb5704f865",
+      "identical": true
+    },
+    {
+      "page": 84,
+      "rgb_sha256": "21cd023aa9622c9c18a1583527a56b944ec6a78d55ba68b90a3dba1c6b1275cd",
+      "png_sha256": "c0e75460ed2d2f243e16f16838776fc3592d2bd0fcd9b23945f285712f12187c",
+      "identical": true
+    },
+    {
+      "page": 85,
+      "rgb_sha256": "ee56861f8de6ad7d09182c1d6aac94e37afb8e480c28956442592ea497187579",
+      "png_sha256": "6d9556700c5dca04da2a7dc4555bd6019912b6c35e76cba436dc79a524473af6",
+      "identical": true
+    },
+    {
+      "page": 86,
+      "rgb_sha256": "185c718bc3838811b1aa87a7684e75d98303e6cebad508afa8d2586e5f57dc8a",
+      "png_sha256": "803c7e4a884647e5f02e2bb5635769489ca6097dafb906926354e5f25f88d8b4",
+      "identical": true
+    },
+    {
+      "page": 87,
+      "rgb_sha256": "98f2485c07f9ca99e058f3abd562588da0c25f5e3b1fe2cdcffeab4ca58b73c0",
+      "png_sha256": "eebfeba0988228c7d49e693df68a26eea040aa7374bb11677c744f49ad8e5d87",
+      "identical": true
+    },
+    {
+      "page": 88,
+      "rgb_sha256": "36c5d2f5bbc4bb821f5af1f50c8aac57ce87e725794f4d17869591ba07f8f215",
+      "png_sha256": "30e40c081ee00737525661745a7bc46a210af4f71bb7f4747ff230976ba8fa16",
+      "identical": true
+    },
+    {
+      "page": 89,
+      "rgb_sha256": "75c1e3f03fbe1786aa90ad86b3726b69f818bd67609527833d81362ffa198290",
+      "png_sha256": "0c9a5c5b5bc1be9055fe3da8e723aa327611f8cb5513099d6a80bddc2e46f397",
+      "identical": true
+    },
+    {
+      "page": 90,
+      "rgb_sha256": "c749e67cfec166a57ebe54b3c53df2611e40fafac939bd957dd46703262b5717",
+      "png_sha256": "f91b13e921467540587e188a8b2947df75bdcffd87a8ee96fa29aaa200664745",
+      "identical": true
+    },
+    {
+      "page": 91,
+      "rgb_sha256": "512068dbd11a665c9bfda7e5dbae27fd8a734c20eb746588dbe5656ea7c73aa6",
+      "png_sha256": "aa73de4685c024fba5ba10939e5d49d03c86844117ab1c3414acbf53ce73bb6a",
+      "identical": true
+    },
+    {
+      "page": 92,
+      "rgb_sha256": "0f9fce0f9b89e1a17c2f5c9c7191e130ec093c63e238c6a48baf3274482baba3",
+      "png_sha256": "7984d98383fe2125c5b11116f300abe981150d3e8cbcd0f17fa8ae02dbba4997",
+      "identical": true
+    },
+    {
+      "page": 93,
+      "rgb_sha256": "c71f5a53e04bb384cebcd8778f5b5adb7c69d4d1a89e189a2bd491a762d6f78b",
+      "png_sha256": "4a231e26521994706dc1e4b6dd3014b514d5dcdf3042584fa5e3afc86da2d5ad",
+      "identical": true
+    }
+  ],
+  "metadata_rebuild_only": true,
+  "deterministic_metadata_note": "BaseDocTemplate invariant mode uses the fixed ReportLab metadata epoch, not the actual publication date.",
+  "two_successive_builds_sha256": "2cc6722ac61336ad9fe4f6ad509d4f497fae148f339fcf86b0be80e989001ef5"
+}

@@ -1,0 +1,122 @@
+{
+  "1": {
+    "join_worked_example_and_exercises": true,
+    "estimated_points": 599.0,
+    "limit_points": 716.9
+  },
+  "2": {
+    "join_worked_example_and_exercises": false,
+    "estimated_points": 756.0,
+    "limit_points": 716.9
+  },
+  "3": {
+    "join_worked_example_and_exercises": true,
+    "estimated_points": 593.8,
+    "limit_points": 716.9
+  },
+  "4": {
+    "join_worked_example_and_exercises": true,
+    "estimated_points": 563.2,
+    "limit_points": 716.9
+  },
+  "5": {
+    "join_worked_example_and_exercises": false,
+    "estimated_points": 880.6,
+    "limit_points": 716.9
+  },
+  "6": {
+    "join_worked_example_and_exercises": true,
+    "estimated_points": 623.0,
+    "limit_points": 716.9
+  },
+  "7": {
+    "join_worked_example_and_exercises": false,
+    "estimated_points": 943.4,
+    "limit_points": 716.9
+  },
+  "8": {
+    "join_worked_example_and_exercises": false,
+    "estimated_points": 973.8,
+    "limit_points": 716.9
+  },
+  "9": {
+    "join_worked_example_and_exercises": true,
+    "estimated_points": 668.2,
+    "limit_points": 716.9
+  },
+  "10": {
+    "join_worked_example_and_exercises": true,
+    "estimated_points": 624.4,
+    "limit_points": 716.9
+  },
+  "11": {
+    "join_worked_example_and_exercises": true,
+    "estimated_points": 651.8,
+    "limit_points": 716.9
+  },
+  "12": {
+    "join_worked_example_and_exercises": true,
+    "estimated_points": 579.6,
+    "limit_points": 716.9
+  },
+  "13": {
+    "join_worked_example_and_exercises": true,
+    "estimated_points": 666.8,
+    "limit_points": 716.9
+  },
+  "14": {
+    "join_worked_example_and_exercises": false,
+    "estimated_points": 871.4,
+    "limit_points": 716.9
+  },
+  "15": {
+    "join_worked_example_and_exercises": false,
+    "estimated_points": 811.0,
+    "limit_points": 716.9
+  },
+  "16": {
+    "join_worked_example_and_exercises": false,
+    "estimated_points": 757.8,
+    "limit_points": 716.9
+  },
+  "17": {
+    "join_worked_example_and_exercises": false,
+    "estimated_points": 899.6,
+    "limit_points": 716.9
+  },
+  "18": {
+    "join_worked_example_and_exercises": true,
+    "estimated_points": 610.2,
+    "limit_points": 716.9
+  },
+  "19": {
+    "join_worked_example_and_exercises": false,
+    "estimated_points": 850.4,
+    "limit_points": 716.9
+  },
+  "20": {
+    "join_worked_example_and_exercises": true,
+    "estimated_points": 709.0,
+    "limit_points": 716.9
+  },
+  "21": {
+    "join_worked_example_and_exercises": false,
+    "estimated_points": 788.8,
+    "limit_points": 716.9
+  },
+  "22": {
+    "join_worked_example_and_exercises": false,
+    "estimated_points": 749.6,
+    "limit_points": 716.9
+  },
+  "23": {
+    "join_worked_example_and_exercises": true,
+    "estimated_points": 579.6,
+    "limit_points": 716.9
+  },
+  "24": {
+    "join_worked_example_and_exercises": true,
+    "estimated_points": 556.8,
+    "limit_points": 716.9
+  }
+}

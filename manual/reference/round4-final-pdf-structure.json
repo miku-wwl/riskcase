@@ -1,0 +1,1818 @@
+{
+  "pdf": "manual\\dist\\RiskCase-Financial-Risk-Management-Engineering-Textbook.pdf",
+  "sha256": "2cc6722ac61336ad9fe4f6ad509d4f497fae148f339fcf86b0be80e989001ef5",
+  "bytes": 5396425,
+  "metadata": {
+    "/Author": "RiskCase Engineering",
+    "/CreationDate": "D:20000101000000+00'00'",
+    "/Creator": "(unspecified)",
+    "/Keywords": "",
+    "/ModDate": "D:20000101000000+00'00'",
+    "/Producer": "ReportLab PDF Library - (opensource)",
+    "/Subject": "Round 4 图解精修版 · 工程基准 2177004a39a534ee1796b8391a590763cce62fc2",
+    "/Title": "企业级金融风控系统：.NET 全栈架构、业务源码与数据一致性实践",
+    "/Trapped": "/False"
+  },
+  "page_count": 93,
+  "bookmarks": [
+    {
+      "title": "第 01 章｜RiskCase 要解决的是什么问题",
+      "page": 6
+    },
+    {
+      "title": "第 02 章｜理解银行风险告警",
+      "page": 9
+    },
+    {
+      "title": "第 03 章｜客户、账户与交易",
+      "page": 13
+    },
+    {
+      "title": "第 04 章｜可解释的风险信号",
+      "page": 16
+    },
+    {
+      "title": "第 05 章｜RiskCase 生命周期与不变量",
+      "page": 19
+    },
+    {
+      "title": "第 06 章｜分析员队列与分派",
+      "page": 23
+    },
+    {
+      "title": "第 07 章｜关系调查与图谱",
+      "page": 26
+    },
+    {
+      "title": "第 08 章｜风险评估与处置",
+      "page": 30
+    },
+    {
+      "title": "第 09 章｜从官方 CleanArchitecture 到 RiskCase",
+      "page": 34
+    },
+    {
+      "title": "第 10 章｜ASP.NET Core 请求管线",
+      "page": 37
+    },
+    {
+      "title": "第 11 章｜MediatR、CQRS 与应用工作流",
+      "page": 40
+    },
+    {
+      "title": "第 12 章｜领域建模与业务不变量",
+      "page": 43
+    },
+    {
+      "title": "第 13 章｜输入验证与资源授权",
+      "page": 46
+    },
+    {
+      "title": "第 14 章｜EF Core Change Tracking",
+      "page": 49
+    },
+    {
+      "title": "第 15 章｜PostgreSQL MVCC 与事务",
+      "page": 53
+    },
+    {
+      "title": "第 16 章｜乐观并发与幂等重试",
+      "page": 57
+    },
+    {
+      "title": "第 17 章｜审计历史与决定完整性",
+      "page": 63
+    },
+    {
+      "title": "第 18 章｜OpenAPI 与 NSwag 客户端生成",
+      "page": 67
+    },
+    {
+      "title": "第 19 章｜React 19 与 shadcn/ui 应用结构",
+      "page": 70
+    },
+    {
+      "title": "第 20 章｜TanStack Query 与本地草稿同步",
+      "page": 74
+    },
+    {
+      "title": "第 21 章｜用 React Flow 表达风险关系",
+      "page": 77
+    },
+    {
+      "title": "第 22 章｜分析员完整工作流",
+      "page": 81
+    },
+    {
+      "title": "第 23 章｜单元、集成与端到端测试",
+      "page": 85
+    },
+    {
+      "title": "第 24 章｜跨层故障恢复与工程取舍",
+      "page": 88
+    },
+    {
+      "title": "附录 A｜术语表",
+      "page": 91
+    },
+    {
+      "title": "附录 B｜源码索引",
+      "page": 92
+    }
+  ],
+  "fonts": {
+    "/Helvetica": {
+      "embedded": false,
+      "used": false
+    },
+    "/AAAAAA+MicrosoftYaHei-Bold-0": {
+      "embedded": true,
+      "used": true
+    },
+    "/AAAAAB+MicrosoftYaHei-Bold-0": {
+      "embedded": true,
+      "used": true
+    },
+    "/AAAAAC+MicrosoftYaHei-Bold-0": {
+      "embedded": true,
+      "used": true
+    },
+    "/AAAAAA+MicrosoftYaHei-0": {
+      "embedded": true,
+      "used": true
+    },
+    "/AAAAAB+MicrosoftYaHei-0": {
+      "embedded": true,
+      "used": true
+    },
+    "/AAAAAC+MicrosoftYaHei-0": {
+      "embedded": true,
+      "used": true
+    },
+    "/AAAAAD+MicrosoftYaHei-0": {
+      "embedded": true,
+      "used": true
+    },
+    "/AAAAAA+Consolas": {
+      "embedded": true,
+      "used": true
+    }
+  },
+  "out_of_page_characters": [],
+  "pages": [
+    {
+      "page": 1,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 141,
+      "images": 0,
+      "links": []
+    },
+    {
+      "page": 2,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 658,
+      "images": 0,
+      "links": []
+    },
+    {
+      "page": 3,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 688,
+      "images": 0,
+      "links": []
+    },
+    {
+      "page": 4,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 283,
+      "images": 0,
+      "links": [
+        {
+          "destination": "[IndirectObject(35, 0, 2270004125984), '/Fit']",
+          "destination_page": 6,
+          "uri": ""
+        },
+        {
+          "destination": "[IndirectObject(40, 0, 2270004125984), '/Fit']",
+          "destination_page": 9,
+          "uri": ""
+        },
+        {
+          "destination": "[IndirectObject(46, 0, 2270004125984), '/Fit']",
+          "destination_page": 13,
+          "uri": ""
+        },
+        {
+          "destination": "[IndirectObject(51, 0, 2270004125984), '/Fit']",
+          "destination_page": 16,
+          "uri": ""
+        },
+        {
+          "destination": "[IndirectObject(56, 0, 2270004125984), '/Fit']",
+          "destination_page": 19,
+          "uri": ""
+        },
+        {
+          "destination": "[IndirectObject(63, 0, 2270004125984), '/Fit']",
+          "destination_page": 23,
+          "uri": ""
+        },
+        {
+          "destination": "[IndirectObject(69, 0, 2270004125984), '/Fit']",
+          "destination_page": 26,
+          "uri": ""
+        },
+        {
+          "destination": "[IndirectObject(77, 0, 2270004125984), '/Fit']",
+          "destination_page": 30,
+          "uri": ""
+        },
+        {
+          "destination": "[IndirectObject(84, 0, 2270004125984), '/Fit']",
+          "destination_page": 34,
+          "uri": ""
+        },
+        {
+          "destination": "[IndirectObject(89, 0, 2270004125984), '/Fit']",
+          "destination_page": 37,
+          "uri": ""
+        },
+        {
+          "destination": "[IndirectObject(94, 0, 2270004125984), '/Fit']",
+          "destination_page": 40,
+          "uri": ""
+        },
+        {
+          "destination": "[IndirectObject(101, 0, 2270004125984), '/Fit']",
+          "destination_page": 43,
+          "uri": ""
+        }
+      ]
+    },
+    {
+      "page": 5,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 342,
+      "images": 0,
+      "links": [
+        {
+          "destination": "[IndirectObject(106, 0, 2270004125984), '/Fit']",
+          "destination_page": 46,
+          "uri": ""
+        },
+        {
+          "destination": "[IndirectObject(111, 0, 2270004125984), '/Fit']",
+          "destination_page": 49,
+          "uri": ""
+        },
+        {
+          "destination": "[IndirectObject(121, 0, 2270004125984), '/Fit']",
+          "destination_page": 53,
+          "uri": ""
+        },
+        {
+          "destination": "[IndirectObject(130, 0, 2270004125984), '/Fit']",
+          "destination_page": 57,
+          "uri": ""
+        },
+        {
+          "destination": "[IndirectObject(143, 0, 2270004125984), '/Fit']",
+          "destination_page": 63,
+          "uri": ""
+        },
+        {
+          "destination": "[IndirectObject(150, 0, 2270004125984), '/Fit']",
+          "destination_page": 67,
+          "uri": ""
+        },
+        {
+          "destination": "[IndirectObject(155, 0, 2270004125984), '/Fit']",
+          "destination_page": 70,
+          "uri": ""
+        },
+        {
+          "destination": "[IndirectObject(163, 0, 2270004125984), '/Fit']",
+          "destination_page": 74,
+          "uri": ""
+        },
+        {
+          "destination": "[IndirectObject(168, 0, 2270004125984), '/Fit']",
+          "destination_page": 77,
+          "uri": ""
+        },
+        {
+          "destination": "[IndirectObject(176, 0, 2270004125984), '/Fit']",
+          "destination_page": 81,
+          "uri": ""
+        },
+        {
+          "destination": "[IndirectObject(183, 0, 2270004125984), '/Fit']",
+          "destination_page": 85,
+          "uri": ""
+        },
+        {
+          "destination": "[IndirectObject(188, 0, 2270004125984), '/Fit']",
+          "destination_page": 88,
+          "uri": ""
+        },
+        {
+          "destination": "[IndirectObject(192, 0, 2270004125984), '/Fit']",
+          "destination_page": 91,
+          "uri": ""
+        },
+        {
+          "destination": "[IndirectObject(231, 0, 2270004125984), '/Fit']",
+          "destination_page": 92,
+          "uri": ""
+        }
+      ]
+    },
+    {
+      "page": 6,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 429,
+      "images": 1,
+      "links": []
+    },
+    {
+      "page": 7,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 1582,
+      "images": 0,
+      "links": [
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Api/Endpoints/AlertIngestion.cs#L17"
+        }
+      ]
+    },
+    {
+      "page": 8,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 831,
+      "images": 0,
+      "links": []
+    },
+    {
+      "page": 9,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 462,
+      "images": 1,
+      "links": []
+    },
+    {
+      "page": 10,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 1570,
+      "images": 0,
+      "links": [
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Application/RiskCases/RiskCaseCommands.cs#L120"
+        }
+      ]
+    },
+    {
+      "page": 11,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 666,
+      "images": 0,
+      "links": []
+    },
+    {
+      "page": 12,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 464,
+      "images": 0,
+      "links": []
+    },
+    {
+      "page": 13,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 390,
+      "images": 1,
+      "links": []
+    },
+    {
+      "page": 14,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 960,
+      "images": 0,
+      "links": [
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Domain/Entities/Account.cs#L17"
+        }
+      ]
+    },
+    {
+      "page": 15,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 755,
+      "images": 0,
+      "links": []
+    },
+    {
+      "page": 16,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 369,
+      "images": 1,
+      "links": []
+    },
+    {
+      "page": 17,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 1126,
+      "images": 0,
+      "links": [
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Domain/Entities/RiskSignal.cs#L18"
+        }
+      ]
+    },
+    {
+      "page": 18,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 704,
+      "images": 0,
+      "links": []
+    },
+    {
+      "page": 19,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 535,
+      "images": 1,
+      "links": []
+    },
+    {
+      "page": 20,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 920,
+      "images": 0,
+      "links": [
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Domain/Entities/RiskCase.cs#L123"
+        }
+      ]
+    },
+    {
+      "page": 21,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 519,
+      "images": 1,
+      "links": []
+    },
+    {
+      "page": 22,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 433,
+      "images": 0,
+      "links": []
+    },
+    {
+      "page": 23,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 425,
+      "images": 1,
+      "links": []
+    },
+    {
+      "page": 24,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 812,
+      "images": 0,
+      "links": [
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Application/RiskCases/RiskCaseQueries.cs#L61"
+        }
+      ]
+    },
+    {
+      "page": 25,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 721,
+      "images": 1,
+      "links": []
+    },
+    {
+      "page": 26,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 393,
+      "images": 1,
+      "links": []
+    },
+    {
+      "page": 27,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 933,
+      "images": 0,
+      "links": [
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Application/RiskCases/RiskCasePresenter.cs#L74"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Application/RiskCases/RiskCasePresenter.cs#L79"
+        }
+      ]
+    },
+    {
+      "page": 28,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 451,
+      "images": 1,
+      "links": []
+    },
+    {
+      "page": 29,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 398,
+      "images": 0,
+      "links": []
+    },
+    {
+      "page": 30,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 509,
+      "images": 1,
+      "links": []
+    },
+    {
+      "page": 31,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 1781,
+      "images": 0,
+      "links": [
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Domain/Entities/RiskCase.cs#L147"
+        }
+      ]
+    },
+    {
+      "page": 32,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 449,
+      "images": 1,
+      "links": []
+    },
+    {
+      "page": 33,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 439,
+      "images": 0,
+      "links": []
+    },
+    {
+      "page": 34,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 534,
+      "images": 1,
+      "links": []
+    },
+    {
+      "page": 35,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 1099,
+      "images": 0,
+      "links": [
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Application/DependencyInjection.cs#L8"
+        }
+      ]
+    },
+    {
+      "page": 36,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 1093,
+      "images": 0,
+      "links": []
+    },
+    {
+      "page": 37,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 491,
+      "images": 1,
+      "links": []
+    },
+    {
+      "page": 38,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 548,
+      "images": 0,
+      "links": [
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Api/Program.cs#L30"
+        }
+      ]
+    },
+    {
+      "page": 39,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 1007,
+      "images": 0,
+      "links": []
+    },
+    {
+      "page": 40,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 451,
+      "images": 1,
+      "links": []
+    },
+    {
+      "page": 41,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 745,
+      "images": 0,
+      "links": [
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Application/RiskCases/RiskCaseCommands.cs#L317"
+        }
+      ]
+    },
+    {
+      "page": 42,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 1035,
+      "images": 0,
+      "links": [
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/jbogard/MediatR/blob/v12.5.0/src/MediatR/Registration/ServiceRegistrar.cs"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/jbogard/MediatR/blob/v12.5.0/src/MediatR/Wrappers/RequestHandlerWrapper.cs"
+        }
+      ]
+    },
+    {
+      "page": 43,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 372,
+      "images": 1,
+      "links": []
+    },
+    {
+      "page": 44,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 1282,
+      "images": 0,
+      "links": [
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Domain/Entities/RiskCase.cs#L105"
+        }
+      ]
+    },
+    {
+      "page": 45,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 855,
+      "images": 0,
+      "links": []
+    },
+    {
+      "page": 46,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 410,
+      "images": 1,
+      "links": []
+    },
+    {
+      "page": 47,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 609,
+      "images": 0,
+      "links": [
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Infrastructure/Identity/IdentityService.cs#L45"
+        }
+      ]
+    },
+    {
+      "page": 48,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 956,
+      "images": 0,
+      "links": []
+    },
+    {
+      "page": 49,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 704,
+      "images": 1,
+      "links": []
+    },
+    {
+      "page": 50,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 1372,
+      "images": 0,
+      "links": [
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Application/RiskCases/RiskCaseCommands.cs#L260"
+        }
+      ]
+    },
+    {
+      "page": 51,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 540,
+      "images": 1,
+      "links": [
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Infrastructure/Data/ApplicationDbContext.cs#L23"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://learn.microsoft.com/en-us/ef/core/querying/single-split-queries"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://learn.microsoft.com/en-us/ef/core/querying/single-split-queries"
+        }
+      ]
+    },
+    {
+      "page": 52,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 480,
+      "images": 0,
+      "links": []
+    },
+    {
+      "page": 53,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 626,
+      "images": 1,
+      "links": []
+    },
+    {
+      "page": 54,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 649,
+      "images": 0,
+      "links": [
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Infrastructure/Data/ApplicationDbContext.cs#L43"
+        }
+      ]
+    },
+    {
+      "page": 55,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 1408,
+      "images": 0,
+      "links": [
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Infrastructure/Data/ApplicationDbContext.cs#L32"
+        }
+      ]
+    },
+    {
+      "page": 56,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 559,
+      "images": 0,
+      "links": [
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://www.postgresql.org/docs/17/transaction-iso.html"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://www.postgresql.org/docs/17/explicit-locking.html"
+        }
+      ]
+    },
+    {
+      "page": 57,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 442,
+      "images": 1,
+      "links": []
+    },
+    {
+      "page": 58,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 709,
+      "images": 1,
+      "links": [
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Infrastructure/Data/Configurations/RiskCaseEntityConfigurations.cs#L102"
+        }
+      ]
+    },
+    {
+      "page": 59,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 1799,
+      "images": 0,
+      "links": [
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Application/Common/Behaviours/IdempotencyBehaviour.cs#L31"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Infrastructure/Data/PostgresIdempotencyStore.cs#L48"
+        }
+      ]
+    },
+    {
+      "page": 60,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 1149,
+      "images": 0,
+      "links": []
+    },
+    {
+      "page": 61,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 556,
+      "images": 2,
+      "links": []
+    },
+    {
+      "page": 62,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 413,
+      "images": 0,
+      "links": []
+    },
+    {
+      "page": 63,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 638,
+      "images": 1,
+      "links": []
+    },
+    {
+      "page": 64,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 1340,
+      "images": 0,
+      "links": [
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Domain/Entities/RiskCase.cs#L151"
+        }
+      ]
+    },
+    {
+      "page": 65,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 347,
+      "images": 1,
+      "links": []
+    },
+    {
+      "page": 66,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 466,
+      "images": 0,
+      "links": []
+    },
+    {
+      "page": 67,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 474,
+      "images": 1,
+      "links": []
+    },
+    {
+      "page": 68,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 907,
+      "images": 0,
+      "links": [
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Api/Endpoints/RiskCases.cs#L90"
+        }
+      ]
+    },
+    {
+      "page": 69,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 884,
+      "images": 0,
+      "links": []
+    },
+    {
+      "page": 70,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 435,
+      "images": 1,
+      "links": []
+    },
+    {
+      "page": 71,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 572,
+      "images": 0,
+      "links": [
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/frontend/src/app.tsx#L19"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/frontend/src/app.tsx#L65"
+        }
+      ]
+    },
+    {
+      "page": 72,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 279,
+      "images": 1,
+      "links": []
+    },
+    {
+      "page": 73,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 461,
+      "images": 0,
+      "links": []
+    },
+    {
+      "page": 74,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 469,
+      "images": 1,
+      "links": []
+    },
+    {
+      "page": 75,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 1119,
+      "images": 0,
+      "links": [
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/frontend/src/lib/drafts.ts#L32"
+        }
+      ]
+    },
+    {
+      "page": 76,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 967,
+      "images": 0,
+      "links": []
+    },
+    {
+      "page": 77,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 438,
+      "images": 1,
+      "links": []
+    },
+    {
+      "page": 78,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 1582,
+      "images": 0,
+      "links": [
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/frontend/src/pages/case-detail-page.tsx#L270"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/frontend/src/pages/case-detail-page.tsx#L279"
+        }
+      ]
+    },
+    {
+      "page": 79,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 365,
+      "images": 1,
+      "links": []
+    },
+    {
+      "page": 80,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 441,
+      "images": 0,
+      "links": []
+    },
+    {
+      "page": 81,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 434,
+      "images": 1,
+      "links": []
+    },
+    {
+      "page": 82,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 1223,
+      "images": 0,
+      "links": [
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/frontend/src/pages/case-detail-page.tsx#L89"
+        }
+      ]
+    },
+    {
+      "page": 83,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 337,
+      "images": 1,
+      "links": []
+    },
+    {
+      "page": 84,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 466,
+      "images": 0,
+      "links": []
+    },
+    {
+      "page": 85,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 437,
+      "images": 1,
+      "links": []
+    },
+    {
+      "page": 86,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 1239,
+      "images": 0,
+      "links": [
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/test/integration/RiskCase.IntegrationTests/HardeningTests.cs#L145"
+        }
+      ]
+    },
+    {
+      "page": 87,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 823,
+      "images": 0,
+      "links": []
+    },
+    {
+      "page": 88,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 417,
+      "images": 1,
+      "links": []
+    },
+    {
+      "page": 89,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 1517,
+      "images": 0,
+      "links": [
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Api/Infrastructure/ProblemDetailsExceptionHandler.cs#L13"
+        }
+      ]
+    },
+    {
+      "page": 90,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 812,
+      "images": 0,
+      "links": []
+    },
+    {
+      "page": 91,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 935,
+      "images": 0,
+      "links": []
+    },
+    {
+      "page": 92,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 1654,
+      "images": 0,
+      "links": [
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Api/Endpoints/AlertIngestion.cs#L17"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Api/Endpoints/AlertIngestion.cs#L17"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Application/RiskCases/RiskCaseCommands.cs#L120"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Application/RiskCases/RiskCaseCommands.cs#L120"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Domain/Entities/Account.cs#L17"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Domain/Entities/Account.cs#L17"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Domain/Entities/RiskSignal.cs#L18"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Domain/Entities/RiskSignal.cs#L18"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Domain/Entities/RiskCase.cs#L123"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Domain/Entities/RiskCase.cs#L123"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Application/RiskCases/RiskCaseQueries.cs#L61"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Application/RiskCases/RiskCaseQueries.cs#L61"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Application/RiskCases/RiskCasePresenter.cs#L74"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Application/RiskCases/RiskCasePresenter.cs#L74"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Application/RiskCases/RiskCasePresenter.cs#L79"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Application/RiskCases/RiskCasePresenter.cs#L79"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Domain/Entities/RiskCase.cs#L147"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Domain/Entities/RiskCase.cs#L147"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Application/DependencyInjection.cs#L8"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Application/DependencyInjection.cs#L8"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Api/Program.cs#L30"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Api/Program.cs#L30"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Application/RiskCases/RiskCaseCommands.cs#L317"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Application/RiskCases/RiskCaseCommands.cs#L317"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Domain/Entities/RiskCase.cs#L105"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Domain/Entities/RiskCase.cs#L105"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Infrastructure/Identity/IdentityService.cs#L45"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Infrastructure/Identity/IdentityService.cs#L45"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Application/RiskCases/RiskCaseCommands.cs#L260"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Application/RiskCases/RiskCaseCommands.cs#L260"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Infrastructure/Data/ApplicationDbContext.cs#L23"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Infrastructure/Data/ApplicationDbContext.cs#L23"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Infrastructure/Data/ApplicationDbContext.cs#L43"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Infrastructure/Data/ApplicationDbContext.cs#L43"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Infrastructure/Data/ApplicationDbContext.cs#L32"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Infrastructure/Data/ApplicationDbContext.cs#L32"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Infrastructure/Data/Configurations/RiskCaseEntityConfigurations.cs#L102"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Infrastructure/Data/Configurations/RiskCaseEntityConfigurations.cs#L102"
+        }
+      ]
+    },
+    {
+      "page": 93,
+      "size": [
+        595.2756,
+        841.8898
+      ],
+      "characters": 946,
+      "images": 0,
+      "links": [
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Application/Common/Behaviours/IdempotencyBehaviour.cs#L31"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Application/Common/Behaviours/IdempotencyBehaviour.cs#L31"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Infrastructure/Data/PostgresIdempotencyStore.cs#L48"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Infrastructure/Data/PostgresIdempotencyStore.cs#L48"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Domain/Entities/RiskCase.cs#L151"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Domain/Entities/RiskCase.cs#L151"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Api/Endpoints/RiskCases.cs#L90"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Api/Endpoints/RiskCases.cs#L90"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/frontend/src/app.tsx#L19"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/frontend/src/app.tsx#L19"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/frontend/src/app.tsx#L65"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/frontend/src/app.tsx#L65"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/frontend/src/lib/drafts.ts#L32"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/frontend/src/lib/drafts.ts#L32"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/frontend/src/pages/case-detail-page.tsx#L270"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/frontend/src/pages/case-detail-page.tsx#L270"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/frontend/src/pages/case-detail-page.tsx#L279"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/frontend/src/pages/case-detail-page.tsx#L279"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/frontend/src/pages/case-detail-page.tsx#L89"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/frontend/src/pages/case-detail-page.tsx#L89"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/test/integration/RiskCase.IntegrationTests/HardeningTests.cs#L145"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/test/integration/RiskCase.IntegrationTests/HardeningTests.cs#L145"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Api/Infrastructure/ProblemDetailsExceptionHandler.cs#L13"
+        },
+        {
+          "destination": "",
+          "destination_page": null,
+          "uri": "https://github.com/miku-wwl/riskcase/blob/2177004a39a534ee1796b8391a590763cce62fc2/backend/RiskCase.Api/Infrastructure/ProblemDetailsExceptionHandler.cs#L13"
+        }
+      ]
+    }
+  ],
+  "navigation_check": {
+    "expected_destinations": [
+      6,
+      9,
+      13,
+      16,
+      19,
+      23,
+      26,
+      30,
+      34,
+      37,
+      40,
+      43,
+      46,
+      49,
+      53,
+      57,
+      63,
+      67,
+      70,
+      74,
+      77,
+      81,
+      85,
+      88,
+      91,
+      92
+    ],
+    "internal_link_destinations": [
+      6,
+      9,
+      13,
+      16,
+      19,
+      23,
+      26,
+      30,
+      34,
+      37,
+      40,
+      43,
+      46,
+      49,
+      53,
+      57,
+      63,
+      67,
+      70,
+      74,
+      77,
+      81,
+      85,
+      88,
+      91,
+      92
+    ],
+    "checks": {
+      "all_pages_a4": true,
+      "all_used_fonts_embedded": true,
+      "bookmarks_match_actual_destinations": true,
+      "toc_links_match_actual_destinations": true,
+      "no_characters_outside_page": true
+    },
+    "passed": true
+  }
+}

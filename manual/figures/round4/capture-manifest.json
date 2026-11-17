@@ -1,0 +1,555 @@
+{
+  "engineeringSha": "2177004a39a534ee1796b8391a590763cce62fc2",
+  "capturedAt": "2026-11-17T10:33:53.825Z",
+  "baseURL": "http://127.0.0.1:15173",
+  "synthetic": true,
+  "images": [
+    {
+      "file": "round4/investigation-facts.png",
+      "raw": "round4/raw/investigation-facts.png",
+      "sha256": "7b81cad222e19206c3b3f43c31666ebc824146929d73b6658f00bdf3756d1eac",
+      "purpose": "Customer/account and observed transaction facts at v3",
+      "caseVersion": "v3",
+      "url": "http://127.0.0.1:15173/cases/0a97f278-7df5-4a56-9112-69aad8b552a1",
+      "raw_sha256": "b746407170c98fe308d9a5826a2fb1a38ec197366b6eed234eba02c6f1041408"
+    },
+    {
+      "file": "round4/review-readonly.png",
+      "raw": "round4/raw/review-readonly.png",
+      "sha256": "75ad4edbccff49b5975b23fb2587fa85d02c685c33e925d8a9ef167a74946562",
+      "purpose": "Reviewing freezes investigation forms on server-aligned UI",
+      "caseVersion": "v6",
+      "url": "http://127.0.0.1:15173/cases/0a97f278-7df5-4a56-9112-69aad8b552a1",
+      "raw_sha256": "07a1b1d9dc7ec26f64a1b9599eea6133da1898d3ffb6fd6359a0fec25a53f1a9"
+    },
+    {
+      "file": "round4/graph-overview.png",
+      "raw": "round4/raw/graph-overview.png",
+      "sha256": "9beb5b381dc5abcf6b139483ff543f41ba4fa845de34844d26269d4f303c2f13",
+      "purpose": "Native React Flow overview before any pan/zoom",
+      "caseVersion": "v6",
+      "url": "http://127.0.0.1:15173/cases/0a97f278-7df5-4a56-9112-69aad8b552a1",
+      "raw_sha256": "b13e59551a56cd05407f340662dc611228f4ebe58729ff52d14810b267b7089b"
+    },
+    {
+      "file": "round4/graph-transactions.png",
+      "raw": "round4/raw/graph-transactions.png",
+      "sha256": "e5010ff1b286ca9cd5f5cf75a89f3289c290f799f871e44135071cd1b7ab07b2",
+      "purpose": "Native crop: transaction nodes connect to retained counterparty references",
+      "caseVersion": "v6",
+      "url": "http://127.0.0.1:15173/cases/0a97f278-7df5-4a56-9112-69aad8b552a1",
+      "raw_sha256": "d4fc929f8e60c21cd238957a7f66322bf97ba436179567962a3a3ceac8532d82"
+    },
+    {
+      "file": "round4/graph-ownership.png",
+      "raw": "round4/raw/graph-ownership.png",
+      "sha256": "dc28d5bf94ae165a679f8e43872ea5f7d67ca7cb0db9504a1a407988d1360457",
+      "purpose": "Native crop: actual customer/account nodes and ownership edges",
+      "caseVersion": "v6",
+      "url": "http://127.0.0.1:15173/cases/0a97f278-7df5-4a56-9112-69aad8b552a1",
+      "raw_sha256": "d4fc929f8e60c21cd238957a7f66322bf97ba436179567962a3a3ceac8532d82"
+    },
+    {
+      "file": "round4/return-dialog.png",
+      "raw": "round4/raw/return-dialog.png",
+      "sha256": "7833405da3a93dea7dc441b861be542fd166a5fa43da5635d421a7d7936d1bda",
+      "purpose": "Genuine return reason confirmation, before submission",
+      "caseVersion": "v6",
+      "url": "http://127.0.0.1:15173/cases/0a97f278-7df5-4a56-9112-69aad8b552a1",
+      "raw_sha256": "d9e3c8c677c03fab3bd8f3e9fec41f99c777994bcad5d1753e7256c1b4c2c447"
+    },
+    {
+      "file": "round4/return-audit.png",
+      "raw": "round4/raw/return-audit.png",
+      "sha256": "a1e73510df9729ee560b4beaf167784ee34c732d86f94371fb8a1edb6653b131",
+      "purpose": "Accepted return reason, real actor/time/version at v7",
+      "caseVersion": "v7",
+      "url": "http://127.0.0.1:15173/cases/0a97f278-7df5-4a56-9112-69aad8b552a1",
+      "raw_sha256": "7e5a9a1cd6d02fcac5d019f5e17b97b5ec93fc50182757e2b12d2b33adca79a9"
+    },
+    {
+      "file": "round4/assessment-history.png",
+      "raw": "round4/raw/assessment-history.png",
+      "sha256": "70e24618553588cefa3df530a385089d7e36d9cf5da15eb8dbf5b12d3f7e5ee4",
+      "purpose": "Both High v5/Basis v4 and Medium v9/Basis v8 retained; reviewed assessment is A2",
+      "caseVersion": "v10",
+      "url": "http://127.0.0.1:15173/cases/0a97f278-7df5-4a56-9112-69aad8b552a1",
+      "raw_sha256": "3ff6cfa76fb10c7c55dcce9d857a5e0f80cea7d29ecc0092c686ead7fafdc33c"
+    },
+    {
+      "file": "round4/final-decision.png",
+      "raw": "round4/raw/final-decision.png",
+      "sha256": "074caaabb2c84ad8640d4cd25c54a79c87d40424774f99c20a253456e4c70253",
+      "purpose": "Independent supervisor's final decision and downstream boundary at v11",
+      "caseVersion": "v11",
+      "url": "http://127.0.0.1:15173/cases/0a97f278-7df5-4a56-9112-69aad8b552a1",
+      "raw_sha256": "14e324bf9ce111ec17d04a63a9401d24db9ff3f75688135b34c40a2b21f81116"
+    },
+    {
+      "file": "round4/unknown-pending.png",
+      "raw": "round4/raw/unknown-pending.png",
+      "sha256": "b1bc6df8701107951df2b387026e8c0f8a5c49c4e09673816f481c981d975306",
+      "purpose": "Real server commit followed by route abort; pending intent remains",
+      "caseVersion": "v4",
+      "url": "http://127.0.0.1:15173/cases/0f9b7c10-5440-44ba-92e7-a32d81927668",
+      "raw_sha256": "db2cf7433f9d8d34db7bb53f12bff0c91a425983c3ba9bfedd8a7ec36137c444"
+    },
+    {
+      "file": "round4/unknown-recovered.png",
+      "raw": "round4/raw/unknown-recovered.png",
+      "sha256": "74969f3c478646d8f95443c4473002e7d57d36ca5285b40653877a81b7fe9450",
+      "purpose": "Recovery replays v5 while current UI remains v6; one historical assessment",
+      "caseVersion": "v6",
+      "url": "http://127.0.0.1:15173/cases/0f9b7c10-5440-44ba-92e7-a32d81927668",
+      "raw_sha256": "ccf6ccc36fc51c22ea23dba263020a017401ecb8a784a6362ccba4d1d7a81f10"
+    },
+    {
+      "file": "round4/queue-card.png",
+      "raw": "round4/raw/queue-card.png",
+      "sha256": "111326ff5f2f7d4165a17032f246c51b6a660d72f1c42384e6c5fa9235dcf34f",
+      "purpose": "Genuine compact queue card: identity, severity, state and ownership at readable size",
+      "caseVersion": null,
+      "url": "http://127.0.0.1:15173/",
+      "raw_sha256": "1dc934fe58a083b203175c9ee89a1894f1395a1036ebf839aa182ffd4f94b71d"
+    }
+  ],
+  "observations": [
+    {
+      "scenario": "return/reassess/resubmit/independent-decision",
+      "caseId": "0a97f278-7df5-4a56-9112-69aad8b552a1",
+      "versions": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "final": {
+        "id": "0a97f278-7df5-4a56-9112-69aad8b552a1",
+        "version": 11,
+        "status": "resolved",
+        "assignedAnalystId": "5c62b9a5-5f8d-496e-8b81-84ebdfe9afbc",
+        "created": "2026-11-17T10:33:57.272944+00:00",
+        "lastModified": "2026-11-17T10:34:10.622225+00:00",
+        "assessmentLevel": "medium",
+        "assessmentRationale": "新增核验未证实共同控制，风险由高调整为中；保留历史高风险理由，仍需主管复核外部受益所有权与经营背景的不确定性。",
+        "assessedAt": "2026-11-17T10:34:07.853365+00:00",
+        "assessedById": "5c62b9a5-5f8d-496e-8b81-84ebdfe9afbc",
+        "currentAssessmentId": "f48792e7-4b84-4a0a-b90e-7bf350b980c7",
+        "reviewedAssessmentId": "f48792e7-4b84-4a0a-b90e-7bf350b980c7",
+        "reviewSubmittedById": "5c62b9a5-5f8d-496e-8b81-84ebdfe9afbc",
+        "reviewSubmittedAt": "2026-11-17T10:34:08.094566+00:00",
+        "assessments": [
+          {
+            "id": "373cb105-9c99-40b7-8c86-ef624a1e2d61",
+            "level": "high",
+            "rationale": "已核对交易时间、引用与账户来源；短时转出及共享新对手方需要补查经营背景，现有资料不构成欺诈或共同控制的证明。",
+            "assessorId": "5c62b9a5-5f8d-496e-8b81-84ebdfe9afbc",
+            "assessedAt": "2026-11-17T10:33:59.800932+00:00",
+            "caseVersion": 5,
+            "basisVersion": 4,
+            "isLegacy": false
+          },
+          {
+            "id": "f48792e7-4b84-4a0a-b90e-7bf350b980c7",
+            "level": "medium",
+            "rationale": "新增核验未证实共同控制，风险由高调整为中；保留历史高风险理由，仍需主管复核外部受益所有权与经营背景的不确定性。",
+            "assessorId": "5c62b9a5-5f8d-496e-8b81-84ebdfe9afbc",
+            "assessedAt": "2026-11-17T10:34:07.853365+00:00",
+            "caseVersion": 9,
+            "basisVersion": 8,
+            "isLegacy": false
+          }
+        ],
+        "alert": {
+          "id": "a791ca3f-02a3-41fb-a37c-a5355e2e26b7",
+          "externalAlertId": "PUB-R4-WORKFLOW-8298fc",
+          "sourceSystem": "Textbook Synthetic Monitor",
+          "category": "transactionRisk",
+          "detectedAt": "2026-11-17T09:59:29.494+00:00",
+          "severity": "high",
+          "riskScore": 87
+        },
+        "customer": {
+          "id": "14ae6ce8-ad6f-4344-a8c0-b1292ccdda11",
+          "customerNumber": "RC-10482",
+          "displayName": "Aroha Thompson",
+          "segment": "Personal Banking",
+          "countryCode": "NZ",
+          "riskTier": "Standard"
+        },
+        "account": {
+          "id": "877e4e29-0361-4f3f-965c-d3b07a441963",
+          "maskedNumber": "02-****-8452",
+          "accountType": "Everyday",
+          "currency": "NZD",
+          "status": "Open",
+          "openedOn": "2022-11-17"
+        },
+        "signals": [
+          {
+            "code": "VELOCITY_30M",
+            "title": "短时间转账频率上升",
+            "explanation": "30 分钟内出现 3 笔金额相近的对外转账，频率高于该客户过去 90 天的观察区间。",
+            "severity": "high",
+            "transactionReferences": [
+              "TX-77104",
+              "TX-77118",
+              "TX-77142",
+              "TX-77164"
+            ]
+          },
+          {
+            "code": "NEW_COUNTERPARTY",
+            "title": "出现新交易对手",
+            "explanation": "其中 2 笔转账流向近期首次出现的交易对手；该信号提示核查关系，不代表交易已被证明为欺诈。",
+            "severity": "medium",
+            "transactionReferences": [
+              "TX-77118",
+              "TX-77142"
+            ]
+          },
+          {
+            "code": "SHARED_COUNTERPARTY",
+            "title": "不同客户账户出现相同交易对手",
+            "explanation": "一笔关联账户交易与当前观察对象流向同一交易对手；这只是需要解释的关系线索，不足以推断账户持有人串通。",
+            "severity": "medium",
+            "transactionReferences": [
+              "TX-77164"
+            ]
+          }
+        ],
+        "transactions": [
+          {
+            "id": "a3ea96e3-574e-45fe-a2bb-3264c79c0263",
+            "externalReference": "TX-77104",
+            "direction": "outgoing",
+            "amount": 19800,
+            "currency": "NZD",
+            "occurredAt": "2026-11-17T09:22:29.494854+00:00",
+            "channel": "Online",
+            "counterpartyReference": "CP-701",
+            "counterpartyLabel": "Harbour Equipment Ltd",
+            "accountMaskedNumber": "02-****-8452"
+          },
+          {
+            "id": "040fa364-6012-4042-8be8-6028b3728381",
+            "externalReference": "TX-77118",
+            "direction": "outgoing",
+            "amount": 19500,
+            "currency": "NZD",
+            "occurredAt": "2026-11-17T09:36:29.494854+00:00",
+            "channel": "Online",
+            "counterpartyReference": "CP-845",
+            "counterpartyLabel": "South Ridge Services",
+            "accountMaskedNumber": "02-****-8452"
+          },
+          {
+            "id": "bd72424a-74cb-4299-ab18-b559238d2dad",
+            "externalReference": "TX-77142",
+            "direction": "outgoing",
+            "amount": 20100,
+            "currency": "NZD",
+            "occurredAt": "2026-11-17T09:53:29.494854+00:00",
+            "channel": "Mobile",
+            "counterpartyReference": "CP-845",
+            "counterpartyLabel": "South Ridge Services",
+            "accountMaskedNumber": "02-****-8452"
+          },
+          {
+            "id": "ce56da0b-a767-43c0-beb2-4a6ea062a944",
+            "externalReference": "TX-77164",
+            "direction": "outgoing",
+            "amount": 8100,
+            "currency": "NZD",
+            "occurredAt": "2026-11-17T09:58:29.494854+00:00",
+            "channel": "Online",
+            "counterpartyReference": "CP-845",
+            "counterpartyLabel": "South Ridge Services",
+            "accountMaskedNumber": "03-****-1269"
+          }
+        ],
+        "notes": [
+          {
+            "id": "3dfea20b-8c87-4550-bc13-9d518a73a528",
+            "analystId": "5c62b9a5-5f8d-496e-8b81-84ebdfe9afbc",
+            "text": "核对四条合成交易：Aroha 与 Mateo 的账户均出现 CP-845；共享对手方仍不足以证明共同控制，需核实经营背景。",
+            "occurredAt": "2026-11-17T10:33:59.416761+00:00",
+            "caseVersion": 4
+          },
+          {
+            "id": "27c8f0e0-14fd-4531-b2af-a53b1551383c",
+            "analystId": "5c62b9a5-5f8d-496e-8b81-84ebdfe9afbc",
+            "text": "补充核验：对手方属于共同商户的可能性尚未排除；已检查观察交易引用，但仍需外部受益所有权资料确认。",
+            "occurredAt": "2026-11-17T10:34:07.449225+00:00",
+            "caseVersion": 8
+          }
+        ],
+        "links": [],
+        "decisions": [
+          {
+            "id": "05319f51-640e-455f-a352-c5e9eeabf9cc",
+            "disposition": "escalate",
+            "rationale": "独立复核已核对两次评估及退回反馈；仍需外部资料确认受益所有权，记录升级调查供下游人工团队后续处理，不表示外部已完成行动。",
+            "reviewerId": "9b7f2e2f-24c4-49fb-9fcb-43765369db81",
+            "decidedAt": "2026-11-17T10:34:10.621895+00:00",
+            "caseVersion": 11,
+            "assessmentId": "f48792e7-4b84-4a0a-b90e-7bf350b980c7"
+          }
+        ],
+        "auditHistory": [
+          {
+            "version": 1,
+            "operation": "AlertIngested",
+            "actorId": "upstream:Textbook Synthetic Monitor",
+            "occurredAt": "2026-11-17T10:33:57.272741+00:00",
+            "detailsJson": "{\"SourceSystem\": \"Textbook Synthetic Monitor\", \"ExternalAlertId\": \"PUB-R4-WORKFLOW-8298fc\", \"transactionCount\": 4}"
+          },
+          {
+            "version": 2,
+            "operation": "AnalystAssigned",
+            "actorId": "5c62b9a5-5f8d-496e-8b81-84ebdfe9afbc",
+            "occurredAt": "2026-11-17T10:33:57.320934+00:00",
+            "detailsJson": "{\"AnalystId\": \"5c62b9a5-5f8d-496e-8b81-84ebdfe9afbc\"}"
+          },
+          {
+            "version": 3,
+            "operation": "InvestigationStarted",
+            "actorId": "5c62b9a5-5f8d-496e-8b81-84ebdfe9afbc",
+            "occurredAt": "2026-11-17T10:33:58.491341+00:00",
+            "detailsJson": "{}"
+          },
+          {
+            "version": 4,
+            "operation": "NoteAdded",
+            "actorId": "5c62b9a5-5f8d-496e-8b81-84ebdfe9afbc",
+            "occurredAt": "2026-11-17T10:33:59.416865+00:00",
+            "detailsJson": "{\"textLength\": 61}"
+          },
+          {
+            "version": 5,
+            "operation": "AssessmentRecorded",
+            "actorId": "5c62b9a5-5f8d-496e-8b81-84ebdfe9afbc",
+            "occurredAt": "2026-11-17T10:33:59.801036+00:00",
+            "detailsJson": "{\"Id\": \"373cb105-9c99-40b7-8c86-ef624a1e2d61\", \"Level\": 2, \"BasisVersion\": 4}"
+          },
+          {
+            "version": 6,
+            "operation": "ReviewRequested",
+            "actorId": "5c62b9a5-5f8d-496e-8b81-84ebdfe9afbc",
+            "occurredAt": "2026-11-17T10:34:00.065217+00:00",
+            "detailsJson": "{\"ReviewSubmittedById\": \"5c62b9a5-5f8d-496e-8b81-84ebdfe9afbc\", \"ReviewedAssessmentId\": \"373cb105-9c99-40b7-8c86-ef624a1e2d61\"}"
+          },
+          {
+            "version": 7,
+            "operation": "InvestigationResumed",
+            "actorId": "9b7f2e2f-24c4-49fb-9fcb-43765369db81",
+            "occurredAt": "2026-11-17T10:34:05.299134+00:00",
+            "detailsJson": "{\"Reason\": \"请核验交易对手账户的实际受益所有人，并补充高频转出与客户经营活动之间的证据关系，再重新提交风险评估。\"}"
+          },
+          {
+            "version": 8,
+            "operation": "NoteAdded",
+            "actorId": "5c62b9a5-5f8d-496e-8b81-84ebdfe9afbc",
+            "occurredAt": "2026-11-17T10:34:07.449316+00:00",
+            "detailsJson": "{\"textLength\": 48}"
+          },
+          {
+            "version": 9,
+            "operation": "AssessmentRecorded",
+            "actorId": "5c62b9a5-5f8d-496e-8b81-84ebdfe9afbc",
+            "occurredAt": "2026-11-17T10:34:07.853434+00:00",
+            "detailsJson": "{\"Id\": \"f48792e7-4b84-4a0a-b90e-7bf350b980c7\", \"Level\": 1, \"BasisVersion\": 8}"
+          },
+          {
+            "version": 10,
+            "operation": "ReviewRequested",
+            "actorId": "5c62b9a5-5f8d-496e-8b81-84ebdfe9afbc",
+            "occurredAt": "2026-11-17T10:34:08.094591+00:00",
+            "detailsJson": "{\"ReviewSubmittedById\": \"5c62b9a5-5f8d-496e-8b81-84ebdfe9afbc\", \"ReviewedAssessmentId\": \"f48792e7-4b84-4a0a-b90e-7bf350b980c7\"}"
+          },
+          {
+            "version": 11,
+            "operation": "DispositionRecorded",
+            "actorId": "9b7f2e2f-24c4-49fb-9fcb-43765369db81",
+            "occurredAt": "2026-11-17T10:34:10.622027+00:00",
+            "detailsJson": "{\"Disposition\": 0, \"AssessmentId\": \"f48792e7-4b84-4a0a-b90e-7bf350b980c7\"}"
+          }
+        ],
+        "graphNodes": [
+          {
+            "id": "customer:14ae6ce8-ad6f-4344-a8c0-b1292ccdda11",
+            "type": "customer",
+            "label": "Aroha Thompson",
+            "detail": "客户号 RC-10482 · NZ · 风险层级 Standard",
+            "isAlertSubject": true
+          },
+          {
+            "id": "account:877e4e29-0361-4f3f-965c-d3b07a441963",
+            "type": "account",
+            "label": "02-****-8452",
+            "detail": "Everyday · NZD · Open",
+            "isAlertSubject": true
+          },
+          {
+            "id": "transaction:a3ea96e3-574e-45fe-a2bb-3264c79c0263",
+            "type": "transaction",
+            "label": "Outgoing 19,800.00 NZD",
+            "detail": "2026-11-17 09:22 · Online · TX-77104",
+            "isAlertSubject": false
+          },
+          {
+            "id": "counterparty:CP-701",
+            "type": "counterparty",
+            "label": "Harbour Equipment Ltd",
+            "detail": "CP-701",
+            "isAlertSubject": false
+          },
+          {
+            "id": "transaction:040fa364-6012-4042-8be8-6028b3728381",
+            "type": "transaction",
+            "label": "Outgoing 19,500.00 NZD",
+            "detail": "2026-11-17 09:36 · Online · TX-77118",
+            "isAlertSubject": false
+          },
+          {
+            "id": "counterparty:CP-845",
+            "type": "counterparty",
+            "label": "South Ridge Services",
+            "detail": "CP-845",
+            "isAlertSubject": false
+          },
+          {
+            "id": "transaction:bd72424a-74cb-4299-ab18-b559238d2dad",
+            "type": "transaction",
+            "label": "Outgoing 20,100.00 NZD",
+            "detail": "2026-11-17 09:53 · Mobile · TX-77142",
+            "isAlertSubject": false
+          },
+          {
+            "id": "account:398c4a0d-dcf1-4d2d-86f6-39989c2591f4",
+            "type": "account",
+            "label": "03-****-1269",
+            "detail": "Business · NZD",
+            "isAlertSubject": false
+          },
+          {
+            "id": "customer:684e8139-f834-48f9-8879-9ca72ee2f118",
+            "type": "customer",
+            "label": "Mateo Chen",
+            "detail": "客户号 RC-20931 · NZ · 风险层级 Elevated",
+            "isAlertSubject": false
+          },
+          {
+            "id": "transaction:ce56da0b-a767-43c0-beb2-4a6ea062a944",
+            "type": "transaction",
+            "label": "Outgoing 8,100.00 NZD",
+            "detail": "2026-11-17 09:58 · Online · TX-77164",
+            "isAlertSubject": false
+          }
+        ],
+        "graphEdges": [
+          {
+            "id": "owns:14ae6ce8-ad6f-4344-a8c0-b1292ccdda11:877e4e29-0361-4f3f-965c-d3b07a441963",
+            "source": "customer:14ae6ce8-ad6f-4344-a8c0-b1292ccdda11",
+            "target": "account:877e4e29-0361-4f3f-965c-d3b07a441963",
+            "label": "持有账户",
+            "rationale": null
+          },
+          {
+            "id": "activity:a3ea96e3-574e-45fe-a2bb-3264c79c0263",
+            "source": "account:877e4e29-0361-4f3f-965c-d3b07a441963",
+            "target": "transaction:a3ea96e3-574e-45fe-a2bb-3264c79c0263",
+            "label": "转出",
+            "rationale": null
+          },
+          {
+            "id": "counterparty:a3ea96e3-574e-45fe-a2bb-3264c79c0263",
+            "source": "transaction:a3ea96e3-574e-45fe-a2bb-3264c79c0263",
+            "target": "counterparty:CP-701",
+            "label": "交易对手",
+            "rationale": null
+          },
+          {
+            "id": "activity:040fa364-6012-4042-8be8-6028b3728381",
+            "source": "account:877e4e29-0361-4f3f-965c-d3b07a441963",
+            "target": "transaction:040fa364-6012-4042-8be8-6028b3728381",
+            "label": "转出",
+            "rationale": null
+          },
+          {
+            "id": "counterparty:040fa364-6012-4042-8be8-6028b3728381",
+            "source": "transaction:040fa364-6012-4042-8be8-6028b3728381",
+            "target": "counterparty:CP-845",
+            "label": "交易对手",
+            "rationale": null
+          },
+          {
+            "id": "activity:bd72424a-74cb-4299-ab18-b559238d2dad",
+            "source": "account:877e4e29-0361-4f3f-965c-d3b07a441963",
+            "target": "transaction:bd72424a-74cb-4299-ab18-b559238d2dad",
+            "label": "转出",
+            "rationale": null
+          },
+          {
+            "id": "counterparty:bd72424a-74cb-4299-ab18-b559238d2dad",
+            "source": "transaction:bd72424a-74cb-4299-ab18-b559238d2dad",
+            "target": "counterparty:CP-845",
+            "label": "交易对手",
+            "rationale": null
+          },
+          {
+            "id": "owns:684e8139-f834-48f9-8879-9ca72ee2f118:398c4a0d-dcf1-4d2d-86f6-39989c2591f4",
+            "source": "customer:684e8139-f834-48f9-8879-9ca72ee2f118",
+            "target": "account:398c4a0d-dcf1-4d2d-86f6-39989c2591f4",
+            "label": "持有账户",
+            "rationale": null
+          },
+          {
+            "id": "activity:ce56da0b-a767-43c0-beb2-4a6ea062a944",
+            "source": "account:398c4a0d-dcf1-4d2d-86f6-39989c2591f4",
+            "target": "transaction:ce56da0b-a767-43c0-beb2-4a6ea062a944",
+            "label": "转出",
+            "rationale": null
+          },
+          {
+            "id": "counterparty:ce56da0b-a767-43c0-beb2-4a6ea062a944",
+            "source": "transaction:ce56da0b-a767-43c0-beb2-4a6ea062a944",
+            "target": "counterparty:CP-845",
+            "label": "交易对手",
+            "rationale": null
+          }
+        ],
+        "legacyAssessors": []
+      }
+    },
+    {
+      "scenario": "assessment-commit/lost-response/reassignment/reload/replay",
+      "caseId": "0f9b7c10-5440-44ba-92e7-a32d81927668",
+      "originalPending": [
+        {
+          "userId": "5c62b9a5-5f8d-496e-8b81-84ebdfe9afbc",
+          "caseId": "0f9b7c10-5440-44ba-92e7-a32d81927668",
+          "operation": "assessment",
+          "expectedVersion": 4,
+          "payload": {
+            "level": "high",
+            "rationale": "短时转出和共享对手方仍需核验经营用途，保留资料缺口及反证，提交高风险评估供独立主管复核。"
+          },
+          "key": "b904598e-2349-46c3-9ed9-59aad331110f"
+        }
+      ],
+      "historicalResponseVersion": 5,
+      "currentVersion": 6,
+      "assessmentCount": 1,
+      "assessmentAuditCount": 1,
+      "currentAssessmentId": null
+    }
+  ]
+}

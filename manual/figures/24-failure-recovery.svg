@@ -1,25 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="460" viewBox="0 0 900 460">
-<rect width="100%" height="100%" rx="18" fill="#ffffff"/>
-<path d="M 30 77 H 870" stroke="#e6edf2" stroke-width="1"/>
-<text x="38" y="39" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="21px" font-weight="700" fill="#22364f">根据失败类型选择恢复方式</text>
-<text x="38" y="63" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12px" font-weight="400" fill="#64748b">重复重试不是所有错误的答案</text>
-<defs><marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#718096"/></marker></defs>
-<rect x="30" y="180" width="182" height="112" rx="13" fill="#fff4df" stroke="#b87414" stroke-width="1.4"/>
-<path d="M 44 194 V 278" stroke="#b87414" stroke-width="3" stroke-linecap="round"/>
-<text x="57" y="214" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">响应超时</text>
-<text x="57" y="246" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#765e39">同一意图 · 复用幂等键</text>
-<rect x="250" y="180" width="182" height="112" rx="13" fill="#fff0ed" stroke="#bd5448" stroke-width="1.4"/>
-<path d="M 264 194 V 278" stroke="#bd5448" stroke-width="3" stroke-linecap="round"/>
-<text x="277" y="214" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">HTTP 412</text>
-<text x="277" y="246" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#77524e">重新读取 · 重新判断</text>
-<rect x="470" y="180" width="182" height="112" rx="13" fill="#f1edfb" stroke="#7255a5" stroke-width="1.4"/>
-<path d="M 484 194 V 278" stroke="#7255a5" stroke-width="3" stroke-linecap="round"/>
-<text x="497" y="214" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">HTTP 409</text>
-<text x="497" y="246" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#625576">检查键是否用于别的内容</text>
-<rect x="690" y="180" width="182" height="112" rx="13" fill="#eef3f9" stroke="#22364f" stroke-width="1.4"/>
-<path d="M 704 194 V 278" stroke="#22364f" stroke-width="3" stroke-linecap="round"/>
-<text x="717" y="214" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">HTTP 403</text>
-<text x="717" y="246" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#4d6074">核对角色与案件负责人</text>
-<path d="M 30 414 H 870" stroke="#e6edf2" stroke-width="1"/>
-<text x="38" y="439" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#64748b">区分未知结果、并发冲突、幂等键冲突和权限失败</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="485" viewBox="0 0 900 485">
+<rect width="900" height="100%" fill="white"/>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="none" stroke="#64748b"/></marker></defs>
+<text x="24" y="32" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="24" fill="#22364f" font-weight="700">按结果是否已知选择恢复动作</text>
+<text x="24" y="61" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="16" fill="#526273" font-weight="400">先识别业务错误 code，再决定读新状态、改输入或保留原意图</text>
+<path d="M24 79H876" fill="none" stroke="#dbe5ea" stroke-width="1.7"/>
+<path d="M24 443H876" fill="none" stroke="#dbe5ea" stroke-width="1.7"/>
+<text x="24" y="470" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="15" fill="#526273" font-weight="400">401 / 403 可能发生在恢复阶段，不能反推第一次提交没有成功</text>
+<rect x="25" y="105" width="850" height="52" rx="7" fill="#fff4df"/>
+<text x="40" y="137" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="18" fill="#a36c13" font-weight="700">网络中断 / 503</text>
+<text x="270" y="137" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#526273" font-weight="400">未知或数据库竞争中止：保留原键、正文与 If-Match</text>
+<rect x="25" y="169" width="850" height="52" rx="7" fill="#fff0ed"/>
+<text x="40" y="201" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="18" fill="#b84940" font-weight="700">412 version_conflict</text>
+<text x="270" y="201" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#526273" font-weight="400">新操作基于旧版本：GET，再由人确认新的意图</text>
+<rect x="25" y="233" width="850" height="52" rx="7" fill="#f1edfb"/>
+<text x="40" y="265" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="18" fill="#7255a5" font-weight="700">409</text>
+<text x="270" y="265" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#526273" font-weight="400">区分键误用、重复关系和领域状态；不能统一换键重试</text>
+<rect x="25" y="297" width="850" height="52" rx="7" fill="#eef3f9"/>
+<text x="40" y="329" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="18" fill="#22364f" font-weight="700">400 / 428</text>
+<text x="270" y="329" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#526273" font-weight="400">修正输入 / 前置条件；确认原意图的明确失败语义</text>
+<rect x="25" y="361" width="850" height="52" rx="7" fill="#e8f5f3"/>
+<text x="40" y="393" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="18" fill="#117c78" font-weight="700">401 / 403</text>
+<text x="270" y="393" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#526273" font-weight="400">恢复身份或检查当前角色与资源资格；不绕过权限</text>
 </svg>

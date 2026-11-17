@@ -1,48 +1,31 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="460" viewBox="0 0 900 460">
-<rect width="100%" height="100%" rx="18" fill="#ffffff"/>
-<path d="M 30 77 H 870" stroke="#e6edf2" stroke-width="1"/>
-<text x="38" y="39" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="21px" font-weight="700" fill="#22364f">调查对象及其关系</text>
-<text x="38" y="63" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="12px" font-weight="400" fill="#64748b">每种对象表达一种可以追溯的业务事实</text>
-<defs><marker id="arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#718096"/></marker></defs>
-<path d="M 216 156.0 C 258 156.0, 213 156.0, 255 156.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="198.5" y="134.0" width="74" height="19" rx="8" fill="#ffffff" stroke="#e2e8f0"/>
-<text x="235.5" y="148.0" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="10px" fill="#526273">拥有</text>
-<path d="M 437 156.0 C 479 156.0, 434 156.0, 476 156.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="419.5" y="134.0" width="74" height="19" rx="8" fill="#ffffff" stroke="#e2e8f0"/>
-<text x="456.5" y="148.0" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="10px" fill="#526273">发生</text>
-<path d="M 658 156.0 C 700 156.0, 655 156.0, 697 156.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="640.5" y="134.0" width="74" height="19" rx="8" fill="#ffffff" stroke="#e2e8f0"/>
-<text x="677.5" y="148.0" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="10px" fill="#526273">指向</text>
-<path d="M 427 341.0 C 469 341.0, 443 341.0, 485 341.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="419.0" y="319.0" width="74" height="19" rx="8" fill="#ffffff" stroke="#e2e8f0"/>
-<text x="456.0" y="333.0" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="10px" fill="#526273">创建调查</text>
-<path d="M 427 341.0 C 469 341.0, 434 156.0, 476 156.0" fill="none" stroke="#718096" stroke-width="2" marker-end="url(#arrow)"/>
-<rect x="414.5" y="226.5" width="74" height="19" rx="8" fill="#ffffff" stroke="#e2e8f0"/>
-<text x="451.5" y="240.5" text-anchor="middle" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="10px" fill="#526273">关联</text>
-<rect x="34" y="100" width="182" height="112" rx="13" fill="#eef3f9" stroke="#22364f" stroke-width="1.4"/>
-<path d="M 48 114 V 198" stroke="#22364f" stroke-width="3" stroke-linecap="round"/>
-<text x="61" y="134" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">客户</text>
-<text x="61" y="166" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#4d6074">自然人或机构</text>
-<rect x="255" y="100" width="182" height="112" rx="13" fill="#e8f5f3" stroke="#117c78" stroke-width="1.4"/>
-<path d="M 269 114 V 198" stroke="#117c78" stroke-width="3" stroke-linecap="round"/>
-<text x="282" y="134" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">账户</text>
-<text x="282" y="166" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#466b68">客户名下的调查对象</text>
-<rect x="476" y="100" width="182" height="112" rx="13" fill="#fff4df" stroke="#b87414" stroke-width="1.4"/>
-<path d="M 490 114 V 198" stroke="#b87414" stroke-width="3" stroke-linecap="round"/>
-<text x="503" y="134" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">交易</text>
-<text x="503" y="166" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#765e39">时间 · 金额 · 对手方</text>
-<rect x="697" y="100" width="182" height="112" rx="13" fill="#f1edfb" stroke="#7255a5" stroke-width="1.4"/>
-<path d="M 711 114 V 198" stroke="#7255a5" stroke-width="3" stroke-linecap="round"/>
-<text x="724" y="134" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">交易对手</text>
-<text x="724" y="166" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#625576">被引用的业务主体</text>
-<rect x="245" y="285" width="182" height="112" rx="13" fill="#fff0ed" stroke="#bd5448" stroke-width="1.4"/>
-<path d="M 259 299 V 383" stroke="#bd5448" stroke-width="3" stroke-linecap="round"/>
-<text x="272" y="319" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">风险告警</text>
-<text x="272" y="351" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#77524e">来源 · 信号 · 交易</text>
-<rect x="485" y="285" width="182" height="112" rx="13" fill="#e8f5f3" stroke="#117c78" stroke-width="1.4"/>
-<path d="M 499 299 V 383" stroke="#117c78" stroke-width="3" stroke-linecap="round"/>
-<text x="512" y="319" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="14px" font-weight="700" fill="#22364f">RiskCase</text>
-<text x="512" y="351" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#466b68">调查状态与决策记录</text>
-<path d="M 30 414 H 870" stroke="#e6edf2" stroke-width="1"/>
-<text x="38" y="439" font-family="Microsoft YaHei, Noto Sans CJK SC, sans-serif" font-size="11px" font-weight="400" fill="#64748b">账户与交易是只读调查事实；案件承载协作和生命周期</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="440" viewBox="0 0 900 440">
+<rect width="900" height="100%" fill="white"/>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="none" stroke="#64748b"/></marker></defs>
+<text x="24" y="32" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="24" fill="#22364f" font-weight="700">持久化关系与概念节点不是同一层</text>
+<text x="24" y="61" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="16" fill="#526273" font-weight="400">Customer / Account / RiskTransaction 是实体；对手方引用来自交易字段</text>
+<path d="M24 79H876" fill="none" stroke="#dbe5ea" stroke-width="1.7"/>
+<path d="M24 398H876" fill="none" stroke="#dbe5ea" stroke-width="1.7"/>
+<text x="24" y="425" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="15" fill="#526273" font-weight="400">实线表示实际外键或值来源；下方说明案件围绕来源告警组织调查</text>
+<rect x="25" y="120" width="190" height="135" rx="9" fill="#eef3f9" stroke="#22364f" stroke-width="1.5"/>
+<text x="39" y="148" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="19" fill="#22364f" font-weight="700">Customer</text>
+<text x="39" y="174" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#526273" font-weight="400">稳定客户 ID</text>
+<text x="39" y="198" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#526273" font-weight="400">不等于告警主体</text>
+<rect x="245" y="120" width="190" height="135" rx="9" fill="#e8f5f3" stroke="#117c78" stroke-width="1.5"/>
+<text x="259" y="148" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="19" fill="#117c78" font-weight="700">Account</text>
+<text x="259" y="174" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#526273" font-weight="400">CustomerId 外键</text>
+<text x="259" y="198" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#526273" font-weight="400">掩码账号，无可写余额</text>
+<rect x="465" y="120" width="190" height="135" rx="9" fill="#fff4df" stroke="#a36c13" stroke-width="1.5"/>
+<text x="479" y="148" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="19" fill="#a36c13" font-weight="700">RiskTransaction</text>
+<text x="479" y="174" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#526273" font-weight="400">AccountId 外键</text>
+<text x="479" y="198" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#526273" font-weight="400">金额 / 时间 / 引用</text>
+<rect x="685" y="120" width="190" height="135" rx="9" fill="#f1edfb" stroke="#7255a5" stroke-width="1.5"/>
+<text x="699" y="148" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="19" fill="#7255a5" font-weight="700">对手方节点</text>
+<text x="699" y="174" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#526273" font-weight="400">Counterparty</text>
+<text x="699" y="198" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#526273" font-weight="400">Reference</text>
+<text x="699" y="222" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#526273" font-weight="400">来自交易中的值</text>
+<path d="M245 185L215 185" fill="none" stroke="#64748b" stroke-width="1.7" marker-end="url(#arrow)"/>
+<path d="M465 185L435 185" fill="none" stroke="#64748b" stroke-width="1.7" marker-end="url(#arrow)"/>
+<path d="M655 185L685 185" fill="none" stroke="#64748b" stroke-width="1.7" marker-end="url(#arrow)"/>
+<rect x="100" y="302" width="700" height="68" rx="9" fill="#eef3f9" stroke="#22364f" stroke-width="1.5"/>
+<text x="114" y="330" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="19" fill="#22364f" font-weight="700">RiskCase → RiskAlert → 主客户/主账户与相关观察</text>
 </svg>

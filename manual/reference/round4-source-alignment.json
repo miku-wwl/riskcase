@@ -1,0 +1,398 @@
+{
+  "engineering_sha": "2177004a39a534ee1796b8391a590763cce62fc2",
+  "protected_paths_changed": [],
+  "source_files": {
+    "backend/RiskCase.Api/Endpoints/AlertIngestion.cs": "96a64d4d532103866474717d78421d80c60dfe71b0d81ce057686dfd0feec6df",
+    "backend/RiskCase.Application/RiskCases/RiskCaseCommands.cs": "3ae9df57d6ee6be594f88cd9a44c6fcdb074b465cf040864f47b9e94de60f48c",
+    "backend/RiskCase.Domain/Entities/Account.cs": "fcb5d58c27541938f737f42390411febfbd3dcea3d2b2d396ccbe38b0dea646d",
+    "backend/RiskCase.Domain/Entities/RiskSignal.cs": "2ec2c4b5bc98cc289bdc696a634cd13a733769673545a3f198ce907dcde9d394",
+    "backend/RiskCase.Domain/Entities/RiskCase.cs": "26ce3d7a30a5d1fe9d277d85e70288a5374cb0cf477852a95d94dfd20507736b",
+    "backend/RiskCase.Application/RiskCases/RiskCaseQueries.cs": "6c9b464e9019b38d75318994e00e4bee66773da7f6b838f42436a61aa66f6403",
+    "backend/RiskCase.Application/RiskCases/RiskCasePresenter.cs": "0770990800de08ff96b5b6532ce286e8b06f5e4fc664824a489a4aacb100b955",
+    "backend/RiskCase.Application/DependencyInjection.cs": "1cb3d8f7f20a53167e5a9307f8a04ff3d80a2c4c58c4ca2497df802445a65857",
+    "backend/RiskCase.Api/Program.cs": "37ce74e951457d329baded5c81442ac2c50b53c7d27454f312885c77e36b2b93",
+    "backend/RiskCase.Infrastructure/Identity/IdentityService.cs": "480cba2ce9a8c98f10adbab3936a1e9cf5d1d9f276e12f4f4c03aae8e8fcc2b4",
+    "backend/RiskCase.Infrastructure/Data/ApplicationDbContext.cs": "5361072cb538efc1d4d4020eced79df868519e54a15fb068cb819a271f6293d4",
+    "backend/RiskCase.Infrastructure/Data/Configurations/RiskCaseEntityConfigurations.cs": "19f05eb552c41056f9aaf4db02e3c56b26ee12af3c577d608e4302a80e3d6f54",
+    "backend/RiskCase.Application/Common/Behaviours/IdempotencyBehaviour.cs": "b3f0e9092636f48154a83a9aff60fb30783c3b7666895324db91a6b7e1fad24c",
+    "backend/RiskCase.Infrastructure/Data/PostgresIdempotencyStore.cs": "ac54cd1f299b2660181e2e514ba297a75e447ef0cb76179f9dc9dafbd245c6fe",
+    "backend/RiskCase.Api/Endpoints/RiskCases.cs": "5fce9d6968d1c3b6961dc62d5deb453d7bd99b9a330f0994d918f4111aba41f0",
+    "frontend/src/app.tsx": "7161c60a111ea612f4ead26b1dfbdb851b181a09fd95ddb634137187009a849d",
+    "frontend/src/lib/drafts.ts": "5fb2586b3964aec7dbbdcc4d4c063fe734bc1d7cce17d2fbddd7faacd1fdc480",
+    "frontend/src/pages/case-detail-page.tsx": "5d07a9034d5e5e50a07872c8421bafe11cdc26e0846cce8c7350ce24daff339c",
+    "test/integration/RiskCase.IntegrationTests/HardeningTests.cs": "ea5e48b62c6703f8236cf3c7d82f1cc54be7c0b52190d9e98d7fc19ac1c8cbd2",
+    "backend/RiskCase.Api/Infrastructure/ProblemDetailsExceptionHandler.cs": "f70bc741fbf836a8eceb51a478699213c66afce20e6aa6909f7822722cfd345c"
+  },
+  "excerpts": [
+    {
+      "chapter": 1,
+      "path": "backend/RiskCase.Api/Endpoints/AlertIngestion.cs",
+      "start": 17,
+      "end": 33,
+      "anchor": "public static async Task<IResult> Ingest",
+      "excerpt_sha256": "c9d9ce1c674910190033f4c4b9c43a941d6bfd6c709b6d559ac125267371396a"
+    },
+    {
+      "chapter": 2,
+      "path": "backend/RiskCase.Application/RiskCases/RiskCaseCommands.cs",
+      "start": 120,
+      "end": 132,
+      "anchor": "var customer = await db.Customers",
+      "excerpt_sha256": "e6c7b0f1638b853317080ece4a1df92b6b83ab1baf3693972c1e63a4f071d6e8"
+    },
+    {
+      "chapter": 3,
+      "path": "backend/RiskCase.Domain/Entities/Account.cs",
+      "start": 17,
+      "end": 33,
+      "anchor": "public static Account Create",
+      "excerpt_sha256": "0eb58a6c3c3aeaddab5a526503a7ee5f9adb9aab92ba75530d8553b46452812a"
+    },
+    {
+      "chapter": 4,
+      "path": "backend/RiskCase.Domain/Entities/RiskSignal.cs",
+      "start": 18,
+      "end": 39,
+      "anchor": "public static RiskSignal Explain(",
+      "excerpt_sha256": "added1243333829f00b019d16452bc3805a44e4689ca0726be33e265c06757d2"
+    },
+    {
+      "chapter": 5,
+      "path": "backend/RiskCase.Domain/Entities/RiskCase.cs",
+      "start": 123,
+      "end": 134,
+      "anchor": "public void RequestReview",
+      "excerpt_sha256": "48fd9903e121188a5298cfc88a0442866b074194dcf9a6f8440e9c2699227bb9"
+    },
+    {
+      "chapter": 6,
+      "path": "backend/RiskCase.Application/RiskCases/RiskCaseQueries.cs",
+      "start": 61,
+      "end": 69,
+      "anchor": "var totalItems = await query.CountAsync",
+      "excerpt_sha256": "2dff2288aa1d2b8019d8506a054691ab27c08b992161289c2049218909fc36fb"
+    },
+    {
+      "chapter": 7,
+      "path": "backend/RiskCase.Application/RiskCases/RiskCasePresenter.cs",
+      "start": 74,
+      "end": 76,
+      "anchor": "var counterpartyNode =",
+      "excerpt_sha256": "5d9b9510521dd05c351418c651eddd88e06c27bd1100112f4a84aef91bb8198f"
+    },
+    {
+      "chapter": 7,
+      "path": "backend/RiskCase.Application/RiskCases/RiskCasePresenter.cs",
+      "start": 79,
+      "end": 79,
+      "anchor": "edges.AddRange(entity.Links",
+      "excerpt_sha256": "6797775b8109a5656b4a98cc37ac758f0dded1516a1ce669578584d15a888427"
+    },
+    {
+      "chapter": 8,
+      "path": "backend/RiskCase.Domain/Entities/RiskCase.cs",
+      "start": 147,
+      "end": 165,
+      "anchor": "public RiskDecision Decide(",
+      "excerpt_sha256": "79d7c8cb670da34986471c16d208d43f9f1e96889b701a23aef048d7620da99f"
+    },
+    {
+      "chapter": 9,
+      "path": "backend/RiskCase.Application/DependencyInjection.cs",
+      "start": 8,
+      "end": 22,
+      "anchor": "public static void AddApplicationServices",
+      "excerpt_sha256": "eea67d45a767255ba0121c7e45c6df01810c7e0ef27c8ac2d2695f64487fa510"
+    },
+    {
+      "chapter": 10,
+      "path": "backend/RiskCase.Api/Program.cs",
+      "start": 30,
+      "end": 41,
+      "anchor": "app.UseExceptionHandler();",
+      "excerpt_sha256": "d51d631bf7433f5812407e203ec446f97e2473297550021a86d3ddbb46708887"
+    },
+    {
+      "chapter": 11,
+      "path": "backend/RiskCase.Application/RiskCases/RiskCaseCommands.cs",
+      "start": 317,
+      "end": 323,
+      "anchor": "public async Task<RiskCaseView> Handle(AddCaseNoteCommand",
+      "excerpt_sha256": "09d00918309937bcb2d3acffda79322058ef4b600aa11dcc0b4dde4bfef9dffa"
+    },
+    {
+      "chapter": 12,
+      "path": "backend/RiskCase.Domain/Entities/RiskCase.cs",
+      "start": 105,
+      "end": 122,
+      "anchor": "public RiskAssessment RecordAssessment",
+      "excerpt_sha256": "43e9159999bc8b570411081e9457f6135e5bf1c78a140025677a7448e05d4f45"
+    },
+    {
+      "chapter": 13,
+      "path": "backend/RiskCase.Infrastructure/Identity/IdentityService.cs",
+      "start": 45,
+      "end": 50,
+      "anchor": "public async Task<bool> IsInRoleAsync",
+      "excerpt_sha256": "9d5fe4e38a57c42c98a4535fef94f41151cacbfc274593310c51786048d8c2b2"
+    },
+    {
+      "chapter": 14,
+      "path": "backend/RiskCase.Application/RiskCases/RiskCaseCommands.cs",
+      "start": 260,
+      "end": 269,
+      "anchor": "protected async Task<RiskCase.Domain.Entities.RiskCase> LoadForWriteAsync",
+      "excerpt_sha256": "0be524a61d05a46abfe1eec63911707b866a95f05e79919e065b9e9b43c9380d"
+    },
+    {
+      "chapter": 14,
+      "path": "backend/RiskCase.Infrastructure/Data/ApplicationDbContext.cs",
+      "start": 23,
+      "end": 23,
+      "anchor": "public IQueryable<RiskCaseEntity> CaseDetails",
+      "excerpt_sha256": "bfee28d1852e95a88d510ba112e95e2acd7aebdf717f966ab7a853e4cd63bc4e"
+    },
+    {
+      "chapter": 15,
+      "path": "backend/RiskCase.Infrastructure/Data/ApplicationDbContext.cs",
+      "start": 43,
+      "end": 47,
+      "anchor": "await using var snapshot = await Database.BeginTransactionAsync",
+      "excerpt_sha256": "a6dc706975de81cd6216031a36fa75e81b8b1f237099f0fe642bd6c9714d9a99"
+    },
+    {
+      "chapter": 15,
+      "path": "backend/RiskCase.Infrastructure/Data/ApplicationDbContext.cs",
+      "start": 32,
+      "end": 42,
+      "anchor": "if (Database.CurrentTransaction is { } existing)",
+      "excerpt_sha256": "708820a8d5a5432b4bcea52a6877ab0f7812af86fec3b2a55626f62ba3042f94"
+    },
+    {
+      "chapter": 16,
+      "path": "backend/RiskCase.Infrastructure/Data/Configurations/RiskCaseEntityConfigurations.cs",
+      "start": 102,
+      "end": 102,
+      "anchor": "b.Property(x => x.Version).IsConcurrencyToken();",
+      "excerpt_sha256": "dd8f5edf1ae1a14cee4e0790e6abf6bcb3bb770177b95d7634eb627b2888c29a"
+    },
+    {
+      "chapter": 16,
+      "path": "backend/RiskCase.Application/Common/Behaviours/IdempotencyBehaviour.cs",
+      "start": 31,
+      "end": 42,
+      "anchor": "public static string Fingerprint",
+      "excerpt_sha256": "3d6599f28246b67ac4ff09278652fb447fdb6d23294548938b9ad581dac97d66"
+    },
+    {
+      "chapter": 16,
+      "path": "backend/RiskCase.Infrastructure/Data/PostgresIdempotencyStore.cs",
+      "start": 48,
+      "end": 52,
+      "anchor": "var response = await action();",
+      "excerpt_sha256": "6b7db0b0f078955e4a4e11aeb4939ef7a4c8b756e9fcf651452c4f67ca2bf26a"
+    },
+    {
+      "chapter": 17,
+      "path": "backend/RiskCase.Domain/Entities/RiskCase.cs",
+      "start": 151,
+      "end": 159,
+      "anchor": "Require(!_legacyAssessorParticipation.Any",
+      "excerpt_sha256": "a93f374d0d76bebc5fd35c9e1291bd172366e1b478ed7451d1bc1ec789f704b2"
+    },
+    {
+      "chapter": 18,
+      "path": "backend/RiskCase.Api/Endpoints/RiskCases.cs",
+      "start": 90,
+      "end": 98,
+      "anchor": "public static async Task<IResult> Resume",
+      "excerpt_sha256": "292b36ab171e5fed7457b49ec7f126777c663d996607fad9aa37060a968875bb"
+    },
+    {
+      "chapter": 19,
+      "path": "frontend/src/app.tsx",
+      "start": 19,
+      "end": 19,
+      "anchor": "const CaseDetailPage = lazy",
+      "excerpt_sha256": "18e233917efd33a5ef82c8d4b20e0093880c4eee9e6d291996780c444faef118"
+    },
+    {
+      "chapter": 19,
+      "path": "frontend/src/app.tsx",
+      "start": 65,
+      "end": 65,
+      "anchor": "<Route path=\"cases/:caseId\"",
+      "excerpt_sha256": "663c544904fdadf3fc962d1a5b576cb8db469d090a04d23ae2806864fc63f1e8"
+    },
+    {
+      "chapter": 20,
+      "path": "frontend/src/lib/drafts.ts",
+      "start": 32,
+      "end": 44,
+      "anchor": "const clearIfUnchanged",
+      "excerpt_sha256": "2a9bc9743f953cec0ecf447506bc9cb279aa44273571104bb97b4422e98b4819"
+    },
+    {
+      "chapter": 21,
+      "path": "frontend/src/pages/case-detail-page.tsx",
+      "start": 270,
+      "end": 278,
+      "anchor": "const nodes = useMemo",
+      "excerpt_sha256": "368c91528b5c80fa64f1c18064782dfef22c831ef0023e4554d4a88214f4835c"
+    },
+    {
+      "chapter": 21,
+      "path": "frontend/src/pages/case-detail-page.tsx",
+      "start": 279,
+      "end": 290,
+      "anchor": "const edges = useMemo",
+      "excerpt_sha256": "296ae602f6cf39383a12feb605ef4e41faba80b1dd1b2cdac6fc35e85ce586c3"
+    },
+    {
+      "chapter": 22,
+      "path": "frontend/src/pages/case-detail-page.tsx",
+      "start": 89,
+      "end": 111,
+      "anchor": "const action = useMutation",
+      "excerpt_sha256": "cc886091e2cf440cff6b03017a6381181a657253bbc5dc9cc9569e34420307f5"
+    },
+    {
+      "chapter": 23,
+      "path": "test/integration/RiskCase.IntegrationTests/HardeningTests.cs",
+      "start": 145,
+      "end": 156,
+      "anchor": "public async Task Concurrent_writers_share_snapshot",
+      "excerpt_sha256": "c5506ddd9f6e49e4543b540716f1383a13f6fd4f6e82a02fc0ac2d9af7083a6f"
+    },
+    {
+      "chapter": 24,
+      "path": "backend/RiskCase.Api/Infrastructure/ProblemDetailsExceptionHandler.cs",
+      "start": 13,
+      "end": 28,
+      "anchor": "var problem = exception switch",
+      "excerpt_sha256": "54aec957ab233d0dabfcb0ba73e4935f9c87005858c7c38f1b4a081050cccb66"
+    }
+  ],
+  "chapters": [
+    {
+      "chapter": 1,
+      "original_teaching_characters": 867,
+      "revised_teaching_characters": 1298
+    },
+    {
+      "chapter": 2,
+      "original_teaching_characters": 960,
+      "revised_teaching_characters": 1581
+    },
+    {
+      "chapter": 3,
+      "original_teaching_characters": 793,
+      "revised_teaching_characters": 1189
+    },
+    {
+      "chapter": 4,
+      "original_teaching_characters": 744,
+      "revised_teaching_characters": 1096
+    },
+    {
+      "chapter": 5,
+      "original_teaching_characters": 1079,
+      "revised_teaching_characters": 1451
+    },
+    {
+      "chapter": 6,
+      "original_teaching_characters": 789,
+      "revised_teaching_characters": 1128
+    },
+    {
+      "chapter": 7,
+      "original_teaching_characters": 804,
+      "revised_teaching_characters": 1135
+    },
+    {
+      "chapter": 8,
+      "original_teaching_characters": 993,
+      "revised_teaching_characters": 1314
+    },
+    {
+      "chapter": 9,
+      "original_teaching_characters": 1170,
+      "revised_teaching_characters": 1654
+    },
+    {
+      "chapter": 10,
+      "original_teaching_characters": 991,
+      "revised_teaching_characters": 1514
+    },
+    {
+      "chapter": 11,
+      "original_teaching_characters": 847,
+      "revised_teaching_characters": 1688
+    },
+    {
+      "chapter": 12,
+      "original_teaching_characters": 824,
+      "revised_teaching_characters": 1306
+    },
+    {
+      "chapter": 13,
+      "original_teaching_characters": 910,
+      "revised_teaching_characters": 1483
+    },
+    {
+      "chapter": 14,
+      "original_teaching_characters": 1321,
+      "revised_teaching_characters": 1623
+    },
+    {
+      "chapter": 15,
+      "original_teaching_characters": 1437,
+      "revised_teaching_characters": 1675
+    },
+    {
+      "chapter": 16,
+      "original_teaching_characters": 1035,
+      "revised_teaching_characters": 2965
+    },
+    {
+      "chapter": 17,
+      "original_teaching_characters": 1227,
+      "revised_teaching_characters": 1450
+    },
+    {
+      "chapter": 18,
+      "original_teaching_characters": 1121,
+      "revised_teaching_characters": 1484
+    },
+    {
+      "chapter": 19,
+      "original_teaching_characters": 807,
+      "revised_teaching_characters": 1023
+    },
+    {
+      "chapter": 20,
+      "original_teaching_characters": 1104,
+      "revised_teaching_characters": 1534
+    },
+    {
+      "chapter": 21,
+      "original_teaching_characters": 749,
+      "revised_teaching_characters": 1156
+    },
+    {
+      "chapter": 22,
+      "original_teaching_characters": 856,
+      "revised_teaching_characters": 1120
+    },
+    {
+      "chapter": 23,
+      "original_teaching_characters": 982,
+      "revised_teaching_characters": 1309
+    },
+    {
+      "chapter": 24,
+      "original_teaching_characters": 1043,
+      "revised_teaching_characters": 1267
+    }
+  ]
+}

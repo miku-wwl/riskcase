@@ -103,6 +103,8 @@ def main() -> None:
     build()
     from build_round3_figures import build as build_round3
     build_round3()
+    from build_round4_figures import build as build_round4
+    build_round4()
     print(f"Generated {len(config['figures'])} editable SVG diagrams.")
 
 

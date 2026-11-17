@@ -1,12 +1,12 @@
 # 14｜EF Core Change Tracking
 
-### 第 1 页｜加载规则事实与加载显示资料是两件事
+### 加载规则事实与加载显示资料是两件事
 
 领域在内存里判断重复关系与独立作者。如果 Handler 只加载案件主行，空 Links 并不能证明数据库里没有关系；没有加载旧作者来源，也不能证明主管没参与过历史评估。写入必须显式加载规则所需事实。
 
 详情展示则同时需要客户、账户、交易、信号、笔记和历史。多个同级集合用一个 JOIN 读取会相乘：十笔交易可能被每条笔记、关系和评估重复携带。AsNoTracking 省去了跟踪开销，却不会改变这个 SQL 结果形状。
 
-### 第 2 页｜观察集合相乘，再选择读取策略
+### 观察集合相乘，再选择读取策略
 
 [figure: round3-query-shape.svg]
 
@@ -14,7 +14,9 @@
 
 中、大型原查询分别具有 2250 万与 90 亿行的集合乘积，在 2 秒预算取消，不能编造其完成时间。优化后的中位数为 36.4 ms、74.2 ms，p95 为 68.3 ms、108.9 ms。原始计划和取样条件在 docs/round-3/performance；这些结果说明该负载更安全，不证明所有部署都更快。
 
-### 第 3 页｜写入加载历史，查询复用一致性边界
+### 写入加载历史，查询复用一致性边界
+
+<!-- page -->
 
 [source: backend/RiskCase.Application/RiskCases/RiskCaseCommands.cs#protected async Task<RiskCase.Domain.Entities.RiskCase> LoadForWriteAsync|10]
 
@@ -22,7 +24,9 @@
 
 只读 CaseDetails 由 Infrastructure 选择 AsSplitQuery；Presenter 把所有读取置于 WithCaseSnapshotAsync 内。分拆策略减少重复行，一致性策略则防止不同 SQL 拼出相互矛盾的视图，两者缺一不可。
 
-### 第 4 页｜固定九条查询的代价与边界
+### 固定九条查询的代价与边界
+
+<!-- page -->
 
 [figure: 14-ef-change-tracking.svg]
 
@@ -30,14 +34,22 @@
 
 查询数不随集合条数增长，避免了 N+1；但每个详情从两条 SQL 增为九条。在高网络延迟数据库上，小案件可能付出更多往返成本，本机结果不能替这种部署作结论。完整集合没有分页，响应和图谱仍按记录总数增长。
 
-分拆查询不是普遍规则。应先确认实际 SQL 和行数，再比较投影、分页或选择性加载。EF Core 官方“Single vs. Split Queries”也明确要求考虑多次读取的一致性；本系统具体快照边界见下一章。
+分拆查询不是普遍规则。应先确认实际 SQL 和行数，再比较投影、分页或选择性加载。[EF Core 官方 Single vs. Split Queries](https://learn.microsoft.com/en-us/ef/core/querying/single-split-queries)要求考虑额外往返与多次读取的一致性；本系统具体快照边界见下一章。
 
-### 第 5 页｜从对象状态预测数据库结果
+### 从对象状态预测数据库结果
+
+<!-- page -->
 
 **练习**
 
 1. 为什么空导航集合不能证明数据库中没有子记录？
 2. 有非默认 GUID 的新子对象为何仍应明确声明 Added？
 3. 子记录先插入、父版本更新随后冲突，事务应该留下哪些已提交记录？
+
+**参考解**
+
+1. 未 Include 的空导航只代表内存未载入；需要显式读取持久化 Links/作者历史，再执行领域判断。数据库唯一约束仍是最后防线。
+2. 既有非默认 GUID 只确定身份，不自动表明 EF 应 INSERT。Handler 对领域返回的新对象调用 DbSet.Add，避免被当成已存在对象 UPDATE。
+3. 不留下任何此次已提交业务子记录、审计或回执。EF 可以先发子 INSERT，父 UPDATE 后来发现旧版本；外层事务整体回滚，SQL 发出顺序不是提交顺序。
 
 **小结**：加载保证领域判断有完整事实；跟踪状态决定生成哪些 SQL；事务提交决定它们是否一起成为持久化事实。
