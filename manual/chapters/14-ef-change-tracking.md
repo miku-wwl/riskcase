@@ -1,28 +1,36 @@
 # 14｜EF Core Change Tracking
 
-### 第 1 页｜内存中没有，不代表数据库中没有
+### 第 1 页｜加载规则事实与加载显示资料是两件事
 
-案件的 Links 集合初始为空。如果写入 Handler 只加载案件主体，领域内的 Any 检查就可能认为一个已持久化端点对不存在。数据库唯一约束最终会拒绝重复，但这不等于应用已经正确解释了业务冲突。
+领域在内存里判断重复关系与独立作者。如果 Handler 只加载案件主行，空 Links 并不能证明数据库里没有关系；没有加载旧作者来源，也不能证明主管没参与过历史评估。写入必须显式加载规则所需事实。
 
-同样，独立复核需要知道所有历史评估作者。把这些规则需要的集合显式加载，才让聚合在真实事实基础上判断；无须把客户和交易等所有资料都纳入可写聚合。
+详情展示则同时需要客户、账户、交易、信号、笔记和历史。多个同级集合用一个 JOIN 读取会相乘：十笔交易可能被每条笔记、关系和评估重复携带。AsNoTracking 省去了跟踪开销，却不会改变这个 SQL 结果形状。
 
-### 第 2 页｜加载、跟踪和提交分别做什么
+### 第 2 页｜观察集合相乘，再选择读取策略
+
+[figure: round3-query-shape.svg]
+
+小型合成案件的原详情 JOIN 实际输出 900 行，加审计为 901 行。优化后九条详情查询合计输出 25 行，完整保留每个集合。20 次含认证的 TestServer 请求，中位数由 146.1 ms 降至 25.5 ms；这不是网络或生产负载指标。
+
+中、大型原查询分别具有 2250 万与 90 亿行的集合乘积，在 2 秒预算取消，不能编造其完成时间。优化后的中位数为 36.4 ms、74.2 ms，p95 为 68.3 ms、108.9 ms。原始计划和取样条件在 docs/round-3/performance；这些结果说明该负载更安全，不证明所有部署都更快。
+
+### 第 3 页｜写入加载历史，查询复用一致性边界
+
+[source: backend/RiskCase.Application/RiskCases/RiskCaseCommands.cs#protected async Task<RiskCase.Domain.Entities.RiskCase> LoadForWriteAsync|10]
+
+这里加载 Links、Assessments 与 LegacyAssessorParticipation，再核对预期版本和资源权限。领域返回新增子实体，Handler 用 DbSet.Add 明确标为 Added。父对象的并发令牌与这些 INSERT 仍在外层同一事务中提交或回滚。
+
+只读 CaseDetails 由 Infrastructure 选择 AsSplitQuery；Presenter 把所有读取置于 WithCaseSnapshotAsync 内。分拆策略减少重复行，一致性策略则防止不同 SQL 拼出相互矛盾的视图，两者缺一不可。
+
+### 第 4 页｜固定九条查询的代价与边界
 
 [figure: 14-ef-change-tracking.svg]
 
-Include 提供规则所需的持久化事实，Change Tracker 记录对象变化，数据库约束保护最终完整性。三者职责不同。领域拒绝重复关系时应返回 409；数据库唯一约束仍保留，防止另一条写入路径绕过规则。
+[source: backend/RiskCase.Infrastructure/Data/ApplicationDbContext.cs#public IQueryable<RiskCaseEntity> CaseDetails|1]
 
-### 第 3 页｜可写聚合明确加载规则所需的集合
+查询数不随集合条数增长，避免了 N+1；但每个详情从两条 SQL 增为九条。在高网络延迟数据库上，小案件可能付出更多往返成本，本机结果不能替这种部署作结论。完整集合没有分页，响应和图谱仍按记录总数增长。
 
-[source: backend/RiskCase.Application/RiskCases/RiskCaseCommands.cs#protected async Task<RiskCase.Domain.Entities.RiskCase> LoadForWriteAsync|15]
-
-这里加载 Links 和 Assessments，然后核对预期版本与资源写权限。领域方法返回新增子实体，Handler 通过相应 DbSet.Add 明确标记 Added。修改父对象版本和插入子实体是同一次业务动作的不同数据库语句。
-
-### 第 4 页｜SaveChanges 成功还没有提交外层事务
-
-新增笔记会更新案件版本、插入笔记与审计。Handler 的 SaveChanges 把这些变化发给 PostgreSQL；外层幂等存储随后再保存回执并 Commit。若回执写入失败，已经执行的业务 SQL 也应回滚。
-
-针对这个窗口的真实 PostgreSQL 故障测试在回执插入时故意失败。独立连接随后看到案件版本、笔记和审计均没有增加。这个观察说明事务覆盖了整个业务边界，而不是仅仅证明一个 SaveChanges 被调用。
+分拆查询不是普遍规则。应先确认实际 SQL 和行数，再比较投影、分页或选择性加载。EF Core 官方“Single vs. Split Queries”也明确要求考虑多次读取的一致性；本系统具体快照边界见下一章。
 
 ### 第 5 页｜从对象状态预测数据库结果
 

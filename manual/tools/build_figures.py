@@ -101,6 +101,8 @@ def main() -> None:
         path.write_text(render(figure), encoding="utf-8", newline="\n")
     from build_round2_figures import build
     build()
+    from build_round3_figures import build as build_round3
+    build_round3()
     print(f"Generated {len(config['figures'])} editable SVG diagrams.")
 
 

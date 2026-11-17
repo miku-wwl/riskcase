@@ -1,25 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" width="900" height="500">
 <rect width="900" height="500" fill="white"/>
 <defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="none" stroke="#64748b"/></marker></defs>
-<text x="30" y="36" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="23" fill="#22364f" font-weight="700">聚合内存与数据库事实必须对齐</text>
-<text x="30" y="63" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="14" fill="#526273" font-weight="400">导航集合未加载不等于数据库中没有记录</text>
+<text x="30" y="36" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="23" fill="#22364f" font-weight="700">聚合规则需要完整的新旧作者事实</text>
+<text x="30" y="63" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="14" fill="#526273" font-weight="400">写入加载与只读详情采用不同读取策略</text>
 <path d="M30 79H870 M30 457H870" stroke="#dbe5ea"/>
-<text x="30" y="482" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="13" fill="#526273" font-weight="400">Include(Links, Assessments) 支撑领域判断；唯一约束和并发版本构成最后边界</text>
-<rect x="35" y="120" width="375" height="145" rx="10" fill="#eef3f9" stroke="#22364f" stroke-width="1.5"/>
-<text x="50" y="148" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#22364f" font-weight="700">读取：加载规则需要的历史</text>
-<text x="50" y="174" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="14" fill="#526273" font-weight="400">RiskCase：Unchanged · 原始 Version=v</text>
-<text x="50" y="196" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="14" fill="#526273" font-weight="400">Links：已持久化端点，检测重复关系</text>
-<text x="50" y="218" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="14" fill="#526273" font-weight="400">Assessments：所有已知评估作者</text>
-<rect x="485" y="120" width="375" height="145" rx="10" fill="#e8f5f3" stroke="#117c78" stroke-width="1.5"/>
-<text x="500" y="148" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#117c78" font-weight="700">操作：显式声明子记录新增</text>
-<text x="500" y="174" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="14" fill="#526273" font-weight="400">领域方法返回 RiskAssessment / Note</text>
-<text x="500" y="196" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="14" fill="#526273" font-weight="400">DbSet.Add(child) → Added</text>
-<text x="500" y="218" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="14" fill="#526273" font-weight="400">案件字段变化 → Modified</text>
-<path d="M410 190L485 190" stroke="#64748b" stroke-width="1.6" fill="none" marker-end="url(#a)"/>
-<text x="417.5" y="181.0" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="12" fill="#526273" font-weight="400">执行</text>
-<rect x="35" y="315" width="825" height="105" rx="10" fill="#fff4df" stroke="#a36c13" stroke-width="1.5"/>
-<text x="50" y="343" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#a36c13" font-weight="700">同一事务写入</text>
-<text x="50" y="369" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="14" fill="#526273" font-weight="400">INSERT 子记录 + INSERT 审计 + UPDATE 案件 WHERE Version=v</text>
-<text x="50" y="391" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="14" fill="#526273" font-weight="400">任一失败 → 回滚全部变化；成功后仍须随幂等回执一起 COMMIT</text>
-<path d="M670 265L670 315" stroke="#64748b" stroke-width="1.6" fill="none" marker-end="url(#a)"/>
+<text x="30" y="482" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="13" fill="#526273" font-weight="400">EF 状态负责生成 SQL；数据库约束与外层事务决定能否作为一次完整事实提交</text>
+<rect x="30" y="120" width="385" height="150" rx="10" fill="#eef3f9" stroke="#22364f" stroke-width="1.5"/>
+<text x="45" y="148" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#22364f" font-weight="700">可写聚合加载</text>
+<text x="45" y="174" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="14" fill="#526273" font-weight="400">Links：已有端点对</text>
+<text x="45" y="196" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="14" fill="#526273" font-weight="400">Assessments：完整评估作者</text>
+<text x="45" y="218" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="14" fill="#526273" font-weight="400">LegacyAssessorParticipation：旧作者</text>
+<text x="45" y="240" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="14" fill="#526273" font-weight="400">先核对版本与当前资源权限</text>
+<rect x="485" y="120" width="385" height="150" rx="10" fill="#e8f5f3" stroke="#117c78" stroke-width="1.5"/>
+<text x="500" y="148" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#117c78" font-weight="700">只读案件详情</text>
+<text x="500" y="174" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="14" fill="#526273" font-weight="400">AsNoTracking + AsSplitQuery</text>
+<text x="500" y="196" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="14" fill="#526273" font-weight="400">独立 GET：REPEATABLE READ</text>
+<text x="500" y="218" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="14" fill="#526273" font-weight="400">已有写事务：先锁案件主行</text>
+<text x="500" y="240" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="14" fill="#526273" font-weight="400">9 条详情查询，不做 N+1 循环</text>
+<rect x="30" y="325" width="840" height="92" rx="10" fill="#fff4df" stroke="#a36c13" stroke-width="1.5"/>
+<text x="45" y="353" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#a36c13" font-weight="700">新增记录必须明确标记 Added</text>
+<text x="45" y="379" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="14" fill="#526273" font-weight="400">INSERT 子记录 + INSERT 审计 + UPDATE 案件版本 + 幂等回执，同一事务成功或回滚</text>
 </svg>

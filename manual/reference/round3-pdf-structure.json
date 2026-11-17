@@ -1,0 +1,119 @@
+{
+  "pdf": "manual/dist/RiskCase-Financial-Risk-Management-Engineering-Textbook.pdf",
+  "sha256": "3efeb42ad0bfde4423bfdcd5aaa365dad9e1d542bf8c5e992ed8182bc9557e76",
+  "pages": 127,
+  "bookmarks": 26,
+  "tocLinks": 24,
+  "missingReplacementGlyphs": 0,
+  "chapterDestinations": [
+    {
+      "title": "第 01 章｜RiskCase 要解决的是什么问题",
+      "page": 6
+    },
+    {
+      "title": "第 02 章｜理解银行风险告警",
+      "page": 11
+    },
+    {
+      "title": "第 03 章｜客户、账户与交易",
+      "page": 16
+    },
+    {
+      "title": "第 04 章｜可解释的风险信号",
+      "page": 21
+    },
+    {
+      "title": "第 05 章｜RiskCase 生命周期与不变量",
+      "page": 26
+    },
+    {
+      "title": "第 06 章｜分析员队列与分派",
+      "page": 31
+    },
+    {
+      "title": "第 07 章｜关系调查与图谱",
+      "page": 36
+    },
+    {
+      "title": "第 08 章｜风险评估与处置",
+      "page": 41
+    },
+    {
+      "title": "第 09 章｜从官方 CleanArchitecture 到 RiskCase",
+      "page": 46
+    },
+    {
+      "title": "第 10 章｜ASP.NET Core 请求管线",
+      "page": 51
+    },
+    {
+      "title": "第 11 章｜MediatR、CQRS 与应用工作流",
+      "page": 56
+    },
+    {
+      "title": "第 12 章｜领域建模与业务不变量",
+      "page": 61
+    },
+    {
+      "title": "第 13 章｜输入验证与资源授权",
+      "page": 66
+    },
+    {
+      "title": "第 14 章｜EF Core Change Tracking",
+      "page": 71
+    },
+    {
+      "title": "第 15 章｜PostgreSQL MVCC 与事务",
+      "page": 76
+    },
+    {
+      "title": "第 16 章｜乐观并发与幂等重试",
+      "page": 81
+    },
+    {
+      "title": "第 17 章｜审计历史与决定完整性",
+      "page": 86
+    },
+    {
+      "title": "第 18 章｜OpenAPI 与 NSwag 客户端生成",
+      "page": 91
+    },
+    {
+      "title": "第 19 章｜React 19 与 shadcn/ui 应用结构",
+      "page": 96
+    },
+    {
+      "title": "第 20 章｜TanStack Query 与本地草稿同步",
+      "page": 101
+    },
+    {
+      "title": "第 21 章｜用 React Flow 表达风险关系",
+      "page": 106
+    },
+    {
+      "title": "第 22 章｜分析员完整工作流",
+      "page": 111
+    },
+    {
+      "title": "第 23 章｜单元、集成与端到端测试",
+      "page": 116
+    },
+    {
+      "title": "第 24 章｜跨层故障恢复与工程取舍",
+      "page": 121
+    },
+    {
+      "title": "附录 A｜术语表",
+      "page": 126
+    },
+    {
+      "title": "附录 B｜源码索引",
+      "page": 127
+    }
+  ],
+  "sourceExcerpts": 26,
+  "svgReferences": 26,
+  "outOfPageTextBoxes": 0,
+  "renderDpi": 110,
+  "renderedPages": 127
+}

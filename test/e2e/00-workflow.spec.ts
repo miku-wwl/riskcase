@@ -30,6 +30,7 @@ test("analyst investigates a cross-account alert and an independent supervisor r
   await expect(analyst.getByRole("link", { name: scenarioAlertId, exact: true })).toBeVisible();
   await expect(analyst.getByText("正在读取档案…")).not.toBeVisible();
   await analyst.screenshot({ path: fileURLToPath(new URL("../../manual/figures/risk-alert-queue.png", import.meta.url)), fullPage: true });
+  await analyst.screenshot({ path: fileURLToPath(new URL("../../manual/figures/risk-alert-queue-viewport.png", import.meta.url)), fullPage: false });
 
   await analyst.getByRole("link", { name: scenarioAlertId, exact: true }).click();
   await expect(analyst.getByRole("heading", { name: /Aroha Thompson/ })).toBeVisible();

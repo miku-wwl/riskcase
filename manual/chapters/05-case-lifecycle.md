@@ -16,17 +16,19 @@ RiskCase 采用 New → Investigating → Reviewing → Resolved。调查阶段�
 
 ### 第 3 页｜领域方法固定复核对象
 
-[source: backend/RiskCase.Domain/Entities/RiskCase.cs#public void RequestReview|20]
+[source: backend/RiskCase.Domain/Entities/RiskCase.cs#public void RequestReview|12]
 
 RequestReview 要求当前经办人在调查阶段已经生成有效评估。提交时固定 ReviewedAssessmentId、提交人和时间，再把状态改为 Reviewing。恢复调查会使这份当前提交失效；历史审计仍记录原提交引用。
 
 API 的 If-Match 与 EF 并发令牌确保“提交复核”和“追加事实”从同一版本出发时，最多只有一个请求成功。
 
-### 第 4 页｜终态不等于外部业务全部结束
+### 第 4 页｜有理由的退回才是可执行的反馈
 
-主管可记录 Escalate、Monitor、CloseFalsePositive 或 ReferForAmlReview。它们都结束本系统内这次调查与处置记录，因此进入 Resolved。升级、持续监测或 AML 转交由下游团队另行执行；本系统没有声称已经启动外部任务、冻结资金或修改账户。
+[figure: round3-review-return-loop.svg]
 
-这种边界让一个小型应用能作出明确承诺：本案的决定不可静默更改，但外部后续行动不由一个简单状态字段冒充完成。
+主管发现受益人所有权缺少证据时，应说明具体缺口。原因去除首尾空白后须有 20 至 1500 个 Unicode 字符；经办人主动撤回自己的复核提交也遵守相同规则。领域先验证状态与原因，再推进版本、清除当前评估及提交引用，历史评估不会删除。
+
+这个闭环只改变本系统调查状态。最终的升级、监测、误报关闭或 AML 转交仍进入 Resolved；下游执行属于其他团队，不能把结案记录当作外部动作已完成。
 
 ### 第 5 页｜预测一次竞争写入
 

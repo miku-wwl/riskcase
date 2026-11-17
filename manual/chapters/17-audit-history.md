@@ -6,25 +6,29 @@
 
 RiskCase 将三种事实分开：RiskAssessment 保存每一次完整判断；ReviewRequested 审计事件保存提交引用；RiskDecision 保存独立复核人的最终决定与 AssessmentId。当前评估字段只提供便捷读取，不承担历史存档职责。
 
-### 第 2 页｜从事件顺序追到具体评估
+### 第 2 页｜从旧审计恢复身份，不伪造业务内容
 
-[figure: 17-audit-history.svg]
+[figure: round3-legacy-author-recovery.svg]
 
-案件版本为每一次业务变化提供顺序。评估记录有作者、时间、等级、理由与调查基础版本；提交与决定再通过 ID 指向具体评估。相同风险等级也可能代表两次不同判断，不能仅凭等级或最近时间反推关联。
+Round 1 的 AssessmentRecorded.ActorId 来自命令执行者，因而旧审计仍能证明谁参与过评估。它只记录等级等摘要，无法恢复已经覆盖的完整理由。迁移将可恢复作者放入独立的 LegacyAssessorParticipation，保留来源审计 ID 和案件版本，不为每个旧事件伪造完整评估。
 
-### 第 3 页｜不可变评估记录保留哪些事实
+该来源记录与新 RiskAssessment 作者共同决定复核资格。审计正文不完整但 ActorId 明确时，身份仍可恢复；若保留的旧评估找不到对应审计，或事件身份为空，就保存明确的未知并阻止最终处置。
 
-[source: backend/RiskCase.Domain/Entities/RiskAssessment.cs#internal static RiskAssessment Record|14]
+### 第 3 页｜不可变记录与前向迁移共同保护责任
 
-工厂只创建新记录，没有改写理由或作者的方法。EF 保存边界拒绝对评估、决定和审计记录进行更新或删除；PostgreSQL 触发器进一步保护这些表。数据库管理员仍拥有管理权限，因此应用内只追加不等同于外部不可篡改归档。
+[source: backend/RiskCase.Domain/Entities/RiskCase.cs#Require(!_legacyAssessorParticipation.Any|9]
 
-### 第 4 页｜读一条结案记录，并承认旧数据的限制
+检查先拒绝无法证明的旧身份，再排除所有新旧评估作者、当前提交人和经办人。重新分派、退回重评或后来取得主管角色都不改变“曾参与评估”的事实。旧结案决定原样保留，不凭迁移重写业务历史。
 
-[screenshot: riskcase-audit-history.png]
+新的前向迁移保留已经发布的两轮迁移。来源外键约束同案，来源 ID 唯一；EF 保存边界及 PostgreSQL 触发器禁止更新或删除参与记录、完整评估、决定和审计。应用只追加不等于管理员无法管理数据库，也不能恢复已丢失的审计事实。
 
-阅读时先按版本定位提交与处置，再到评估历史核对被引用的理由。新的决定保存明确评估 ID；历史记录不会因最新投影改变而丢失。
+### 第 4 页｜在退回审计中读取具体反馈
 
-旧版只有最后一次评估快照。迁移保留已知等级、理由与时间，标记 IsLegacy，作者保持未知；不把当前负责人伪造成历史作者。旧复核案件退回调查并留下迁移审计，旧结案记录保持原样。被旧版覆盖的更早理由无法重建。
+[screenshot: riskcase-return-audit.png]
+
+新 InvestigationResumed 事件保存接受的 Reason、真实 ActorId、发生时间和提交版本。原因与案件状态、评估失效、幂等回执在同一事务中提交，重试不会新增第二条反馈。图中的意见来自真实浏览器操作，使用合成客户资料。
+
+旧事件没有原因时，界面明确显示“历史退回记录未保存原因”，不补写占位理由。旧版成功回执可以恢复原结果；新的无正文退回则返回 400。历史成功、当前状态与新业务要求因此有清楚边界。
 
 ### 第 5 页｜追溯性练习
 

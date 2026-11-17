@@ -20,7 +20,7 @@
 
 ### 第 4 页｜从真实队列继续工作
 
-[screenshot: risk-alert-queue.png]
+[screenshot: risk-alert-queue-viewport.png]
 
 队列一行需要同时显示来源告警、客户、类别、严重度、负责人、状态和更新时间。点击一行进入工作区后，页面读取完整案件视图；搜索和筛选只影响查询条件，不会改变服务器数据。
 

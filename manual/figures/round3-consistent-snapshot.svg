@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" width="900" height="500">
+<rect width="900" height="500" fill="white"/>
+<defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8" fill="none" stroke="#64748b"/></marker></defs>
+<text x="30" y="36" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="23" fill="#22364f" font-weight="700">分拆查询必须共享一个可见性边界</text>
+<text x="30" y="63" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="14" fill="#526273" font-weight="400">示意：GET 读取期间，另一事务将案件从 v5 提交为 v6</text>
+<path d="M30 79H870 M30 457H870" stroke="#dbe5ea"/>
+<text x="30" y="482" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="13" fill="#526273" font-weight="400">独立 GET：REPEATABLE READ；已有写事务：读取前 FOR SHARE 主行锁，复用事务</text>
+<text x="35" y="111" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="18" fill="#b84940" font-weight="700">原实现 · 每条语句建立新快照</text>
+<rect x="35" y="140" width="225" height="90" rx="10" fill="#eef3f9" stroke="#22364f" stroke-width="1.5"/>
+<text x="50" y="168" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#22364f" font-weight="700">案件查询 S1</text>
+<text x="50" y="194" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="14" fill="#526273" font-weight="400">案件 v5 · 集合 v5</text>
+<rect x="335" y="140" width="225" height="90" rx="10" fill="#fff4df" stroke="#a36c13" stroke-width="1.5"/>
+<text x="350" y="168" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#a36c13" font-weight="700">并发写事务提交</text>
+<text x="350" y="194" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="14" fill="#526273" font-weight="400">案件 v6 + 审计 v6</text>
+<rect x="635" y="140" width="230" height="90" rx="10" fill="#fff0ed" stroke="#b84940" stroke-width="1.5"/>
+<text x="650" y="168" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#b84940" font-weight="700">审计查询 S2</text>
+<text x="650" y="194" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="14" fill="#526273" font-weight="400">看到 v6 → 响应矛盾</text>
+<path d="M260 185L335 185" stroke="#64748b" stroke-width="1.6" fill="none" marker-end="url(#a)"/>
+<path d="M560 185L635 185" stroke="#64748b" stroke-width="1.6" fill="none" marker-end="url(#a)"/>
+<text x="35" y="283" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="18" fill="#117c78" font-weight="700">独立 GET 修复后 · 第一次查询固定快照 S</text>
+<rect x="35" y="312" width="225" height="90" rx="10" fill="#e8f5f3" stroke="#117c78" stroke-width="1.5"/>
+<text x="50" y="340" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#117c78" font-weight="700">案件查询 S</text>
+<text x="50" y="366" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="14" fill="#526273" font-weight="400">案件 v5</text>
+<rect x="335" y="312" width="225" height="90" rx="10" fill="#fff4df" stroke="#a36c13" stroke-width="1.5"/>
+<text x="350" y="340" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#a36c13" font-weight="700">并发仍可提交 v6</text>
+<text x="350" y="366" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="14" fill="#526273" font-weight="400">不进入此 GET 的快照</text>
+<rect x="635" y="312" width="230" height="90" rx="10" fill="#e8f5f3" stroke="#117c78" stroke-width="1.5"/>
+<text x="650" y="340" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="17" fill="#117c78" font-weight="700">集合与审计仍用 S</text>
+<text x="650" y="366" font-family="Microsoft YaHei,Noto Sans CJK SC,sans-serif" font-size="14" fill="#526273" font-weight="400">都看到 v5，可一致组装</text>
+<path d="M260 357L335 357" stroke="#64748b" stroke-width="1.6" fill="none" marker-end="url(#a)"/>
+<path d="M560 357L635 357" stroke="#64748b" stroke-width="1.6" fill="none" marker-end="url(#a)"/>
+</svg>

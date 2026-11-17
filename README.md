@@ -149,3 +149,9 @@ The review basis is frozen during supervisor review. Assessments are immutable, 
 The API validates assignee eligibility, loads persisted relationships, checks current Identity roles before idempotency replay, and rejects conflicting command-key reuse. The client preserves editing generations, rejects cache version regression, and can recover an uncertain committed write after reload using its original request and key.
 
 See [the remediation matrix, migration semantics and verification report](docs/round-2/ENGINEERING-HANDOFF.md). The schema upgrade preserves known legacy snapshots with unknown authors and returns unverifiable in-flight reviews for reassessment; it does not invent lost historical information. Escalation/monitoring/AML dispositions complete this application's record, while downstream actions remain outside its scope.
+
+## Round 3 integrity and performance
+
+Round 3 recovers known legacy assessment authors from immutable audit provenance, preserves consistent case/audit snapshots across split queries, and requires attributable review-return feedback. Unknown historical identities explicitly block finalization. Existing Round 1/2 migrations are preserved; `LegacyAssessorProvenance` adds the forward upgrade.
+
+The verified local suite has 47 domain, 13 application, 55 real PostgreSQL integration and 15 browser tests (130 functional passes). An explicit PostgreSQL benchmark is run separately; ordinary CI checks complete collections and constant query count without hardware timing gates. See the [Round 3 handoff](docs/round-3/ENGINEERING-HANDOFF.md), [actual performance comparison](docs/round-3/performance/README.md), and [127-page illustrated textbook](manual/dist/RiskCase-Financial-Risk-Management-Engineering-Textbook.pdf). The textbook's [publication QA](manual/reference/round3-publication-qa.md) records the final checksum and page coverage.

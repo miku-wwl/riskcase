@@ -225,7 +225,7 @@ class CoverPage(Flowable):
         canvas.drawString(56, PAGE_H - 335, "从告警调查到独立复核：真实实现、真实源码与可复核工作流")
         canvas.setFont(CN_FONT, 10)
         canvas.setFillColor(colors.HexColor("#667788"))
-        canvas.drawString(56, 68, "RiskCase Engineering  ·  2026  ·  Round 2")
+        canvas.drawString(56, 68, "RiskCase Engineering  ·  2026  ·  Round 3")
 
 
 class ChapterAnchor(Flowable):
@@ -397,7 +397,8 @@ def _paragraphs_for_block(block: str, styles: dict, width: float, temp_dir: Path
             data = json.loads((FIGURES / "diagrams.json").read_text(encoding="utf-8"))
             caption = next(item["title"] for item in data["figures"] if item["file"] == name)
         except (StopIteration, KeyError):
-            caption = name
+            extra_captions = json.loads((FIGURES / "round3-captions.json").read_text(encoding="utf-8"))
+            caption = extra_captions.get(name, name)
         yield Paragraph(f"图｜{markdown_inline(caption)}。原理图为 RiskCase 原创矢量图。", styles["caption"])
         return
     screenshot_match = SCREENSHOT_RE.fullmatch(block.strip())
@@ -493,7 +494,7 @@ def front_matter(chapters: list[dict], styles: dict):
         Paragraph("版权、数据与使用边界", styles["frontTitle"]),
         Paragraph("本教材讲解 RiskCase 当前仓库中的真实实现。业务名称、账号、交易和告警均为合成演示数据；示例不构成法律、金融或监管建议。RiskCase 不执行付款、冻结账户、改变余额，也没有取得金融合规认证。", styles["body"]),
         Spacer(1, 10),
-        Paragraph("本版依据 Round 2 工程提交 df126c7 修订。评估、复核冻结与幂等恢复的说明对应该实现；完整修复与验证记录保存在 docs/round-2。", styles["body"]),
+        Paragraph("本版依据 Round 3 工程提交 65b2895 修订。旧作者来源、一致快照、复核退回与查询性能的说明对应该实现；完整工程材料保存在 docs/round-3。", styles["body"]),
         Spacer(1, 10),
         Paragraph("代码许可与模板来源", styles["frontSub"]),
         Paragraph("RiskCase 源码采用仓库根目录声明的 Apache-2.0 许可。后端从 Jason Taylor CleanArchitecture v10.8.0 实际生成解决方案改造；上游 MIT 许可证原文及准确提交 SHA 保存在 manual/reference。依赖许可应以各锁定版本的包元数据为准。", styles["body"]),
@@ -595,7 +596,8 @@ def main() -> None:
     missing_screenshots = validate_assets(chapters, args.allow_missing_screenshots)
     excerpts = build_source_map(chapters)
     if args.validate_only:
-        print(f"Validated {len(chapters)} chapters, 24 original SVG references, {len(excerpts)} source excerpts.")
+        figure_count = len({name for chapter in chapters for section in chapter["sections"] for name in FIGURE_RE.findall(section["body"])})
+        print(f"Validated {len(chapters)} chapters, {figure_count} SVG references, {len(excerpts)} source excerpts.")
         if missing_screenshots:
             print("Awaiting authentic screenshots: " + ", ".join(missing_screenshots))
         return

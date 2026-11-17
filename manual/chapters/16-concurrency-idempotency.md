@@ -14,9 +14,9 @@ RiskCase 的读者角色可以查看全案。只要 A 仍有当前有效的调�
 
 ### 第 3 页｜命令类型也属于一次业务意图
 
-[source: backend/RiskCase.Application/Common/Behaviours/IdempotencyBehaviour.cs#public static string Fingerprint|9]
+[source: backend/RiskCase.Application/Common/Behaviours/IdempotencyBehaviour.cs#public static string Fingerprint|12]
 
-Start、Review、Resume 可能具有完全相同的 CaseId 和 ExpectedVersion。如果指纹只有字段内容，误用同一个键可能把一种命令的结果冒充另一种。指纹因此包括命令类型，同时排除传输幂等键本身。不同类型或内容复用旧键返回 409。
+Start 与 Review 具有相同的 CaseId 和 ExpectedVersion 字段；旧版 Resume 也曾具有同一形状，新版则增加了 Reason。如果指纹只有字段内容，误用同一个键可能把一种命令的结果冒充另一种。指纹因此包括命令类型，同时排除传输幂等键本身。不同类型或内容复用旧键返回 409。
 
 ### 第 4 页｜丢响应、刷新与安全恢复
 

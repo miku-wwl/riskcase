@@ -31,7 +31,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     {
         if (Database.CurrentTransaction is { } existing)
         {
-            // All case writes update the parent before appending children/audit, in the same transaction.
+            // Case state, children and audit commit atomically; every mutation updates the parent.
             // Under READ COMMITTED a parent share lock stabilizes the following split reads, including
             // duplicate-ingestion reads. Reuse our own write lock; never start a nested transaction.
             if (existing.GetDbTransaction().IsolationLevel == IsolationLevel.ReadCommitted)
